@@ -13,7 +13,7 @@ public class DefaultFont extends Font{
     }
 
     public DefaultFont(int size) {
-        super(NAME, STYLE, SIZE);
+        super(NAME, STYLE, size);
     }
 
     public DefaultFont(String name){

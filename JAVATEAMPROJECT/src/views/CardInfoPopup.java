@@ -106,7 +106,7 @@ class CardInfoInputPanel extends JPanel{
     }
 }
 
-public class CardInfoView extends JFrame{
+public class CardInfoPopup extends JFrame{
     public static final int WIDTH = 1600,
             HEIGHT = 600;
 
@@ -116,7 +116,7 @@ public class CardInfoView extends JFrame{
     JButton backBtn;
     Container cp;
 
-    public CardInfoView() {
+    public CardInfoPopup() {
         setSize(WIDTH, HEIGHT);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 

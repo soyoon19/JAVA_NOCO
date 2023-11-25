@@ -31,7 +31,7 @@ public class PswdFindView extends JPanel {
                 //center-2의 left
         GridBagConstraints bcglc = new GridBagConstraints();
         bcglc.weightx = 1;
-        center2.add(new JPanel());
+        center2.add(new JPanel(),bcglc);
                 //center-2의 right
         GridBagConstraints bctgrc = new GridBagConstraints();
         bctgrc.weightx = 8;
@@ -51,7 +51,7 @@ public class PswdFindView extends JPanel {
                 //center-3의 left
         GridBagConstraints bcbglc = new GridBagConstraints();
         bcbglc.weightx = 1;
-        center3.add(new JPanel());
+        center3.add(new JPanel(),bcbglc);
                 //center-3의 right
         GridBagConstraints bcbgrc = new GridBagConstraints();
         bcbgrc.weightx = 8;

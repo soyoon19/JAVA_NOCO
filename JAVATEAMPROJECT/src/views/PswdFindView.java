@@ -2,16 +2,14 @@ package views;
 
 import custom_component.DefaultFont;
 import custom_component.NumberPadPanel;
-import sun.java2d.loops.CustomComponent;
-
 import javax.swing.*;
 import java.awt.*;
 
 public class PswdFindView extends JPanel {
     private static final int FONT_SIZE = 80;
-    JLabel phonelb, birthlb; // lb는 label을 의미
-    JTextField phonetf, birthtf; // tf는 textfield를 의미
-    JButton inquirybt; // bt는 button을 의미
+    JLabel phonelb, birthlb;
+    JTextField phonetf, birthtf;
+    JButton inquirybt;
     NumberPadPanel np;
 
     public PswdFindView() {
@@ -27,24 +25,47 @@ public class PswdFindView extends JPanel {
 
             //center-1
         glc.add(new JPanel());
+
             //center-2
-        JPanel center2 = new JPanel();
+        JPanel center2 = new JPanel(new GridBagLayout());
+                //center-2의 left
+        GridBagConstraints bcglc = new GridBagConstraints();
+        bcglc.weightx = 1;
+        center2.add(new JPanel());
+                //center-2의 right
+        GridBagConstraints bctgrc = new GridBagConstraints();
+        bctgrc.weightx = 8;
+        JPanel bcgr = new JPanel(new FlowLayout(FlowLayout.LEFT));
         phonelb = new JLabel("연락처 : ");
         phonelb.setFont(new DefaultFont(FONT_SIZE));
-        center2.add(phonelb);
+        bcgr.add(phonelb);
         phonetf = new JTextField(10);
         phonetf.setFont(new DefaultFont(FONT_SIZE));
-        center2.add(phonetf);
+        bcgr.add(phonetf);
+        center2.add(bcgr, bctgrc);
+
         glc.add(center2);
+
             //center-3
-        JPanel center3 = new JPanel();
+        JPanel center3 = new JPanel(new GridBagLayout());
+                //center-3의 left
+        GridBagConstraints bcbglc = new GridBagConstraints();
+        bcbglc.weightx = 1;
+        center3.add(new JPanel());
+                //center-3의 right
+        GridBagConstraints bcbgrc = new GridBagConstraints();
+        bcbgrc.weightx = 8;
+        JPanel bcbgr = new JPanel(new FlowLayout(FlowLayout.LEFT));
         birthlb = new JLabel("생년월일 : ");
         birthlb.setFont(new DefaultFont(FONT_SIZE));
-        center3.add(birthlb);
+        bcbgr.add(birthlb);
         birthtf = new JTextField(10);
         birthtf.setFont(new DefaultFont(FONT_SIZE));
-        center3.add(birthtf);
+        bcbgr.add(birthtf);
+        center3.add(bcbgr, bcbgrc);
+
         glc.add(center3);
+
             //center-4
         glc.add(new JPanel());
         blc.add(glc,gtf);

@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class PswdFindView extends JPanel {
-    private static final int FONT_SIZE = 70;
+    private static final int FONT_SIZE = 60;
     JLabel phonelb, birthlb;
     JTextField phonetf, birthtf;
     JButton inquirybt;

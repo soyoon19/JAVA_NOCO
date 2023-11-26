@@ -1,37 +1,41 @@
 package views;
 
+import custom_component.DefaultFont;
+import custom_component.FreeImageIcon;
+
 import javax.swing.*;
 import java.awt.*;
 
-public class UsePurchaseSelectView extends JFrame {
+public class UsePurchaseSelectView extends JPanel {
     JButton musicUse, productPurchase;
+    private static final int IMAGE_X = 400;
+    private static final int IMAGE_Y = 400;
+    private static final int FONT_SIZE = 50;
     public UsePurchaseSelectView(){
-        this.setLayout(new GridBagLayout());
-        JPanel gbl = new JPanel();
-        add(gbl);
+        JPanel gbl = new JPanel(new GridLayout(1,2,5,5));
+        this.add(gbl);
         //left
-        JPanel left = new JPanel();
-        this.add(left,DefaultFrame.easyGridBagConstraint(0,0,1,1));
             //클릭 전 버튼
-        String imagePath1 = DefaultFrame.PATH+"/images/musicBefore";
-        ImageIcon img1 = new ImageIcon(imagePath1);
+        ImageIcon img1 = new FreeImageIcon(DefaultFrame.PATH+"/images/musicBefore.png",IMAGE_X,IMAGE_Y);
         musicUse = new JButton("곡 사용",img1);
+        musicUse.setFont(new DefaultFont(FONT_SIZE));
+        musicUse.setContentAreaFilled(false);
             //클릭 후 버튼
-        String imagePath2 = DefaultFrame.PATH+"/images/musicAfter";
-        ImageIcon img2 = new ImageIcon(imagePath2);
+        ImageIcon img2 = new FreeImageIcon(DefaultFrame.PATH+"/images/musicAfter.png",IMAGE_X,IMAGE_Y);
         musicUse.setPressedIcon(img2);
-        gbl.add(left);
+
+        gbl.add(musicUse);
+
         //right
-        JPanel right = new JPanel();
-        this.add(right,DefaultFrame.easyGridBagConstraint(1,0,1,1));
             //클릭 전 버튼
-        String imagePath3 = DefaultFrame.PATH+"/images/coinBefore";
-        ImageIcon img3 = new ImageIcon(imagePath3);
+        ImageIcon img3 = new FreeImageIcon(DefaultFrame.PATH+"/images/coinBefore.png",IMAGE_X,IMAGE_Y);
         productPurchase = new JButton("상품 구매",img3);
+        productPurchase.setFont(new DefaultFont(FONT_SIZE));
+        productPurchase.setContentAreaFilled(false);
             //클릭 후 버튼
-        String imagePath4 = DefaultFrame.PATH+"/images/coinAfter";
-        ImageIcon img4 = new ImageIcon(imagePath4);
+        ImageIcon img4 = new FreeImageIcon(DefaultFrame.PATH+"/images/coinAfter.png",IMAGE_X,IMAGE_Y);
         productPurchase.setPressedIcon(img4);
-        gbl.add(right);
+
+        gbl.add(productPurchase);
     }
 }

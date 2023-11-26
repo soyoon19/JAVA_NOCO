@@ -24,4 +24,4 @@ hs_err_pid*
 replay_pid*
 
 #DB LoginInfo
-JAVATEAMPROJECT/src/DBLoginInfo.java
+./JAVATEAMPROJECT/src/DBLoginInfo.java

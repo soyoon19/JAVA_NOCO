@@ -4,19 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e8f45e45-ae5a-4366-b15b-9599b1d4c3fa" name="Changes" comment="Feat : update">
-      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/DBLoginInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-24__12_27__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-24__12_27__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-24__1_10__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-24__1_10__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-24__1_10__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-24__1_10__Changes_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-25__5_10__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-25__5_10__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/DBConnect.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/DBConnect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/CardInfoPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/CardInfoPopup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ProductListCartView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ProductListCartView.java" afterDir="false" />
-    </list>
+    <list default="true" id="e8f45e45-ae5a-4366-b15b-9599b1d4c3fa" name="Changes" comment="Feat : DB 정보 은닉, View 수정&#10;&#10;DBLoginInfo DB 로그인 정보가 있게 했음" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -140,7 +128,14 @@
       <option name="project" value="LOCAL" />
       <updated>1700901450797</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Feat : DB 정보 은닉, View 수정&#10;&#10;DBLoginInfo DB 로그인 정보가 있게 했음">
+      <created>1701021162780</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1701021162780</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -192,6 +187,7 @@
     <MESSAGE value="Feat : 패키지, 뷰, 팝업, 커스텀객체, dao 수정, 추가&#10; &#10;뷰 : ProductListCartView, DefaultFrame 수정&#10;팝업 : ProductCartResultPopup &#10;커스텀객체 : FreeImageIcon, NumberPadPanel &#10;dao : MemberDAO, MemberLogDAO, RoomDAO, StaffDAO&#10;dao(DB에서 온 데이터를 저장할 객체들이 정의 되어 있는 패키지)" />
     <MESSAGE value="Fix : PwsdFindView&#10;&#10;GridBagLayout 수정&#10;efaultFrame.easyGridBagConstraint() 사용 바람." />
     <MESSAGE value="Feat : DAO, DTO, View, Controller, DBConnect 추가&#10;&#10;DTO을 DAO로 표기 실수와 DB와 속성과 갖게 변경&#10;GoodsDAO만 간단하게 구현 나머지 DAO 구현 필요&#10;BirthdayPopup, MusicUseView,ProductOptionPopup 추가&#10;DefaultFrame 수정" />
-    <option name="LAST_COMMIT_MESSAGE" value="Feat : DAO, DTO, View, Controller, DBConnect 추가&#10;&#10;DTO을 DAO로 표기 실수와 DB와 속성과 갖게 변경&#10;GoodsDAO만 간단하게 구현 나머지 DAO 구현 필요&#10;BirthdayPopup, MusicUseView,ProductOptionPopup 추가&#10;DefaultFrame 수정" />
+    <MESSAGE value="Feat : DB 정보 은닉, View 수정&#10;&#10;DBLoginInfo DB 로그인 정보가 있게 했음" />
+    <option name="LAST_COMMIT_MESSAGE" value="Feat : DB 정보 은닉, View 수정&#10;&#10;DBLoginInfo DB 로그인 정보가 있게 했음" />
   </component>
 </project>

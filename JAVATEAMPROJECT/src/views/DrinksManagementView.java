@@ -31,7 +31,6 @@ public class DrinksManagementView extends JPanel{
         //top : 음료명 검색
         JPanel top = new JPanel();
 
-
         //center : 카테고리
         JPanel center = new JPanel();
 
@@ -40,7 +39,7 @@ public class DrinksManagementView extends JPanel{
     }
 
     class drinksDetailPanel extends  JPanel {
-
+        //상품 정보 출력 (JTable 이용)
     }
 
 }

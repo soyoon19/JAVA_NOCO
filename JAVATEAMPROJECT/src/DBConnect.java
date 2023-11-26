@@ -12,9 +12,9 @@ public class DBConnect {
         }
         try{
             conn = DriverManager.getConnection(
-                    "jdbc:mysql://34.64.197.206:3306/java_project?serverTimezone=Asia/Seoul",
-                    "java",
-                    "javaNoInCo$$4");
+                    "jdbc:mysql://" + DBLoginInfo.DB_IP +  ":3306/" + DBLoginInfo.DB_NAME  + " ?serverTimezone=Asia/Seoul",
+                    DBLoginInfo.DB_ID,
+                    DBLoginInfo.DB_PW);
             System.out.println(conn);
         } catch (Exception e) {
             e.printStackTrace();

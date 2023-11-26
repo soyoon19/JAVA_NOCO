@@ -1,8 +1,10 @@
+import dto.GoodsDTO;
 import views.DefaultFrame;
 import views.MusicUseView;
 import views.ProductListCartView;
 
 import java.awt.*;
+import java.util.ArrayList;
 import javax.swing.*;
 
 public class Main {
@@ -15,13 +17,14 @@ public class Main {
 
         //win.add(new MusicUseView(win));
         //win.add(new ProductListCartView(win));
-        win.add(new ProductListCartView());
+        win.add(new ProductListCartView(win));
 
         /*DB Test
-        ArrayList<GoodsDTO> x = controller.getGoodsDTO().all();
+
+        */
+        ArrayList<GoodsDTO> x = (new Controller((new DBConnect()).getConn())).getGoodsDTO().all();
         for(int i = 0; i < x.size(); i++)
             System.out.println(x.get(i).getName());
-        */
         win.setVisible(true);
         win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

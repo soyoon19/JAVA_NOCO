@@ -12,7 +12,7 @@ public class Main {
         DefaultFrame win = new DefaultFrame();
         win.setSize(1920,1080);
         //add는 setVisible보다 위에 있어야 됨!
-            win.add(new DeleteDrinksPopup());
+            win.add(new ProductListCartView(win));
         win.setVisible(true);
         win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

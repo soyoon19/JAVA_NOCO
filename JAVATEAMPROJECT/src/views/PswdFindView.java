@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class PswdFindView extends JPanel {
-    private static final int FONT_SIZE = 60;
+    private static final int FONT_SIZE = 80;
     JLabel phonelb, birthlb;
     JTextField phonetf, birthtf;
     JButton inquirybt;
@@ -19,8 +19,6 @@ public class PswdFindView extends JPanel {
         add(blc, BorderLayout.CENTER);
 
             //Grid Bag Layout의 left
-        GridBagConstraints gtf = new GridBagConstraints();
-        gtf.weightx = 2;
         JPanel glc = new JPanel(new GridLayout(4,1));
 
             //center-1
@@ -29,12 +27,8 @@ public class PswdFindView extends JPanel {
             //center-2
         JPanel center2 = new JPanel(new GridBagLayout());
                 //center-2의 left
-        GridBagConstraints bcglc = new GridBagConstraints();
-        bcglc.weightx = 1;
         center2.add(new JPanel(), DefaultFrame.easyGridBagConstraint(0,0,1,1));
                 //center-2의 right
-        GridBagConstraints bctgrc = new GridBagConstraints();
-        bctgrc.weightx = 8;
         JPanel bcgr = new JPanel(new FlowLayout(FlowLayout.LEFT));
         phonelb = new JLabel("연락처    : ");
         phonelb.setFont(new DefaultFont(FONT_SIZE));
@@ -49,12 +43,8 @@ public class PswdFindView extends JPanel {
             //center-3
         JPanel center3 = new JPanel(new GridBagLayout());
                 //center-3의 left
-        GridBagConstraints bcbglc = new GridBagConstraints();
-        bcbglc.weightx = 1;
         center3.add(new JPanel(),DefaultFrame.easyGridBagConstraint(0,0,1,1));
                 //center-3의 right
-        GridBagConstraints bcbgrc = new GridBagConstraints();
-        bcbgrc.weightx = 8;
         JPanel bcbgr = new JPanel(new FlowLayout(FlowLayout.LEFT));
         birthlb = new JLabel("생년월일 : ");
         birthlb.setFont(new DefaultFont(FONT_SIZE));
@@ -68,17 +58,10 @@ public class PswdFindView extends JPanel {
 
             //center-4
         glc.add(new JPanel());
-
-
         blc.add(glc, DefaultFrame.easyGridBagConstraint(0,0,2,1));
 
             //Grid Bag Layout의 right
-        JPanel gbr = new JPanel();
-        GridBagConstraints gnp = new GridBagConstraints();
-        gnp.weightx = 1;
-
         np = new NumberPadPanel();
-        //gbr.add(np);
         np.setBorder(BorderFactory.createEmptyBorder(30,15,30,15));
         blc.add(np,DefaultFrame.easyGridBagConstraint(1,0,1,1));
 

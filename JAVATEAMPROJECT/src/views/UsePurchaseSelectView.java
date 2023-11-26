@@ -8,11 +8,11 @@ import java.awt.*;
 
 public class UsePurchaseSelectView extends JPanel {
     JButton musicUse, productPurchase;
-    private static final int IMAGE_X = 400;
-    private static final int IMAGE_Y = 400;
-    private static final int FONT_SIZE = 50;
+    private static final int IMAGE_X = 500;
+    private static final int IMAGE_Y = 500;
+    private static final int FONT_SIZE = 80;
     public UsePurchaseSelectView(){
-        JPanel gbl = new JPanel(new GridLayout(1,2,5,5));
+        JPanel gbl = new JPanel(new GridLayout(1,2,15,15));
         this.add(gbl);
         //left
             //클릭 전 버튼

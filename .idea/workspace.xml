@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e8f45e45-ae5a-4366-b15b-9599b1d4c3fa" name="Changes" comment="Feat : DB 정보 은닉, View 수정&#10;&#10;DBLoginInfo DB 로그인 정보가 있게 했음" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="kjw2" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="48ac9d93-024d-444f-851f-0c126ca9dd97" />
+        <option name="url" value="https://github.com/soyoon19/JAVA_NOCO.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2YZVaGrJIrbJOzSSu9dYpg5RStn" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/KJW/Documents/programs/jar/mysql-connector-j-8.2.0/mysql-connector-j-8.2.0.jar&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\KJW\Code\kotlinProgramming\JAVA_NOCO_1\JAVATEAMPROJECT\src\images" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\KJW\Code\kotlinProgramming\JAVA_NOCO_1\JAVATEAMPROJECT\src\images" />
+      <recent name="C:\Users\KJW\Code\kotlinProgramming\JAVA_NOCO_1\JAVATEAMPROJECT\src\title" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="JAVATEAMPROJECT" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e8f45e45-ae5a-4366-b15b-9599b1d4c3fa" name="Changes" comment="" />
+      <created>1700733150714</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1700733150714</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Feat : 패키지, 뷰, 커스텀객체 생성&#10; &#10;패키지 : custom_component, views&#10;뷰 : CardInfoView, DefaultFrame&#10;커스텀객체 : DefaultFont">
+      <created>1700734512701</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1700734512701</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Feat : 패키지, 뷰, 커스텀객체 수정, 추가&#10; &#10;패키지 : images //이미지를 저장하는 패키지, dao&#10;뷰 : CardInfoView --&gt; CardInfoPopup 변경 &#10;메인 : ProductCartResultPopup, ProductListCartView&#10;커스텀객체 : DefaultFont 수정, JPanelOneLabel">
+      <created>1700818863222</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1700818863222</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Feat : 패키지, 뷰, 커스텀객체 수정, 추가&#10; &#10;패키지 : images //이미지를 저장하는 패키지, dao&#10;뷰 : CardInfoView --&gt; CardInfoPopup 변경 &#10;메인 : ProductCartResultPopup, ProductListCartView&#10;커스텀객체 : DefaultFont 수정, JPanelOneLabel">
+      <created>1700819288672</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1700819288672</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Feat : 패키지, 뷰, 팝업, 커스텀객체, dao 수정, 추가&#10; &#10;뷰 : ProductListCartView, DefaultFrame 수정&#10;팝업 : ProductCartResultPopup &#10;커스텀객체 : FreeImageIcon, NumberPadPanel &#10;dao : MemberDAO, MemberLogDAO, RoomDAO, StaffDAO&#10;dao(DB에서 온 데이터를 저장할 객체들이 정의 되어 있는 패키지)">
+      <created>1700855885978</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1700855885978</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Fix : PwsdFindView&#10;&#10;GridBagLayout 수정&#10;efaultFrame.easyGridBagConstraint() 사용 바람.">
+      <created>1700901450797</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1700901450797</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Feat : DB 정보 은닉, View 수정&#10;&#10;DBLoginInfo DB 로그인 정보가 있게 했음">
+      <created>1701021162780</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1701021162780</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="true" />
+                </map>
+              </option>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="kjw2" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="kjw" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Feat : 패키지, 뷰, 커스텀객체 생성&#10; &#10;패키지 : custom_component, views&#10;뷰 : CardInfoView, DefaultFrame&#10;커스텀객체 : DefaultFont" />
+    <MESSAGE value="Feat : 패키지, 뷰, 커스텀객체 수정, 추가&#10; &#10;패키지 : images //이미지를 저장하는 패키지, dao&#10;뷰 : CardInfoView --&gt; CardInfoPopup 변경 &#10;메인 : ProductCartResultPopup, ProductListCartView&#10;커스텀객체 : DefaultFont 수정, JPanelOneLabel" />
+    <MESSAGE value="Feat : 패키지, 뷰, 팝업, 커스텀객체, dao 수정, 추가&#10; &#10;뷰 : ProductListCartView, DefaultFrame 수정&#10;팝업 : ProductCartResultPopup &#10;커스텀객체 : FreeImageIcon, NumberPadPanel &#10;dao : MemberDAO, MemberLogDAO, RoomDAO, StaffDAO&#10;dao(DB에서 온 데이터를 저장할 객체들이 정의 되어 있는 패키지)" />
+    <MESSAGE value="Fix : PwsdFindView&#10;&#10;GridBagLayout 수정&#10;efaultFrame.easyGridBagConstraint() 사용 바람." />
+    <MESSAGE value="Feat : DAO, DTO, View, Controller, DBConnect 추가&#10;&#10;DTO을 DAO로 표기 실수와 DB와 속성과 갖게 변경&#10;GoodsDAO만 간단하게 구현 나머지 DAO 구현 필요&#10;BirthdayPopup, MusicUseView,ProductOptionPopup 추가&#10;DefaultFrame 수정" />
+    <MESSAGE value="Feat : DB 정보 은닉, View 수정&#10;&#10;DBLoginInfo DB 로그인 정보가 있게 했음" />
+    <option name="LAST_COMMIT_MESSAGE" value="Feat : DB 정보 은닉, View 수정&#10;&#10;DBLoginInfo DB 로그인 정보가 있게 했음" />
+  </component>
+</project>

@@ -12,12 +12,16 @@ public class RoomSettingView extends JPanel {
     public static final int MIDDLE_FONT_SIZE = 40;
     public static final int BETWEEN_FONT = 60;
     public static final int BUTTON_FONT_SIZE = 80;
-    public RoomSettingView(){
+
+    private DefaultFrame parent;
+
+    public RoomSettingView(DefaultFrame parent){
+        this.parent = parent;
         this.setLayout(new BorderLayout());
         //탭 생성
         JTabbedPane rsv = new JTabbedPane();
         RoomEditPanel rep = new RoomEditPanel();
-        RoomManagePanel rmp = new RoomManagePanel();
+        RoomManagePanel rmp = new RoomManagePanel(parent);
         rsv.addTab("편집",rep);
         rsv.addTab("관리",rmp);
         rsv.setFont(new DefaultFont(FONT_SIZE));
@@ -306,7 +310,9 @@ class RoomSettingPanelMini extends JPanel implements ActionListener {
 
 class RoomManagePanel extends JPanel implements ActionListener{
     JButton musicAdd, forcedExit;
-    public RoomManagePanel() {
+    DefaultFrame parent;
+    public RoomManagePanel(DefaultFrame parent) {
+        this.parent = parent;
         this.setLayout(new BorderLayout());
         JPanel rmview = new JPanel(new GridBagLayout());
 
@@ -340,9 +346,9 @@ class RoomManagePanel extends JPanel implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         String s = e.getActionCommand();
         if(s.equals("곡 추가")){
-            new MusicAddPopup();
+            (new MusicAddPopup(parent)).setVisible(true);
         } else if (s.equals("강제 퇴장")) {
-            new ForcedExitPopup();
+            (new ForcedExitPopup(parent)).setVisible(true);
         }
     }
 }
@@ -367,7 +373,13 @@ class MusicAddPopup extends JDialog{
         addBtn.setBounds(20,220,145,110);
         cancleBtn.setBounds(205,220,145,110);
 
+        ct.add(musicAccount);
+        ct.add(musicAccountTf);
+        ct.add(addBtn);
+        ct.add(cancleBtn);
+
         setSize(WIDTH, HEIGHT);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 }
 
@@ -388,7 +400,12 @@ class ForcedExitPopup extends JDialog{
         addBtn.setBounds(20,220,145,110);
         cancleBtn.setBounds(205,220,145,110);
 
+        ct.add(musicAccount);
+        ct.add(addBtn);
+        ct.add(cancleBtn);
+
         setSize(WIDTH, HEIGHT);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 }
 

@@ -4,6 +4,8 @@ import custom_component.DefaultFont;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class ManagerMainView extends JPanel {
     public ManagerMainView(){
@@ -19,7 +21,7 @@ public class ManagerMainView extends JPanel {
     }
 }
 
-class ManagerButtonListPanel extends JPanel {
+class ManagerButtonListPanel extends JPanel implements ActionListener {
     private static final int FONT_SIZE = 40;
     private static final int ORDER_lIST = 0, STOCK_MANAGE = 1, ROOM_SETTING = 2, MEMBER_LIST = 3,
             DRINK_EDIT = 4, SALE_STATUS = 5, REQUEST_MANAGE = 6;
@@ -52,16 +54,26 @@ class ManagerButtonListPanel extends JPanel {
 
         //Border Layout의 South
         JPanel bls = new JPanel();
+
         staffManage = new JButton("직원 관리");
         logout = new JButton("LOGOUT");
         bls.add(staffManage);
         bls.add(logout);
+
         staffManage.setFont(new DefaultFont(20));
         logout.setFont(new DefaultFont(20));
+        logout.addActionListener(this);
+
         staffManage.setPreferredSize(new Dimension(150,60));
         logout.setPreferredSize(new Dimension(150,60));
+
         bls.setLayout(new FlowLayout(FlowLayout.RIGHT));
         add(bls, BorderLayout.SOUTH);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JOptionPane.showConfirmDialog(this, "로그아웃하시겠습니까?","LOGUT",JOptionPane.YES_NO_OPTION);
     }
 }
 

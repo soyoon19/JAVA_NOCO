@@ -4,8 +4,10 @@ import custom_component.DefaultFont;
 import custom_component.NumberPadPanel;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class PswdFindView extends JPanel {
+public class PswdFindView extends JPanel implements ActionListener {
     private static final int FONT_SIZE = 80;
     JLabel phonelb, birthlb;
     JTextField phonetf, birthtf;
@@ -74,7 +76,14 @@ public class PswdFindView extends JPanel {
         inquirybt = new JButton("조회");
         inquirybt.setPreferredSize(new Dimension(200, 100));
         inquirybt.setFont(new DefaultFont(FONT_SIZE));
+        inquirybt.addActionListener(this);
         stp.add(inquirybt);
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        //대충 if문 연락처와 생년월일이 일치하는 비밀번호가 있으면 FindSuccess 띄우기
+        JOptionPane.showMessageDialog(this,"당신의 비밀번호는 ","비밀번호 찾기 성공",JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this,"회원정보가 일치하지 않습니다.","비밀번호 찾기 실패",JOptionPane.INFORMATION_MESSAGE);
+    }
 }

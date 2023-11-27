@@ -97,14 +97,14 @@ class ProductCart extends JPanel{
         btm.setLayout(new GridLayout(2, 1));
         JPanel btmDown, btmUp;
 
-            //bottom-1
+        //bottom-1
         btmUp = new JPanel();
         JLabel totalLb;
         totalLb = new JLabel("Total : 0원");
         btmUp.add(totalLb);
 
 
-            //bottom-2
+        //bottom-2
         JButton buyBtn, rmBtn;
         btmDown = new JPanel();
         buyBtn = new JButton("구매");
@@ -217,7 +217,7 @@ class ProductDetailPanel extends JPanel{
         right.setLayout(new GridLayout(3, 1));
         imageLb.setBorder(BorderFactory.createEmptyBorder(5, 5,5, 5));
 
-            //right-1 상품명
+        //right-1 상품명
         /* 대체!
         하나의 패널의 하나의 JLabel만 들어가는 경우 JPanelOneLabel을 사용해 보자.
         JPanel right1 = new JPanel();
@@ -230,13 +230,13 @@ class ProductDetailPanel extends JPanel{
         right.add(right1);
 
 
-            //right-2 가격
+        //right-2 가격
         JPanelOneLabel right2 = new JPanelOneLabel(String.valueOf(product.getSellPrice() + "원"),
                 new FlowLayout(FlowLayout.LEFT));
         right2.getLabel().setFont(new DefaultFont(FONT_SIZE));
         right.add(right2);
 
-            //rigth-3 구매
+        //rigth-3 구매
         JPanel right3 = new JPanel();
         buyBtn = new JButton("구매");
         buyBtn.setPreferredSize(new Dimension(BTN_WIDTH_SIZE, 30));
@@ -291,18 +291,18 @@ class ProductCarDetailPanel extends JPanel{
         left.setLayout(new GridLayout(3, 1));
         left.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
 
-            //left-1 - 상품 이름
+        //left-1 - 상품 이름
         JLabel nameLb = new JLabel(prodcut.getName());
         nameLb.setFont(new DefaultFont(FONT_SZIE));
         nameLb.setSize(200, 30);
         left.add(nameLb);
 
-            //left-2 - 상품 가격
+        //left-2 - 상품 가격
         priceLb = new JLabel(prodcut.getSellPrice() + "원");
         priceLb.setFont(new DefaultFont(FONT_SZIE));
         left.add(priceLb);
 
-            //left-3 - 수량 조절 & 삭제
+        //left-3 - 수량 조절 & 삭제
         JPanel left3 = new JPanel();
         //left3.setLayout();
 

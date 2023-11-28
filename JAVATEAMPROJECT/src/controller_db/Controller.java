@@ -1,3 +1,5 @@
+package controller_db;
+
 import dao.*;
 import dto.GoodsDTO;
 import dto.OrderHDTO;
@@ -16,7 +18,6 @@ public class Controller {
     private RoomManageDAO roomManageDAO;
     private RoomOptionDAO roomOptionDAO;
     private WorkerDAO workerDAO;
-
 
 
     public Controller(Connection conn){

@@ -1,4 +1,5 @@
 import dto.GoodsDTO;
+import views.CardInfoPopup;
 import views.DefaultFrame;
 import views.MusicUseView;
 import views.ProductListCartView;
@@ -19,14 +20,14 @@ public class Main {
         //win.add(new ProductListCartView(win));
         win.add(new ProductListCartView(win));
 
-        /*DB Test
 
-        */
-        ArrayList<GoodsDTO> x = (new Controller((new DBConnect()).getConn())).getGoodsDTO().all();
-        for(int i = 0; i < x.size(); i++)
-            System.out.println(x.get(i).getName());
+
+        //(new CardInfoPopup(win)).setVisible(true);
+
         win.setVisible(true);
         win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+
 
     }
 }

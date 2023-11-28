@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
+import java.util.Stack;
 import javax.swing.*;
 
 /*
@@ -26,14 +27,15 @@ class DefaultTopPanel extends JPanel{
     public String getTopName() {
         return topName;
     }
+
 }
 
 class DefaultUserTopPanel extends DefaultTopPanel{
     public static final int TOP_HEIGHT = 130;   //TOP의 크기이다.
 
-    private JButton homeBtn;
     private JLabel timeLb, titleLb;
     private DefaultFrame parent;
+    private JButton backBtn;
 
 
     public DefaultUserTopPanel(String topName, DefaultFrame prt){
@@ -44,18 +46,18 @@ class DefaultUserTopPanel extends DefaultTopPanel{
         //left - 홈버튼
         JPanel topLeft = new JPanel();
         topLeft.setLayout(new FlowLayout(FlowLayout.LEFT));
-        homeBtn = new JButton(FreeImageIcon.resizeImageIcon(DefaultFrame.PATH + "/images/back.png",
+        backBtn = new JButton(FreeImageIcon.resizeImageIcon(DefaultFrame.PATH + "/images/back.png",
                 (int)(TOP_HEIGHT * 3 * 0.7), (int)(TOP_HEIGHT * 0.7)));
-        homeBtn.setPreferredSize(new Dimension((int)(TOP_HEIGHT * 3 * 0.7),
+        backBtn.setPreferredSize(new Dimension((int)(TOP_HEIGHT * 3 * 0.7),
                 (int)(TOP_HEIGHT  * 0.7)));
 
         //버튼 투명하게 --> 이미지를 버튼으로 활용하고 싶을 때
-        homeBtn.setBorderPainted(false);        //주변 테투리 이미지를 없게 한다.
-        homeBtn.setContentAreaFilled(false);    //버튼 안에 기본이미지를 없게 한다.
-        homeBtn.setFocusPainted(false);         //포커스 했을 때 이미지를 없게 한다.
+        backBtn.setBorderPainted(false);        //주변 테투리 이미지를 없게 한다.
+        backBtn.setContentAreaFilled(false);    //버튼 안에 기본이미지를 없게 한다.
+        backBtn.setFocusPainted(false);         //포커스 했을 때 이미지를 없게 한다.
         int borderValue = (int)(TOP_HEIGHT * 0.17);
         topLeft.setBorder(BorderFactory.createEmptyBorder(borderValue, 20, 0,0));
-        topLeft.add(homeBtn);
+        topLeft.add(backBtn);
         topLeft.setBackground(DefaultFrame.TOP_BACKGROUND_COLOR);
         this.add(topLeft);
 
@@ -71,7 +73,7 @@ class DefaultUserTopPanel extends DefaultTopPanel{
         this.add(topCenter);
 
         //top 변경을 확인하기 위해서 버튼에 테스트로 이미지를 씀
-        homeBtn.addActionListener(new ActionListener() {
+        backBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 parent.switchTop(DefaultFrame.TOP_ADMIN);
@@ -103,10 +105,13 @@ class DefaultUserTopPanel extends DefaultTopPanel{
         (new LiveDateLabel(timePLb.getLabel(), new SimpleDateFormat("HH:mm:ss"))).start();
 
 
-
         topRight.add(datePLb);
         topRight.add(timePLb);
         this.add(topRight);
+    }
+
+    public JButton getBackButton(){
+        return backBtn;
     }
 }
 
@@ -118,7 +123,7 @@ class DefaultAdminTopPanel extends DefaultTopPanel{
     private JButton homeBtn;
     public DefaultAdminTopPanel(String topName, DefaultFrame prt){
         super(topName);
-        this.setLayout(new GridLayout(1,2));
+        this.setLayout(new GridLayout(1,3));
         this.parent = prt;
 
         JPanel topLeft = new JPanel();
@@ -147,6 +152,13 @@ class DefaultAdminTopPanel extends DefaultTopPanel{
             }
         });
         this.add(topLeft);
+
+        //center - 노인 코래방
+        JPanelOneLabel topCenter = new JPanelOneLabel("노인 코래방");
+        topCenter.setBackground(DefaultFrame.TOP_BACKGROUND_COLOR);
+        topCenter.getLabel().setFont(new DefaultFont(50, Font.BOLD));
+        topCenter.getLabel().setForeground(Color.white);
+        this.add(topCenter);
 
 
         //right - 날짜, 시간
@@ -178,7 +190,10 @@ class DefaultAdminTopPanel extends DefaultTopPanel{
         topRight.add(timePLb);
 
         this.add(topRight);
+    }
 
+    public JButton getHomeBtn(){
+        return getHomeBtn();
     }
 }
 
@@ -198,6 +213,7 @@ public class DefaultFrame extends JFrame {
     private JPanel top;
     private JButton homeBtn;
     private JLabel timeLb, titleLb;
+    private Stack<JPanel> views = new Stack<>();
 
     private String nowTopName;
     DefaultTopPanel[] tops;
@@ -270,6 +286,33 @@ public class DefaultFrame extends JFrame {
         cp.add(c, BorderLayout.CENTER);
         return c;
     }
+
+
+    public void move(JPanel nowView, JPanel nextView){
+        views.add(nowView);
+        this.remove(nowView);
+        this.repaint();
+        this.revalidate();
+        this.add(nextView);
+    }
+
+    public void resetMove(JPanel nowView, JPanel nextView){
+        views.clear();  //전에 있던 값을 모두 제거
+        move(nowView, nextView); //이동!
+    }
+
+
+    public boolean back(JPanel nowView){
+        if(views.empty()) return false;
+
+        this.remove(nowView);
+        this.repaint();
+        this.revalidate();
+
+        this.add(views.pop());
+        return true;
+    }
+
 
 
     public static GridBagConstraints easyGridBagConstraint(int x, int y, double weightX, double weightY, int gridWidth, int gridHeight) {

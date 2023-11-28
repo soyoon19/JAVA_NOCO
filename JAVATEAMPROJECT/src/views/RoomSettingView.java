@@ -1,7 +1,6 @@
 package views;
 
 import custom_component.DefaultFont;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -57,7 +56,7 @@ class ScreenEditPanelMini extends JPanel implements ActionListener{
         this.setLayout(new BorderLayout());
         sep = new JPanel();
         sep.setLayout(new GridLayout(2,1));
-        roomAdd = new JButton("방 추가"); //Todo : 패널 이동
+        roomAdd = new JButton("방 추가");
         roomDelete = new JButton("방 삭제");
         roomAdd.setFont(new DefaultFont(RoomSettingView.BUTTON_FONT_SIZE));
         roomDelete.setFont(new DefaultFont(RoomSettingView.BUTTON_FONT_SIZE));
@@ -267,6 +266,7 @@ class RoomSettingPanelMini extends JPanel implements ActionListener {
         roomActivate.setFont(new DefaultFont(RoomSettingView.BETWEEN_FONT));
         roomActivate.addActionListener(this);
         p3.add(roomActivate);
+        roomActivate.setPreferredSize(new Dimension(400,80));
         rsg.add(p3);
 
         //4행
@@ -275,6 +275,7 @@ class RoomSettingPanelMini extends JPanel implements ActionListener {
         roomUnActivate.setFont(new DefaultFont(RoomSettingView.BETWEEN_FONT));
         roomUnActivate.addActionListener(this);
         p4.add(roomUnActivate);
+        roomUnActivate.setPreferredSize(new Dimension(400,80));
         rsg.add(p4);
 
         //5행
@@ -353,7 +354,7 @@ class RoomManagePanel extends JPanel implements ActionListener{
     }
 }
 
-class MusicAddPopup extends JDialog{
+class MusicAddPopup extends JDialog implements ActionListener{
     private static final String TITLE = "곡 추가";
     private static final int WIDTH = 370, HEIGHT = 350;
     Container ct = getContentPane();
@@ -363,49 +364,84 @@ class MusicAddPopup extends JDialog{
     MusicAddPopup(JFrame parent){
         super(parent, TITLE, true);
         musicAccount = new JLabel("곡 수 :");
+        musicAccount.setFont(new DefaultFont(RoomSettingView.FONT_SIZE));
         musicAccountTf = new JTextField(3);
-        addBtn = new JButton("추가");
+        musicAccountTf.setFont(new DefaultFont(RoomSettingView.FONT_SIZE));
+        addBtn = new JButton("추가"); //TODO 버튼 이벤트 넣을 지 고민
+        addBtn.setFont(new DefaultFont(RoomSettingView.FONT_SIZE));
+        addBtn.addActionListener(this);
         cancleBtn = new JButton("취소");
+        cancleBtn.addActionListener(this);
+        cancleBtn.setFont(new DefaultFont(RoomSettingView.FONT_SIZE));
 
         ct.setLayout(null);
-        musicAccount.setBounds(40,110,100,80);
-        musicAccountTf.setBounds(225,110,100,80);
-        addBtn.setBounds(20,220,145,110);
-        cancleBtn.setBounds(205,220,145,110);
+        musicAccount.setBounds(100,80,100,40);
+        musicAccountTf.setBounds(200,80,50,40);
+        addBtn.setBounds(40,180,120,100);
+        cancleBtn.setBounds(200,180,120,100);
 
         ct.add(musicAccount);
         ct.add(musicAccountTf);
         ct.add(addBtn);
         ct.add(cancleBtn);
 
+        setLocation(((parent.getWidth()-WIDTH)/2), ((int)((parent.getHeight() - HEIGHT) * 0.3333)));
         setSize(WIDTH, HEIGHT);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String s = e.getActionCommand();
+        if(s.equals("추가")){
+            JOptionPane.showMessageDialog(this, "곡이 추가되었습니다.","방 추가",JOptionPane.INFORMATION_MESSAGE);
+        } else if (s.equals("취소")){
+            this.dispose();
+        }
+    }
 }
 
-class ForcedExitPopup extends JDialog{
+class ForcedExitPopup extends JDialog implements ActionListener {
     private static final String TITLE = "강제 퇴장";
     private static final int WIDTH = 370, HEIGHT = 350;
     Container ct = getContentPane();
     JLabel musicAccount;
     JButton addBtn, cancleBtn;
+    JFrame parent;
     ForcedExitPopup(JFrame parent){
         super(parent, TITLE, true);
+        this.parent = parent;
         musicAccount = new JLabel("번 방을 강제 퇴장하시겠습니까?");
+        musicAccount.setFont(new DefaultFont(RoomSettingView.FONT_SIZE-10));
         addBtn = new JButton("확인");
+        addBtn.addActionListener(this);
+        addBtn.setFont(new DefaultFont(RoomSettingView.FONT_SIZE));
         cancleBtn = new JButton("취소");
+        cancleBtn.addActionListener(this);
+        cancleBtn.setFont(new DefaultFont(RoomSettingView.FONT_SIZE));
 
         ct.setLayout(null);
-        musicAccount.setBounds(40,110,100,80);
-        addBtn.setBounds(20,220,145,110);
-        cancleBtn.setBounds(205,220,145,110);
+        musicAccount.setBounds(30,80,300,40);
+        addBtn.setBounds(40,180,120,100);
+        cancleBtn.setBounds(200,180,120,100);
 
         ct.add(musicAccount);
         ct.add(addBtn);
         ct.add(cancleBtn);
 
+        setLocation(((parent.getWidth()-WIDTH)/2), ((int)((parent.getHeight() - HEIGHT) * 0.3333)));
         setSize(WIDTH, HEIGHT);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String s = e.getActionCommand();
+        if(s.equals("확인")){
+            JOptionPane.showMessageDialog(this, "번방이 강제퇴장되었습니다.","방 강제퇴장",JOptionPane.INFORMATION_MESSAGE);
+        } else if (s.equals("취소")){
+            this.dispose();
+        }
     }
 }
 
@@ -435,25 +471,25 @@ class RoomManageInfoPanel extends JPanel {
         rmi.add(p3);
         //4행
         JPanel p4 = new JPanel(new FlowLayout());
-        inTime = new JLabel("입장 시각");
+        inTime = new JLabel("입장 시각 : ");
         inTime.setFont(new DefaultFont(RoomSettingView.MIDDLE_FONT_SIZE));
         p4.add(inTime);
         rmi.add(p4);
         //5행
         JPanel p5 = new JPanel(new FlowLayout());
-        useMusic = new JLabel("사용곡 수");
+        useMusic = new JLabel("사용곡 수 : ");
         useMusic.setFont(new DefaultFont(RoomSettingView.MIDDLE_FONT_SIZE));
         p5.add(useMusic);
         rmi.add(p5);
         //6행
         JPanel p6 = new JPanel(new FlowLayout());
-        remainMusic = new JLabel("잔여곡 수");
+        remainMusic = new JLabel("잔여곡 수 : ");
         remainMusic.setFont(new DefaultFont(RoomSettingView.MIDDLE_FONT_SIZE));
         p6.add(remainMusic);
         rmi.add(p6);
         //7행
         JPanel p7 = new JPanel(new FlowLayout());
-        payMusic = new JLabel("결제곡 수");
+        payMusic = new JLabel("결제곡 수 : ");
         payMusic.setFont(new DefaultFont(RoomSettingView.MIDDLE_FONT_SIZE));
         p7.add(payMusic);
         rmi.add(p7);

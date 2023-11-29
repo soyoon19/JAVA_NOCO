@@ -1,3 +1,5 @@
+package controller_db;
+
 import dao.*;
 import dto.GoodsDTO;
 import dto.OrderHDTO;
@@ -25,7 +27,7 @@ public class Controller {
         //memberLogDAO = new MemberLogDAO();
     }
 
-    public GoodsDAO getGoodsDTO() {
+    public GoodsDAO getGoodsDAO() {
         return goodsDAO;
     }
 }

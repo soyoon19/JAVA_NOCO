@@ -91,7 +91,7 @@ public class GoodsDTO {
         this.cost = cost;
     }
 
-    public boolean isDisStatus() {
+    public boolean getDisStatus() {
         return disStatus;
     }
 

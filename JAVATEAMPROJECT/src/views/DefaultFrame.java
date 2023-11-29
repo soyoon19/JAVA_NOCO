@@ -2,6 +2,7 @@ package views;
 
 
 
+import controller_db.Controller;
 import custom_component.*;
 
 import java.awt.*;
@@ -200,6 +201,7 @@ public class DefaultFrame extends JFrame {
     private JLabel timeLb, titleLb;
 
     private String nowTopName;
+    private Controller controller;
     DefaultTopPanel[] tops;
 
     /*
@@ -236,8 +238,8 @@ public class DefaultFrame extends JFrame {
         nowTopName = name;
     }
 
-    public DefaultFrame() {
-
+    public DefaultFrame(Controller controller) {
+        this.controller = controller;
         cp = getContentPane();
         DefaultUserTopPanel userTop = new DefaultUserTopPanel(TOP_USER, this);
         DefaultAdminTopPanel adminTop = new DefaultAdminTopPanel(TOP_ADMIN, this);
@@ -271,6 +273,9 @@ public class DefaultFrame extends JFrame {
         return c;
     }
 
+    public Controller getController() {
+        return controller;
+    }
 
     public static GridBagConstraints easyGridBagConstraint(int x, int y, double weightX, double weightY, int gridWidth, int gridHeight) {
 

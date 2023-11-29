@@ -43,8 +43,8 @@ public abstract class AreaSelectMouseListener implements MouseListener {
 
         for(int i = y; i < option.getWidth() + y && i < RoomViewPanel.MAX_HEIGHT; i++)
             for(int j = x; j < option.getHeight() + x && j < RoomViewPanel.MAX_WIDTH; j++) {
-                if(empty) jps[i][j].setBackground(Color.blue);
-                else jps[i][j].setBackground(Color.red);    //방이 이미 점유되어 있으면 빨간색으로 변경한다.
+                if(empty) jps[i][j].setBackground(new Color(122,138,250));
+                else jps[i][j].setBackground(new Color(242,101,101));    //방이 이미 점유되어 있으면 빨간색으로 변경한다.
             }
 
     }

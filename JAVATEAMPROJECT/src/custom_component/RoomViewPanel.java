@@ -70,9 +70,11 @@ public class RoomViewPanel extends JPanel {
                 //방 붙이기
                 JPanel roomPs = new JPanel();
                 JLabel lbs = new JLabel(room.getNum() + "번");
-                roomPs.setBackground(Color.GREEN);
+                lbs.setForeground(Color.white);
+                roomPs.setBackground(new Color(156,156,156));
                 roomPs.add(lbs);
-                roomPs.setBorder(new TitledBorder(new LineBorder(Color.black, 3)));
+                //roomPs.setBorder(new TitledBorder(new LineBorder(Color.white, 3)));
+                roomPs.setBorder(null);
                 //방의 좌표와 크기만큼 영역을 지정해 준다.
                 this.add(roomPs, DefaultFrame.easyGridBagConstraint(x, y,1,1, width ,height));
             }

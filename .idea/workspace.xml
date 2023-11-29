@@ -4,18 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e8f45e45-ae5a-4366-b15b-9599b1d4c3fa" name="Changes" comment="Feat : DB 정보 은닉, View 수정&#10;&#10;DBLoginInfo DB 로그인 정보가 있게 했음">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-24__12_27__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-24__12_27__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-24__1_10__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-24__1_10__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-24__1_10__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-24__1_10__Changes_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-25__5_10__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-25__5_10__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__1_30__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__1_30__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__1_32__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__1_32__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__2_15__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__2_15__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__2_19__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__2_19__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__2_20__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__2_20__Changes_.xml" afterDir="false" />
+    <list default="true" id="e8f45e45-ae5a-4366-b15b-9599b1d4c3fa" name="Changes" comment="Feat : custom_component 추가, package 이동&#10;&#10;NumberPadPanel의 이벤트 관련해서 기능 추가 NumberPadListener 추가&#10;&#10;DefaultFrame 페이지 이동 기능 추가&#10;&#10;관리자 topPanel &quot;노인 코래방&quot; 텍스트 추가&#10;&#10;Controller, DBConnect 다른 클래스에서 인식을 못하는 문제가 발생해 controller_db 패키지를 추가해 안에 넣어 문제 해결">
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/custom_component/AreaJPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/custom_component/AreaSelectMouseListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/custom_component/EventSwitch.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/custom_component/RoomEditPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/custom_component/RoomViewPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/JAVATEAMPROJECT1/images/americano(ice).png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/JAVATEAMPROJECT1/images/home.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/JAVATEAMPROJECT1/images/title.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO_1/images/back.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO_1/images/birth.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO_1/images/coinAfter.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO_1/images/coinBefore.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO_1/images/musicAfter.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO_1/images/musicBefore.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/MemberDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/MemberDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dto/RoomImfDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dto/RoomImfDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dto/RoomManageDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dto/RoomManageDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/RoomSettingView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/RoomSettingView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -33,7 +40,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="kjw2" />
+        <entry key="$PROJECT_DIR$" value="jaewon" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -154,6 +161,11 @@
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
+        <entry key="0bd3f8fb-8d19-4f2c-b739-dc4430bdb809">
+          <value>
+            <State />
+          </value>
+        </entry>
         <entry key="MAIN">
           <value>
             <State>
@@ -176,6 +188,11 @@
             </State>
           </value>
         </entry>
+      </map>
+    </option>
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="0bd3f8fb-8d19-4f2c-b739-dc4430bdb809" value="TOOL_WINDOW" />
       </map>
     </option>
     <option name="RECENT_FILTERS">
@@ -202,5 +219,15 @@
     <MESSAGE value="Feat : DAO, DTO, View, Controller, DBConnect 추가&#10;&#10;DTO을 DAO로 표기 실수와 DB와 속성과 갖게 변경&#10;GoodsDAO만 간단하게 구현 나머지 DAO 구현 필요&#10;BirthdayPopup, MusicUseView,ProductOptionPopup 추가&#10;DefaultFrame 수정" />
     <MESSAGE value="Feat : DB 정보 은닉, View 수정&#10;&#10;DBLoginInfo DB 로그인 정보가 있게 했음" />
     <option name="LAST_COMMIT_MESSAGE" value="Feat : DB 정보 은닉, View 수정&#10;&#10;DBLoginInfo DB 로그인 정보가 있게 했음" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="5" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

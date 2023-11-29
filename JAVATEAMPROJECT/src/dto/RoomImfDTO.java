@@ -1,26 +1,40 @@
 package dto;
 
+import java.sql.Time;
+
 public class RoomImfDTO {
-    private String code, num;
-    private int x, y, option;
-    private boolean check;
 
-    public RoomImfDTO(String code, String num,
-                      int x, int y, int option, boolean check) {
-        this.code = code;
+    private String num, userHp;
+    private Time enterTime;
+    private int useSong, leftSong, paySong;
+    private boolean using;
+
+    RoomImfDTO(){}
+
+    public RoomImfDTO(String userHp, Time enterTime, String num, int useSong, int leftSong, int paySong, boolean using) {
+        this.userHp = userHp;
+        this.enterTime = enterTime;
         this.num = num;
-        this.x = x;
-        this.y = y;
-        this.option = option;
-        this.check = check;
+        this.useSong = useSong;
+        this.leftSong = leftSong;
+        this.paySong = paySong;
+        this.using = using;
     }
 
-    public String getCode() {
-        return code;
+    public String getUserHp() {
+        return userHp;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setUserHp(String userHp) {
+        this.userHp = userHp;
+    }
+
+    public Time getEnterTime() {
+        return enterTime;
+    }
+
+    public void setEnterTime(Time enterTime) {
+        this.enterTime = enterTime;
     }
 
     public String getNum() {
@@ -31,35 +45,36 @@ public class RoomImfDTO {
         this.num = num;
     }
 
-    public int getX() {
-        return x;
+    public int getUseSong() {
+        return useSong;
     }
 
-    public void setX(int x) {
-        this.x = x;
+    public void setUseSong(int useSong) {
+        this.useSong = useSong;
     }
 
-    public int getY() {
-        return y;
+    public int getLeftSong() {
+        return leftSong;
     }
 
-    public void setY(int y) {
-        this.y = y;
+    public void setLeftSong(int leftSong) {
+        this.leftSong = leftSong;
     }
 
-    public int getOption() {
-        return option;
+    public int getPaySong() {
+        return paySong;
     }
 
-    public void setOption(int option) {
-        this.option = option;
+    public void setPaySong(int paySong) {
+        this.paySong = paySong;
     }
 
-    public boolean isCheck() {
-        return check;
+    public boolean isUsing() {
+        return using;
     }
 
-    public void setCheck(boolean check) {
-        this.check = check;
+    public void setUsing(boolean using) {
+        this.using = using;
     }
+
 }

@@ -5,7 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class RoomSettingView extends JPanel {
+public class RoomSettingView extends JPanel { //메인뷰
 
     public static final int FONT_SIZE = 30;
     public static final int MIDDLE_FONT_SIZE = 40;
@@ -28,7 +28,7 @@ public class RoomSettingView extends JPanel {
     }
 }
 
-class RoomEditPanel extends JPanel {
+class RoomEditPanel extends JPanel { //방편집 패널
     public RoomEditPanel() {
         this.setLayout(new BorderLayout());
         JPanel review = new JPanel(new GridBagLayout());
@@ -49,7 +49,7 @@ class RoomEditPanel extends JPanel {
 }
 
 
-class ScreenEditPanelMini extends JPanel implements ActionListener{
+class ScreenEditPanelMini extends JPanel implements ActionListener{ //화면 편집 패널
     JButton roomAdd, roomDelete;
     JPanel sep;
     public ScreenEditPanelMini() {
@@ -87,7 +87,7 @@ class ScreenEditPanelMini extends JPanel implements ActionListener{
     }
 }
 
-class RoomAdd extends  JPanel implements ActionListener {
+class RoomAdd extends  JPanel implements ActionListener { //방추가 버튼
     JButton beforeBtn, addBtn, cancleBtn;
     JLabel roomNum, roomSize, roomlcX, roomlcY;
     JTextField roomNumtf, roomlcXtf, roomlcYtf;
@@ -164,8 +164,11 @@ class RoomAdd extends  JPanel implements ActionListener {
         if (s.equals("추가")){
             JOptionPane.showConfirmDialog(this, "추가하시겠습니까?","방 추가",JOptionPane.YES_NO_OPTION);
             JOptionPane.showMessageDialog(this, "방 추가가 완료되었습니다.","방 추가 확인",JOptionPane.INFORMATION_MESSAGE);
-        } else if (s.equals("취소")) {
-            JOptionPane.showConfirmDialog(this, "취소하시겠습니까?","방 추가",JOptionPane.YES_NO_OPTION);
+        } else if (s.equals("취소")) { //TODO combobox 디폴트로 세팅
+            roomNumtf.setText("");
+            roomSizeXY.setSelectedIndex(0);
+            roomlcXtf.setText("");
+            roomlcYtf.setText("");
         } else if(s.equals("이전")){
             mini.remove(this);
             mini.add(mini.sep);
@@ -176,9 +179,9 @@ class RoomAdd extends  JPanel implements ActionListener {
     }
 }
 
-class RoomDelete extends JPanel implements ActionListener {
-    JButton beforeBtn, deleteBtn, cancleBtn;
-    JLabel roomNum;
+class RoomDelete extends JPanel implements ActionListener { //방삭제 버튼
+    JButton beforeBtn, deleteBtn;
+    JLabel roomNum, roomSize,roomlcX,roomlcY;
     JComboBox roomNumtf;
     ScreenEditPanelMini mini;
     public RoomDelete(ScreenEditPanelMini mini) {
@@ -197,14 +200,44 @@ class RoomDelete extends JPanel implements ActionListener {
 
         //Border layout의 Center
         JPanel p2 = new JPanel();
-        roomNum = new JLabel("방 번호    :");
-        roomNum.setFont(new DefaultFont(RoomSettingView.MIDDLE_FONT_SIZE));
-        String [] roomNumList = {"1","2","3","4","5","6","7","8","9"};
+        p2.setLayout(new GridLayout(4,1));
+
+        //1행
+        JPanel mini1 = new JPanel();
+        mini1.setLayout(new FlowLayout());
+        roomNum = new JLabel("방 번호:");
+        roomNum.setFont(new DefaultFont(RoomSettingView.BETWEEN_FONT));
+        String [] roomNumList = {" 1 "," 2 "," 3 "," 4 "," 5 "," 6 "," 7 "," 8 "," 9 "};
         roomNumtf = new JComboBox(roomNumList);
-        roomNumtf.setFont(new DefaultFont(RoomSettingView.FONT_SIZE));
-        p2.add(roomNum);
-        p2.add(roomNumtf);
-        p2.setLayout(new FlowLayout());
+        roomNumtf.setFont(new DefaultFont(RoomSettingView.BETWEEN_FONT - 10));
+        mini1.add(roomNum);
+        mini1.add(roomNumtf);
+
+        //2행
+        JPanel mini2 = new JPanel();
+        mini2.setLayout(new FlowLayout());
+        roomSize = new JLabel("방 크기 XY :");
+        roomSize.setFont(new DefaultFont(RoomSettingView.BETWEEN_FONT));
+        mini2.add(roomSize);
+
+        //3행
+        JPanel mini3 = new JPanel();
+        mini3.setLayout(new FlowLayout());
+        roomlcX = new JLabel("방 위치 X :");
+        roomlcX.setFont(new DefaultFont(RoomSettingView.BETWEEN_FONT));
+        mini3.add(roomlcX);
+
+        //4행
+        JPanel mini4 = new JPanel();
+        mini4.setLayout(new FlowLayout());
+        roomlcY = new JLabel("방 위치 Y :");
+        roomlcY.setFont(new DefaultFont(RoomSettingView.BETWEEN_FONT));
+        mini4.add(roomlcY);
+
+        p2.add(mini1);
+        p2.add(mini2);
+        p2.add(mini3);
+        p2.add(mini4);
         add(p2,BorderLayout.CENTER);
 
         //Border layout의 North
@@ -212,11 +245,7 @@ class RoomDelete extends JPanel implements ActionListener {
         deleteBtn = new JButton("삭제");
         deleteBtn.setFont(new DefaultFont(RoomSettingView.MIDDLE_FONT_SIZE));
         deleteBtn.addActionListener(this);
-        cancleBtn = new JButton("취소");
-        cancleBtn.setFont(new DefaultFont(RoomSettingView.MIDDLE_FONT_SIZE));
-        cancleBtn.addActionListener(this);
         p3.add(deleteBtn);
-        p3.add(cancleBtn);
         p3.setLayout(new FlowLayout());
         add(p3,BorderLayout.SOUTH);
     }
@@ -227,8 +256,6 @@ class RoomDelete extends JPanel implements ActionListener {
         if (s.equals("삭제")){
             JOptionPane.showConfirmDialog(this, "삭제하시겠습니까?","방 삭제",JOptionPane.YES_NO_OPTION);
             JOptionPane.showMessageDialog(this, "방 삭제가 완료되었습니다.","방 삭제 확인",JOptionPane.INFORMATION_MESSAGE);
-        } else if (s.equals("취소")) {
-            JOptionPane.showConfirmDialog(this, "취소하시겠습니까?","방 삭제",JOptionPane.YES_NO_OPTION);
         } else if(s.equals("이전")){
             mini.remove(this);
             mini.add(mini.sep);
@@ -238,10 +265,10 @@ class RoomDelete extends JPanel implements ActionListener {
         }
     }
 }
-class RoomSettingPanelMini extends JPanel implements ActionListener {
+class RoomSettingPanelMini extends JPanel implements ActionListener { //방설정 패널
     JLabel roomNum;
     JTextField roomNumtf;
-    JButton roomActivate, roomUnActivate, applyBtn, cancleBtn;
+    JButton roomActivate, roomUnActivate, applyBtn;
     public RoomSettingPanelMini() {
         this.setLayout(new BorderLayout());
         JPanel rsg = new JPanel();
@@ -283,11 +310,7 @@ class RoomSettingPanelMini extends JPanel implements ActionListener {
         applyBtn = new JButton("적용");
         applyBtn.setFont(new DefaultFont(RoomSettingView.MIDDLE_FONT_SIZE));
         applyBtn.addActionListener(this);
-        cancleBtn = new JButton("취소");
-        cancleBtn.setFont(new DefaultFont(RoomSettingView.MIDDLE_FONT_SIZE));
-        cancleBtn.addActionListener(this);
         p5.add(applyBtn);
-        p5.add(cancleBtn);
         rsg.add(p5);
 
         add(rsg);
@@ -303,13 +326,11 @@ class RoomSettingPanelMini extends JPanel implements ActionListener {
         } else if (s.equals("적용")) {
             JOptionPane.showConfirmDialog(this, "적용하시겠습니까?","방 설정",JOptionPane.YES_NO_OPTION);
             JOptionPane.showMessageDialog(this, "방 설정이 완료되었습니다.","방 설정 확인",JOptionPane.INFORMATION_MESSAGE);
-        } else if (s.equals("취소")) {
-            JOptionPane.showConfirmDialog(this, "취소하시겠습니까?","방 설정",JOptionPane.YES_NO_OPTION);
         }
     }
 }
 
-class RoomManagePanel extends JPanel implements ActionListener{
+class RoomManagePanel extends JPanel implements ActionListener { //방관리 패널
     JButton musicAdd, forcedExit;
     DefaultFrame parent;
     public RoomManagePanel(DefaultFrame parent) {
@@ -354,7 +375,7 @@ class RoomManagePanel extends JPanel implements ActionListener{
     }
 }
 
-class MusicAddPopup extends JDialog implements ActionListener{
+class MusicAddPopup extends JDialog implements ActionListener { //곡추가 팝업
     private static final String TITLE = "곡 추가";
     private static final int WIDTH = 370, HEIGHT = 350;
     Container ct = getContentPane();
@@ -401,7 +422,7 @@ class MusicAddPopup extends JDialog implements ActionListener{
     }
 }
 
-class ForcedExitPopup extends JDialog implements ActionListener {
+class ForcedExitPopup extends JDialog implements ActionListener { //강제퇴장 팝업
     private static final String TITLE = "강제 퇴장";
     private static final int WIDTH = 370, HEIGHT = 350;
     Container ct = getContentPane();
@@ -445,7 +466,7 @@ class ForcedExitPopup extends JDialog implements ActionListener {
     }
 }
 
-class RoomManageInfoPanel extends JPanel {
+class RoomManageInfoPanel extends JPanel { //방관리정보 패널
     JLabel division, phone,birth, inTime,useMusic, remainMusic, payMusic;
     public RoomManageInfoPanel () {
         this.setLayout(new BorderLayout());

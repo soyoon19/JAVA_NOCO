@@ -20,7 +20,6 @@ public class Controller {
     private WorkerDAO workerDAO;
 
 
-
     public Controller(Connection conn){
         goodsDAO = new GoodsDAO(conn);
         //memberDAO = new MemberDAO();

@@ -8,24 +8,26 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class GoodsDAO {
+public class GoodsDAO implements  DAO<GoodsDTO, String>{
     private Connection conn;
 
     public GoodsDAO(Connection coon){
         this.conn = coon;
     }
 
-    public ArrayList<GoodsDTO> all(){
-        PreparedStatement pstmt = null;
-        ResultSet rst = null;
-        ArrayList<GoodsDTO> goodsArr = new ArrayList();
+    public ArrayList<GoodsDTO> findAll(){
+        PreparedStatement pstmt = null; //sql Query을 위해서 필요
+        ResultSet rst = null;     //Query문 결과를 저장
+        ArrayList<GoodsDTO> goodsArr = new ArrayList(); //받아온 데이터를 DTO형태로 변환
 
         int flag = 0;
+
         try{
-            String sql = "select * from Goods_T";
+            String sql = "select * from Goods_T";   //sql문
             pstmt = conn.prepareStatement(sql);
             rst = pstmt.executeQuery();
             while(rst.next()){
+                //받아온 데이터를 DTO로 변환
                 GoodsDTO goods = new GoodsDTO();
                 goods.setCode(rst.getString("g_code"));
                 goods.setCategory(rst.getString("g_class"));
@@ -52,5 +54,21 @@ public class GoodsDAO {
             }
         }
         return goodsArr;
+    }
+
+    @Override
+    public GoodsDTO save(GoodsDTO goodsDTO) {
+        return null;
+    }
+
+    @Override
+    public ArrayList<GoodsDTO> findById(String s) {
+        return null;
+    }
+
+
+    @Override
+    public boolean delete(String s) {
+        return false;
     }
 }

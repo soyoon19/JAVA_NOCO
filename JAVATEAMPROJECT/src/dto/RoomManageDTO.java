@@ -8,6 +8,8 @@ public class RoomManageDTO {
     private int x, y, option;
     private boolean check;
 
+    public RoomManageDTO(){}
+
     public RoomManageDTO(String code, String num,
                       int x, int y, int option, boolean check) {
         this.code = code;

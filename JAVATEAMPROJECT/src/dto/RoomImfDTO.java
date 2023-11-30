@@ -9,7 +9,7 @@ public class RoomImfDTO {
     private int useSong, leftSong, paySong;
     private boolean using;
 
-    RoomImfDTO(){}
+    public RoomImfDTO(){}
 
     public RoomImfDTO(String userHp, Time enterTime, String num, int useSong, int leftSong, int paySong, boolean using) {
         this.userHp = userHp;

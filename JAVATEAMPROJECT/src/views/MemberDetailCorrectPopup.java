@@ -8,7 +8,7 @@ import java.awt.*;
 public class MemberDetailCorrectPopup extends JDialog {
 
     public  MemberDetailCorrectPopup(DefaultFrame prt){
-        super(prt,"회원상세정보",true);
+        super(prt,"",true);
         this.setSize(500,700);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 

@@ -137,7 +137,6 @@ class SelectDrinkPanel extends JPanel{
         drinkSelect.add(cancelDrinkMg);
 
     }
-
 }
 
 //right

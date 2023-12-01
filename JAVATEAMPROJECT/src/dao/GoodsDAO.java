@@ -139,15 +139,17 @@ public class GoodsDAO implements  DAO<GoodsDTO, String>{
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         } finally {
             try {
                 if (pstmt != null)
                     pstmt.close();
             } catch (SQLException e) {
                 e.printStackTrace();
+                return false;
             }
-            return true;
         }
+        return true;
     }
 
 }

@@ -83,21 +83,22 @@ public class MemberDAO implements DAO<MemberDTO, String>{
             String sql = "DELETE FROM Member_T WHERE m_hp = ?";
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, m_ph);
-            int rowsAffected = pstmt.executeUpdate();
-
-            return rowsAffected > 0; // 삭제된 행이 하나 이상이면 true 반환
+            pstmt.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
-            return false; // 삭제에 실패하면 false를 반환
+            return false;
         } finally {
             try {
                 if (pstmt != null)
                     pstmt.close();
             } catch (SQLException e) {
                 e.printStackTrace();
+                return false;
+
             }
         }
+        return true;
     }
 
     // 회원 조회 by ID

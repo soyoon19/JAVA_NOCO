@@ -34,6 +34,7 @@ public class MemberLogDAO implements DAO<MemberLogDTO, String> {
                     pstmt.close();
             } catch (SQLException e) {
                 e.printStackTrace();
+                return false;
             }
         }
         return true; // 추가가 성공하면 true를 반환
@@ -46,9 +47,7 @@ public class MemberLogDAO implements DAO<MemberLogDTO, String> {
             String sql = "DELETE FROM MemberLog_T WHERE m_hp = ?";
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, m_hp);
-            int rowsAffected = pstmt.executeUpdate();
-
-            return rowsAffected > 0; // 삭제된 행이 하나 이상이면 true 반환
+            pstmt.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();

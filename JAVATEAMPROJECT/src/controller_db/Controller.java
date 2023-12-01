@@ -17,6 +17,7 @@ public class Controller {
     private RoomOptionDAO roomOptionDAO;
     private WorkerDAO workerDAO;
     private GoodsImageDAO goodsImageDAO;
+    private StockDAO stockDAO;
 
 
     public Controller(Connection conn){
@@ -30,6 +31,7 @@ public class Controller {
         roomOptionDAO = new RoomOptionDAO(conn);
         workerDAO = new WorkerDAO(conn);
         goodsImageDAO = new GoodsImageDAO(conn);
+        stockDAO = new StockDAO(conn);
     }
 
     public GoodsDAO getGoodsDAO() {
@@ -66,4 +68,6 @@ public class Controller {
 
     public WorkerDAO getWorkerDAO() {return workerDAO;}
     public GoodsImageDAO getGoodsImageDAO() {return goodsImageDAO; }
+
+    public StockDAO getStockDAO(){ return stockDAO; }
 }

@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="73277347-8d03-48f7-a7c0-89844aebc90d" name="Changes" comment="feat : StocksDAO, StocksDTO">
+    <list default="true" id="73277347-8d03-48f7-a7c0-89844aebc90d" name="Changes" comment="Feat : DAO, DTO, ImageProcess 구현&#10;모든 Stock DAO, DTO을 제외한 DTO을 구현 ImageProcess 구현">
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/StockDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dto/StockDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__1_59__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__1_59__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__1_59__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__1_59__Changes_1.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__5_16__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__5_16__Changes_.xml" afterDir="false" />
@@ -21,9 +23,13 @@
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-12-01__10_56__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-12-01__10_56__Changes_1.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-12-01__11_01__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-12-01__11_01__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/StocksDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/StocksDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dto/StocksDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dto/StocksDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/DrinksManagementView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/DrinksManagementView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/controller_db/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/controller_db/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/GoodsDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/GoodsDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/GoodsImageDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/GoodsImageDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/MemberDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/MemberDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/MemberLogDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/MemberLogDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/OrderDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/OrderDAO.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,7 +97,7 @@
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
-      <module name="JAVA_NOCO1" />
+      <module name="JAVATEAMPROJECT" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -164,25 +170,17 @@
       <option name="project" value="LOCAL" />
       <updated>1701099558321</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Feat : DAO, DTO, ImageProcess 구현&#10;모든 Stock DAO, DTO을 제외한 DTO을 구현 ImageProcess 구현">
+      <created>1701416359568</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1701416359568</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
-    <option name="RECENT_FILTERS">
-      <map>
-        <entry key="Branch">
-          <value>
-            <list>
-              <RecentGroup>
-                <option name="FILTER_VALUES">
-                  <option value="kjw" />
-                </option>
-              </RecentGroup>
-            </list>
-          </value>
-        </entry>
-      </map>
-    </option>
     <option name="TAB_STATES">
       <map>
         <entry key="0bd3f8fb-8d19-4f2c-b739-dc4430bdb809">
@@ -214,6 +212,21 @@
         </entry>
       </map>
     </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="kjw" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Feat : 패키지, 뷰, 커스텀객체 생성&#10; &#10;패키지 : custom_component, views&#10;뷰 : CardInfoView, DefaultFrame&#10;커스텀객체 : DefaultFont" />
@@ -225,7 +238,6 @@
     <MESSAGE value="Fix : popup 문제 해결&#10;&#10;MusicAddPopup&#10;ForcedExitPopup" />
     <MESSAGE value="Fix : RoomSettingView&#10;RoomSettingView 이벤트 연결" />
     <MESSAGE value="Feat : DAO, DTO, ImageProcess 구현&#10;모든 Stock DAO, DTO을 제외한 DTO을 구현 ImageProcess 구현" />
-    <MESSAGE value="feat : StocksDAO, StocksDTO" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat : StocksDAO, StocksDTO" />
+    <option name="LAST_COMMIT_MESSAGE" value="Feat : DAO, DTO, ImageProcess 구현&#10;모든 Stock DAO, DTO을 제외한 DTO을 구현 ImageProcess 구현" />
   </component>
 </project>

@@ -10,12 +10,12 @@ public class GoodsDTO {
     //mainCategory -- category //대분류
     private String code, name, category, status;
     private int mainCategory, saleCount, price, cost;
-    private boolean disStatus;
+    private boolean disStatus, ice, hot;
 
     public GoodsDTO(){}
 
     public GoodsDTO(String code, String name, String category, String status, int mainCategory,
-                    int saleCount, int price, int cost, boolean disStatus) {
+                    int saleCount, int price, int cost, boolean disStatus, boolean ice, boolean hot) {
         this.code = code;
         this.name = name;
         this.category = category;
@@ -25,6 +25,8 @@ public class GoodsDTO {
         this.price = price;
         this.cost = cost;
         this.disStatus = disStatus;
+        this.ice = ice;
+        this.hot = hot;
     }
 
     public String getCode() {
@@ -99,4 +101,19 @@ public class GoodsDTO {
         this.disStatus = disStatus;
     }
 
+    public boolean getIce() {
+        return ice;
+    }
+
+    public void setIce(boolean ice) {
+        this.ice = ice;
+    }
+
+    public boolean getHot() {
+        return hot;
+    }
+
+    public void setHot(boolean hot) {
+        this.hot = hot;
+    }
 }

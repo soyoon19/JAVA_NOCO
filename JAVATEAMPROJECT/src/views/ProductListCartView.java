@@ -3,13 +3,12 @@ package views;
 import custom_component.DefaultFont;
 import custom_component.FreeImageIcon;
 import custom_component.JPanelOneLabel;
-import dao.ProductDAO;
+import dto.GoodsDTO;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import javax.swing.*;
 
@@ -118,8 +117,8 @@ class ProductCart extends JPanel{
         this.add(btm, BorderLayout.SOUTH);
     }
 
-    public void add(ProductDAO p){  //add 함수 실행시 선택한 상품이 추가된다.
-        cartList.add(new ProductCarDetailPanel(p));
+    public void add(GoodsDTO g){  //add 함수 실행시 선택한 상품이 추가된다.
+        cartList.add(new ProductCarDetailPanel(g));
         center.add(cartList.get(cartList.size() - 1));
     }
 
@@ -131,16 +130,16 @@ class ProductCart extends JPanel{
         @Override
         public void actionPerformed(ActionEvent e) {
             int i = 0;
-            ProductDAO[] ps = new ProductDAO[cartList.size()];
+            GoodsDTO[] gs = new GoodsDTO[cartList.size()];
             int[] nums = new int[cartList.size()];
 
             for(ProductCarDetailPanel p : cartList){
-                ps[i] = p.getProdcut();
+                gs[i] = p.getGoods();
                 nums[i] = p.getNum();
                 i++;
             }
 
-            ProductCartResultPopup popup = new ProductCartResultPopup(ps, nums, parent);
+            ProductCartResultPopup popup = new ProductCartResultPopup(gs, nums, parent);
         }
     }
 }
@@ -149,7 +148,7 @@ class ProductCart extends JPanel{
  class ProductCategoryTap extends JScrollPane{
     JPanel main; //JscrollPane에 넣을 패널
     private String mainCategory, category;
-    private ProductDAO[] products;
+    private GoodsDTO[] goodsArr;
     private ProductCart cart;
 
 
@@ -160,17 +159,17 @@ class ProductCart extends JPanel{
         main = new JPanel();
 
         //대분류와 소분류를 구분한 데이터를 가져왔다고 가정
-        products = new ProductDAO[9];
-        for(int i = 0; i < products.length; i++){
-            products[i] =  new ProductDAO("C05", "aa(ice)",
-                    "coffee", 10, false, 2000, 400,"실패");
+        goodsArr = new GoodsDTO[9];
+        for(int i = 0; i < goodsArr.length; i++){
+            goodsArr[i] =  new GoodsDTO("C05", "aa(ice)",
+                    "coffee","실패", 10, 10, 2000, 400, true, true, true);
         }
 
 
-        main.setLayout(new GridLayout(products.length / 2 + 1, 2));
+        main.setLayout(new GridLayout(goodsArr.length / 2 + 1, 2));
 
-        for(int i = 0; i < products.length; i++){
-            main.add(new ProductDetailPanel(products[i], cart));
+        for(int i = 0; i < goodsArr.length; i++){
+            main.add(new ProductDetailPanel(goodsArr[i], cart));
         }
         //만약 JScrollPanel 생성후에 Panel의 스크롤 기능을 만들고 싶다면
         //꼭  setViewportView(JPanel)을 사용해야 한다는 점을 잊지 말자.
@@ -185,17 +184,17 @@ class ProductDetailPanel extends JPanel{
     private static final int FONT_SIZE = 25;
     private static final int BTN_WIDTH_SIZE = 100;
 
-    private ProductDAO product;
+    private GoodsDTO goods;
     private ImageIcon producImage;
     private ProductCart cartList;
     private JButton buyBtn;
     private ProductCart cart;
 
 
-    public  ProductDetailPanel(ProductDAO p, ProductCart pc){
+    public  ProductDetailPanel(GoodsDTO g, ProductCart pc){
         this.setLayout(new GridLayout(1, 2));
         this.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        product = p;
+        goods = g;
         cart = pc;
 
 
@@ -224,14 +223,14 @@ class ProductDetailPanel extends JPanel{
         JLabel nameLb = new JLabel(product.getName());
         right1.add(nameLb);
          */
-        JPanelOneLabel right1 = new JPanelOneLabel(product.getName(),
+        JPanelOneLabel right1 = new JPanelOneLabel(goods.getName(),
                 new FlowLayout(FlowLayout.LEFT));
         right1.getLabel().setFont(new DefaultFont(FONT_SIZE));
         right.add(right1);
 
 
         //right-2 가격
-        JPanelOneLabel right2 = new JPanelOneLabel(String.valueOf(product.getSellPrice() + "원"),
+        JPanelOneLabel right2 = new JPanelOneLabel(String.valueOf(goods.getPrice() + "원"),
                 new FlowLayout(FlowLayout.LEFT));
         right2.getLabel().setFont(new DefaultFont(FONT_SIZE));
         right.add(right2);
@@ -244,7 +243,7 @@ class ProductDetailPanel extends JPanel{
         buyBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cart.add(product);
+                cart.add(goods);
                 cart.revalidate(); //갱신
             }
         });
@@ -255,8 +254,8 @@ class ProductDetailPanel extends JPanel{
         this.add(right);
     }
 
-    public ProductDAO getProduct(){
-        return product;
+    public GoodsDTO getGoods(){
+        return goods;
     }
 
 }
@@ -266,15 +265,15 @@ class ProductCarDetailPanel extends JPanel{
     private static final int IMAGE_SIZE = 100;
     private static final int FONT_SZIE = 25;
     private static final int BTN_SIZE = 25;
-    private ProductDAO prodcut;
+    private GoodsDTO goods;
     private ImageIcon producImage; //사이즈가 조정된 imageIcon
     private JButton upBtn, downBtn;
     private JLabel numLb, priceLb;
     private int num = 1;
 
 
-    public ProductCarDetailPanel(ProductDAO p) {
-        this.prodcut = p;
+    public ProductCarDetailPanel(GoodsDTO g) {
+        this.goods = g;
         //this.setLayout(new FlowLayout(FlowLayout.LEFT));
         this.setLayout(new GridBagLayout());
         //image
@@ -292,13 +291,13 @@ class ProductCarDetailPanel extends JPanel{
         left.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
 
         //left-1 - 상품 이름
-        JLabel nameLb = new JLabel(prodcut.getName());
+        JLabel nameLb = new JLabel(goods.getName());
         nameLb.setFont(new DefaultFont(FONT_SZIE));
         nameLb.setSize(200, 30);
         left.add(nameLb);
 
         //left-2 - 상품 가격
-        priceLb = new JLabel(prodcut.getSellPrice() + "원");
+        priceLb = new JLabel(goods.getPrice() + "원");
         priceLb.setFont(new DefaultFont(FONT_SZIE));
         left.add(priceLb);
 
@@ -327,7 +326,7 @@ class ProductCarDetailPanel extends JPanel{
                 if(num > 1) {
                     num--;
                     numLb.setText(String.valueOf(num));
-                    priceLb.setText(num * prodcut.getSellPrice() + "원");
+                    priceLb.setText(num * goods.getPrice() + "원");
                 }
             }
         });
@@ -337,7 +336,7 @@ class ProductCarDetailPanel extends JPanel{
             public void actionPerformed(ActionEvent e) {
                 num++;
                 numLb.setText(String.valueOf(num));
-                priceLb.setText(num * prodcut.getSellPrice() + "원");
+                priceLb.setText(num * goods.getPrice() + "원");
             }
         });
 
@@ -353,8 +352,8 @@ class ProductCarDetailPanel extends JPanel{
         this.add(left, DefaultFrame.easyGridBagConstraint(1,0,3,1));
     }
 
-    public ProductDAO getProdcut(){
-        return prodcut;
+    public GoodsDTO getGoods(){
+        return goods;
     }
 
 

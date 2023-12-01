@@ -2,7 +2,7 @@ package views;
 
 import custom_component.DefaultFont;
 import custom_component.JPanelOneLabel;
-import dao.ProductDAO;
+import dto.GoodsDTO;
 
 import javax.swing.*;
 import java.awt.*;
@@ -37,17 +37,17 @@ class ProductCartResultPricePanel extends JPanel{
 }
 
 class ProductCartResultListPanel extends JScrollPane{
-    ProductDAO[] products;
+    GoodsDTO[] goods;
     int[] num;
 
-    public ProductCartResultListPanel(ProductDAO[] ps, int[] num){
+    public ProductCartResultListPanel(GoodsDTO[] gs, int[] num){
         JPanel main = new JPanel();
-        this.products = ps;
+        this.goods = gs;
         this.num = num;
 
-        main.setLayout(new GridLayout(ps.length, 1));
-        for(int i = 0; i < ps.length; i++)
-            main.add(new ProductCartResultListDetailPanel(ps[i], num[i]));
+        main.setLayout(new GridLayout(gs.length, 1));
+        for(int i = 0; i < gs.length; i++)
+            main.add(new ProductCartResultListDetailPanel(gs[i], num[i]));
 
         this.setViewportView(main);
     }
@@ -57,13 +57,13 @@ class ProductCartResultListDetailPanel extends JPanel{
     private static final int IMAGE_SIZE = 100;
     private static final int FONT_SZIE = 25;
     private static final int BTN_SIZE = 25;
-    private ProductDAO product;
+    private GoodsDTO goods;
     private int num;
     ImageIcon productImage;
 
-    public ProductCartResultListDetailPanel(ProductDAO p, int n){
+    public ProductCartResultListDetailPanel(GoodsDTO g, int n){
 
-        this.product = p;
+        this.goods = g;
         this.num = n;
 
         this.setLayout(new GridBagLayout());
@@ -81,13 +81,13 @@ class ProductCartResultListDetailPanel extends JPanel{
         left.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
 
         //left-1 - 상품 이름
-        JLabel nameLb = new JLabel(product.getName());
+        JLabel nameLb = new JLabel(goods.getName());
         nameLb.setFont(new DefaultFont(FONT_SZIE));
         nameLb.setSize(200, 30);
         left.add(nameLb);
 
         //left-2 - 상품 가격
-        JLabel priceLb = new JLabel(product.getSellPrice() * num + "원");
+        JLabel priceLb = new JLabel(goods.getPrice() * num + "원");
         priceLb.setFont(new DefaultFont(FONT_SZIE));
         left.add(priceLb);
 
@@ -109,7 +109,7 @@ class ProductCartResultListDetailPanel extends JPanel{
 public class ProductCartResultPopup extends JDialog implements ActionListener{
     private static final String TITLE = "상품 확인";
     private static final int WIDTH = 400, HEIGHT = 900;
-    private ProductDAO[] products;
+    private GoodsDTO[] goodsArr;
     private int[] nums;
     private int tot, pay;
     JFrame parent;
@@ -118,20 +118,20 @@ public class ProductCartResultPopup extends JDialog implements ActionListener{
     JButton backBtn, payBtn;
 
 
-    public ProductCartResultPopup(ProductDAO[] ps, int[] ns, JFrame parent) {
+    public ProductCartResultPopup(GoodsDTO[] gs, int[] ns, JFrame parent) {
         super(parent, TITLE, true);
         this.setLayout(new BorderLayout());
 
-        this.products = ps;
+        this.goodsArr = gs;
         this.nums = ns;
         this.parent = parent;
 
 
         tot = 0;
-        for(int i = 0; i < products.length; i++)
-            tot += products[i].getSellPrice() * nums[i];
+        for(int i = 0; i < goodsArr.length; i++)
+            tot += goodsArr[i].getPrice() * nums[i];
 
-        productCartResultListPanel = new ProductCartResultListPanel(products, nums);
+        productCartResultListPanel = new ProductCartResultListPanel(goodsArr, nums);
         productCartResultPricePanel = new ProductCartResultPricePanel(tot, 0, tot);
 
         JPanel main = new JPanel();

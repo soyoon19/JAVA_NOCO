@@ -4,17 +4,107 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="174b952e-a21f-475e-aa03-013ef68dd2d3" name="Changes" comment="fix : 음료 관리 메인 페이지 디자인 수정, 부족한 재고 알림 팝업창 수정&#10;&#10;&#10;feat : 음료 관리 팝업창, 음료 상태 팝업창, 재고 관리 팝업">
-      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/StocksDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dto/StocksDTO.java" afterDir="false" />
+    <list default="true" id="73277347-8d03-48f7-a7c0-89844aebc90d" name="Changes" comment="Feat : DAO, DTO, ImageProcess 구현&#10;모든 Stock DAO, DTO을 제외한 DTO을 구현 ImageProcess 구현">
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__1_59__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__1_59__Changes_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__5_16__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__5_16__Changes_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-28__12_43__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-29__10_09__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30__10_04__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30__10_04__Changes_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30__12_02__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30__12_48__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30__12_57__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30__1_02__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-12-01__10_56__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-12-01__10_56__Changes_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-12-01__11_01__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-12-01_오전_10_56_[Changes]/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-12-01_오전_10_56_[Changes]1/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-12-01_오전_11_01_[Changes]/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/custom_component/RoomEditPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/GoodsImageDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/RoomIfmDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dto/GoodsImageDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dto/RoomIfmDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/s0101.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/s0102.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/s0103.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v0201.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v0202.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v0203.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v0204.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v0205.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v0211.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v0212.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v0221.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v0222.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v0231.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v0232.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v0241.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v0242.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/process/ImageProcess.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/JAVATEAMPROJECT/images/goods/s0101.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/JAVATEAMPROJECT/images/goods/s0102.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/JAVATEAMPROJECT/images/goods/s0103.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/JAVATEAMPROJECT/images/goods/v0201.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/JAVATEAMPROJECT/images/goods/v0202.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/JAVATEAMPROJECT/images/goods/v0203.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/JAVATEAMPROJECT/images/goods/v0204.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/JAVATEAMPROJECT/images/goods/v0205.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/JAVATEAMPROJECT/images/goods/v0211.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/JAVATEAMPROJECT/images/goods/v0212.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/JAVATEAMPROJECT/images/goods/v0221.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/JAVATEAMPROJECT/images/goods/v0222.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/JAVATEAMPROJECT/images/goods/v0231.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/JAVATEAMPROJECT/images/goods/v0232.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/JAVATEAMPROJECT/images/goods/v0241.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/JAVATEAMPROJECT/images/goods/v0242.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-24__12_27__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-24__1_10__Changes_1.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-24_오전_12_27_[Changes]/americano(ice).png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-24_오전_12_27_[Changes]/shelved.patch" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-24_오전_1_10_[Changes]1/americano(ice).png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-24_오전_1_10_[Changes]1/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27_오전_5_16_[Changes]/shelved.patch" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27_오전_5_16_[Changes]/shelved.patch" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27_오전_5_16_[Changes]1/shelved.patch" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27_오전_5_16_[Changes]1/shelved.patch" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27_오후_1_59_[Changes]/shelved.patch" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27_오후_1_59_[Changes]/shelved.patch" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27_오후_1_59_[Changes]1/shelved.patch" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27_오후_1_59_[Changes]1/shelved.patch" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-28_오전_12_43_[Changes]/shelved.patch" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-28_오전_12_43_[Changes]/shelved.patch" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-29_오전_10_09_[Changes]/shelved.patch" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-29_오전_10_09_[Changes]/shelved.patch" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30_오전_10_04_[Changes]/shelved.patch" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30_오전_10_04_[Changes]/shelved.patch" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30_오전_10_04_[Changes]1/shelved.patch" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30_오전_10_04_[Changes]1/shelved.patch" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30_오전_12_02_[Changes]/shelved.patch" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30_오전_12_02_[Changes]/shelved.patch" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30_오전_12_48_[Changes]/shelved.patch" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30_오전_12_48_[Changes]/shelved.patch" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30_오전_12_57_[Changes]/shelved.patch" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30_오전_12_57_[Changes]/shelved.patch" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30_오전_1_02_[Changes]/shelved.patch" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30_오전_1_02_[Changes]/shelved.patch" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/controller_db/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/controller_db/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/DAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/DAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/GoodsDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/GoodsDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/MemberDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/MemberDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/MemberLogDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/MemberLogDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/OrderDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/OrderDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/OrderHDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/OrderHDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/OrderManageDAO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/ProductDAO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/RoomDAO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/RoomImfDAO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/RoomManageDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/RoomManageDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/RoomOptionDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/RoomOptionDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/RoomRequestDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/RoomRequestDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/StaffDAO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/WorkerDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/WorkerDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dto/GoodsDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dto/GoodsDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dto/MemberLogDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dto/MemberLogDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dto/OrderHDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dto/OrderHDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dto/RoomImfDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dto/RoomManageDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dto/RoomManageDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ProductCartResultPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ProductCartResultPopup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ProductListCartView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ProductListCartView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ProductOptionPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ProductOptionPopup.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,42 +121,58 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="soyoon" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="48ac9d93-024d-444f-851f-0c126ca9dd97" />
+        <option name="url" value="https://github.com/soyoon19/JAVA_NOCO.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
-  </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 5
-}</component>
-  <component name="ProjectId" id="2YhojUlCJZCipP2eSYyxzJAFvtR" />
+  <component name="ProjectId" id="2YZVaGrJIrbJOzSSu9dYpg5RStn" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Program Files (x86)/MySQL/Connector J 8.0/mysql-connector-java-8.0.27.jar&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_opened_file_path": "C:/Users/KJW/Code/kotlinProgramming/JAVA_NOCO_1/JAVATEAMPROJECT/src/images/goods",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\KJW\Code\kotlinProgramming\JAVA_NOCO_1\JAVATEAMPROJECT\src\images\goods" />
+      <recent name="C:\Users\KJW\Code\kotlinProgramming\JAVA_NOCO_1\JAVATEAMPROJECT\src\images" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\KJW\Code\kotlinProgramming\JAVA_NOCO_1\JAVATEAMPROJECT\src\images\goods" />
+      <recent name="C:\Users\KJW\Code\kotlinProgramming\JAVA_NOCO_1\JAVATEAMPROJECT\src\images" />
+      <recent name="C:\Users\KJW\Code\kotlinProgramming\JAVA_NOCO_1\JAVATEAMPROJECT\src\title" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="ALTERNATIVE_JRE_PATH" value="9" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="Main" />
-      <module name="JAVA_NOCO1" />
+      <module name="JAVATEAMPROJECT" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -74,73 +180,70 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="174b952e-a21f-475e-aa03-013ef68dd2d3" name="Changes" comment="" />
-      <created>1700987308038</created>
+      <changelist id="73277347-8d03-48f7-a7c0-89844aebc90d" name="Changes" comment="Fix : RoomSettingView&#10;RoomSettingView 이벤트 연결" />
+      <created>1700733150714</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1700987308038</updated>
+      <updated>1700733150714</updated>
     </task>
-    <task id="LOCAL-00001" summary="feat : 팝업 추가&#10;&#10;삭제 팝업(음료, 재고)&#10;상태 팝업&#10;&#10;음료 관리 메인 페이지(구조)">
-      <option name="closed" value="true" />
-      <created>1700990180279</created>
+    <task id="LOCAL-00001" summary="Feat : 패키지, 뷰, 커스텀객체 생성&#10; &#10;패키지 : custom_component, views&#10;뷰 : CardInfoView, DefaultFrame&#10;커스텀객체 : DefaultFont">
+      <created>1700734512701</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1700990180279</updated>
+      <updated>1700734512701</updated>
     </task>
-    <task id="LOCAL-00002" summary="feat : &#10;음료 관리 메인 페이지 (좌측 패널 만드는 중)">
-      <option name="closed" value="true" />
-      <created>1701011449828</created>
+    <task id="LOCAL-00002" summary="Feat : 패키지, 뷰, 커스텀객체 수정, 추가&#10; &#10;패키지 : images //이미지를 저장하는 패키지, dao&#10;뷰 : CardInfoView --&gt; CardInfoPopup 변경 &#10;메인 : ProductCartResultPopup, ProductListCartView&#10;커스텀객체 : DefaultFont 수정, JPanelOneLabel">
+      <created>1700818863222</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1701011449828</updated>
+      <updated>1700818863222</updated>
     </task>
-    <task id="LOCAL-00003" summary="feat : &#10;음료 관리 메인 페이지 (좌측 패널 만드는 중)">
-      <option name="closed" value="true" />
-      <created>1701011639227</created>
+    <task id="LOCAL-00003" summary="Feat : 패키지, 뷰, 커스텀객체 수정, 추가&#10; &#10;패키지 : images //이미지를 저장하는 패키지, dao&#10;뷰 : CardInfoView --&gt; CardInfoPopup 변경 &#10;메인 : ProductCartResultPopup, ProductListCartView&#10;커스텀객체 : DefaultFont 수정, JPanelOneLabel">
+      <created>1700819288672</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1701011639227</updated>
+      <updated>1700819288672</updated>
     </task>
-    <task id="LOCAL-00004" summary="feat : &#10;음료 관리 메인 페이지 (우측 패널 생성)&#10;JTable 사용">
-      <option name="closed" value="true" />
-      <created>1701033392422</created>
+    <task id="LOCAL-00004" summary="Feat : 패키지, 뷰, 팝업, 커스텀객체, dao 수정, 추가&#10; &#10;뷰 : ProductListCartView, DefaultFrame 수정&#10;팝업 : ProductCartResultPopup &#10;커스텀객체 : FreeImageIcon, NumberPadPanel &#10;dao : MemberDAO, MemberLogDAO, RoomDAO, StaffDAO&#10;dao(DB에서 온 데이터를 저장할 객체들이 정의 되어 있는 패키지)">
+      <created>1700855885978</created>
       <option name="number" value="00004" />
       <option name="presentableId" value="LOCAL-00004" />
       <option name="project" value="LOCAL" />
-      <updated>1701033392422</updated>
+      <updated>1700855885978</updated>
     </task>
-    <task id="LOCAL-00005" summary="fix : 음료 관리 메인 페이지 수정&#10;&#10;음료 관리 메인 페이지 (좌측 TOP 패널: 카테고리 생성 / 우측JTable 적용)">
-      <option name="closed" value="true" />
-      <created>1701084594150</created>
+    <task id="LOCAL-00005" summary="Fix : PwsdFindView&#10;&#10;GridBagLayout 수정&#10;efaultFrame.easyGridBagConstraint() 사용 바람.">
+      <created>1700901450797</created>
       <option name="number" value="00005" />
       <option name="presentableId" value="LOCAL-00005" />
       <option name="project" value="LOCAL" />
-      <updated>1701084594150</updated>
+      <updated>1700901450797</updated>
     </task>
-    <task id="LOCAL-00006" summary="fix : 음료 관리 메인 페이지 완성&#10;&#10;feat : 부족한 재고 알림 팝업창">
-      <option name="closed" value="true" />
-      <created>1701270771904</created>
+    <task id="LOCAL-00006" summary="Feat : DB 정보 은닉, View 수정&#10;&#10;DBLoginInfo DB 로그인 정보가 있게 했음">
+      <created>1701021162780</created>
       <option name="number" value="00006" />
       <option name="presentableId" value="LOCAL-00006" />
       <option name="project" value="LOCAL" />
-      <updated>1701270771904</updated>
+      <updated>1701021162780</updated>
     </task>
-    <task id="LOCAL-00007" summary="fix : 음료 관리 메인 페이지 완성&#10;&#10;feat : 부족한 재고 알림 팝업창">
-      <option name="closed" value="true" />
-      <created>1701270787442</created>
+    <task id="LOCAL-00007" summary="Fix : popup 문제 해결&#10;&#10;MusicAddPopup&#10;ForcedExitPopup">
+      <created>1701099558321</created>
       <option name="number" value="00007" />
       <option name="presentableId" value="LOCAL-00007" />
       <option name="project" value="LOCAL" />
-      <updated>1701270787442</updated>
+      <updated>1701099558321</updated>
     </task>
     <option name="localTasksCounter" value="8" />
     <servers />
@@ -148,20 +251,61 @@
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
-        <entry key="MAIN">
+        <entry key="0bd3f8fb-8d19-4f2c-b739-dc4430bdb809">
           <value>
             <State />
+          </value>
+        </entry>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="true" />
+                </map>
+              </option>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="jaewon" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="kjw" />
+                </option>
+              </RecentGroup>
+            </list>
           </value>
         </entry>
       </map>
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat : 팝업 추가&#10;&#10;삭제 팝업(음료, 재고)&#10;상태 팝업&#10;&#10;음료 관리 메인 페이지(구조)" />
-    <MESSAGE value="feat : &#10;음료 관리 메인 페이지 (좌측 패널 만드는 중)" />
-    <MESSAGE value="feat : &#10;음료 관리 메인 페이지 (우측 패널 생성)&#10;JTable 사용" />
-    <MESSAGE value="fix : 음료 관리 메인 페이지 수정&#10;&#10;음료 관리 메인 페이지 (좌측 TOP 패널: 카테고리 생성 / 우측JTable 적용)" />
-    <MESSAGE value="fix : 음료 관리 메인 페이지 완성&#10;&#10;feat : 부족한 재고 알림 팝업창" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix : 음료 관리 메인 페이지 완성&#10;&#10;feat : 부족한 재고 알림 팝업창" />
+    <MESSAGE value="Feat : 패키지, 뷰, 커스텀객체 생성&#10; &#10;패키지 : custom_component, views&#10;뷰 : CardInfoView, DefaultFrame&#10;커스텀객체 : DefaultFont" />
+    <MESSAGE value="Feat : 패키지, 뷰, 커스텀객체 수정, 추가&#10; &#10;패키지 : images //이미지를 저장하는 패키지, dao&#10;뷰 : CardInfoView --&gt; CardInfoPopup 변경 &#10;메인 : ProductCartResultPopup, ProductListCartView&#10;커스텀객체 : DefaultFont 수정, JPanelOneLabel" />
+    <MESSAGE value="Feat : 패키지, 뷰, 팝업, 커스텀객체, dao 수정, 추가&#10; &#10;뷰 : ProductListCartView, DefaultFrame 수정&#10;팝업 : ProductCartResultPopup &#10;커스텀객체 : FreeImageIcon, NumberPadPanel &#10;dao : MemberDAO, MemberLogDAO, RoomDAO, StaffDAO&#10;dao(DB에서 온 데이터를 저장할 객체들이 정의 되어 있는 패키지)" />
+    <MESSAGE value="Fix : PwsdFindView&#10;&#10;GridBagLayout 수정&#10;efaultFrame.easyGridBagConstraint() 사용 바람." />
+    <MESSAGE value="Feat : DAO, DTO, View, Controller, DBConnect 추가&#10;&#10;DTO을 DAO로 표기 실수와 DB와 속성과 갖게 변경&#10;GoodsDAO만 간단하게 구현 나머지 DAO 구현 필요&#10;BirthdayPopup, MusicUseView,ProductOptionPopup 추가&#10;DefaultFrame 수정" />
+    <MESSAGE value="Feat : DB 정보 은닉, View 수정&#10;&#10;DBLoginInfo DB 로그인 정보가 있게 했음" />
+    <MESSAGE value="Fix : popup 문제 해결&#10;&#10;MusicAddPopup&#10;ForcedExitPopup" />
+    <MESSAGE value="Fix : RoomSettingView&#10;RoomSettingView 이벤트 연결" />
+    <MESSAGE value="Feat : DAO, DTO, ImageProcess 구현&#10;모든 Stock DAO, DTO을 제외한 DTO을 구현 ImageProcess 구현" />
+    <option name="LAST_COMMIT_MESSAGE" value="Feat : DAO, DTO, ImageProcess 구현&#10;모든 Stock DAO, DTO을 제외한 DTO을 구현 ImageProcess 구현" />
   </component>
 </project>

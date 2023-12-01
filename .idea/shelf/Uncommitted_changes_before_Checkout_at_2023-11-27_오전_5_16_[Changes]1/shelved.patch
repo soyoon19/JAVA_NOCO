@@ -1,0 +1,28 @@
+Index: JAVATEAMPROJECT/src/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import dto.GoodsDTO;\r\nimport views.DefaultFrame;\r\nimport views.MusicUseView;\r\nimport views.ProductListCartView;\r\n\r\nimport java.awt.*;\r\nimport java.util.ArrayList;\r\nimport javax.swing.*;\r\n\r\npublic class Main {\r\n    public static void main(String[] args) {\r\n        System.out.println(System.getProperty(\"user.dir\"));\r\n        DefaultFrame win = new DefaultFrame();\r\n        win.setSize(1920,1080);\r\n        //add는 setVisible보다 위에 있어야 됨!\r\n        //win.add(new ProductListCartView(win));\r\n\r\n        //win.add(new MusicUseView(win));\r\n        //win.add(new ProductListCartView(win));\r\n        win.add(new ProductListCartView(win));\r\n\r\n        /*DB Test\r\n\r\n        */\r\n        ArrayList<GoodsDTO> x = (new Controller((new DBConnect()).getConn())).getGoodsDTO().all();\r\n        for(int i = 0; i < x.size(); i++)\r\n            System.out.println(x.get(i).getName());\r\n        win.setVisible(true);\r\n        win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);\r\n\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/JAVATEAMPROJECT/src/Main.java b/JAVATEAMPROJECT/src/Main.java
+--- a/JAVATEAMPROJECT/src/Main.java	
++++ b/JAVATEAMPROJECT/src/Main.java	
+@@ -4,10 +4,13 @@
+ import views.ProductListCartView;
+ 
+ import java.awt.*;
++import java.awt.event.ActionEvent;
++import java.awt.event.ActionListener;
+ import java.util.ArrayList;
+ import javax.swing.*;
+ 
+ public class Main {
++    public static final int BTN_ORDER_LIST = 0, BTN_STOCKMANAGE = 1;
+     public static void main(String[] args) {
+         System.out.println(System.getProperty("user.dir"));
+<<<<<<< Updated upstream
+         DefaultFrame win
+=======
+         DefaultFrame win = new DefaultFrame();
+>>>>>>> Stashed changes

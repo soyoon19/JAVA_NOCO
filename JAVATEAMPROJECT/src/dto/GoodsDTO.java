@@ -3,7 +3,7 @@ package dto;
 import javax.swing.*;
 
 public class GoodsDTO {
-    public static final int MAIN_CATEGORY_MUSCI = 1;
+    public static final int MAIN_CATEGORY_MUSIC = 1;
     public static final int MAIN_CATEGORY_DRINK = 2;
 
     //category -- class //분류

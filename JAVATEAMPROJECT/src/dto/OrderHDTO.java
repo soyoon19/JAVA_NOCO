@@ -7,6 +7,8 @@ public class OrderHDTO {
     private int count, price, discount, cost;
     private Date date;
 
+    public OrderHDTO(){}
+
     public OrderHDTO(String orderCode, String goodsCode, int count,
                      int price, int discount, int cost, Date date) {
         this.orderCode = orderCode;

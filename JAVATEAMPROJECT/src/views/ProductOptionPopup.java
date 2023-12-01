@@ -2,7 +2,7 @@ package views;
 
 import custom_component.FreeImageIcon;
 import custom_component.JPanelOneLabel;
-import dao.ProductDAO;
+import dto.GoodsDTO;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,18 +13,18 @@ public class ProductOptionPopup extends JDialog {
     private JButton cancelBtn, checkBtn;
     private JRadioButton iceRdBtn, hotRdBtn;
     private  ProductListCartView productListCartView;
-    private ProductDAO product;
+    private GoodsDTO goods;
     private DefaultFrame parent;
 
     //public ProductOptionPopup(ProductListCartView productListCartView, ProductDAO p){
-    public ProductOptionPopup(DefaultFrame prt, ProductDAO p){
+    public ProductOptionPopup(DefaultFrame prt, GoodsDTO g){
         super(prt, "ICE HOT", true);
         this.setSize(WIDTH, HEIGHT);
 
         this.setUndecorated(true);
         JPanel main = new JPanel(new BorderLayout());
         //this.productListCartView = productListCartView;
-        this.product = p;
+        this.goods = g;
 
         //top
         JPanel top = new JPanel();
@@ -47,11 +47,11 @@ public class ProductOptionPopup extends JDialog {
         cancelBtn.add(center1, DefaultFrame.easyGridBagConstraint(0,0,1,2));
 
             //center-2
-        JPanelOneLabel nameLb = new JPanelOneLabel(p.getName());
+        JPanelOneLabel nameLb = new JPanelOneLabel(goods.getName());
         center.add(nameLb, DefaultFrame.easyGridBagConstraint(0,1,1,1));
 
             //center-3
-        JPanelOneLabel priceLb = new JPanelOneLabel(p.getSellPrice() + "원");
+        JPanelOneLabel priceLb = new JPanelOneLabel(goods.getPrice() + "원");
         center.add(priceLb, DefaultFrame.easyGridBagConstraint(0,2,1,1));
         main.add(center, BorderLayout.CENTER);
 

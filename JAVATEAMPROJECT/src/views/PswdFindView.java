@@ -1,7 +1,12 @@
 package views;
 
+import controller_db.Controller;
 import custom_component.DefaultFont;
 import custom_component.NumberPadPanel;
+import dao.MemberDAO;
+import dao.MemberLogDAO;
+import dto.MemberDTO;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -13,8 +18,10 @@ public class PswdFindView extends JPanel implements ActionListener {
     JTextField phonetf, birthtf;
     JButton inquirybt;
     NumberPadPanel np;
+    DefaultFrame parent;
 
-    public PswdFindView() {
+    public PswdFindView(DefaultFrame p) {
+        parent = p;
         this.setLayout(new BorderLayout());
         // BorderLayout의 Center
         JPanel blc = new JPanel(new GridBagLayout());
@@ -82,8 +89,14 @@ public class PswdFindView extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        //대충 if문 연락처와 생년월일이 일치하는 비밀번호가 있으면 FindSuccess 띄우기
-        JOptionPane.showMessageDialog(this,"당신의 비밀번호는 ","비밀번호 찾기 성공",JOptionPane.INFORMATION_MESSAGE);
-        JOptionPane.showMessageDialog(this,"회원정보가 일치하지 않습니다.","비밀번호 찾기 실패",JOptionPane.INFORMATION_MESSAGE);
+        MemberDAO memberDAO = parent.getController().getMemberDAO();
+        MemberDTO member = memberDAO.findById(phonetf.getText());
+
+        if(member == null) // || !member.getBirthDate().equals(birthtf.getText()))
+            JOptionPane.showMessageDialog(this,"회원정보가 일치하지 않습니다.","비밀번호 찾기 실패",JOptionPane.INFORMATION_MESSAGE);
+        else {
+            JOptionPane.showMessageDialog(this, "당신의 비밀번호는 : " + member.getPasswd(), "비밀번호 찾기 성공", JOptionPane.INFORMATION_MESSAGE);
+        }
+
     }
 }

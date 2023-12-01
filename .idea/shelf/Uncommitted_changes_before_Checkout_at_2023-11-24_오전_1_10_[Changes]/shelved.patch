@@ -1,0 +1,17 @@
+Index: JAVATEAMPROJECT/src/views/PswdFindView.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package views;\r\n\r\nimport javax.swing.*;\r\nimport java.awt.*;\r\n\r\npublic class PswdFindView extends JPanel {\r\n    JLabel phonelb,birthlb;\r\n    JTextField phontf,birthtf;\r\n    JButton inquirybt;\r\n    public PswdFindView(){\r\n        this.setLayout(new BorderLayout());\r\n        this.setBackground(Color.red);\r\n\r\n        //BorderLayout의 Center\r\n        JPanel ctp = new JPanel();\r\n        ctp.setLayout(new FlowLayout());\r\n        ctp.setBackground(Color.yellow);\r\n\r\n        //ctp JPanel의 top 부분\r\n        JPanel ctptop = new JPanel();\r\n        ctptop.setLayout(new FlowLayout());\r\n        ctptop.setBackground(Color.pink);\r\n\r\n        phonelb = new JLabel(\"연락처 :\");\r\n        phontf = new JTextField(8);\r\n\r\n        ctptop.add(phonelb);\r\n        ctptop.add(phontf);\r\n\r\n        //ctp JPanel의 bottom 부분\r\n        JPanel ctpbtm = new JPanel();\r\n        ctpbtm.setLayout(new FlowLayout());\r\n        ctpbtm.setBackground(Color.blue);\r\n\r\n        birthlb = new JLabel(\"생년월일 :\");\r\n        birthtf = new JTextField(7);\r\n\r\n        ctpbtm.add(birthlb);\r\n        ctpbtm.add(birthtf);\r\n\r\n        ctp.add(ctptop);\r\n        ctp.add(ctpbtm);\r\n\r\n        add(ctp,BorderLayout.CENTER);\r\n\r\n        //BorderLayout의 South\r\n        JPanel stp = new JPanel();\r\n        stp.setLayout(new FlowLayout());\r\n        stp.setBackground(Color.gray);\r\n\r\n        inquirybt = new JButton(\"조회\");\r\n        stp.add(inquirybt);\r\n\r\n        add(stp,BorderLayout.SOUTH);\r\n    }\r\n\r\n\r\n}\r\n
+===================================================================
+diff --git a/JAVATEAMPROJECT/src/views/PswdFindView.java b/JAVATEAMPROJECT/src/views/PswdFindView.java
+--- a/JAVATEAMPROJECT/src/views/PswdFindView.java	
++++ b/JAVATEAMPROJECT/src/views/PswdFindView.java	
+@@ -24,6 +24,8 @@
+         phonelb = new JLabel("연락처 :");
+         phontf = new JTextField(8);
+ 
++
++
+         ctptop.add(phonelb);
+         ctptop.add(phontf);
+ 

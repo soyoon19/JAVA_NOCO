@@ -1,0 +1,350 @@
+Index: JAVATEAMPROJECT/src/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import views.DefaultFrame;\r\nimport views.ProductListCartView;\r\n\r\nimport java.awt.*;\r\nimport javax.swing.*;\r\n\r\npublic class Main {\r\n    public static void main(String[] args) {\r\n        System.out.println(System.getProperty(\"user.dir\"));\r\n        DefaultFrame win = new DefaultFrame();\r\n        win.setSize(1920,1080);\r\n        //add는 setVisible보다 위에 있어야 됨!\r\n        //win.add(new ProductListCartView(win));\r\n        win.setVisible(true);\r\n        win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);\r\n\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/JAVATEAMPROJECT/src/Main.java b/JAVATEAMPROJECT/src/Main.java
+--- a/JAVATEAMPROJECT/src/Main.java	
++++ b/JAVATEAMPROJECT/src/Main.java	
+@@ -1,4 +1,5 @@
+ import views.DefaultFrame;
++import views.MusicUseView;
+ import views.ProductListCartView;
+ 
+ import java.awt.*;
+@@ -10,7 +11,7 @@
+         DefaultFrame win = new DefaultFrame();
+         win.setSize(1920,1080);
+         //add는 setVisible보다 위에 있어야 됨!
+-        //win.add(new ProductListCartView(win));
++        win.add(new MusicUseView(win));
+         win.setVisible(true);
+         win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+ 
+Index: JAVATEAMPROJECT/src/views/DefaultFrame.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package views;\r\n\r\n\r\nimport custom_component.DefaultFont;\r\nimport custom_component.FreeImageIcon;\r\nimport custom_component.JPanelOneLabel;\r\n\r\nimport java.awt.*;\r\nimport javax.swing.*;\r\n\r\n/*\r\n    가장 상위(parent)인 Frame이다.\r\n    우리가 만든 View가 붙을 객체이다.\r\n    지금은 상수와 클래스 메서드만 보자(static 키워드가 붙은 부분만 확인하자)\r\n    easyGridBagConstraint가 이 클래스에 구현되어 있음으로 사용할 때\r\n    DefaultFrame.easyGridBagConstraint()로 호출하여 사용하자.\r\n */\r\n\r\npublic class DefaultFrame extends JFrame{\r\n    public static final int WIDTH = 1920, HEIGHT = 1080, //Frame의 사이즈 크기이다.\r\n            TOP_HEIGHT = 130;   //TOP의 크기이다.\r\n    //PATH 파일의 절대경을 저장하고 있는 상수이다.\r\n    //Image을 가져올때 사용하자\r\n    public static final String PATH = System.getProperty(\"user.dir\") + \"/JAVATEAMPROJECT/src\";\r\n    //Top Background Color 색상을 저장하고 있는 상수이다.\r\n    public static final Color TOP_BACKGROUND_COLOR = new Color(64,64,64),\r\n            TOP_TEXT_COLOR = Color.white;\r\n\r\n    private Container cp;\r\n    private JPanel top;\r\n    private JButton homeBtn;\r\n    private JLabel timeLb, titleLb;\r\n\r\n\r\n    /*\r\n    예쁘게 하기위해서 tod에 귀찮은 작업들을 많이 했으니\r\n    지금은 top(South) 부분은 안 보는 것을 추천한다.\r\n     */\r\n    public DefaultFrame() {\r\n        cp = getContentPane();\r\n\r\n        top = new JPanel();\r\n        top.setLayout(new GridLayout(1,3));\r\n\r\n        //left - 홈버튼\r\n        JPanel topLeft = new JPanel();\r\n        topLeft.setLayout(new FlowLayout(FlowLayout.LEFT));\r\n        homeBtn = new JButton(FreeImageIcon.resizeImageIcon(DefaultFrame.PATH + \"/images/home.png\",\r\n                (int)(TOP_HEIGHT * 3 * 0.7), (int)(TOP_HEIGHT * 0.7)));\r\n        homeBtn.setPreferredSize(new Dimension((int)(TOP_HEIGHT * 3 * 0.7),\r\n                (int)(TOP_HEIGHT  * 0.7)));\r\n\r\n            //버튼 투명하게 --> 이미지를 버튼으로 활용하고 싶을 때\r\n        homeBtn.setBorderPainted(false);        //주변 테투리 이미지를 없게 한다.\r\n        homeBtn.setContentAreaFilled(false);    //버튼 안에 기본이미지를 없게 한다.\r\n        homeBtn.setFocusPainted(false);         //포커스 했을 때 이미지를 없게 한다.\r\n        int borderValue = (int)(TOP_HEIGHT * 0.17);\r\n        topLeft.setBorder(BorderFactory.createEmptyBorder(borderValue, 20, 0,0));\r\n        topLeft.add(homeBtn);\r\n        topLeft.setBackground(TOP_BACKGROUND_COLOR);\r\n        top.add(topLeft);\r\n\r\n\r\n        //center - 로고\r\n        JPanel topCenter = new JPanel();\r\n        ImageIcon ii = new ImageIcon(DefaultFrame.PATH + \"/images/title.png\");\r\n        ImageIcon producImage = new ImageIcon(ii.getImage().getScaledInstance((int)(TOP_HEIGHT * 3.24), TOP_HEIGHT, Image.SCALE_SMOOTH));\r\n        titleLb = new JLabel(producImage);\r\n        topCenter.add(titleLb);\r\n        topCenter.setBackground(TOP_BACKGROUND_COLOR);\r\n        top.add(topCenter);\r\n\r\n\r\n        //right - 날짜, 시간\r\n        JPanel topRight = new JPanel();\r\n        topRight.setLayout(new GridLayout(2,1));\r\n            //날짜\r\n        JPanelOneLabel datePLb = new JPanelOneLabel(\"2023.11.24(월)\", new FlowLayout(FlowLayout.RIGHT));\r\n\r\n\r\n            //시간\r\n        JPanelOneLabel timePLb = new JPanelOneLabel(\"20:40:11\", new FlowLayout(FlowLayout.RIGHT));\r\n        datePLb.getLabel().setFont(new DefaultFont(38, Font.BOLD));\r\n        datePLb.setBackground(TOP_BACKGROUND_COLOR);\r\n        datePLb.getLabel().setForeground(TOP_TEXT_COLOR);\r\n        datePLb.setBorder(BorderFactory.createEmptyBorder(15, 0,0, 22));\r\n\r\n        timePLb.getLabel().setFont(new DefaultFont(38, Font.BOLD));\r\n        timePLb.setBackground(TOP_BACKGROUND_COLOR);\r\n        timePLb.getLabel().setForeground(TOP_TEXT_COLOR);\r\n        timePLb.setBorder(BorderFactory.createEmptyBorder(0, 0,15, 20));\r\n\r\n\r\n        topRight.add(datePLb);\r\n        topRight.add(timePLb);\r\n        top.add(topRight);\r\n\r\n\r\n        cp.add(top, BorderLayout.NORTH);\r\n    }\r\n\r\n    public Component add(Component c) {\r\n        cp.add(c, BorderLayout.CENTER);\r\n        return c;\r\n    }\r\n\r\n    public static GridBagConstraints easyGridBagConstraint(int x, int y, double weightX, double weightY, int gridWidth, int gridHeight){\r\n\r\n        GridBagConstraints gbc = new GridBagConstraints();\r\n        gbc.gridx = x;\r\n        gbc.gridy = y;\r\n        gbc.gridwidth = gridWidth;\r\n        gbc.gridheight = gridHeight;\r\n        gbc.weightx = weightX;\r\n        gbc.weighty = weightY;\r\n        gbc.fill = GridBagConstraints.BOTH;\r\n\r\n        return gbc;\r\n    }\r\n\r\n    public static GridBagConstraints easyGridBagConstraint(int x, int y, double weightX, double weightY) {\r\n        return easyGridBagConstraint(x, y, weightX, weightY, 1, 1);\r\n    }\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/JAVATEAMPROJECT/src/views/DefaultFrame.java b/JAVATEAMPROJECT/src/views/DefaultFrame.java
+--- a/JAVATEAMPROJECT/src/views/DefaultFrame.java	
++++ b/JAVATEAMPROJECT/src/views/DefaultFrame.java	
+@@ -6,6 +6,8 @@
+ import custom_component.JPanelOneLabel;
+ 
+ import java.awt.*;
++import java.awt.event.ActionEvent;
++import java.awt.event.ActionListener;
+ import javax.swing.*;
+ 
+ /*
+@@ -16,87 +18,190 @@
+     DefaultFrame.easyGridBagConstraint()로 호출하여 사용하자.
+  */
+ 
+-public class DefaultFrame extends JFrame{
+-    public static final int WIDTH = 1920, HEIGHT = 1080, //Frame의 사이즈 크기이다.
+-            TOP_HEIGHT = 130;   //TOP의 크기이다.
+-    //PATH 파일의 절대경을 저장하고 있는 상수이다.
+-    //Image을 가져올때 사용하자
+-    public static final String PATH = System.getProperty("user.dir") + "/JAVATEAMPROJECT/src";
+-    //Top Background Color 색상을 저장하고 있는 상수이다.
+-    public static final Color TOP_BACKGROUND_COLOR = new Color(64,64,64),
+-            TOP_TEXT_COLOR = Color.white;
++class DefaultTopPanel extends JPanel{
++    private String topName;
++    public DefaultTopPanel(String topName){
++        this.topName = topName;
++    }
++    public String getTopName() {
++        return topName;
++    }
++}
+ 
+-    private Container cp;
+-    private JPanel top;
++class DefaultUserTopPanel extends DefaultTopPanel{
++
+     private JButton homeBtn;
+     private JLabel timeLb, titleLb;
++    private DefaultFrame parent;
+ 
+ 
+-    /*
+-    예쁘게 하기위해서 tod에 귀찮은 작업들을 많이 했으니
+-    지금은 top(South) 부분은 안 보는 것을 추천한다.
+-     */
+-    public DefaultFrame() {
+-        cp = getContentPane();
+-
+-        top = new JPanel();
+-        top.setLayout(new GridLayout(1,3));
++    public DefaultUserTopPanel(String topName, DefaultFrame prt){
++        super(topName);
++        this.setLayout(new GridLayout(1,3));
++        this.parent = prt;
+ 
+         //left - 홈버튼
+         JPanel topLeft = new JPanel();
+         topLeft.setLayout(new FlowLayout(FlowLayout.LEFT));
+         homeBtn = new JButton(FreeImageIcon.resizeImageIcon(DefaultFrame.PATH + "/images/home.png",
+-                (int)(TOP_HEIGHT * 3 * 0.7), (int)(TOP_HEIGHT * 0.7)));
+-        homeBtn.setPreferredSize(new Dimension((int)(TOP_HEIGHT * 3 * 0.7),
+-                (int)(TOP_HEIGHT  * 0.7)));
++                (int)(DefaultFrame.TOP_HEIGHT * 3 * 0.7), (int)(DefaultFrame.TOP_HEIGHT * 0.7)));
++        homeBtn.setPreferredSize(new Dimension((int)(DefaultFrame.TOP_HEIGHT * 3 * 0.7),
++                (int)(DefaultFrame.TOP_HEIGHT  * 0.7)));
+ 
+-            //버튼 투명하게 --> 이미지를 버튼으로 활용하고 싶을 때
++        //버튼 투명하게 --> 이미지를 버튼으로 활용하고 싶을 때
+         homeBtn.setBorderPainted(false);        //주변 테투리 이미지를 없게 한다.
+         homeBtn.setContentAreaFilled(false);    //버튼 안에 기본이미지를 없게 한다.
+         homeBtn.setFocusPainted(false);         //포커스 했을 때 이미지를 없게 한다.
+-        int borderValue = (int)(TOP_HEIGHT * 0.17);
++        int borderValue = (int)(DefaultFrame.TOP_HEIGHT * 0.17);
+         topLeft.setBorder(BorderFactory.createEmptyBorder(borderValue, 20, 0,0));
+         topLeft.add(homeBtn);
+-        topLeft.setBackground(TOP_BACKGROUND_COLOR);
+-        top.add(topLeft);
++        topLeft.setBackground(DefaultFrame.TOP_BACKGROUND_COLOR);
++        this.add(topLeft);
+ 
+ 
+         //center - 로고
+         JPanel topCenter = new JPanel();
+         ImageIcon ii = new ImageIcon(DefaultFrame.PATH + "/images/title.png");
+-        ImageIcon producImage = new ImageIcon(ii.getImage().getScaledInstance((int)(TOP_HEIGHT * 3.24), TOP_HEIGHT, Image.SCALE_SMOOTH));
+-        titleLb = new JLabel(producImage);
++        ImageIcon productImage = new ImageIcon(ii.getImage().getScaledInstance((int)(DefaultFrame.TOP_HEIGHT * 3.24),
++                DefaultFrame.TOP_HEIGHT, Image.SCALE_SMOOTH));
++        titleLb = new JLabel(productImage);
+         topCenter.add(titleLb);
+-        topCenter.setBackground(TOP_BACKGROUND_COLOR);
+-        top.add(topCenter);
++        topCenter.setBackground(DefaultFrame.TOP_BACKGROUND_COLOR);
++        this.add(topCenter);
++
++        //top 변경을 확인하기 위해서 버튼에 테스트로 이미지를 씀
++        homeBtn.addActionListener(new ActionListener() {
++            @Override
++            public void actionPerformed(ActionEvent e) {
++                parent.switchTop(DefaultFrame.TOP_ADMIN);
++            }
++        });
+ 
+ 
+         //right - 날짜, 시간
+         JPanel topRight = new JPanel();
+         topRight.setLayout(new GridLayout(2,1));
+-            //날짜
++        //날짜
+         JPanelOneLabel datePLb = new JPanelOneLabel("2023.11.24(월)", new FlowLayout(FlowLayout.RIGHT));
+ 
+ 
+-            //시간
++        //시간
+         JPanelOneLabel timePLb = new JPanelOneLabel("20:40:11", new FlowLayout(FlowLayout.RIGHT));
+         datePLb.getLabel().setFont(new DefaultFont(38, Font.BOLD));
+-        datePLb.setBackground(TOP_BACKGROUND_COLOR);
+-        datePLb.getLabel().setForeground(TOP_TEXT_COLOR);
++        datePLb.setBackground(DefaultFrame.TOP_BACKGROUND_COLOR);
++        datePLb.getLabel().setForeground(DefaultFrame.TOP_TEXT_COLOR);
+         datePLb.setBorder(BorderFactory.createEmptyBorder(15, 0,0, 22));
+ 
+         timePLb.getLabel().setFont(new DefaultFont(38, Font.BOLD));
+-        timePLb.setBackground(TOP_BACKGROUND_COLOR);
+-        timePLb.getLabel().setForeground(TOP_TEXT_COLOR);
++        timePLb.setBackground(DefaultFrame.TOP_BACKGROUND_COLOR);
++        timePLb.getLabel().setForeground(DefaultFrame.TOP_TEXT_COLOR);
+         timePLb.setBorder(BorderFactory.createEmptyBorder(0, 0,15, 20));
+ 
+ 
+         topRight.add(datePLb);
+         topRight.add(timePLb);
+-        top.add(topRight);
++        this.add(topRight);
++    }
++}
++
++class DefaultAdminTopPanel extends DefaultTopPanel{
++    private DefaultFrame parent;
++
++    private JButton homeBtn;
++    public DefaultAdminTopPanel(String topName, DefaultFrame prt){
++        super(topName);
++        this.setLayout(new FlowLayout(FlowLayout.LEFT));
++        this.parent = prt;
++
++        JPanel temp = new JPanel();
++
++        homeBtn = new JButton("뒤로가기");
++        homeBtn.setPreferredSize(new Dimension((int)(DefaultFrame.TOP_HEIGHT * 3 * 0.7),
++                (int)(DefaultFrame.TOP_HEIGHT  * 0.7)));
++        homeBtn.setFont(new DefaultFont(30, Font.BOLD));
++        int borderValue = (int)(DefaultFrame.TOP_HEIGHT * 0.15);
++
++        this.setBackground(DefaultFrame.TOP_BACKGROUND_COLOR);
++        temp.setBackground(DefaultFrame.TOP_BACKGROUND_COLOR);
++
++        temp.add(homeBtn);
++        temp.setBorder(BorderFactory.createEmptyBorder(borderValue, 20,borderValue, 0));
++
++        homeBtn.addActionListener(new ActionListener() {
++            @Override
++            public void actionPerformed(ActionEvent e) {
++                parent.switchTop(DefaultFrame.TOP_USER);
++            }
++        });
++
++
++
++        this.add(temp);
++    }
++}
++
++
++public class DefaultFrame extends JFrame{
++    public static final int WIDTH = 1920, HEIGHT = 1080, //Frame의 사이즈 크기이다.
++            TOP_HEIGHT = 130;   //TOP의 크기이다.
++    //PATH 파일의 절대경을 저장하고 있는 상수이다.
++    //Image을 가져올때 사용하자
++    public static final String PATH = System.getProperty("user.dir") + "/JAVATEAMPROJECT/src",
++        TOP_ADMIN = "ADMIN", TOP_USER = "USER", TOP_NONE = "NONE";
++
++    //Top Background Color 색상을 저장하고 있는 상수이다.
++    public static final Color TOP_BACKGROUND_COLOR = new Color(64,64,64),
++            TOP_TEXT_COLOR = Color.white;
++
++    private Container cp;
++    private JPanel top;
++    private JButton homeBtn;
++    private JLabel timeLb, titleLb;
++    private String nowTopName;
++    DefaultTopPanel[] tops;
++
++    /*
++    예쁘게 하기위해서 tod에 귀찮은 작업들을 많이 했으니
++    지금은 top(South) 부분은 안 보는 것을 추천한다.
++     */
++
++    public void switchTop(String name){
++        if(nowTopName.equals(name)) return;
+ 
++        DefaultTopPanel changeTop = null;
+ 
+-        cp.add(top, BorderLayout.NORTH);
++        for(DefaultTopPanel p : tops){
++            if(p.getTopName().equals(name)){
++                changeTop = p;
++                break;
++            }
++        }
++
++        if(!nowTopName.equals(TOP_NONE))
++            for(DefaultTopPanel p : tops)
++                if(p.getTopName().equals(nowTopName)){
++                    System.out.println(p.getTopName());
++                    cp.remove(p);
++                    cp.revalidate();
++                }
++
++        if(!name.equals(TOP_NONE)) {
++            cp.add(changeTop, BorderLayout.NORTH);
++            cp.revalidate();
++        }
++        cp.repaint();
++
++        nowTopName = name;
++    }
++    public DefaultFrame() {
++        cp = getContentPane();
++        DefaultUserTopPanel userTop = new DefaultUserTopPanel(TOP_USER, this);
++        DefaultAdminTopPanel adminTop = new DefaultAdminTopPanel(TOP_ADMIN, this);
++        tops = new DefaultTopPanel[]{userTop, adminTop};
++
++        cp.add(userTop, BorderLayout.NORTH);
++        nowTopName = TOP_USER;
++        //cp.add(adminTop,BorderLayout.NORTH);
+     }
+ 
+     public Component add(Component c) {
+Index: JAVATEAMPROJECT/src/views/MusicUseView.java
+===================================================================
+diff --git a/JAVATEAMPROJECT/src/views/MusicUseView.java b/JAVATEAMPROJECT/src/views/MusicUseView.java
+new file mode 100644
+--- /dev/null	
++++ b/JAVATEAMPROJECT/src/views/MusicUseView.java	
+@@ -0,0 +1,69 @@
++package views;
++
++import custom_component.DefaultFont;
++import custom_component.JPanelOneLabel;
++import dao.MemberLogDAO;
++
++import javax.swing.*;
++import java.awt.*;
++import java.util.Date;
++
++class MusicUseViewPanel extends JPanel{
++    private MemberLogDAO member;
++    JButton useBtn;
++    public MusicUseViewPanel(MemberLogDAO m){
++        member = m;
++
++        this.setLayout(new BorderLayout());
++
++        //top
++        JPanel top = new JPanel();
++        top.setLayout(new GridLayout(2, 1));
++        JLabel useMusicLb = new JLabel("보유 곡 100");
++        useMusicLb.setFont(new DefaultFont(100));
++        useMusicLb.setBorder(BorderFactory.createEmptyBorder(0, 50, 0,0));
++        JLabel usedMusicLb = new JLabel("사용할 곡 0");
++        usedMusicLb.setFont(new DefaultFont(100));
++        usedMusicLb.setBorder(BorderFactory.createEmptyBorder(0, 50, 0,0));
++
++        top.add(useMusicLb);
++        top.add(usedMusicLb);
++        this.add(top, BorderLayout.CENTER);
++
++        //bottom
++        JPanel btm = new JPanel();
++        btm.setLayout(new FlowLayout(FlowLayout.RIGHT));
++        useBtn = new JButton("사용");
++        useBtn.setPreferredSize(new Dimension(200, 70));
++        useBtn.setFont(new DefaultFont(30));
++        btm.add(useBtn);
++        this.add(btm, BorderLayout.SOUTH);
++
++    }
++}
++
++class MusicUseEditPanel extends JPanel{
++
++}
++
++
++public class MusicUseView extends JPanel {
++    MusicUseViewPanel view;
++    MusicUseEditPanel edit;
++    DefaultFrame parent;
++    public MusicUseView(DefaultFrame prt){
++        this.setLayout(new GridBagLayout());
++        this.parent  = prt;
++        this.view = new MusicUseViewPanel(new MemberLogDAO("100", "2", new Date(), new Date(),
++                100, 100, 'B', new Date()));
++        this.edit = new MusicUseEditPanel();
++
++        //left
++        view.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 15));
++        this.add(view, DefaultFrame.easyGridBagConstraint(0,0,3,1));
++
++        //right
++        edit.setBorder(BorderFactory.createEmptyBorder(30, 15, 30, 30));
++        this.add(edit, DefaultFrame.easyGridBagConstraint(1,0,2,1));
++    }
++}

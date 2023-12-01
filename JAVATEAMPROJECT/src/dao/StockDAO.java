@@ -19,8 +19,8 @@ public class StockDAO implements DAO<StockDTO, String>{
     public boolean insert(StockDTO stock) {
         PreparedStatement pstmt = null;
         try {
-            String sql = "INSERT INTO Stock_T (s_code, s_name, s_amount, s_minAmount, s_cost, s_date) " +
-                    "VALUES (?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO Stock_T (s_code, s_name, s_amount, s_minAmount, s_cost, s_date, s_category) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?)";
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, stock.getCode());
             pstmt.setString(2, stock.getName());
@@ -28,6 +28,7 @@ public class StockDAO implements DAO<StockDTO, String>{
             pstmt.setInt(4, stock.getMinAmount());
             pstmt.setInt(5, stock.getCost());
             pstmt.setDate(6, stock.getDate());
+            pstmt.setInt(7, stock.getCategory());
 
             pstmt.executeUpdate();
         } catch (SQLException e) {
@@ -135,7 +136,8 @@ public class StockDAO implements DAO<StockDTO, String>{
         int minAmount = rs.getInt("s_minAmount");
         int cost = rs.getInt("s_cost");
         java.sql.Date date = rs.getDate("s_date");
+        int category = rs.getInt("s_category");
 
-        return new StockDTO(code, name, amount, minAmount, cost, date);
+        return new StockDTO(code, name, amount, minAmount, cost, date, category);
     }
 }

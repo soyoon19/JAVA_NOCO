@@ -120,12 +120,24 @@ public class NoticeStockPopup extends JDialog{
         main.add(scrollPane);
 
 
-        //right - 1 (Button)
+
+/*
+        JPanel t = new JPanel();
+        t.setLayout(new GridLayout(1,1));
         JPanel right = new JPanel();
         right.setLayout(null);
-        right.setBounds(10, 10, 40, 50);
+        right.setBounds(0, 0, 40, 50);
+
         JButton okBtn = new JButton("확인");
         okBtn.setFont(new DefaultFont(20));
+        okBtn.setBounds(0, 0, 40, 50);
+*/
+        JPanel right = new JPanel();
+        right.setLayout(new FlowLayout());
+
+        JButton okBtn = new JButton("확인");
+        okBtn.setFont(new DefaultFont(20));
+
         right.add(okBtn);
         main.add(right, BorderLayout.EAST);
 
@@ -134,7 +146,5 @@ public class NoticeStockPopup extends JDialog{
         this.setVisible(true);
 
     }
-
-
 
 }

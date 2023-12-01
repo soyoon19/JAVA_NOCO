@@ -69,9 +69,25 @@ public class DrinkMgPopup  extends JDialog{
         //right - 1 (해당 음료 이미지, 이미지 변경 버튼, 취소, 저장 버튼)
         JPanel right = new JPanel();
         //right.setLayout(new );
-        JButton okBtn = new JButton("확인");
+
+        //이미지 변경 버튼
+        JButton changeImg = new JButton("이미지 변경");
+        changeImg.setFont(new DefaultFont(20));
+        right.add(changeImg);
+
+
+        //right - 3 : 취소 버튼
+        JButton canBtn = new JButton("취소");
+        canBtn.setFont(new DefaultFont(20));
+        right.add(canBtn);
+
+        //right - 3 : 저장 버튼
+        JButton okBtn = new JButton("저장");
         okBtn.setFont(new DefaultFont(20));
         right.add(okBtn);
+
+
+
         main.add(right, BorderLayout.EAST);
 
         //호출시 보이기 설정

@@ -23,7 +23,7 @@ public class Main {
 
         //add는 setVisible보다 위에 있어야 됨!
         //win.add(new ProductListCartView(win));
-        new NoticeStockPopup(win);
+        (new NoticeStockPopup(win)).show();
         //win.add(new MusicUseView(win));
         //win.add(new ProductListCartView(win));
         //win.add(new ProductListCartView(win));

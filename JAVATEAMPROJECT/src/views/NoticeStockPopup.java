@@ -27,8 +27,7 @@ public class NoticeStockPopup extends JDialog{
     //A -> G -> H
 
 
-    public void show(){
-        this.setVisible(true);
+    public void popup(){
 
         /*
         getStockDAO()가 DB에 재고 테이블에 있는 테이블에 모든 정보를
@@ -152,6 +151,7 @@ public class NoticeStockPopup extends JDialog{
 
         //호출시 보이기 설정
         this.add(main);
+        this.setVisible(true);
     }
 
     public NoticeStockPopup(DefaultFrame parent) {

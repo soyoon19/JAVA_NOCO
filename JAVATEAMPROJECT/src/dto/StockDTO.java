@@ -8,17 +8,29 @@ public class StockDTO {
     public static final int MAIN_CATEGORY_
     */
 
+    public static final int TEMPERATURE_ITEMS = 0
+            , REFRIGERATED_ITEMS = 1, FROZEN_ITEMS = 2, ORTHER_ITEMS = 3;
+
+    public static final String[] ITEMS_KOREA_NAME = {
+            "실온(상품)", "냉장", "냉동", "일회용품"
+    };
+
+    public static String CATEGORY_TO_KOREANNAME(int category){
+        return ITEMS_KOREA_NAME[category];
+    }
+
+
     //category -- class //분류
 
     public StockDTO(){}
 
     private  String code, name;
-    private  int amount, minAmount, cost;
+    private  int amount, minAmount, cost, category;
     private Date date;
 
 
     public StockDTO(String code, String name,
-                     int amount, int minAmount, int cost, java.sql.Date date) {
+                     int amount, int minAmount, int cost, java.sql.Date date, int category) {
 
         this.code = code;
         this.name = name;
@@ -26,6 +38,15 @@ public class StockDTO {
         this.minAmount = minAmount;
         this.cost = cost;
         this.date = date;
+        this.category = category;
+    }
+
+    public int getCategory() {
+        return category;
+    }
+
+    public void setCategory(int category) {
+        this.category = category;
     }
 
     public String getCode() {

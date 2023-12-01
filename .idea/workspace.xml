@@ -4,9 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="73277347-8d03-48f7-a7c0-89844aebc90d" name="Changes" comment="">
+    <list default="true" id="73277347-8d03-48f7-a7c0-89844aebc90d" name="Changes" comment="Feat : NoticeStockPopup 데이터 불러오기">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__1_59__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__1_59__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__1_59__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__1_59__Changes_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__5_16__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__5_16__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__5_16__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__5_16__Changes_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-28__12_43__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-28__12_43__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-29__10_09__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-29__10_09__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30__10_04__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30__10_04__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30__10_04__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30__10_04__Changes_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30__12_02__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30__12_02__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30__12_48__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30__12_48__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30__12_57__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30__12_57__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30__1_02__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30__1_02__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-12-01__10_56__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-12-01__10_56__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-12-01__10_56__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-12-01__10_56__Changes_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-12-01__11_01__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-12-01__11_01__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_2023-11-27__8_44__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_2023-11-27__8_44__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/StockDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/StockDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dto/StockDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dto/StockDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dto/StocksDTO.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/NoticeStockPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/NoticeStockPopup.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -163,7 +182,14 @@
       <option name="project" value="LOCAL" />
       <updated>1701448020379</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Feat : NoticeStockPopup 데이터 불러오기">
+      <created>1701455635446</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1701455635446</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -187,7 +213,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="jaewon" />
+                        <option value="SDE" />
                       </list>
                     </value>
                   </entry>
@@ -225,6 +251,7 @@
     <MESSAGE value="Fix : RoomSettingView&#10;RoomSettingView 이벤트 연결" />
     <MESSAGE value="Feat : DAO, DTO, ImageProcess 구현&#10;모든 Stock DAO, DTO을 제외한 DTO을 구현 ImageProcess 구현" />
     <MESSAGE value="Fix : DAO, DTO 수정&#10;&#10;StockDAO, StockDTO 수정" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix : DAO, DTO 수정&#10;&#10;StockDAO, StockDTO 수정" />
+    <MESSAGE value="Feat : NoticeStockPopup 데이터 불러오기" />
+    <option name="LAST_COMMIT_MESSAGE" value="Feat : NoticeStockPopup 데이터 불러오기" />
   </component>
 </project>

@@ -16,7 +16,7 @@ public class StocksDAO implements DAO<StocksDTO, String> {
         this.conn = coon;
     }
 
-    public ArrayList<StocksDTO> findAll() {
+    public ArrayList<StocksDAO> findAll() {
         PreparedStatement pstmt = null; // sql Query를 위해 필요
         ResultSet rst = null;  //Query문 결과를 저장
         ArrayList<StocksDAO> stocksArr = new ArrayList();

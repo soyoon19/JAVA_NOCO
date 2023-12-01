@@ -63,6 +63,7 @@ class DrinksCategoryPanel extends JPanel {
         JPanel cBottom = new JPanel();
         this.add(cBottom, BorderLayout.SOUTH);
 
+        //버튼 넣기
         String [] drinkMangement = {"추가", "편집", "삭제", "<HTML><body style='text-align:center;'>일괄<br>설정</body></HTML>"};
         String [] dMButtonColor = {"green", "yellow", "RED", "orange"};
         Color[] btnColors = {Color.green, Color.YELLOW, new Color(255, 0, 0) , Color.orange};
@@ -154,7 +155,8 @@ class DrinksDetailPanel extends  JPanel implements MouseListener {
         this.parent = parent;
         controller = parent.getController(); //getController 하기 귀찮아서 변수에 저장
 
-        drinkList = controller.getGoodsDAO().all();
+        //!!!!!!
+        //drinkList = controller.getGoodsDAO().all();
         this.drinksManagementView = drinksManagementView;
 
         String[] columnType = {"음료코드", "음료명", "분류", "상태", "판매 가능 개수", "이벤트 여부", "판매가", "단가"};

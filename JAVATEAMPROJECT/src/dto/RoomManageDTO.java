@@ -1,7 +1,5 @@
-package dto;
 
-import java.sql.Time;
-import java.util.Stack;
+package dto;
 
 public class RoomManageDTO {
     private String code, num;
@@ -11,7 +9,7 @@ public class RoomManageDTO {
     public RoomManageDTO(){}
 
     public RoomManageDTO(String code, String num,
-                      int x, int y, int option, boolean check) {
+                         int x, int y, int option, boolean check) {
         this.code = code;
         this.num = num;
         this.x = x;
@@ -68,3 +66,4 @@ public class RoomManageDTO {
         this.check = check;
     }
 }
+

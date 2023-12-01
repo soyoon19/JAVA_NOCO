@@ -1,0 +1,19 @@
+Index: JAVATEAMPROJECT/src/dao/DAO.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package dao;\r\n\r\nimport java.util.ArrayList;\r\n\r\npublic interface DAO <E, K>{\r\n    public E save(E e);\r\n    public ArrayList<E> findById(K k);\r\n    public ArrayList<E> findAll();\r\n    public boolean delete(K k);\r\n\r\n}\r\n
+===================================================================
+diff --git a/JAVATEAMPROJECT/src/dao/DAO.java b/JAVATEAMPROJECT/src/dao/DAO.java
+--- a/JAVATEAMPROJECT/src/dao/DAO.java	
++++ b/JAVATEAMPROJECT/src/dao/DAO.java	
+@@ -3,8 +3,8 @@
+ import java.util.ArrayList;
+ 
+ public interface DAO <E, K>{
+-    public E save(E e);
+-    public ArrayList<E> findById(K k);
++    public boolean insert(E e);
++    public E findById(K k);
+     public ArrayList<E> findAll();
+     public boolean delete(K k);
+ 

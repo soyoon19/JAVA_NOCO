@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class RoomOptionDAO implements DAO<RoomOptionDTO, String>{
+public class RoomOptionDAO implements DAO<RoomOptionDTO, Integer>{
     private Connection conn;
     public RoomOptionDAO(Connection coon){ this.conn=coon;}
 
@@ -38,14 +38,14 @@ public class RoomOptionDAO implements DAO<RoomOptionDTO, String>{
     }
 
     @Override
-    public RoomOptionDTO findById(String code) {
+    public RoomOptionDTO findById(Integer code) {
         PreparedStatement pstmt = null;
         ResultSet rst = null;
         RoomOptionDTO option = null;
         try {
             String sql = "SELECT * FROM RoomOption_T WHERE r_option = ?";
             pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, code);
+            pstmt.setInt(1, code);
             rst = pstmt.executeQuery();
             if (rst.next()) {
                 option = new RoomOptionDTO();
@@ -102,12 +102,12 @@ public class RoomOptionDAO implements DAO<RoomOptionDTO, String>{
     }
 
     @Override
-    public boolean delete(String code) {
+    public boolean delete(Integer code) {
         PreparedStatement pstmt = null;
         try {
             String sql = "DELETE FROM RoomOption_T WHERE r_option = ?";
             pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, code);
+            pstmt.setInt(1, code);
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

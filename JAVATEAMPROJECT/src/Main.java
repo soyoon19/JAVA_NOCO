@@ -37,7 +37,6 @@ public class Main {
         }
          */
 
-/* DB연결 확인
 
         // DB 연결 확인
          DAO[] ds = {
@@ -50,7 +49,7 @@ public class Main {
             //전체조회
             System.out.println(d.findAll());
         }
-*/
+
 
 
         /* 이미지 데이터 삽입 -- 주석해제 금지 --

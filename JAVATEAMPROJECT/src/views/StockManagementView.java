@@ -1,9 +1,17 @@
 package views;
 
 import custom_component.DefaultFont;
+import custom_component.JPanelOneLabel;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 class StocksShowPanel extends JPanel{
     public StocksShowPanel(){
@@ -82,6 +90,8 @@ class StocksShowPanel extends JPanel{
 
 //right - 1
  class StockMenuPanel extends JPanel{
+
+    private CalendarPanel calendarPanel;
     public StockMenuPanel(){
         this.setLayout(new BorderLayout());
         JTabbedPane jtp = new JTabbedPane();
@@ -108,10 +118,14 @@ class StocksShowPanel extends JPanel{
 
         //center : 달력
         JPanel cCenter = new JPanel();
+        cCenter.setLayout(new BorderLayout());
 
         JPanel divCenter = new JPanel();
         divCenter.setBackground(Color.BLACK);
         divCenter.setLayout(new BorderLayout());
+        calendarPanel = new CalendarPanel();
+        divCenter.add(calendarPanel);
+        cCenter.add(divCenter, BorderLayout.CENTER);
 
         //center - 1(달력 이동) : moveMonth (moveLastMonth, moveNextMonth)
         JPanel moveMonth = new JPanel();
@@ -122,6 +136,20 @@ class StocksShowPanel extends JPanel{
 
         moveMonth.add(moveLastMonth);
         moveMonth.add(moveNextMonth);
+
+        moveLastMonth.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                calendarPanel.preMonth();
+            }
+        });
+
+        moveNextMonth.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                calendarPanel.nextMonth();
+            }
+        });
 
         cCenter.add(moveMonth, BorderLayout.NORTH);
 
@@ -136,11 +164,13 @@ class StocksShowPanel extends JPanel{
         //bottom : 버튼 설정
         //1. 선택(클릭 후 버튼 클릭시 해당 날짜 재고 show, 초기화 선택시 오늘 재고 상태를 show)
         //2. 추가/편집/삭제/일괄설정 버튼 넣기 (색깔 지정)
-        JPanel cBottom = new JPanel();
-        this.add(cBottom, BorderLayout.SOUTH);
+        JPanel cCenterBtm = new JPanel();
+        JButton selBtn = new JButton("선택"), reBtn = new JButton("초기화");
+        cCenterBtm.add(selBtn); cCenterBtm.add(reBtn);
+        cCenter.add(cCenterBtm, BorderLayout.SOUTH);
 
         //stock
-
+        JPanel cBottom = new JPanel();
         String[] drinkMangement = {"추가", "편집", "삭제", "<HTML><body style='text-align:center;'>선택<br>해제</body></HTML>"};
         String[] dMButtonColor = {"green", "yellow", "RED", "orange"};
         Color[] btnColors = {Color.green, Color.YELLOW, new Color(255, 0, 0),Color.white};
@@ -185,6 +215,79 @@ public class StockManagementView extends JPanel {
         this.add(new StockMenuPanel(), DefaultFrame.easyGridBagConstraint(1,0,1,1));
 
     }
+}
+
+
+class CalendarPanel extends JPanel{
+    private Calendar date;
+    public static final String WEEK[] = {"일", "월", "화", "수", "목", "금", "토"};
+    private JPanelOneLabel[][] space;
+    private JPanelOneLabel yearMonth;
+    private SimpleDateFormat format;
+
+    public CalendarPanel(){
+        date = Calendar.getInstance();
+        this.setLayout(new BorderLayout());
+        format = new SimpleDateFormat("yyyy-MM");
+        //top
+        yearMonth = new JPanelOneLabel(format.format(date.getTime()));
+        this.add(yearMonth, BorderLayout.NORTH);
+
+        //center
+        JPanel cal = new JPanel();
+        cal.setLayout(new GridLayout(WEEK.length, WEEK.length));
+        space = new JPanelOneLabel[WEEK.length][WEEK.length];
+
+        for(int i = 0; i < WEEK.length; i++) {
+            for (int j = 0; j < WEEK.length; j++) {
+                space[i][j] = new JPanelOneLabel("");
+                space[i][j].setBorder(new LineBorder(Color.BLACK, 1));
+                cal.add(space[i][j]);
+            }
+        }
+
+        for(int i = 0; i < WEEK.length; i++){
+            space[0][i].setBackground(Color.ORANGE);
+            space[0][i].getLabel().setText(WEEK[i]);
+        }
+
+        this.update();
+        this.add(cal);
+    }
+
+    public void nextMonth(){
+        if(date.compareTo(Calendar.getInstance()) < 0) //date가 더 작을 경우에만
+            date.add(Calendar.MONTH, 1);
+        update();
+    }
+
+    public void preMonth(){
+        date.add(Calendar.MONTH, -1);
+        update();
+    }
+
+    public void resetDate(){
+        date = Calendar.getInstance();
+    }
+
+    public void update(){
+        yearMonth.getLabel().setText(format.format(date.getTime()));
+        for(int y = 1; y < WEEK.length; y++)
+            for(int x = 0; x < WEEK.length; x++)
+                space[y][x].getLabel().setText("");
+
+        Calendar month = Calendar.getInstance();
+        month.set(date.get(Calendar.YEAR), date.get(Calendar.MONTH), 1);
+
+        int start =  month.get(Calendar.DAY_OF_WEEK) - 1 + WEEK.length;
+        int end = month.getActualMaximum(Calendar.DAY_OF_MONTH) + start;
+
+        for(int i = start; i < end; i++){
+            space[i / WEEK.length][i % WEEK.length].getLabel().setText(
+                    String.valueOf(i - start + 1));
+        }
+    }
+
 
 
 }

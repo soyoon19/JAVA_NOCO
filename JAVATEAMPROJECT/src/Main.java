@@ -102,7 +102,8 @@ public class Main {
 
         //(new CardInfoPopup(win)).setVisible(true);
         //win.add(new ManagerMainView(win));
-        win.add(new UserHomeView(win));
+        //win.add(new UserHomeView(win));
+        win.add(new StockManagementView());
         win.setVisible(true);
         win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

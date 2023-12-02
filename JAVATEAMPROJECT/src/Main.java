@@ -1,5 +1,5 @@
+
 import controller_db.Controller;
-import controller_db.DBConnect;
 import dao.DAO;
 import dao.GoodsDAO;
 import dto.GoodsDTO;
@@ -48,13 +48,14 @@ public class Main {
 
         //add는 setVisible보다 위에 있어야 됨!
         //win.add(new ProductListCartView(win));
-        //(new NoticeStockPopup(win)).popup();
-        //win.add(new DrinksManagementView(win));
-        win.add(new MusicUseView(win));
+        //win.add(new UserLoginView());
+        win.add(new UserLoginView());
+        new NoticeStockPopup(win);
+        //win.add(new MusicUseView(win));
         //win.add(new ProductListCartView(win));
         //win.add(new ProductListCartView(win));
 
-        win.add(new StockManagementView());
+        //win.add(new StockManagementView());
         /*
         SDE 창 test
             win.add(new DrinksManagementView(win));

@@ -43,6 +43,9 @@ public class DrinksStatusPopup extends JDialog {
         okBtn.setBounds(30, 195, 180, 60);
         cancleBtn.setBounds(430, 195, 180, 60);
 
+        //배경색 설정
+        b1.setBackground(Color.GREEN);
+
         this.add(msg);
         this.add(b1);
         this.add(b2);

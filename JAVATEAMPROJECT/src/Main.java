@@ -25,10 +25,20 @@ public class Main {
         //win.add(new ProductListCartView(win));
         //(new NoticeStockPopup(win)).popup();
         //win.add(new DrinksManagementView(win));
-        new DrinksStatusPopup(win);
-        //win.add(new MusicUseView(win));
+        win.add(new MusicUseView(win));
         //win.add(new ProductListCartView(win));
         //win.add(new ProductListCartView(win));
+
+        win.add(new StockManagementView());
+        /*
+        SDE 창 test
+            win.add(new DrinksManagementView(win));
+
+            new DrinksStatusPopup(win);
+
+
+            (new NoticeStockPopup(win)).popup();
+         */
 
         /* Image to Byte[], Byte[] to Image 테스트
         try {

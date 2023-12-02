@@ -106,24 +106,31 @@ class StocksShowPanel extends JPanel{
         this.add(cTop);
 
 
-        //center : 날짜, 달력
+        //center : 달력
         JPanel cCenter = new JPanel();
 
-        /*
-        DrinksCart가 Border에 의해서 고정적인 공간이 생기는 걸 피하기 위해서
-        FlowLayout을 가지고 있는 패널(tmp)를 만들고 JScrollPanel 넣음.
-        가변적인 패널 생성을 위해 팀장의 조언을 받아 Box layout 사용함.
+        JPanel divCenter = new JPanel();
+        divCenter.setBackground(Color.BLACK);
+        divCenter.setLayout(new BorderLayout());
 
-        box layout 설명
-        가변적으로 컴포너트가 추가, 삭제되는 되는 패널을 만들 때 유용
-        BoxLayout을 설정하려하는 JPanel과 수평, 수직으로 배치할지 선택 필요
-        add을 수행하면 정한 방향(수평 혹은 수직)으로 계속 추가 가능
-         */
+        //center - 1(달력 이동) : moveMonth (moveLastMonth, moveNextMonth)
+        JPanel moveMonth = new JPanel();
+        moveMonth.setLayout(new FlowLayout());
 
-        //스크롤 팬
-        JPanel tmp = new JPanel();
-        JScrollPane jsp = new JScrollPane(tmp);
-        //jsp.setBackground(Color.orange);
+        JButton moveLastMonth = new JButton("지난 달");
+        JButton moveNextMonth = new JButton("다음 달");
+
+        moveMonth.add(moveLastMonth);
+        moveMonth.add(moveNextMonth);
+
+        cCenter.add(moveMonth, BorderLayout.NORTH);
+
+        //center - 2(달력) <도움!!>
+
+
+
+
+
 
 
         //bottom : 버튼 설정
@@ -134,9 +141,9 @@ class StocksShowPanel extends JPanel{
 
         //stock
 
-        String[] drinkMangement = {"추가", "편집", "삭제", "<HTML><body style='text-align:center;'>일괄<br>설정</body></HTML>"};
+        String[] drinkMangement = {"추가", "편집", "삭제", "<HTML><body style='text-align:center;'>선택<br>해제</body></HTML>"};
         String[] dMButtonColor = {"green", "yellow", "RED", "orange"};
-        Color[] btnColors = {Color.green, Color.YELLOW, new Color(255, 0, 0), Color.orange};
+        Color[] btnColors = {Color.green, Color.YELLOW, new Color(255, 0, 0),Color.white};
 
         //1. 반복문으로 drinkMangement 개수만큼 버튼 생성
         JButton[] dMButton = new JButton[drinkMangement.length];
@@ -154,7 +161,7 @@ class StocksShowPanel extends JPanel{
         }
 
         add(cTop, BorderLayout.NORTH);
-        add(jsp, BorderLayout.CENTER);
+        add(cCenter, BorderLayout.CENTER);
         add(cBottom, BorderLayout.SOUTH);
 
     }

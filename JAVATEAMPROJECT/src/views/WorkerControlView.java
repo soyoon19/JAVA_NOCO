@@ -1,12 +1,17 @@
 package views;
 
+import dao.WorkerDAO;
+import dto.WorkerDTO;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class WorkerControlView extends JPanel {
 
     public WorkerControlView(DefaultFrame prt) {
+        this.setLayout(new BorderLayout());
         JPanel ct= new JPanel();
         ct.setLayout(new BorderLayout());
 
@@ -27,14 +32,18 @@ public class WorkerControlView extends JPanel {
         ct.add(top, BorderLayout.NORTH);
         //테이블 배치
 
-        DefaultTableModel tableModel = new DefaultTableModel(
-                new Object[][]{
-                        {false, 1, "직책1", "이름1", "010-1111-1111", "id1", "password1", true, "2023-01-01"},
-                        {false, 2, "직책2", "이름2", "010-2222-2222", "id2", "password2", false, "2023-01-02"},
-                        // ... (직책 정보를 필요에 맞게 추가)
-                },
-                new Object[]{"선택", "순서", "직책", "이름", "전화번호", "ID", "Password", "관리자 권한", "등록일자"}
-        );
+        ArrayList<WorkerDTO> workers = prt.getController().getWorkerDAO().findAll();
+        Object[] colum = new Object[]{"선택", "순서", "직책", "이름", "전화번호", "ID", "Password", "관리자 권한", "등록일자"};
+        Object[][] workerData = new Object[workers.size()][];
+
+        int i = 0;
+        for(WorkerDTO worker : workers){
+            workerData[i] = new Object[]{false, (i + 1), worker.getPosition(), worker.getName(), worker.getHp(), worker.getId(),
+                worker.getPasswd(), worker.getPosition().equals("점장"), worker.getRegDate()};
+            i++;
+        }
+
+        DefaultTableModel tableModel = new DefaultTableModel(workerData, colum);
 
         // JTable 생성 및 모델 설정
         JTable table = new JTable(tableModel) {
@@ -60,8 +69,6 @@ public class WorkerControlView extends JPanel {
         JScrollPane scrollPane = new JScrollPane(table);
         ct.add(scrollPane, BorderLayout.CENTER);
 
-
-
-
+        this.add(ct);
     }
 }

@@ -9,11 +9,10 @@ import java.awt.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class SalesAnalysisView extends JFrame {
+public class SalesAnalysisView extends JPanel {
     public SalesAnalysisView(DefaultFrame prt) {
 
-        Container ct = getContentPane();
-        ct.setLayout(new BorderLayout());
+        this.setLayout(new BorderLayout());
 
 
         JPanel main = new JPanel();
@@ -254,6 +253,6 @@ public class SalesAnalysisView extends JFrame {
         main.add(SaleCheck);
         main.add(current);
         main.add(analysis);
-        ct.add(main, BorderLayout.CENTER);
+        this.add(main, BorderLayout.CENTER);
     }
 }

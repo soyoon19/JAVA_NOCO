@@ -101,7 +101,7 @@ class SelectDrinkPanel extends JPanel{
         this.setLayout(new GridBagLayout());
 
         //관리자가 선택해 담긴 음료 show : left (음료 사진)
-        ImageIcon drinkImg = FreeImageIcon.resizeImageIcon(DefaultFrame.PATH + "/images/americano(ice).png", 150, 150);
+        ImageIcon drinkImg = FreeImageIcon.resizeImageIcon(DefaultFrame.PATH + "/images/goods/" + goods.getCode() + ".png", 150, 150);
         JLabel imageLb = new JLabel(drinkImg);
         imageLb.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
         this.add(imageLb, DefaultFrame.easyGridBagConstraint(0,0,2,1));
@@ -156,7 +156,13 @@ class DrinksDetailPanel extends  JPanel implements MouseListener {
         controller = parent.getController(); //getController 하기 귀찮아서 변수에 저장
 
         //!!!!!!
-        //drinkList = controller.getGoodsDAO().all();
+        ArrayList<GoodsDTO> goodsList = controller.getGoodsDAO().findAll();
+        drinkList = new ArrayList<>();
+        for(int i = 0; i < goodsList.size(); i++)
+            if(goodsList.get(i).getMainCategory() == GoodsDTO.MAIN_CATEGORY_DRINK)
+                drinkList.add(goodsList.get(i));
+
+
         this.drinksManagementView = drinksManagementView;
 
         String[] columnType = {"음료코드", "음료명", "분류", "상태", "판매 가능 개수", "이벤트 여부", "판매가", "단가"};

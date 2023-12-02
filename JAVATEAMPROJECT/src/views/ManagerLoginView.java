@@ -1,15 +1,22 @@
 package views;
+import controller_db.Controller;
 import custom_component.DefaultFont;
+import dto.WorkerDTO;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 public class ManagerLoginView extends JPanel {
     private static final int FONT_SIZE = 80;
     JLabel idlb, pwlb;
-    JTextField idtf, pwtf;
+    JTextField idtf;
+    JPasswordField pwtf;
     JButton loginbt;
-    public ManagerLoginView(){
+    DefaultFrame parent;
+    public ManagerLoginView(DefaultFrame prt){
         this.setLayout(new BorderLayout());
+        this.parent = prt;
 
         /// BorderLayout의 Center
         JPanel blc = new JPanel(new GridLayout(4,1));
@@ -31,7 +38,7 @@ public class ManagerLoginView extends JPanel {
         pwlb = new JLabel("PW : ");
         pwlb.setFont(new DefaultFont(FONT_SIZE));
         center3.add(pwlb);
-        pwtf = new JTextField(10);
+        pwtf = new JPasswordField(10);
         pwtf.setFont(new DefaultFont(FONT_SIZE));
         center3.add(pwtf);
         blc.add(center3);
@@ -49,6 +56,21 @@ public class ManagerLoginView extends JPanel {
         loginbt.setPreferredSize(new Dimension(500, 100));
         loginbt.setFont(new DefaultFont(FONT_SIZE));
         bls.add(loginbt);
+
+        loginbt.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                WorkerDTO worker = parent.getController().getWorkerDAO().findById(idtf.getText());
+                if(worker == null){
+
+                }else if(!worker.getPasswd().equals(pwtf.getText())){
+
+                }else{
+                    parent.switchTop(DefaultFrame.TOP_ADMIN);
+                    parent.resetMove(new ManagerMainView(parent, worker));
+                }
+            }
+        });
 
         add(bls, BorderLayout.SOUTH);
     }

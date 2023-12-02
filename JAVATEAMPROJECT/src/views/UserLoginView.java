@@ -17,8 +17,6 @@ public class UserLoginView extends JPanel {
         top.add(loginLb);
         this.add(top, BorderLayout.NORTH);
 
-
-
         //center
         JPanel center = new JPanel();
         center.setLayout(new GridBagLayout());

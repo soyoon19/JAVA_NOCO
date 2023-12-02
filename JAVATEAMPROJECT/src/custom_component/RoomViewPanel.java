@@ -25,6 +25,7 @@ public class RoomViewPanel extends JPanel {
     protected AreaJPanel[][] jps;
     protected ArrayList<RoomManageDTO> rooms; //방 정보
     protected ArrayList<RoomOptionDTO> options;
+    protected RoomPanel[] roomPs;
 
     //이벤트 발생여부
     protected EventSwitch sw;
@@ -47,14 +48,14 @@ public class RoomViewPanel extends JPanel {
 
                 this.add(jps[i][j], DefaultFrame.easyGridBagConstraint(j,i,1,1));
             }
-
-
         }
 
         //그리드된 화면에서 방을 표시한다.
+        roomPs = new RoomPanel[rooms.size()];
         RoomOptionDTO option;
-        int x, y, width, height;
+        int x, y, width, height, k = 0;
         for(RoomManageDTO room : rooms){
+            roomPs[k] = new RoomPanel(room);
             x = room.getX(); y = room.getY();
             option = options.get(room.getOption() - 1);
             width = option.getWidth();
@@ -66,18 +67,10 @@ public class RoomViewPanel extends JPanel {
                     this.remove(jps[i][j]); //원래 점유하고 있던 패널을 삭제한다.
                     jps[i][j].setUse(false); //이 패널을 사용하지 않는다는 표시를 한다.
                 }
-
-                //방 붙이기
-                JPanel roomPs = new JPanel();
-                JLabel lbs = new JLabel(room.getNum() + "번");
-                lbs.setForeground(Color.white);
-                roomPs.setBackground(new Color(156,156,156));
-                roomPs.add(lbs);
-                //roomPs.setBorder(new TitledBorder(new LineBorder(Color.white, 3)));
-                roomPs.setBorder(null);
-                //방의 좌표와 크기만큼 영역을 지정해 준다.
-                this.add(roomPs, DefaultFrame.easyGridBagConstraint(x, y,1,1, width ,height));
             }
+
+            this.add(roomPs[k], DefaultFrame.easyGridBagConstraint(x, y,1,1, width ,height));
+            k++;
         }
     }
 
@@ -89,5 +82,9 @@ public class RoomViewPanel extends JPanel {
 
     public void eventUnActivate(){
         sw.setSw(false);
+    }
+
+    public RoomPanel[] getRoomPs(){
+        return roomPs;
     }
 }

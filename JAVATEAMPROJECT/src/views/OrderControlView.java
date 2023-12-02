@@ -80,7 +80,7 @@ public class OrderControlView extends JPanel {
         bottom.add(cancel);
         main.add(bottom, BorderLayout.SOUTH);
         ct.add(main);
-
+        this.add(ct);
     }
 
     static class ButtonRenderer extends JButton implements TableCellRenderer {

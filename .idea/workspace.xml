@@ -5,6 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="73277347-8d03-48f7-a7c0-89844aebc90d" name="Changes" comment="Feat : DAO, DTO, ImageProcess 구현&#10;모든 Stock DAO, DTO을 제외한 DTO을 구현 ImageProcess 구현">
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/custom_component/NumberPadListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/custom_component/RoomPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/RoomSelectView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-24__1_10__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-24__1_10__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-25__5_10__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-25__5_10__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__1_30__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__1_30__Changes_.xml" afterDir="false" />
@@ -29,10 +32,27 @@
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-12-01__11_01__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-12-01__11_01__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_2023-11-27__8_44__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_2023-11-27__8_44__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/DBConnect.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/controller_db/DBConnect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/DBLoginInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/controller_db/DBLoginInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/StocksDAO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/DrinkMgPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/DrinkMgPopup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/NoticeStockPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/NoticeStockPopup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/custom_component/NumberPadPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/custom_component/NumberPadPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/custom_component/RoomEditPanel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/custom_component/RoomViewPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/custom_component/RoomViewPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/GoodsDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/GoodsDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dto/GoodsDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dto/GoodsDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/CardInfoPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/CardInfoPopup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/DefaultFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/DefaultFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/DrinksManagementView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/DrinksManagementView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ManagerLoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ManagerLoginView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ManagerMainView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ManagerMainView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/OrderControlView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/OrderControlView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ProductListCartView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ProductListCartView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/RoomSettingView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/RoomSettingView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/SalesAnalysisView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/SalesAnalysisView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/UserHomeView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/UserHomeView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/UserLoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/UserLoginView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/WorkerControlView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/WorkerControlView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVA_NOCO_1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/JAVA_NOCO_1.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,6 +65,9 @@
         <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="Git.Merge.Settings">
+    <option name="BRANCH" value="chooyj_temp" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -75,18 +98,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "C:/Users/KJW/Code/kotlinProgramming/JAVA_NOCO_1/out/production/JAVA_NOCO1/jar/mysql-connector-j-8.2.0.jar",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/KJW/Code/kotlinProgramming/JAVA_NOCO_1/out/production/JAVA_NOCO1/jar/mysql-connector-j-8.2.0.jar&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\KJW\Code\kotlinProgramming\JAVA_NOCO_1\out\production\JAVA_NOCO1\jar" />
@@ -102,20 +125,7 @@
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
-      <module name="JAVA_NOCO1" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="JAVA_NOCO1" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="JAVA_NOCO1" />
-      <option name="filePath" />
+      <module name="JAVA_NOCO_1" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>

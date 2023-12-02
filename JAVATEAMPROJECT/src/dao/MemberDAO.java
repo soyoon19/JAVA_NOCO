@@ -1,47 +1,140 @@
 package dao;
 
-import java.util.Date;
+import dto.MemberDTO;
 
-public class MemberDAO {
-    private String phoneId, passwd;
-    private Date birth, joinDate;
+import java.sql.*;
+import java.util.ArrayList;
 
-    public MemberDAO(String phoneId, String passwd, Date birth, Date joinDate) {
-        this.phoneId = phoneId;
-        this.passwd = passwd;
-        this.birth = birth;
-        this.joinDate = joinDate;
+public class MemberDAO implements DAO<MemberDTO, String>{
+    private Connection conn;
+    public MemberDAO(Connection coon){
+        this.conn = coon;
     }
 
-    public String getPhoneId() {
-        return phoneId;
+
+    public ArrayList<MemberDTO> findAll() {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        ArrayList<MemberDTO> members = new ArrayList<>();
+
+
+        try {
+            String sql = "SELECT * FROM Member_T";
+            pstmt = conn.prepareStatement(sql);
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                String hp = rs.getString("m_hp");
+                String passwd = rs.getString("m_passwd");
+                Date birthDate = rs.getDate("m_birthDate");
+                Date joinDate = rs.getDate("m_joinDate");
+
+                MemberDTO member = new MemberDTO(hp, passwd, birthDate, joinDate);
+                members.add(member);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null)
+                    rs.close();
+                if (pstmt != null)
+                    pstmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return members;
     }
 
-    public void setPhoneId(String phoneId) {
-        this.phoneId = phoneId;
+
+    @Override
+    public boolean insert(MemberDTO member) {
+        PreparedStatement pstmt = null;
+        try {
+            String sql = "INSERT INTO Member_T (m_hp, m_passwd, m_birthDate, m_joinDate) VALUES (?, ?, ?, ?)";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, member.getHp());
+            pstmt.setString(2, member.getPasswd());
+            pstmt.setDate(3, member.getBirthDate());
+            pstmt.setDate(4, member.getJoinDate());
+
+            pstmt.executeUpdate();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pstmt != null)
+                    pstmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return true;
+        }
     }
 
-    public String getPasswd() {
-        return passwd;
+
+    // 회원 삭제
+    public boolean delete(String m_ph) {
+        PreparedStatement pstmt = null;
+        try {
+            String sql = "DELETE FROM Member_T WHERE m_hp = ?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, m_ph);
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            try {
+                if (pstmt != null)
+                    pstmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false;
+
+            }
+        }
+        return true;
     }
 
-    public void setPasswd(String passwd) {
-        this.passwd = passwd;
-    }
+    // 회원 조회 by ID
+    public MemberDTO findById(String ph) {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        MemberDTO member = null;
 
-    public Date getBirth() {
-        return birth;
-    }
+        try {
+            String sql = "SELECT * FROM Member_T WHERE m_hp = ?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, ph);
+            rs = pstmt.executeQuery();
 
-    public void setBirth(Date birth) {
-        this.birth = birth;
-    }
+            if (rs.next()) {
+                String hp = rs.getString("m_hp");
+                String passwd = rs.getString("m_passwd");
+                Date birthDate = rs.getDate("m_birthDate");
+                Date joinDate = rs.getDate("m_joinDate");
 
-    public Date getJoinDate() {
-        return joinDate;
-    }
+                member = new MemberDTO(hp, passwd, birthDate, joinDate);
+            }
 
-    public void setJoinDate(Date joinDate) {
-        this.joinDate = joinDate;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null)
+                    rs.close();
+                if (pstmt != null)
+                    pstmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return member; // 해당 ID의 회원을 찾지 못하면 null 반환
     }
 }

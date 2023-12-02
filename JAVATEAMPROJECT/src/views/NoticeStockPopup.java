@@ -17,18 +17,8 @@ public class NoticeStockPopup extends JDialog{
     DefaultFrame parent;
     StockDAO stockDAO;
 
-    //A
-    //C
-
-    //A -> B -> C
-    //A -> B -> D
-    //A -> B -> E
-    //A -> B -> F
-    //A -> G -> H
-
 
     public void popup(){
-
         /*
         getStockDAO()가 DB에 재고 테이블에 있는 테이블에 모든 정보를
         ArrayList<StockDTO> 형태로 가져온다.
@@ -50,7 +40,6 @@ public class NoticeStockPopup extends JDialog{
                         StockDTO.CATEGORY_TO_KOREANNAME(stock.getCategory())}); //Category는 숫자로 관리하기 때문에 정해지 약속에 따라서 변환한다.
             }
         }
-
         //너무해.....
 
         //만약 재고가 적은게 없다면 종료한다.

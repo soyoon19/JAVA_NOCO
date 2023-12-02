@@ -5,7 +5,7 @@ import java.sql.Date;
 public class StockDTO {
 
     /*
-    public static final int MAIN_CATEGORY_
+    public static final int MAINCATEGORY
     */
 
     public static final int TEMPERATURE_ITEMS = 0
@@ -30,7 +30,7 @@ public class StockDTO {
 
 
     public StockDTO(String code, String name,
-                     int amount, int minAmount, int cost, java.sql.Date date, int category) {
+                    int amount, int minAmount, int cost, java.sql.Date date, int category) {
 
         this.code = code;
         this.name = name;

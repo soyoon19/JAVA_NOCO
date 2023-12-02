@@ -1,3 +1,5 @@
+package controller_db;
+
 import dao.*;
 import dto.GoodsImageDTO;
 

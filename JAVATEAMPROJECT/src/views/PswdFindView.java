@@ -92,9 +92,9 @@ public class PswdFindView extends JPanel implements ActionListener {
         MemberDAO memberDAO = parent.getController().getMemberDAO();
         MemberDTO member = memberDAO.findById(phonetf.getText());
 
-        if(member == null) // || !member.getBirthDate().equals(birthtf.getText()))
-            JOptionPane.showMessageDialog(this,"회원정보가 일치하지 않습니다.","비밀번호 찾기 실패",JOptionPane.INFORMATION_MESSAGE);
-        else {
+        if (member == null) {// || !member.getBirthDate().equals(birthtf.getText()))
+            JOptionPane.showMessageDialog(this, "회원정보가 일치하지 않습니다.", "비밀번호 찾기 실패", JOptionPane.INFORMATION_MESSAGE);
+        }else {
             JOptionPane.showMessageDialog(this, "당신의 비밀번호는 : " + member.getPasswd(), "비밀번호 찾기 성공", JOptionPane.INFORMATION_MESSAGE);
         }
 

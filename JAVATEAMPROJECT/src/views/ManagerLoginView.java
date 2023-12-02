@@ -3,7 +3,7 @@ import custom_component.DefaultFont;
 
 import java.awt.*;
 import javax.swing.*;
-class ManagerLoginView extends JPanel {
+public class ManagerLoginView extends JPanel {
     private static final int FONT_SIZE = 80;
     JLabel idlb, pwlb;
     JTextField idtf, pwtf;

@@ -48,10 +48,22 @@ public class Main {
 
         //add는 setVisible보다 위에 있어야 됨!
         //win.add(new ProductListCartView(win));
-        new NoticeStockPopup(win);
-        //win.add(new MusicUseView(win));
+        //(new NoticeStockPopup(win)).popup();
+        //win.add(new DrinksManagementView(win));
+        win.add(new MusicUseView(win));
         //win.add(new ProductListCartView(win));
         //win.add(new ProductListCartView(win));
+
+        win.add(new StockManagementView());
+        /*
+        SDE 창 test
+            win.add(new DrinksManagementView(win));
+
+            new DrinksStatusPopup(win);
+
+
+            (new NoticeStockPopup(win)).popup();
+         */
 
         /* Image to Byte[], Byte[] to Image 테스트
         try {

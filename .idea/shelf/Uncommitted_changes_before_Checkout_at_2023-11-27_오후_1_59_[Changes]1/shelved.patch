@@ -1,0 +1,61 @@
+Index: JAVATEAMPROJECT/src/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import views.DefaultFrame;\r\nimport views.DeleteDrinksPopup;\r\nimport views.DrinksManagementView;\r\nimport views.ProductListCartView;\r\n\r\nimport java.awt.*;\r\nimport javax.swing.*;\r\n\r\npublic class Main {\r\n    public static void main(String[] args) {\r\n        System.out.println(System.getProperty(\"user.dir\"));\r\n        DefaultFrame win = new DefaultFrame();\r\n        win.setSize(1920,1080);\r\n        //add는 setVisible보다 위에 있어야 됨!\r\n            win.add(new ProductListCartView(win));\r\n        win.setVisible(true);\r\n        win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);\r\n\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/JAVATEAMPROJECT/src/Main.java b/JAVATEAMPROJECT/src/Main.java
+--- a/JAVATEAMPROJECT/src/Main.java	
++++ b/JAVATEAMPROJECT/src/Main.java	
+@@ -12,7 +12,7 @@
+         DefaultFrame win = new DefaultFrame();
+         win.setSize(1920,1080);
+         //add는 setVisible보다 위에 있어야 됨!
+-            win.add(new ProductListCartView(win));
++            win.add(new DrinksManagementView());
+         win.setVisible(true);
+         win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+ 
+Index: .idea/modules.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ProjectModuleManager\">\r\n    <modules>\r\n      <module fileurl=\"file://$PROJECT_DIR$/JAVATEAMPROJECT/src/JAVATEAMPROJECT.iml\" filepath=\"$PROJECT_DIR$/JAVATEAMPROJECT/src/JAVATEAMPROJECT.iml\" />\r\n    </modules>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/modules.xml b/.idea/modules.xml
+--- a/.idea/modules.xml	
++++ b/.idea/modules.xml	
+@@ -2,7 +2,7 @@
+ <project version="4">
+   <component name="ProjectModuleManager">
+     <modules>
+-      <module fileurl="file://$PROJECT_DIR$/JAVATEAMPROJECT/src/JAVATEAMPROJECT.iml" filepath="$PROJECT_DIR$/JAVATEAMPROJECT/src/JAVATEAMPROJECT.iml" />
++      <module fileurl="file://$PROJECT_DIR$/JAVATEAMPROJECT/JAVATEAMPROJECT1.iml" filepath="$PROJECT_DIR$/JAVATEAMPROJECT/JAVATEAMPROJECT1.iml" />
+     </modules>
+   </component>
+ </project>
+\ No newline at end of file
+Index: JAVATEAMPROJECT/JAVATEAMPROJECT1.iml
+===================================================================
+diff --git a/JAVATEAMPROJECT/JAVATEAMPROJECT1.iml b/JAVATEAMPROJECT/JAVATEAMPROJECT1.iml
+new file mode 100644
+--- /dev/null	
++++ b/JAVATEAMPROJECT/JAVATEAMPROJECT1.iml	
+@@ -0,0 +1,11 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<module type="JAVA_MODULE" version="4">
++  <component name="NewModuleRootManager" inherit-compiler-output="true">
++    <exclude-output />
++    <content url="file://$MODULE_DIR$">
++      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
++    </content>
++    <orderEntry type="inheritedJdk" />
++    <orderEntry type="sourceFolder" forTests="false" />
+<<<<<<< Updated upstream
+=======
++  </component>
++</module>
+\ No newline at end of file
+>>>>>>> Stashed changes

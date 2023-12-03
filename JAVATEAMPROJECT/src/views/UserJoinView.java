@@ -26,7 +26,7 @@ public class UserJoinView extends JPanel {
         //centerL
         JPanel centerL = new JPanel();
         centerL.setLayout(new GridLayout(5, 1));
-        String[] joinStr = {"연락처", "생년월일", "비밀번호", "비밀번호 재입력"};
+        String[] joinStr = {"연락처 : ", "생년월일 : ", "비밀번호 : ", "비밀번호 재입력 : "};
         JLabel[] joinLbs = new JLabel[joinStr.length];
         JTextField[] joinTfs = new JTextField[joinStr.length];
 
@@ -37,8 +37,8 @@ public class UserJoinView extends JPanel {
             joinLbs[i] = new JLabel(joinStr[i]);
             joinTfs[i] = new JTextField(11);
 
-            joinLbs[i].setFont(new DefaultFont(30));
-            joinTfs[i].setFont(new DefaultFont(30));
+            joinLbs[i].setFont(new DefaultFont(50));
+            joinTfs[i].setFont(new DefaultFont(50));
 
             p.add(joinLbs[i]); p.add(joinTfs[i]);
             centerL.add(p);
@@ -51,7 +51,7 @@ public class UserJoinView extends JPanel {
         JPanel centerL5_1 = new JPanel();
         centerL5_1.setLayout(new FlowLayout(FlowLayout.LEFT));
         JLabel checkLb = new JLabel("xxx");
-        checkLb.setFont(new DefaultFont(15));
+        checkLb.setFont(new DefaultFont(30));
         centerL5_1.add(checkLb);
         centerL5.add(centerL5_1);
 
@@ -59,7 +59,7 @@ public class UserJoinView extends JPanel {
         JPanel centerL5_2 = new JPanel();
         centerL5_2.setLayout(new FlowLayout(FlowLayout.LEFT));
         JCheckBox agreeCB = new JCheckBox(">>개인정보 처리 방침 동의");
-        agreeCB.setFont(new DefaultFont(15));
+        agreeCB.setFont(new DefaultFont(30));
         centerL5_2.add(agreeCB);
         centerL5.add(centerL5_2);
 
@@ -70,13 +70,13 @@ public class UserJoinView extends JPanel {
         //centerR
         NumberPadPanel np = new NumberPadPanel();
         center.add(np, DefaultFrame.easyGridBagConstraint(1,0,3,1));
-        //넘버패드 붙여넣기
+
 
         this.add(center, BorderLayout.CENTER);
 
-        //bottom
-        JPanel bottom = new JPanel();
-        bottom.setLayout(new FlowLayout());
+        //centerBtom
+        JPanel centerBtom = new JPanel();
+        centerBtom.setLayout(new FlowLayout());
 
         JButton celBtn, checkBtn;
         celBtn = new JButton("");
@@ -85,14 +85,25 @@ public class UserJoinView extends JPanel {
         celBtn.setFont(new DefaultFont(30));
         checkBtn.setFont(new DefaultFont(30));
 
+        //bottom
+        JButton okBtn, noBtn;
+        JPanel bottom = new JPanel();
+        bottom.setLayout(new FlowLayout());
+        okBtn = new JButton("확인");
+        noBtn = new JButton("취소");
+        bottom.add(okBtn); //확인
+        bottom.add(noBtn); //취소
 
-        bottom.add(checkBtn); //확인
-        bottom.add(celBtn); //취소
+        okBtn.setFont(new DefaultFont(50));
+        noBtn.setFont(new DefaultFont(50));
+        bottom.add(okBtn);
+        bottom.add(noBtn);
 
-        bottom.setBackground(Color.RED);
-        this.add(bottom, BorderLayout.SOUTH); //박스레이아웃 어렵지만 다양성을 위해 사용하고 싶음
+
+        this.add(bottom, BorderLayout.SOUTH);
     }
 
-
-
 }
+
+//체크박스가 뒤에 가야하는데 앞에 있음
+//어캄?

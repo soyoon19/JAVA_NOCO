@@ -64,9 +64,18 @@ public class StaffCallView extends JPanel {
         right.add(right1, DefaultFrame.easyGridBagConstraint(0,0,1,1));
         //right-2
         JPanel right2 = new JPanel();
-        //right2.setLayout(new GridBagLayout());
-        right2.setBackground(Color.PINK);
+        JTextField roomNum = new JTextField(11);
+        roomNum.setFont(new DefaultFont(30));
+        JLabel bunBang = new JLabel("번 방");
+        bunBang.setFont(new DefaultFont(30));
+        right2.add(roomNum);
+        right2.add(bunBang);
+        JButton okBtn = new JButton("확인");
+        okBtn.setPreferredSize(new Dimension(100,50));
+        okBtn.setFont(new DefaultFont(30));
+        right2.add(okBtn);
         right.add(right2, DefaultFrame.easyGridBagConstraint(0,1,1,1));
+
         //right-3
         NumberPadPanel np = new NumberPadPanel();
         right.add(np, DefaultFrame.easyGridBagConstraint(0,2,1,2));

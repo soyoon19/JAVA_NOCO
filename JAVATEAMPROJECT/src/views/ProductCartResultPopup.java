@@ -171,7 +171,7 @@ public class ProductCartResultPopup extends JDialog implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         dispose();
         if(e.getActionCommand().equals("결제")){
-            CardInfoPopup popup = new CardInfoPopup(parent);
+            CardInfoPopup popup = new CardInfoPopup((DefaultFrame) parent);
             popup.setVisible(true);
         }
     }

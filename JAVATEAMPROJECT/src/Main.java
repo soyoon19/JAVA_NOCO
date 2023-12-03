@@ -1,6 +1,11 @@
-import views.*;
+import dto.GoodsDTO;
+import views.CardInfoPopup;
+import views.DefaultFrame;
+import views.MusicUseView;
+import views.ProductListCartView;
 
 import java.awt.*;
+import java.util.ArrayList;
 import javax.swing.*;
 
 public class Main {
@@ -10,10 +15,19 @@ public class Main {
         win.setSize(1920,1080);
         //add는 setVisible보다 위에 있어야 됨!
         //win.add(new ProductListCartView(win));
-        //win.add(new UserLoginView());
-        win.add(new UserLoginView());
+
+        //win.add(new MusicUseView(win));
+        //win.add(new ProductListCartView(win));
+        win.add(new ProductListCartView(win));
+
+
+
+        //(new CardInfoPopup(win)).setVisible(true);
+
         win.setVisible(true);
         win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+
 
     }
 }

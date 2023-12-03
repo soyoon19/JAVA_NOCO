@@ -1,47 +1,27 @@
 package dao;
 
-import java.util.Date;
+import dto.MemberDTO;
 
-public class MemberDAO {
-    private String phoneId, passwd;
-    private Date birth, joinDate;
+import java.util.ArrayList;
 
-    public MemberDAO(String phoneId, String passwd, Date birth, Date joinDate) {
-        this.phoneId = phoneId;
-        this.passwd = passwd;
-        this.birth = birth;
-        this.joinDate = joinDate;
+public class MemberDAO implements DAO<MemberDTO, String>{
+    @Override
+    public MemberDTO save(MemberDTO memberDTO) {
+        return null;
     }
 
-    public String getPhoneId() {
-        return phoneId;
+    @Override
+    public ArrayList<MemberDTO> findById(String s) {
+        return null;
     }
 
-    public void setPhoneId(String phoneId) {
-        this.phoneId = phoneId;
+    @Override
+    public ArrayList<MemberDTO> findAll() {
+        return null;
     }
 
-    public String getPasswd() {
-        return passwd;
-    }
-
-    public void setPasswd(String passwd) {
-        this.passwd = passwd;
-    }
-
-    public Date getBirth() {
-        return birth;
-    }
-
-    public void setBirth(Date birth) {
-        this.birth = birth;
-    }
-
-    public Date getJoinDate() {
-        return joinDate;
-    }
-
-    public void setJoinDate(Date joinDate) {
-        this.joinDate = joinDate;
+    @Override
+    public boolean delete(String s) {
+        return false;
     }
 }

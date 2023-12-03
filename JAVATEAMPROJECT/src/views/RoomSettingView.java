@@ -1,12 +1,14 @@
 package views;
 
 import custom_component.DefaultFont;
+import custom_component.FreeImageIcon;
 import custom_component.RoomViewPanel;
 import dto.RoomIfmDTO;
 import dto.RoomManageDTO;
 import dto.RoomOptionDTO;
 import dto.WorkerDTO;
 import javafx.scene.Parent;
+import javafx.scene.control.ComboBox;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -197,6 +199,8 @@ class RoomEditViewPanel extends RoomViewPanel{
 
 
 class ScreenEditPanelMini extends JPanel implements ActionListener{ //화면 편집 패널
+    private static final int IMAGE_X = 140;
+    private static final int IMAGE_Y = 140;
     JButton roomAddBtn, roomDeleteBtn;
     RoomAdd roomAdd; RoomDelete roomDel;
     JPanel sep;
@@ -211,10 +215,24 @@ class ScreenEditPanelMini extends JPanel implements ActionListener{ //화면 편
 
         sep = new JPanel();
         sep.setLayout(new GridLayout(2,1));
-        roomAddBtn = new JButton("방 추가");
-        roomDeleteBtn = new JButton("방 삭제");
-        roomAddBtn.setFont(new DefaultFont(RoomSettingView.BUTTON_FONT_SIZE));
-        roomDeleteBtn.setFont(new DefaultFont(RoomSettingView.BUTTON_FONT_SIZE));
+
+        //추가 버튼 클릭 전
+        ImageIcon img1 = new FreeImageIcon(DefaultFrame.PATH+"/images/roomAddBefore.png",IMAGE_X,IMAGE_Y);
+        roomAddBtn = new JButton("방 추가",img1);
+        roomAddBtn.setBackground(Color.white);
+            //클릭 후
+        ImageIcon img2 = new FreeImageIcon(DefaultFrame.PATH+"/images/roomAddAfter.png",IMAGE_X,IMAGE_Y);
+        roomAddBtn.setPressedIcon(img2);
+        //삭제 버튼 클릭 전
+        ImageIcon img3 = new FreeImageIcon(DefaultFrame.PATH+"/images/roomDeleteBefore.png",IMAGE_X,IMAGE_Y);
+        roomDeleteBtn = new JButton("방 삭제",img3);
+        roomDeleteBtn.setBackground(Color.white);
+            //클릭 후
+        ImageIcon img4 = new FreeImageIcon(DefaultFrame.PATH+"/images/roomDeleteAfter.png",IMAGE_X,IMAGE_Y);
+        roomDeleteBtn.setPressedIcon(img4);
+
+        roomAddBtn.setFont(new DefaultFont(RoomSettingView.BUTTON_FONT_SIZE-10));
+        roomDeleteBtn.setFont(new DefaultFont(RoomSettingView.BUTTON_FONT_SIZE-10));
         sep.add(roomAddBtn);
         sep.add(roomDeleteBtn);
         add(sep);
@@ -399,7 +417,7 @@ class RoomAdd extends  JPanel implements ActionListener { //방추가 버튼
         return roomlcYtf;
     }
 
-    public JComboBox getRoomSizeXY(){return roomSizeXY;}
+    public JComboBox getRoomSizeXY() {return roomSizeXY;}
 
 }
 
@@ -491,7 +509,7 @@ class RoomDelete extends JPanel implements ActionListener { //방삭제 버튼
 }
 class RoomSettingPanelMini extends JPanel implements ActionListener { //방설정 패널
     JLabel roomNum;
-    JTextField roomNumtf;
+    JComboBox roomNumtf;
     JButton roomActivate, roomUnActivate, applyBtn;
     public RoomSettingPanelMini() {
         this.setLayout(new BorderLayout());
@@ -505,8 +523,9 @@ class RoomSettingPanelMini extends JPanel implements ActionListener { //방설�
         JPanel p2 = new JPanel();
         roomNum = new JLabel("방 번호 :");
         roomNum.setFont(new DefaultFont(RoomSettingView.BETWEEN_FONT));
-        roomNumtf = new JTextField(3);
-        roomNumtf.setFont(new DefaultFont(RoomSettingView.BETWEEN_FONT));
+        String [] roomNumList = {" 1 "," 2 "," 3 "," 4 "," 5 "," 6 "," 7 "," 8 "," 9 "};
+        roomNumtf = new JComboBox(roomNumList);
+        roomNumtf.setFont(new DefaultFont(RoomSettingView.BETWEEN_FONT - 10));
         p2.add(roomNum);
         p2.add(roomNumtf);
         rsg.add(p2);

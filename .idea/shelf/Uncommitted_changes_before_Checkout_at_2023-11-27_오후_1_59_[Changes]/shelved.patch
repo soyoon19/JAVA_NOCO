@@ -1,0 +1,21 @@
+Index: JAVATEAMPROJECT/src/views/DrinksManagementView.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package views;\r\n\r\nimport javax.swing.*;\r\nimport java.awt.*;\r\n\r\npublic class DrinksManagementView extends JPanel{\r\n    JPanel drinksCategoryPanel, drinksDetailPanel;\r\n\r\n    //left: drinksCategoryPanel | Right: drinksDetailPanel\r\n    public DrinksManagementView(){\r\n        this.setLayout(new GridBagLayout());\r\n\r\n        //left : drinksCategoryPanel\r\n        drinksCategoryPanel = new JPanel();\r\n        drinksCategoryPanel.setLayout(new BorderLayout());\r\n        this.add(drinksCategoryPanel, DefaultFrame.easyGridBagConstraint(0, 0, 2, 1));\r\n        drinksDetailPanel.setBackground(Color.red);\r\n\r\n\r\n        //right : drinksDetailPanel\r\n        drinksDetailPanel = new JPanel();\r\n        drinksDetailPanel.setLayout(new FlowLayout());\r\n        this.add(drinksDetailPanel, DefaultFrame.easyGridBagConstraint(1,0,5,1));\r\n        drinksDetailPanel.setBackground(Color.red);\r\n\r\n    }\r\n\r\n    class drinksCategoryPanel extends JPanel {\r\n\r\n\r\n        //top : 음료명 검색\r\n        JPanel top = new JPanel();\r\n\r\n        //center : 카테고리\r\n        JPanel center = new JPanel();\r\n\r\n        //bottom : 추가/편집/삭제/일괄설정 버튼 넣기\r\n        JPanel bottom = new JPanel();\r\n    }\r\n\r\n    class drinksDetailPanel extends  JPanel {\r\n        //상품 정보 출력 (JTable 이용)\r\n    }\r\n\r\n}
+===================================================================
+diff --git a/JAVATEAMPROJECT/src/views/DrinksManagementView.java b/JAVATEAMPROJECT/src/views/DrinksManagementView.java
+--- a/JAVATEAMPROJECT/src/views/DrinksManagementView.java	
++++ b/JAVATEAMPROJECT/src/views/DrinksManagementView.java	
+@@ -14,7 +14,7 @@
+         drinksCategoryPanel = new JPanel();
+         drinksCategoryPanel.setLayout(new BorderLayout());
+         this.add(drinksCategoryPanel, DefaultFrame.easyGridBagConstraint(0, 0, 2, 1));
+-        drinksDetailPanel.setBackground(Color.red);
++        drinksCategoryPanel.setBackground(Color.orange);
+ 
+ 
+<<<<<<< Updated upstream
+         //right : dr
+=======
+         //right : drinksDetailPanel
+>>>>>>> Stashed changes

@@ -88,7 +88,7 @@ class CardInfoInputPanel extends JPanel{
         for(int i = 0; i < cardNumsTf.length; i++) {
             cardNumsTf[i] = new JTextField(4); //textField 생성할 때 int 넣으면 자리수에 맞는 라벨이 생긴다.
             cardNumsTf[i].setFont(new DefaultFont());
-            inputListPanel[0].add(cardNumsTf[i]); 
+            inputListPanel[0].add(cardNumsTf[i]);
         }
 
         //2 index CVC 패널이다.
@@ -99,7 +99,7 @@ class CardInfoInputPanel extends JPanel{
         //3 index 비밀번호 패널이다.
         pwPf = new JPasswordField(4);
         pwPf.setFont(new DefaultFont());
-        inputListPanel[3].add(pwPf); 
+        inputListPanel[3].add(pwPf);
 
 
         add(ctn);

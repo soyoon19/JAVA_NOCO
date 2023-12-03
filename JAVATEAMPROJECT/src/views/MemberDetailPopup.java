@@ -2,16 +2,22 @@ package views;
 // 등급까지 완성
 
 import custom_component.DefaultFont;
+import dao.MemberDAO;
+import dto.MemberDTO;
+import dto.MemberLogDTO;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class MemberDetailPopup extends JDialog {
 
-    public MemberDetailPopup(DefaultFrame prt) {
+    public MemberDetailPopup(DefaultFrame prt, MemberDTO member) {
         super(prt, "", true);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setSize(500, 700);
+
+        MemberDAO memberDAO = prt.getController().getMemberDAO();
+        MemberLogDTO memberLog=new MemberLogDAO()
 
 
         Container ct = getContentPane();

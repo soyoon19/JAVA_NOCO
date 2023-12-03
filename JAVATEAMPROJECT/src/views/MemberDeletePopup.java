@@ -1,16 +1,27 @@
 package views;
 
 import custom_component.DefaultFont;
+import dao.MemberDAO;
+import dao.MemberLogDAO;
+import dto.MemberDTO;
+import dto.MemberLogDTO;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class MemberDeletePopup extends JDialog {
 
-    public MemberDeletePopup(DefaultFrame prt){
+    public MemberDeletePopup(DefaultFrame prt, MemberDTO member){
         super(prt, "", true);
         this.setSize(500,700);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        MemberDAO  memberDAO =prt.getController().getMemberDAO();
+
+
+        MemberLogDAO memberLogDAO=prt.getController().getMemberLogDAO();
+        MemberLogDTO memberLog= memberLogDAO.findById(member.getHp());
+
 
         Container ct = getContentPane();
         ct.setLayout(new GridBagLayout());

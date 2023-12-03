@@ -48,7 +48,7 @@ public class Main {
 
         //add는 setVisible보다 위에 있어야 됨!
         //win.add(new ProductListCartView(win));
-        new NoticeStockPopup(win);
+        //new NoticeStockPopup(win);
         //win.add(new MusicUseView(win));
         //win.add(new ProductListCartView(win));
         //win.add(new ProductListCartView(win));
@@ -64,16 +64,16 @@ public class Main {
 
 
         // DB 연결 확인
-         DAO[] ds = {
+        // DAO[] ds = {
                 controller.getGoodsDAO(), controller.getMemberDAO(), controller.getOrderDAO(),
                 controller.getRoomImfDAO(), controller.getMemberLogDAO(), controller.getRoomManageDAO(),
                 controller.getRoomOptionDAO(), controller.getOrderHDAO(), controller.getWorkerDAO(), controller.getStockDAO()
-        };
+        //};
 
-         for(DAO d : ds){
+       //  for(DAO d : ds){
             //전체조회
-            System.out.println(d.findAll());
-        }
+            //System.out.println(d.findAll());
+      //  }
 
 
 

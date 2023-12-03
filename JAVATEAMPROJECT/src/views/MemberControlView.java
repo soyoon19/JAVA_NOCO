@@ -8,10 +8,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 
 public class MemberControlView extends JPanel {
-
+DefaultFrame parent;
     public MemberControlView(DefaultFrame prt) {
 
-
+        parent==prt;
         this.setSize(WIDTH,HEIGHT);
 
         JPanel ct = new JPanel();

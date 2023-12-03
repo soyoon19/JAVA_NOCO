@@ -1,6 +1,7 @@
 package views;
 import controller_db.Controller;
 import custom_component.DefaultFont;
+import dao.WorkerDAO;
 import dto.WorkerDTO;
 
 import java.awt.*;
@@ -60,11 +61,18 @@ public class ManagerLoginView extends JPanel {
         loginbt.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if(idtf.getText().equals("") || pwtf.getText().equals("")){
+                    JOptionPane.showConfirmDialog(parent, "Empty!");
+                    return;
+                }
+                //parent에 있는 controller을 가져옴
+                //controller에 있는 Worker_T에서 데이터를 가져와주는(DTO로 변환하여) WorkerDAO을 가져온다
+                //WorkerDAO에 메서드를 실행시킨다.
                 WorkerDTO worker = parent.getController().getWorkerDAO().findById(idtf.getText());
                 if(worker == null){
-
+                    //JOptionPane 아이디 일치하지 않음
                 }else if(!worker.getPasswd().equals(pwtf.getText())){
-
+                    //
                 }else{
                     parent.switchTop(DefaultFrame.TOP_ADMIN);
                     parent.resetMove(new ManagerMainView(parent, worker));

@@ -2,6 +2,7 @@ package views;
 
 import controller_db.Controller;
 import custom_component.DefaultFont;
+import custom_component.NumberPadListener;
 import custom_component.NumberPadPanel;
 import dao.MemberDAO;
 import dao.MemberLogDAO;
@@ -11,6 +12,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 
 public class PswdFindView extends JPanel implements ActionListener {
     private static final int FONT_SIZE = 80;
@@ -22,6 +24,7 @@ public class PswdFindView extends JPanel implements ActionListener {
 
     public PswdFindView(DefaultFrame p) {
         parent = p;
+        np = new NumberPadPanel();
         this.setLayout(new BorderLayout());
         // BorderLayout의 Center
         JPanel blc = new JPanel(new GridBagLayout());
@@ -44,6 +47,9 @@ public class PswdFindView extends JPanel implements ActionListener {
         bcgr.add(phonelb);
         phonetf = new JTextField(10);
         phonetf.setFont(new DefaultFont(FONT_SIZE));
+        phonetf.addMouseListener(new NumberPadListener(phonetf,np));
+        phonetf.setEditable(false);
+        phonetf.setBackground(Color.white);
         bcgr.add(phonetf);
         center2.add(bcgr, DefaultFrame.easyGridBagConstraint(1,0,8,1));
 
@@ -60,6 +66,9 @@ public class PswdFindView extends JPanel implements ActionListener {
         bcbgr.add(birthlb);
         birthtf = new JTextField(10);
         birthtf.setFont(new DefaultFont(FONT_SIZE));
+        birthtf.addMouseListener(new NumberPadListener(birthtf,np));
+        birthtf.setEditable(false);
+        birthtf.setBackground(Color.white);
         bcbgr.add(birthtf);
         center3.add(bcbgr, DefaultFrame.easyGridBagConstraint(1,0,8,1));
 
@@ -70,7 +79,6 @@ public class PswdFindView extends JPanel implements ActionListener {
         blc.add(glc, DefaultFrame.easyGridBagConstraint(0,0,2,1));
 
             //Grid Bag Layout의 right
-        np = new NumberPadPanel();
         np.setBorder(BorderFactory.createEmptyBorder(30,15,30,15));
         blc.add(np,DefaultFrame.easyGridBagConstraint(1,0,1,1));
 
@@ -91,12 +99,20 @@ public class PswdFindView extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         MemberDAO memberDAO = parent.getController().getMemberDAO();
         MemberDTO member = memberDAO.findById(phonetf.getText());
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+        String birth;
 
-        if (member == null) {// || !member.getBirthDate().equals(birthtf.getText()))
+        if (member == null) {
             JOptionPane.showMessageDialog(this, "회원정보가 일치하지 않습니다.", "비밀번호 찾기 실패", JOptionPane.INFORMATION_MESSAGE);
-        }else {
-            JOptionPane.showMessageDialog(this, "당신의 비밀번호는 : " + member.getPasswd(), "비밀번호 찾기 성공", JOptionPane.INFORMATION_MESSAGE);
+            return;
         }
 
+        birth = format.format(member.getBirthDate());
+        if(!birth.equals(birthtf.getText())) {
+            JOptionPane.showMessageDialog(this, "회원정보가 일치하지 않습니다.", "비밀번호 찾기 실패", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        JOptionPane.showMessageDialog(this, "당신의 비밀번호는 : " + member.getPasswd(), "비밀번호 찾기 성공", JOptionPane.INFORMATION_MESSAGE);
     }
 }

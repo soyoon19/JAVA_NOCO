@@ -1,0 +1,22 @@
+Index: JAVATEAMPROJECT/src/custom_component/RoomViewPanel.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package custom_component;\r\n\r\nimport dao.RoomManageDAO;\r\nimport dao.RoomOptionDAO;\r\nimport dto.RoomManageDTO;\r\nimport dto.RoomOptionDTO;\r\nimport views.DefaultFrame;\r\n\r\nimport javax.swing.*;\r\nimport javax.swing.border.LineBorder;\r\nimport javax.swing.border.TitledBorder;\r\nimport java.awt.*;\r\nimport java.awt.event.*;\r\nimport java.util.ArrayList;\r\n\r\n\r\npublic class RoomViewPanel extends JPanel {\r\n\r\n\r\n    //pixcel 크기\r\n    public static int MAX_WIDTH = 25,\r\n            MAX_HEIGHT = 25;\r\n\r\n    //각 좌표의 지점\r\n    protected AreaJPanel[][] jps;\r\n    protected ArrayList<RoomManageDTO> rooms; //방 정보\r\n    protected ArrayList<RoomOptionDTO> options;\r\n\r\n    //이벤트 발생여부\r\n    protected EventSwitch sw;\r\n\r\n\r\n    public RoomViewPanel(ArrayList<RoomManageDTO> rooms, ArrayList<RoomOptionDTO> options){\r\n        this.rooms = rooms;\r\n        this.options = options;\r\n\r\n        this.setLayout(new GridBagLayout());\r\n        jps = new AreaJPanel[MAX_HEIGHT][MAX_WIDTH];\r\n        sw = new EventSwitch();\r\n\r\n        for(int i = 0; i < MAX_HEIGHT; i++) {\r\n            for (int j = 0; j < MAX_WIDTH; j++) {\r\n\r\n                jps[i][j] = new AreaJPanel(i, j);   //가록 세로 크기만큼 패널을 붙인다.\r\n                jps[i][j].setBackground(Color.white);\r\n\r\n\r\n                this.add(jps[i][j], DefaultFrame.easyGridBagConstraint(j,i,1,1));\r\n            }\r\n\r\n\r\n        }\r\n\r\n        //그리드된 화면에서 방을 표시한다.\r\n        RoomOptionDTO option;\r\n        int x, y, width, height;\r\n        for(RoomManageDTO room : rooms){\r\n            x = room.getX(); y = room.getY();\r\n            option = options.get(room.getOption() - 1);\r\n            width = option.getWidth();\r\n            height = option.getHeight();\r\n\r\n\r\n            for(int i = y; i < y + height ; i++) {\r\n                for (int j = x; j < x + width; j++) {\r\n                    this.remove(jps[i][j]); //원래 점유하고 있던 패널을 삭제한다.\r\n                    jps[i][j].setUse(false); //이 패널을 사용하지 않는다는 표시를 한다.\r\n                }\r\n\r\n                //방 붙이기\r\n                JPanel roomPs = new JPanel();\r\n                JLabel lbs = new JLabel(room.getNum() + \"번\");\r\n                lbs.setForeground(Color.white);\r\n                roomPs.setBackground(new Color(156,156,156));\r\n                roomPs.add(lbs);\r\n                //roomPs.setBorder(new TitledBorder(new LineBorder(Color.white, 3)));\r\n                roomPs.setBorder(null);\r\n                //방의 좌표와 크기만큼 영역을 지정해 준다.\r\n                this.add(roomPs, DefaultFrame.easyGridBagConstraint(x, y,1,1, width ,height));\r\n            }\r\n        }\r\n    }\r\n\r\n\r\n\r\n    public void eventActivate(){\r\n        sw.setSw(true);\r\n    }\r\n\r\n    public void eventUnActivate(){\r\n        sw.setSw(false);\r\n    }\r\n}\r\n
+===================================================================
+diff --git a/JAVATEAMPROJECT/src/custom_component/RoomViewPanel.java b/JAVATEAMPROJECT/src/custom_component/RoomViewPanel.java
+--- a/JAVATEAMPROJECT/src/custom_component/RoomViewPanel.java	
++++ b/JAVATEAMPROJECT/src/custom_component/RoomViewPanel.java	
+@@ -81,8 +81,7 @@
+         }
+     }
+ 
+-
+-
++    
+     public void eventActivate(){
+<<<<<<< Updated upstream
+         sw.setS
+=======
+         sw.setSw(true);
+     }
+>>>>>>> Stashed changes

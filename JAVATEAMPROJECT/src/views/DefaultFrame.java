@@ -2,11 +2,14 @@ package views;
 
 
 
+import controller_db.Controller;
 import custom_component.*;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.text.SimpleDateFormat;
 import java.util.Stack;
 import javax.swing.*;
@@ -72,11 +75,32 @@ class DefaultUserTopPanel extends DefaultTopPanel{
         topCenter.setBackground(DefaultFrame.TOP_BACKGROUND_COLOR);
         this.add(topCenter);
 
+        topCenter.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if(e.getClickCount() == 3){
+                    parent.move(new ManagerLoginView(parent));
+                }
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {}
+
+            @Override
+            public void mouseReleased(MouseEvent e) {}
+
+            @Override
+            public void mouseEntered(MouseEvent e) {}
+
+            @Override
+            public void mouseExited(MouseEvent e) {}
+        });
+
         //top 변경을 확인하기 위해서 버튼에 테스트로 이미지를 씀
         backBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                parent.switchTop(DefaultFrame.TOP_ADMIN);
+                parent.back();
             }
         });
 
@@ -148,7 +172,7 @@ class DefaultAdminTopPanel extends DefaultTopPanel{
         homeBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                parent.switchTop(DefaultFrame.TOP_USER);
+                parent.back();
             }
         });
         this.add(topLeft);
@@ -193,7 +217,7 @@ class DefaultAdminTopPanel extends DefaultTopPanel{
     }
 
     public JButton getHomeBtn(){
-        return getHomeBtn();
+        return homeBtn;
     }
 }
 
@@ -210,12 +234,11 @@ public class DefaultFrame extends JFrame {
             TOP_TEXT_COLOR = Color.white;
 
     private Container cp;
-    private JPanel top;
-    private JButton homeBtn;
-    private JLabel timeLb, titleLb;
+    private JPanel main;
     private Stack<JPanel> views = new Stack<>();
 
     private String nowTopName;
+    private Controller controller;
     DefaultTopPanel[] tops;
 
     /*
@@ -252,13 +275,14 @@ public class DefaultFrame extends JFrame {
         nowTopName = name;
     }
 
-    public DefaultFrame() {
-
+    public DefaultFrame(Controller controller) {
+        this.controller = controller;
         cp = getContentPane();
         DefaultUserTopPanel userTop = new DefaultUserTopPanel(TOP_USER, this);
         DefaultAdminTopPanel adminTop = new DefaultAdminTopPanel(TOP_ADMIN, this);
         tops = new DefaultTopPanel[]{userTop, adminTop};
 
+        /*
         top = new JPanel();
         top.setLayout(new BorderLayout());
 
@@ -277,40 +301,62 @@ public class DefaultFrame extends JFrame {
         top.add(timeLb, BorderLayout.EAST);
 
         cp.add(top, BorderLayout.NORTH);
+        */
+        main = new JPanel();
+        main.setLayout(new BorderLayout());
+
         cp.add(userTop, BorderLayout.NORTH);
+        cp.add(main, BorderLayout.CENTER);
         nowTopName = TOP_USER;
         //cp.add(adminTop,BorderLayout.NORTH);
     }
 
     public Component add(Component c) {
-        cp.add(c, BorderLayout.CENTER);
+        main.add(c, BorderLayout.CENTER);
         return c;
     }
 
+    public Controller getController() {
+        return controller;
+    }
 
     public void move(JPanel nowView, JPanel nextView){
         views.add(nowView);
-        this.remove(nowView);
-        this.repaint();
-        this.revalidate();
-        this.add(nextView);
+        main.remove(nowView);
+        main.add(nextView);
+        main.repaint();
+        main.revalidate();
     }
 
+    public void move(JPanel nextView){
+        move((JPanel) main.getComponent(0), nextView);
+    }
+
+    //현재 위치도 저장하지 않고 이동
     public void resetMove(JPanel nowView, JPanel nextView){
         views.clear();  //전에 있던 값을 모두 제거
-        move(nowView, nextView); //이동!
+        main.remove(nowView);
+        main.add(nextView);
+        main.repaint();
+        main.revalidate();
     }
 
+    public void resetMove(JPanel nextView){
+        resetMove((JPanel) main.getComponent(0), nextView);
+    }
 
     public boolean back(JPanel nowView){
         if(views.empty()) return false;
+        main.remove(nowView);
+        main.repaint();
+        main.revalidate();
 
-        this.remove(nowView);
-        this.repaint();
-        this.revalidate();
-
-        this.add(views.pop());
+        main.add(views.pop());
         return true;
+    }
+
+    public boolean back(){
+        return back((JPanel)main.getComponent(0));
     }
 
 

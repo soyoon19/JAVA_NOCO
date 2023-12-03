@@ -1,18 +1,27 @@
 package views;
 
+import controller_db.Controller;
 import custom_component.DefaultFont;
 import custom_component.NumberPadPanel;
+import dao.MemberDAO;
+import dao.MemberLogDAO;
+import dto.MemberDTO;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class PswdFindView extends JPanel {
-    private static final int FONT_SIZE = 70;
+public class PswdFindView extends JPanel implements ActionListener {
+    private static final int FONT_SIZE = 80;
     JLabel phonelb, birthlb;
     JTextField phonetf, birthtf;
     JButton inquirybt;
     NumberPadPanel np;
+    DefaultFrame parent;
 
-    public PswdFindView() {
+    public PswdFindView(DefaultFrame p) {
+        parent = p;
         this.setLayout(new BorderLayout());
         // BorderLayout의 Center
         JPanel blc = new JPanel(new GridBagLayout());
@@ -27,8 +36,6 @@ public class PswdFindView extends JPanel {
             //center-2
         JPanel center2 = new JPanel(new GridBagLayout());
                 //center-2의 left
-        GridBagConstraints bcglc = new GridBagConstraints();
-        bcglc.weightx = 1;
         center2.add(new JPanel(), DefaultFrame.easyGridBagConstraint(0,0,1,1));
                 //center-2의 right
         JPanel bcgr = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -45,12 +52,8 @@ public class PswdFindView extends JPanel {
             //center-3
         JPanel center3 = new JPanel(new GridBagLayout());
                 //center-3의 left
-        GridBagConstraints bcbglc = new GridBagConstraints();
-        bcbglc.weightx = 1;
         center3.add(new JPanel(),DefaultFrame.easyGridBagConstraint(0,0,1,1));
                 //center-3의 right
-        GridBagConstraints bcbgrc = new GridBagConstraints();
-        bcbgrc.weightx = 8;
         JPanel bcbgr = new JPanel(new FlowLayout(FlowLayout.LEFT));
         birthlb = new JLabel("생년월일 : ");
         birthlb.setFont(new DefaultFont(FONT_SIZE));
@@ -64,17 +67,10 @@ public class PswdFindView extends JPanel {
 
             //center-4
         glc.add(new JPanel());
-
-
         blc.add(glc, DefaultFrame.easyGridBagConstraint(0,0,2,1));
 
             //Grid Bag Layout의 right
-        JPanel gbr = new JPanel();
-        GridBagConstraints gnp = new GridBagConstraints();
-        gnp.weightx = 1;
-
         np = new NumberPadPanel();
-        //gbr.add(np);
         np.setBorder(BorderFactory.createEmptyBorder(30,15,30,15));
         blc.add(np,DefaultFrame.easyGridBagConstraint(1,0,1,1));
 
@@ -87,7 +83,20 @@ public class PswdFindView extends JPanel {
         inquirybt = new JButton("조회");
         inquirybt.setPreferredSize(new Dimension(200, 100));
         inquirybt.setFont(new DefaultFont(FONT_SIZE));
+        inquirybt.addActionListener(this);
         stp.add(inquirybt);
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        MemberDAO memberDAO = parent.getController().getMemberDAO();
+        MemberDTO member = memberDAO.findById(phonetf.getText());
+
+        if (member == null) {// || !member.getBirthDate().equals(birthtf.getText()))
+            JOptionPane.showMessageDialog(this, "회원정보가 일치하지 않습니다.", "비밀번호 찾기 실패", JOptionPane.INFORMATION_MESSAGE);
+        }else {
+            JOptionPane.showMessageDialog(this, "당신의 비밀번호는 : " + member.getPasswd(), "비밀번호 찾기 성공", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+    }
 }

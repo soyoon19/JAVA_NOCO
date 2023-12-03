@@ -4,14 +4,18 @@ import custom_component.DefaultFont;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 //유저 홈화면 (entrance)
 //2021011017 김수빈
-public class UserHomeView extends JPanel {
+public class UserHomeView extends JPanel implements ActionListener {
     public static Dimension BUTTON_SIZE = new Dimension(500,200);
-
-    public UserHomeView() {
+    private DefaultFrame parent;
+    public UserHomeView(DefaultFrame prt) {
+        this.parent = prt;
         this.setLayout(new BorderLayout());
+
 
         //center
         JPanel center = new JPanel();
@@ -57,5 +61,23 @@ public class UserHomeView extends JPanel {
         introLb.setFont(new DefaultFont(70,Font.BOLD));
         btom.add(introLb);
         this.add(btom, BorderLayout.SOUTH);
+
+        nomemEntBtn.addActionListener(this);
+        memEntBtn.addActionListener(this);
+        callStaBtn.addActionListener(this);
+    }
+
+    //페이지 이동
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getActionCommand().contains("직원")){
+            //(new ManagerLoginView())
+        }else if(e.getActionCommand().contains("비회원")){
+            //비회원이 경우 상품 리스트로 이동한다.
+            parent.move(this, new RoomSelectView(parent, null));
+        }else if(e.getActionCommand().contains("회원")){
+            //회원이 경우 로그인 화면으로 이동한다.
+            parent.move(this, new UserLoginView());
+        }
     }
 }

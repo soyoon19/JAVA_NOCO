@@ -13,14 +13,55 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+
 class StocksShowPanel extends JPanel{
+
+
     public StocksShowPanel(){
     //left - JTable
+
         this.setLayout(new BorderLayout());
 
         JPanel main = new JPanel();
         JPanel left = new JPanel(new BorderLayout());
 
+
+        //탭 생성 : 실온(0), 냉장, 냉동, 기타(3) JTabbed 반복문으로는 못 하는지? DB불러오기
+        //실온식품 패널
+        class RoomTempFoodPane extends JPanel {
+
+            JLabel jsp = new JLabel("ha");
+        }
+        class RefrigeratedItemsPane extends JPanel {
+            JLabel jsp = new JLabel("aaa");
+        }
+        class FrozenItems  extends JPanel {
+            JLabel jsp = new JLabel("bbb");
+
+        }
+        class OtherItems extends JPanel {
+            JLabel jsp = new JLabel("ccc");
+        }
+
+
+        JTabbedPane stockJTabb = new JTabbedPane();
+        RoomTempFoodPane rtf = new RoomTempFoodPane();
+        RefrigeratedItemsPane rfi = new RefrigeratedItemsPane();
+        FrozenItems frozeni = new FrozenItems();
+        OtherItems otheri = new OtherItems();
+
+        stockJTabb.addTab("실온(제품)", rtf);
+        stockJTabb.addTab("냉장(식품)", rfi);
+        stockJTabb.addTab("냉동(식품)", frozeni);
+        stockJTabb.addTab("기타", otheri);
+
+
+
+        //(카테고리 기준)DB로 table 불러오기
+
+
+
+/*
 
         String[] columnType = new String[]{"재고코드", "재고명", "현재 수량", "최소수량", "공급가", "날짜"};
 
@@ -65,7 +106,8 @@ class StocksShowPanel extends JPanel{
         JTable table = new JTable(stockstData, columnType);
         add(table);
 
-        /*
+        */
+/*
         Object[][] productData = new Object[drinkList.size()][];
 
         for(int i = 0; i <productData.length; i++){
@@ -75,8 +117,7 @@ class StocksShowPanel extends JPanel{
                     goods.getCode(), goods.getName(), goods.getCategory(), goods.getStatus(), goods.getSaleCount(),
                     goods.getDisStatus(), goods.getPrice(), goods.getCost()
             };
-        }*/
-
+        }*//*
 
 
         //Table에 scrollPane 붙이기
@@ -84,6 +125,7 @@ class StocksShowPanel extends JPanel{
         JScrollPane scrollPane = new JScrollPane(table);
         //scrollPane 올리기
         this.add(scrollPane);
+*/
 
     }
 }
@@ -137,6 +179,7 @@ class StocksShowPanel extends JPanel{
         moveMonth.add(moveLastMonth);
         moveMonth.add(moveNextMonth);
 
+        //Event: 이전 달로 넘어가기
         moveLastMonth.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -144,6 +187,7 @@ class StocksShowPanel extends JPanel{
             }
         });
 
+        //Event: 다음 달로 넘어가기
         moveNextMonth.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

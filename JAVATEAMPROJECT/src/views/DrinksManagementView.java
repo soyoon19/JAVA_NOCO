@@ -4,15 +4,18 @@ import controller_db.Controller;
 import custom_component.DefaultFont;
 import custom_component.FreeImageIcon;
 import dto.GoodsDTO;
+import dto.WorkerDTO;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 //left
-class DrinksCategoryPanel extends JPanel {
+class DrinksCategoryPanel extends JPanel  {
     public static Dimension BUTTON_SIZE = new Dimension(80,80);
     public static final String[] drinksCategorys = {
             "전체 메뉴 보기", "커피", "논-커피", "티", "스무디", "상품"
@@ -38,7 +41,7 @@ class DrinksCategoryPanel extends JPanel {
         /*
         DrinksCart가 Border에 의해서 고정적인 공간이 생기는 걸 피하기 위해서
         FlowLayout을 가지고 있는 패널(tmp)를 만들고 JScrollPanel 넣음.
-        가변적인 패널 생성을 위해 팀장의 조언을 받아 Box layout 사용함.
+        가변적인 패널 생성을 위해 팀장의 조언 -> Box layout 사용
         
         box layout 설명
         가변적으로 컴포너트가 추가, 삭제되는 되는 패널을 만들 때 유용
@@ -81,6 +84,7 @@ class DrinksCategoryPanel extends JPanel {
             dMButton[i].setBackground(btnColors[i]);
             //5. 버튼 생성
             cBottom.add(dMButton[i]);
+
         }
 
         add(cTop, BorderLayout.NORTH);
@@ -126,9 +130,10 @@ class SelectDrinkPanel extends JPanel{
         status.setFont(new DefaultFont(15));
         drinkSelect.add(status);
 
-        //삭제 버튼
+        //삭제 버튼 (개별)
         JButton cancelDrinkMg = new JButton("X");
         cancelDrinkMg.setForeground(Color.red);
+
         cancelDrinkMg.setBorderPainted(false);        //주변 테투리 이미지를 없게 한다.
         cancelDrinkMg.setContentAreaFilled(false);    //버튼 안에 기본이미지를 없게 한다.
         cancelDrinkMg.setFocusPainted(false);         //포커스 했을 때 이미지를 없게 한다.
@@ -136,6 +141,14 @@ class SelectDrinkPanel extends JPanel{
         //cancelDrinkMg.setRolloverIcon();          //버튼 마우스 오버 되었을 경우 변경되는 이미지
 
         drinkSelect.add(cancelDrinkMg);
+
+        //버튼 클릭 이벤트 처리 : (X 버튼 클릭시 담겼던 음료 삭제)
+        cancelDrinkMg.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
 
     }
 }
@@ -201,9 +214,21 @@ class DrinksDetailPanel extends  JPanel implements MouseListener {
                 {"CF01", "아메리카노", "커피", "판매", 20, "X", 3000, 800},
         }; */
 
+
+
         table = new JTable(productData, columnType);
         table.addMouseListener(this);
         JScrollPane scrollPane = new JScrollPane(table);
+
+        //table 기본 설정
+        table.getTableHeader().setReorderingAllowed(false); //header 움직이기 방지)
+
+        //table.setEnabled(false); //아예 못 움직이게 (이벤트 처리 불가)
+        /*table.setModel(new DefaultTableModel(new Object[][][] {}, new String[] { "셀1","셀2","셀3" })
+        {public boolean isCellEditable(int row, int column) {return false;}})*/
+
+
+
         //scrollPane 올리기
         this.add(scrollPane);
         this.setVisible(true);
@@ -211,8 +236,12 @@ class DrinksDetailPanel extends  JPanel implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        int row = table.getSelectedRow();
-        drinksManagementView.getDrinksCategoryPanel().addDrink(drinkList.get(row));
+        //테이블 클릭시 CategoryPanel에 담아줌 < >
+        //2번 클릭시 이벤트 구현 : DrinkMgPopup
+        if(e.getClickCount() == 2){
+            int row = table.getSelectedRow();
+            drinksManagementView.getDrinksCategoryPanel().addDrink(drinkList.get(row));
+        }
     }
 
     @Override

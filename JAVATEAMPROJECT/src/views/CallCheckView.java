@@ -1,5 +1,8 @@
 package views;
 
+import custom_component.DefaultFont;
+import custom_component.JPanelOneLabel;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -11,28 +14,20 @@ import java.awt.event.ActionListener;
 public class CallCheckView extends JPanel {
 
     public CallCheckView() {
-        this.setLayout(new BorderLayout());
+        setLayout(new BorderLayout());
+        JPanelOneLabel mss = new JPanelOneLabel("요청 관리 페이지");
+        mss.getLabel().setFont(new DefaultFont(60));
+        add(mss,BorderLayout.NORTH);
 
-        // Center
-        JPanel center = new JPanel();
-        center.setLayout(new BorderLayout());
+        String [] colcumType = new String [] {"순서", "접수시간","방번호","완료여부"};
+        Object [] [] requestData = {
+                {"1","10:34:12","1",new JButton()},
+                {"2","14:54:58","2",},
+                {"3","19:28:37","6",}
+        };
 
-        // JTable 생성
-        JTable callTable = new JTable();
-        JScrollPane scrollPane = new JScrollPane();
+        JTable callTable = new JTable(requestData,colcumType);
+        JScrollPane scrollPane = new JScrollPane(callTable);
         add(scrollPane, BorderLayout.CENTER);
-        setVisible(true);
-
-        //데이터 불러오기
-
-
-        // 요청사항 내에서 페이지 이동 액션리스너
-        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        JButton leftButton = new JButton("◀");
-        JButton rightButton = new JButton("▶");
-
-        // Bottom
-        JPanel bottom = new JPanel();
-        this.add(bottom, BorderLayout.SOUTH);
     }
 }

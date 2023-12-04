@@ -31,12 +31,15 @@ public class UserHomeView extends JPanel implements ActionListener {
         memEntBtn.setPreferredSize(new Dimension(BUTTON_SIZE));
         memEntBtn.setFont(new DefaultFont(60));
         center1_1.add(memEntBtn);
-                //center1_2
+
+            //center1_2
         JPanel center1_2 = new JPanel();
         JButton nomemEntBtn = new JButton
                 ("<HTML><body style='text-align:center;'>비회원으로<br>입장하기</body></HTML> ");
         nomemEntBtn.setPreferredSize(new Dimension(BUTTON_SIZE));
         nomemEntBtn.setFont(new DefaultFont(60));
+
+
         center1_2.add(nomemEntBtn);
         center1.add(center1_1);
         center1.add(center1_2);
@@ -63,6 +66,8 @@ public class UserHomeView extends JPanel implements ActionListener {
         this.add(btom, BorderLayout.SOUTH);
 
         nomemEntBtn.addActionListener(this);
+
+
         memEntBtn.addActionListener(this);
         callStaBtn.addActionListener(this);
     }
@@ -73,11 +78,17 @@ public class UserHomeView extends JPanel implements ActionListener {
         if(e.getActionCommand().contains("직원")){
             //(new ManagerLoginView())
         }else if(e.getActionCommand().contains("비회원")){
-            //비회원이 경우 상품 리스트로 이동한다.
-            parent.move(this, new RoomSelectView(parent, null));
+            int x = JOptionPane.showConfirmDialog(this, "<HTML><body style='text-align:center;'>비회원 이용시<br>할인혜택 및 적립 불가<br>회원가입 하시겠습니까?</body></HTML>", "비회원 안내", JOptionPane.YES_NO_OPTION);
+            if (x == JOptionPane.OK_OPTION){
+                parent.move(new UserJoinView());
+            }
+            else{
+                parent.move(this, new RoomSelectView(parent, null));
+            }
+
         }else if(e.getActionCommand().contains("회원")){
             //회원이 경우 로그인 화면으로 이동한다.
-            parent.move(this, new UserLoginView());
+            parent.move(this, new UserLoginView(parent));
         }
     }
 }

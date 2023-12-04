@@ -82,7 +82,7 @@ public class UserLoginView extends JPanel {
 
         this.add(bottom, BorderLayout.SOUTH); //박스레이아웃 어렵지만 다양성을 위해 사용하고 싶음
 
-       /* loginBtn.addActionListener(new ActionListener() {
+       loginBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 MemberDAO memberDAO = parent.getController().getMemberDAO();
@@ -96,7 +96,7 @@ public class UserLoginView extends JPanel {
                     JOptionPane.showConfirmDialog(parent, "로그인 성공");
                 }
             }
-        });*/
+        });
     }
 
 }

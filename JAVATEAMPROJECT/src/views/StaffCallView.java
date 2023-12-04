@@ -1,20 +1,33 @@
 package views;
 
+import controller_db.Controller;
 import custom_component.DefaultFont;
+import custom_component.NumberPadListener;
 import custom_component.NumberPadPanel;
+import dto.RoomManageDTO;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 //직원호출페이지
 //2021011017 김수빈
 
-public class StaffCallView extends JPanel {
+public class StaffCallView extends JPanel implements ActionListener {
 
     public static Dimension BUTTON_SIZE = new Dimension(400,200);
+    NumberPadPanel np;
+    JTextField roomNum;
+    DefaultFrame parent;
 
-    public StaffCallView() {
+    public StaffCallView(DefaultFrame prc) {
+        this.parent = prc;
         this.setLayout(new GridBagLayout());
+
+        np = new NumberPadPanel();
+
         //left
         JPanel left = new JPanel();
         left.setLayout(new GridLayout(2,2));
@@ -25,6 +38,7 @@ public class StaffCallView extends JPanel {
         JButton cleanBtn = new JButton("정리요청");
         cleanBtn.setPreferredSize(new Dimension(BUTTON_SIZE));
         cleanBtn.setFont(new DefaultFont(50));
+        cleanBtn.addActionListener(this);
         left1.add(cleanBtn);
         left.add(left1);
         //left-2
@@ -32,6 +46,7 @@ public class StaffCallView extends JPanel {
         JButton coverBtn = new JButton("마이크 커버");
         coverBtn.setPreferredSize(new Dimension(BUTTON_SIZE));
         coverBtn.setFont(new DefaultFont(50));
+        coverBtn.addActionListener(this);
         left2.add(coverBtn);
         left.add(left2);
         //left-3
@@ -39,6 +54,7 @@ public class StaffCallView extends JPanel {
         JButton errorBtn = new JButton("기기 오류");
         errorBtn.setPreferredSize(new Dimension(BUTTON_SIZE));
         errorBtn.setFont(new DefaultFont(50));
+        errorBtn.addActionListener(this);
         left3.add(errorBtn);
         left.add(left3);
         //left-4
@@ -46,6 +62,7 @@ public class StaffCallView extends JPanel {
         JButton staffBtn = new JButton("직원 호출");
         staffBtn.setPreferredSize(new Dimension(BUTTON_SIZE));
         staffBtn.setFont(new DefaultFont(50));
+        staffBtn.addActionListener(this);
         left4.add(staffBtn);
         left.add(left4);
 
@@ -64,22 +81,47 @@ public class StaffCallView extends JPanel {
         right.add(right1, DefaultFrame.easyGridBagConstraint(0,0,1,1));
         //right-2
         JPanel right2 = new JPanel();
-        JTextField roomNum = new JTextField(11);
+        roomNum = new JTextField(11);
         roomNum.setFont(new DefaultFont(30));
         JLabel bunBang = new JLabel("번 방");
         bunBang.setFont(new DefaultFont(30));
+
+        roomNum.addMouseListener(new NumberPadListener(roomNum, np));
+
         right2.add(roomNum);
         right2.add(bunBang);
-        JButton okBtn = new JButton("확인");
-        okBtn.setPreferredSize(new Dimension(100,50));
-        okBtn.setFont(new DefaultFont(30));
-        right2.add(okBtn);
         right.add(right2, DefaultFrame.easyGridBagConstraint(0,1,1,1));
 
         //right-3
-        NumberPadPanel np = new NumberPadPanel();
         right.add(np, DefaultFrame.easyGridBagConstraint(0,2,1,2));
 
         this.add(right, DefaultFrame.easyGridBagConstraint(1,0,3,1));
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        String roomNumber = roomNum.getText();
+        RoomManageDTO requestRoom = null;
+        if (roomNumber.equals("")) {
+            //JOptionpanel 값을 입력하세요
+            //JOptionPane.show
+            return;
+        }
+        Controller controller = parent.getController();
+        ArrayList<RoomManageDTO> rooms = controller.getRoomManageDAO().findAll();
+        boolean find = false;
+
+        for (RoomManageDTO room : rooms) {
+            if (roomNumber.equals(room.getNum())) {
+                find = true;
+                requestRoom = room;
+                break;
+            }
+        }
+        if (!find) {
+            //JOptionPane
+            return;
+        }
+        String request = e.getActionCommand();
+        System.out.println(roomNum.getText() + "번 방에 대해서 " + request + "요청이 들어왔습니다.");
     }
 }

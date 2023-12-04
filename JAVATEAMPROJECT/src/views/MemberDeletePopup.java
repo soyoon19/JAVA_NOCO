@@ -1,16 +1,29 @@
 package views;
 
 import custom_component.DefaultFont;
+import dto.MemberDTO;
+import dto.MemberLogDTO;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class MemberDeletePopup extends JDialog {
 
-    public MemberDeletePopup(DefaultFrame prt){
-        super(prt, "", true);
+    MemberDTO member;
+    MemberLogDTO memberLog;
+    DefaultFrame parent;
+
+    public MemberDeletePopup(DefaultFrame prt, String M_hp){
+        super(prt, "직원 삭제", true);
         this.setSize(500,700);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        parent = prt;
+        member = parent.getController().getMemberDAO().findById(M_hp);
+        memberLog = parent.getController().getMemberLogDAO().findById(M_hp);
+
 
         Container ct = getContentPane();
         ct.setLayout(new GridBagLayout());
@@ -32,12 +45,16 @@ public class MemberDeletePopup extends JDialog {
         JPanel topBtm = new JPanel();
         JLabel hp = new JLabel("전화번호");
         JTextField T_hp = new JTextField(15);
+        T_hp.setText(member.getHp());
+
 
         T_hp.setEditable(false);// 변경불가 값
         T_hp.setBackground(Color.WHITE);
 
         JLabel passwd = new JLabel("비밀번호");
         JTextField T_passwd = new JTextField(20);
+        T_passwd.setText(member.getPasswd());
+
 
         JLabel birth = new JLabel("생년월일");
         JTextField T_birth = new JTextField(15);
@@ -108,5 +125,13 @@ public class MemberDeletePopup extends JDialog {
         btmBtm.add(del);
         btm.add(btmBtm,BorderLayout.SOUTH);
         ct.add(btm, DefaultFrame.easyGridBagConstraint(0, 1, 1, 3));
+
+        del.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                parent.getController().getMemberLogDAO().delete(member.getHp());
+                parent.getController().getMemberDAO().delete(member.getHp());
+            }
+        });
     }
 }

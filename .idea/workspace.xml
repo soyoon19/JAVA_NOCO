@@ -4,19 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="73277347-8d03-48f7-a7c0-89844aebc90d" name="Changes" comment="Feat : update 기능 추가 DAO, DTO 추가&#10;&#10;StockDateDAO, StockDateDTO">
+    <list default="true" id="73277347-8d03-48f7-a7c0-89844aebc90d" name="Changes" comment="Feat : DAO&#10;RoomManageDAO 마지막 행 찾기 추가">
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/deleteBtn.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/OrderHDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/OrderHDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/RoomIfmDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/RoomIfmDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/RoomManageDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/RoomManageDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/RoomRequestDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/RoomRequestDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/StockDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/StockDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dto/MemberDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dto/MemberDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/CardInfoPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/CardInfoPopup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ProductCartResultPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ProductCartResultPopup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ProductListCartView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ProductListCartView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ProductOptionPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ProductOptionPopup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/custom_component/NumberPadPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/custom_component/NumberPadPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/DefaultFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/DefaultFrame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,8 +74,8 @@
       <recent name="C:\Users\KJW\Code\kotlinProgramming\JAVA_NOCO_1\JAVATEAMPROJECT\src\images" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\KJW\Code\kotlinProgramming\JAVA_NOCO_1\JAVATEAMPROJECT\src\images\goods" />
       <recent name="C:\Users\KJW\Code\kotlinProgramming\JAVA_NOCO_1\JAVATEAMPROJECT\src\images" />
+      <recent name="C:\Users\KJW\Code\kotlinProgramming\JAVA_NOCO_1\JAVATEAMPROJECT\src\images\goods" />
       <recent name="C:\Users\KJW\Code\kotlinProgramming\JAVA_NOCO_1\JAVATEAMPROJECT\src\title" />
     </key>
   </component>
@@ -198,7 +190,14 @@
       <option name="project" value="LOCAL" />
       <updated>1701704179638</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Feat : DAO&#10;RoomManageDAO 마지막 행 찾기 추가">
+      <created>1701711939010</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1701711939010</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -263,6 +262,7 @@
     <MESSAGE value="Feat : 캘린더 패널 추가&#10;CalendarPanel 추가" />
     <MESSAGE value="Feat : 사용자 페이지 이동, 이벤트 &#10;&#10;상품 구매를 제외한 페이지 이동 완료&#10;이벤트 추가" />
     <MESSAGE value="Feat : update 기능 추가 DAO, DTO 추가&#10;&#10;StockDateDAO, StockDateDTO" />
-    <option name="LAST_COMMIT_MESSAGE" value="Feat : update 기능 추가 DAO, DTO 추가&#10;&#10;StockDateDAO, StockDateDTO" />
+    <MESSAGE value="Feat : DAO&#10;RoomManageDAO 마지막 행 찾기 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="Feat : DAO&#10;RoomManageDAO 마지막 행 찾기 추가" />
   </component>
 </project>

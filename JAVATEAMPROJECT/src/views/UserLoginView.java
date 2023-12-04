@@ -1,6 +1,7 @@
 package views;
 
 import custom_component.DefaultFont;
+import custom_component.NumberPadListener;
 import custom_component.NumberPadPanel;
 import dao.MemberDAO;
 import dto.MemberDTO;
@@ -10,8 +11,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class UserLoginView extends JPanel {
-    DefaultFrame parent;
+public class UserLoginView extends JPanel implements ActionListener{
+    private DefaultFrame parent;
+    private JTextField hpTf;
+    private JTextField pwTf;
+    private NumberPadPanel np;
+
     public UserLoginView(DefaultFrame prt){
         parent = prt;
         this.setLayout(new BorderLayout());
@@ -35,8 +40,8 @@ public class UserLoginView extends JPanel {
         pwLb.setFont(new DefaultFont(50));
 
 
-        JTextField hpTf = new JTextField(11);
-        JTextField pwTf = new JTextField(11);
+        hpTf = new JTextField(11);
+        pwTf = new JTextField(11);
         hpTf.setFont(new DefaultFont(60));
         pwTf.setFont(new DefaultFont(60));
 
@@ -55,7 +60,7 @@ public class UserLoginView extends JPanel {
         center.add(center1, DefaultFrame.easyGridBagConstraint(0,0,6,1));
 
         //center2
-        NumberPadPanel np = new NumberPadPanel();
+        np = new NumberPadPanel();
         center.add(np, DefaultFrame.easyGridBagConstraint(1,0,3,1));
 
         this.add(center, BorderLayout.CENTER);
@@ -82,6 +87,13 @@ public class UserLoginView extends JPanel {
 
         this.add(bottom, BorderLayout.SOUTH); //박스레이아웃 어렵지만 다양성을 위해 사용하고 싶음
 
+        celBtn.addActionListener(this);
+        joinBtn.addActionListener(this);
+        findPwBtn.addActionListener(this);
+
+        pwTf.addMouseListener(new NumberPadListener(pwTf, np));
+        hpTf.addMouseListener(new NumberPadListener(hpTf, np));
+
        loginBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -94,9 +106,28 @@ public class UserLoginView extends JPanel {
                     JOptionPane.showConfirmDialog(parent, "비밀번호 틀림");
                 }else{
                     JOptionPane.showConfirmDialog(parent, "로그인 성공");
+                    parent.move(new RoomSelectView(parent, member));
                 }
             }
         });
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String s = e.getActionCommand();
+
+        switch (s){
+            case "취소":
+                hpTf.setText("");
+                pwTf.setText("");
+                break;
+            case "회원가입":
+                parent.move(new UserJoinView(parent));
+                break;
+            case "PW찾기":
+                parent.move(new PswdFindView(parent));
+                break;
+        }
+
+    }
 }

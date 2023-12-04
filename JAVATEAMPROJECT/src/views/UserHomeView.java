@@ -77,6 +77,7 @@ public class UserHomeView extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getActionCommand().contains("직원")){
             //(new ManagerLoginView())
+            parent.move(new StaffCallView(parent));
         }else if(e.getActionCommand().contains("비회원")){
             int x = JOptionPane.showConfirmDialog(this, "<HTML><body style='text-align:center;'>비회원 이용시<br>할인혜택 및 적립 불가<br>회원가입 하시겠습니까?</body></HTML>", "비회원 안내", JOptionPane.YES_NO_OPTION);
             if (x == JOptionPane.OK_OPTION){

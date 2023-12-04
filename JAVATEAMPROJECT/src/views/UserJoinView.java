@@ -5,9 +5,13 @@ import custom_component.NumberPadPanel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-public class UserJoinView extends JPanel {
-    public UserJoinView(){
+public class UserJoinView extends JPanel{
+    DefaultFrame parent;
+    public UserJoinView(DefaultFrame prt){
+        this.parent = prt;
         this.setLayout(new BorderLayout());
 
         //top
@@ -58,8 +62,11 @@ public class UserJoinView extends JPanel {
         //centerL5-2
         JPanel centerL5_2 = new JPanel();
         centerL5_2.setLayout(new FlowLayout(FlowLayout.LEFT));
-        JCheckBox agreeCB = new JCheckBox(">>개인정보 처리 방침 동의");
-        agreeCB.setFont(new DefaultFont(30));
+        JLabel agreeLb = new JLabel("\">>개인정보 처리 방침 동의");
+        JCheckBox agreeCB = new JCheckBox();
+        agreeCB.setEnabled(false); //사용자가 임임로 선택하지 못하게
+        agreeLb.setFont(new DefaultFont(30));
+        centerL5_2.add(agreeLb);
         centerL5_2.add(agreeCB);
         centerL5.add(centerL5_2);
 
@@ -101,6 +108,33 @@ public class UserJoinView extends JPanel {
 
 
         this.add(bottom, BorderLayout.SOUTH);
+
+        agreeLb.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                (new UserJoinPerssonInfoPopup(parent,agreeCB)).setVisible(true);
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                agreeLb.setFont(new DefaultFont(30, Font.BOLD));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                agreeLb.setFont(new DefaultFont(30, Font.TRUETYPE_FONT));
+            }
+        });
     }
 
 }

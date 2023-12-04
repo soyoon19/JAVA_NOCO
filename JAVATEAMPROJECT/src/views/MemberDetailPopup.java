@@ -2,14 +2,25 @@ package views;
 // 등급까지 완성
 
 import custom_component.DefaultFont;
+import dao.MemberDAO;
+import dto.MemberDTO;
+import dto.MemberLogDTO;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class MemberDetailPopup extends JDialog {
+    MemberDTO member;
+    MemberLogDTO memberLog;
+    DefaultFrame parent;
 
-    public MemberDetailPopup(DefaultFrame prt) {
-        super(prt, "", true);
+    public MemberDetailPopup(DefaultFrame prt, String M_hp) {
+        super(prt, "직원 상세 정보", true);
+        parent = prt;
+        member = parent.getController().getMemberDAO().findById(M_hp);
+        memberLog = parent.getController().getMemberLogDAO().findById(M_hp);
+
+
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setSize(500, 700);
 
@@ -34,12 +45,14 @@ public class MemberDetailPopup extends JDialog {
         JPanel topBtm = new JPanel();
         JLabel hp = new JLabel("전화번호");
         JTextField T_hp = new JTextField(15);
+        hp.setText(member.getHp());
 
         T_hp.setEditable(false);// 변경불가 값
         T_hp.setBackground(Color.WHITE);
 
         JLabel passwd = new JLabel("비밀번호");
         JTextField T_passwd = new JTextField(20);
+        hp.setText(member.getPasswd());
 
         JLabel birth = new JLabel("생년월일");
         JTextField T_birth = new JTextField(15);

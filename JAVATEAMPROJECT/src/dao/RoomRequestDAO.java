@@ -153,4 +153,39 @@ public class RoomRequestDAO implements DAO<RoomRequestDTO, String> {
             }
         }
     }
+
+
+    public RoomRequestDTO findLastRow() {
+        PreparedStatement pstmt = null;
+        ResultSet rst = null;
+        RoomRequestDTO roomRequest = null;
+
+        try {
+            // 일련번호를 기준으로 내림차순 정렬하여 마지막 행을 가져오는 쿼리
+            String sql = "SELECT * FROM RoomRequest_T ORDER BY id DESC LIMIT 1";
+            pstmt = conn.prepareStatement(sql);
+            rst = pstmt.executeQuery();
+
+            if (rst.next()) {
+                roomRequest = new RoomRequestDTO();
+                roomRequest.setRequest(rst.getString("r_request"));
+                roomRequest.setNum(rst.getString("r_num"));
+                roomRequest.setComplete(rst.getBoolean("r_complete"));
+                roomRequest.setRecTime(rst.getTime("r_recTime"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pstmt != null)
+                    pstmt.close();
+                if (rst != null)
+                    rst.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return roomRequest;
+    }
 }

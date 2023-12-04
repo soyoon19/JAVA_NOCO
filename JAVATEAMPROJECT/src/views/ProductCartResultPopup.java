@@ -3,6 +3,7 @@ package views;
 import custom_component.DefaultFont;
 import custom_component.JPanelOneLabel;
 import dto.GoodsDTO;
+import dto.MemberDTO;
 
 import javax.swing.*;
 import java.awt.*;
@@ -68,7 +69,7 @@ class ProductCartResultListDetailPanel extends JPanel{
 
         this.setLayout(new GridBagLayout());
         //image
-        ImageIcon ii = new ImageIcon(DefaultFrame.PATH + "/images/americano(ice).png");
+        ImageIcon ii = new ImageIcon(DefaultFrame.PATH + "/images/goods/" + g.getCode() + ".png");
         productImage = new ImageIcon(ii.getImage().getScaledInstance(IMAGE_SIZE, IMAGE_SIZE, Image.SCALE_SMOOTH));
 
         //right
@@ -116,12 +117,14 @@ public class ProductCartResultPopup extends JDialog implements ActionListener{
     ProductCartResultListPanel productCartResultListPanel;
     ProductCartResultPricePanel productCartResultPricePanel;
     JButton backBtn, payBtn;
+    MemberDTO mmeber;
 
 
-    public ProductCartResultPopup(GoodsDTO[] gs, int[] ns, JFrame parent) {
+    public ProductCartResultPopup(GoodsDTO[] gs, int[] ns, JFrame parent, MemberDTO member) {
         super(parent, TITLE, true);
         this.setLayout(new BorderLayout());
 
+        this.mmeber = member;
         this.goodsArr = gs;
         this.nums = ns;
         this.parent = parent;
@@ -171,7 +174,7 @@ public class ProductCartResultPopup extends JDialog implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         dispose();
         if(e.getActionCommand().equals("결제")){
-            CardInfoPopup popup = new CardInfoPopup((DefaultFrame) parent);
+            CardInfoPopup popup = new CardInfoPopup((DefaultFrame) parent, mmeber);
             popup.setVisible(true);
         }
     }

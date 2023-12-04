@@ -161,4 +161,40 @@ public class RoomManageDAO implements DAO<RoomManageDTO, String> {
         return true;
     }
 
+
+    public RoomManageDTO findLatest() {
+        PreparedStatement pstmt = null;
+        ResultSet rst = null;
+        RoomManageDTO manage = null;
+
+        try {
+            String sql = "SELECT * FROM RoomManage_T ORDER BY r_code DESC LIMIT 1";
+            pstmt = conn.prepareStatement(sql);
+            rst = pstmt.executeQuery();
+
+            if (rst.next()) {
+                manage = new RoomManageDTO();
+                manage.setCode(rst.getString("r_code"));
+                manage.setNum(rst.getString("r_num"));
+                manage.setX(rst.getInt("r_X"));
+                manage.setY(rst.getInt("r_Y"));
+                manage.setOption(rst.getInt("r_option"));
+                manage.setCheck(rst.getBoolean("r_check"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pstmt != null)
+                    pstmt.close();
+                if (rst != null)
+                    rst.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return manage;
+    }
+
 }

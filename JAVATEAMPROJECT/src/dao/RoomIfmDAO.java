@@ -166,4 +166,42 @@ public class RoomIfmDAO implements DAO<RoomIfmDTO, String>{
         return true;
     }
 
+
+    public RoomIfmDTO findLastRow() {
+        PreparedStatement pstmt = null;
+        ResultSet rst = null;
+        RoomIfmDTO rimf = null;
+
+        try {
+            // 일련번호를 기준으로 내림차순 정렬하여 마지막 행을 가져오는 쿼리
+            String sql = "SELECT * FROM RoomIfm_T ORDER BY r_num DESC LIMIT 1";
+            pstmt = conn.prepareStatement(sql);
+            rst = pstmt.executeQuery();
+
+            if (rst.next()) {
+                rimf = new RoomIfmDTO();
+                rimf.setUserHp(rst.getString("r_userHP"));
+                rimf.setEnterTime(rst.getTime("r_enter"));
+                rimf.setNum(rst.getString("r_num"));
+                rimf.setUseSong(rst.getInt("r_useSong"));
+                rimf.setLeftSong(rst.getInt("r_leftSong"));
+                rimf.setPaySong(rst.getInt("r_paySong"));
+                rimf.setUsing(rst.getBoolean("r_using"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pstmt != null)
+                    pstmt.close();
+                if (rst != null)
+                    rst.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return rimf;
+    }
+
 }

@@ -6,6 +6,8 @@ import dao.GoodsDAO;
 import dao.GoodsImageDAO;
 import dto.GoodsDTO;
 import dto.GoodsImageDTO;
+import dto.StockDTO;
+import dto.StockDateDTO;
 import process.ImageProcess;
 import views.*;
 
@@ -14,6 +16,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 
 public class Main {
@@ -84,34 +87,7 @@ public class Main {
 
         //상품 전체 삭제
 
-        /*
-        ArrayList<GoodsDTO> goods = controller.getGoodsDAO().findAll();
-        for(int i = 0; i < goods.size(); i++){
-            controller.getGoodsImageDAO().delete(goods.get(i).getCode());
-            controller.getGoodsDAO().delete(goods.get(i).getCode());
-        }
 
-        File f = new File("C:\\Users\\KJW\\Documents\\카카오톡 받은 파일\\Onlydata2.csv");
-        System.out.println(f);
-
-        //새로운 상품 추가
-        try {
-            try (BufferedReader br = new BufferedReader(new FileReader(f))) {
-                String line;
-                while ((line = br.readLine()) != null) {
-                    System.out.println(line);
-                    String[] str = line.split(",");
-                    GoodsDTO g = new GoodsDTO(str[0], str[1], str[2], str[3], Integer.parseInt(str[4])
-                            , Integer.parseInt(str[5]),Integer.parseInt(str[6]),Integer.parseInt(str[7]),
-                            str[8].equals("TRUE") ,str[9].equals("TRUE"), str[10].equals("TRUE"));
-
-
-                    controller.getGoodsDAO().insert(g);
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
 
         //win.add(new PswdFindView(win));
         //win.add(new StockManagementView());

@@ -19,8 +19,8 @@ public class StockDAO implements DAO<StockDTO, String>{
     public boolean insert(StockDTO stock) {
         PreparedStatement pstmt = null;
         try {
-            String sql = "INSERT INTO Stock_T (s_code, s_name, s_amount, s_minAmount, s_cost, s_date, s_category) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO Stock_T (s_code, s_name, s_amount, s_minAmount, s_cost, s_category) " +
+                    "VALUES (?, ?, ?, ?, ?, ?)";
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, stock.getCode());
             pstmt.setString(2, stock.getName());

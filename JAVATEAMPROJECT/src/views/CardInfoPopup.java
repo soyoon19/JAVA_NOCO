@@ -8,6 +8,7 @@ import javax.swing.*;
 import custom_component.DefaultFont;
 import custom_component.NumberPadListener;
 import custom_component.NumberPadPanel;
+import dto.MemberDTO;
 
 
 class CardInfoInputPanel extends JPanel {
@@ -34,8 +35,8 @@ class CardInfoInputPanel extends JPanel {
 
         //라벨의 맞는 텍스트 넣어주기
         cardNumLb = new JLabel("카드번호");
-        dateLb = 	new JLabel("유효기간");
-        cvcLb = 	new JLabel("CVC");
+        dateLb = 	new JLabel("CVC");
+        cvcLb = 	new JLabel("유효기간");
         pwLb = 		new JLabel("카드 비빌번호");
 
         //배열에 담는다.
@@ -181,11 +182,12 @@ public class CardInfoPopup extends JDialog{
     CardInfoInputPanel cardinputPanel;
     JButton backBtn;
     Container cp;
+    MemberDTO member;
 
-
-    public CardInfoPopup(JFrame parent) {
+    public CardInfoPopup(JFrame parent, MemberDTO member) {
         super(parent, TITLE, true);
         setSize(WIDTH, HEIGHT);
+        this.member = member;
 
         cp = getContentPane();
 
@@ -209,7 +211,5 @@ public class CardInfoPopup extends JDialog{
         center.add(numberPanel, DefaultFrame.easyGridBagConstraint(1, 0, 2, 1));
         cp.add(center, BorderLayout.CENTER);
     }
-
-
 
 }

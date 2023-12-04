@@ -1,6 +1,5 @@
 package dao;
 
-import dto.OrderDTO;
 import dto.OrderHDTO;
 
 import java.sql.Connection;
@@ -8,7 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class OrderHDAO implements DAO<OrderHDTO, String> {
     private Connection conn;
@@ -68,35 +66,10 @@ public class OrderHDAO implements DAO<OrderHDTO, String> {
         return true;
     }
 
-    public OrderHDTO findById(String orderCode) {
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
-        OrderHDTO orderH = null;
 
-        try {
-            String sql = "SELECT * FROM OrderHD_T WHERE o_code = ?";
-            pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, orderCode);
-            rs = pstmt.executeQuery();
 
-            if (rs.next()) {
-                orderH = createOrderHDTO(rs);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (rs != null)
-                    rs.close();
-                if (pstmt != null)
-                    pstmt.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-
-        return orderH;
+    public OrderHDTO findById(String orderCode){
+        return null;
     }
 
     public ArrayList<OrderHDTO> findAll() {

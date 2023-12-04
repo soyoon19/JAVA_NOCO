@@ -142,4 +142,38 @@ public class OrderHDAO implements DAO<OrderHDTO, String> {
 
         return new OrderHDTO(o_code, g_code, g_count, oH_price, oH_discount, oH_cost, o_date);
     }
+
+
+    public boolean update(OrderHDTO orderH) {
+        PreparedStatement pstmt = null;
+
+        try {
+            String sql = "UPDATE OrderH_T SET g_code=?, g_count=?, o_date=?, oH_price=?, oH_discount=?, oH_cost=? WHERE o_code=?";
+            pstmt = conn.prepareStatement(sql);
+
+            pstmt.setString(1, orderH.getGoodsCode());
+            pstmt.setInt(2, orderH.getCount());
+            pstmt.setDate(3, orderH.getDate());
+            pstmt.setInt(4, orderH.getPrice());
+            pstmt.setInt(5, orderH.getDiscount());
+            pstmt.setInt(6, orderH.getCost());
+            pstmt.setString(7, orderH.getOrderCode());
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            try {
+                if (pstmt != null)
+                    pstmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
+
+        return true;
+    }
+
 }

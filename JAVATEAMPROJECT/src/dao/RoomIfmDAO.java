@@ -136,4 +136,34 @@ public class RoomIfmDAO implements DAO<RoomIfmDTO, String>{
         }
         return true;
     }
+
+    public boolean update(RoomIfmDTO imf) {
+        PreparedStatement pstmt = null;
+        try {
+            String sql = "UPDATE RoomIfm_T SET r_userHP=?, r_enter=?, r_useSong=?, r_leftSong=?, r_paySong=?, r_using=? WHERE r_num=?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, imf.getUserHp());
+            pstmt.setTime(2, imf.getEnterTime());
+            pstmt.setInt(3, imf.getUseSong());
+            pstmt.setInt(4, imf.getLeftSong());
+            pstmt.setInt(5, imf.getPaySong());
+            pstmt.setBoolean(6, imf.isUsing());
+            pstmt.setString(7, imf.getNum());
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            try {
+                if (pstmt != null)
+                    pstmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
+        return true;
+    }
+
 }

@@ -131,4 +131,34 @@ public class RoomManageDAO implements DAO<RoomManageDTO, String> {
         }
         return true;
     }
+
+
+    public boolean update(RoomManageDTO manage) {
+        PreparedStatement pstmt = null;
+        try {
+            String sql = "UPDATE RoomManage_T SET r_num=?, r_X=?, r_Y=?, r_option=?, r_check=? WHERE r_code=?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, manage.getNum());
+            pstmt.setInt(2, manage.getX());
+            pstmt.setInt(3, manage.getY());
+            pstmt.setInt(4, manage.getOption());
+            pstmt.setBoolean(5, manage.isCheck());
+            pstmt.setString(6, manage.getCode());
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            try {
+                if (pstmt != null)
+                    pstmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
+        return true;
+    }
+
 }

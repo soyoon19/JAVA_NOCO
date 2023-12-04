@@ -26,18 +26,16 @@ public class StockDTO {
 
     private  String code, name;
     private  int amount, minAmount, cost, category;
-    private Date date;
 
 
     public StockDTO(String code, String name,
-                    int amount, int minAmount, int cost, java.sql.Date date, int category) {
+                    int amount, int minAmount, int cost, int category) {
 
         this.code = code;
         this.name = name;
         this.amount = amount;
         this.minAmount = minAmount;
         this.cost = cost;
-        this.date = date;
         this.category = category;
     }
 
@@ -89,11 +87,5 @@ public class StockDTO {
         this.cost = cost;
     }
 
-    public Date getDate() {
-        return date;
-    }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
 }

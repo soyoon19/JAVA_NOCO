@@ -1,10 +1,6 @@
 package views;
 
-import custom_component.AreaSelectMouseListener;
-import custom_component.DefaultFont;
-import custom_component.EventSwitch;
-import custom_component.RoomPanel;
-import custom_component.RoomViewPanel;
+import custom_component.*;
 import dto.*;
 import javafx.scene.control.ComboBox;
 
@@ -16,26 +12,32 @@ import java.awt.event.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Vector;
 
 public class RoomSettingView extends JPanel { //메인뷰
 
     public static final int FONT_SIZE = 30;
     public static final int MIDDLE_FONT_SIZE = 40;
-    public static final int BETWEEN_FONT = 60;
+    public static final int BETWEEN_FONT = 50;
     public static final int BUTTON_FONT_SIZE = 80;
 
     private DefaultFrame parent;
 
-    public RoomSettingView(DefaultFrame prt){
+    public RoomSettingView(DefaultFrame prt, WorkerDTO worker){
         this.parent = prt;
         this.setLayout(new BorderLayout());
         //탭 생성
         JTabbedPane rsv = new JTabbedPane();
-        RoomEditPanel rep = new RoomEditPanel(prt);
+        RoomEditPanel rep = new RoomEditPanel(parent);
         RoomManagePanel rmp = new RoomManagePanel(parent);
-        rsv.addTab("편집",rep);
+
+        if(worker.getPosition().equals("점장"))
+            rsv.addTab("편집",rep);
+
         rsv.addTab("관리",rmp);
         rsv.setFont(new DefaultFont(FONT_SIZE));
+
+
         add(rsv);
     }
 }
@@ -58,18 +60,22 @@ class RoomEditPanel extends JPanel { //방편집 패널
         ArrayList<RoomManageDTO> rooms = prt.getController().getRoomManageDAO().findAll();
         ArrayList<RoomOptionDTO> options = prt.getController().getRoomOptionDAO().findAll();
 
-        RoomEditViewPanel gbl = new RoomEditViewPanel(rooms, options, options.get(0), this);
-        review.add(gbl,DefaultFrame.easyGridBagConstraint(0,0,3,1));
+        roomEditViewPanel = new RoomEditViewPanel(rooms, options, options.get(0), this);
+        review.add(roomEditViewPanel,DefaultFrame.easyGridBagConstraint(0,0,3,1));
         //Grid Bag Layout의 right
         JTabbedPane gbr = new JTabbedPane();
-        se = new ScreenEditPanelMini(parent);
+        se = new ScreenEditPanelMini(parent, roomEditViewPanel);
         rs = new RoomSettingPanelMini();
 
         gbr.add("화면 편집",se);
         gbr.add("방 설정",rs);
+
         gbr.setFont(new DefaultFont(RoomSettingView.FONT_SIZE));
         review.add(gbr,DefaultFrame.easyGridBagConstraint(1,0,1,1));
         add(review);
+
+
+        JComboBox x = new JComboBox(new Vector());
 
 
         //방 삭제와, 방 설정 이벤트 설정
@@ -79,30 +85,16 @@ class RoomEditPanel extends JPanel { //방편집 패널
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     if(rs.getEventSwitch().getSw()){
-
+                        rs.setRoomInfo(rp.getRoom());
                     }
 
                     if(se.getRoomDel().getEventSwitch().getSw()){
-                        JComboBox selectBox = se.getRoomDel().getRoomNumtf();
-                        System.out.println(rp.getRoom().getNum());
-                        System.out.println(selectBox.getSelectedObjects());
-                        int i = 0;
-                        for(Object item : selectBox.getSelectedObjects()){
-                            if(item.toString().equals(rp.getRoom().getNum()))
-                                break;
-                            i++;
-                        }
-                        System.out.println(i);
-
-                        selectBox.setSelectedIndex(i);
+                        se.getRoomDel().setRoomInfo(rp.getRoom());
                     }
                 }
 
                 @Override
-                public void mousePressed(MouseEvent e) {
-
-                }
-
+                public void mousePressed(MouseEvent e) {}
                 @Override
                 public void mouseReleased(MouseEvent e) {}
 
@@ -122,6 +114,10 @@ class RoomEditPanel extends JPanel { //방편집 패널
                 }
             });
         }
+
+        //Button의 getter을
+        //방의 대한 정보를 확인해서
+        //se.getRoomDel().get
     }
 
     public ScreenEditPanelMini getSe(){
@@ -131,13 +127,15 @@ class RoomEditPanel extends JPanel { //방편집 패널
     public RoomSettingPanelMini getRs(){
         return rs;
     }
+
 }
 
 class RoomEditViewPanel extends RoomViewPanel{
 
-    RoomEditPanel roomEditPanel;
-    ArrayList<RoomManageDTO> rooms;
-    ArrayList<RoomOptionDTO> options;
+    private RoomEditPanel roomEditPanel;
+    private ArrayList<RoomManageDTO> rooms;
+    private ArrayList<RoomOptionDTO> options;
+
 
     public RoomEditViewPanel(ArrayList<RoomManageDTO> rooms, ArrayList<RoomOptionDTO> options, RoomOptionDTO optionDTO, RoomEditPanel roomEditPanel) {
         super(rooms, options);
@@ -164,16 +162,16 @@ class RoomEditViewPanel extends RoomViewPanel{
                         option = options.get(choice);
 
                         boolean empty = true;
-                        for(int i = y; i < option.getWidth() + y && i < RoomViewPanel.MAX_HEIGHT; i++)
-                            for(int j = x; j < option.getHeight() + x && j < RoomViewPanel.MAX_WIDTH; j++)
+                        for(int i = y; i < option.getHeight() + y && i < RoomViewPanel.MAX_HEIGHT; i++)
+                            for(int j = x; j < option.getWidth() + x && j < RoomViewPanel.MAX_WIDTH; j++)
                                 if(!jps[i][j].getUse()) { //JPanel이 사용되고 있지 않으면 == 방이 이미 점유되어 있면
                                     empty = false;
                                     break;
                                 }
 
 
-                        for(int i = y; i < option.getWidth() + y && i < RoomViewPanel.MAX_HEIGHT; i++)
-                            for(int j = x; j < option.getHeight() + x && j < RoomViewPanel.MAX_WIDTH; j++) {
+                        for(int i = y; i < option.getHeight() + y && i < RoomViewPanel.MAX_HEIGHT; i++)
+                            for(int j = x; j < option.getWidth() + x && j < RoomViewPanel.MAX_WIDTH; j++) {
                                 if(empty) jps[i][j].setBackground(new Color(122,138,250));
                                 else jps[i][j].setBackground(new Color(242,101,101));    //방이 이미 점유되어 있으면 빨간색으로 변경한다.
                             }
@@ -184,11 +182,10 @@ class RoomEditViewPanel extends RoomViewPanel{
                     public void mouseExited(java.awt.event.MouseEvent e) {
                         if(!sw.getSw()) return;
 
-                        for(int i = y; i < option.getWidth() + y && i < RoomViewPanel.MAX_HEIGHT; i++)
-                            for(int j = x; j < option.getHeight() + x && j < RoomViewPanel.MAX_WIDTH; j++) {
+                        for(int i = y; i < option.getHeight() + y && i < RoomViewPanel.MAX_HEIGHT; i++)
+                            for(int j = x; j < option.getWidth() + x && j < RoomViewPanel.MAX_WIDTH; j++) {
                                 jps[i][j].setBackground(Color.white);
                             }
-
                     }
 
                     @Override
@@ -201,8 +198,8 @@ class RoomEditViewPanel extends RoomViewPanel{
                         if(!sw.getSw()) return;
 
                         boolean empty = true;
-                        for(int i = y; i < option.getWidth() + y && i < RoomViewPanel.MAX_HEIGHT; i++)
-                            for(int j = x; j < option.getHeight() + x && j < RoomViewPanel.MAX_WIDTH; j++)
+                        for(int i = y; i < option.getHeight() + y && i < RoomViewPanel.MAX_HEIGHT; i++)
+                            for(int j = x; j < option.getWidth() + x && j < RoomViewPanel.MAX_WIDTH; j++)
                                 if(!jps[i][j].getUse()) { //JPanel이 사용되고 있지 않으면 == 방이 이미 점유되어 있면
                                     empty = false;
                                     break;
@@ -211,7 +208,7 @@ class RoomEditViewPanel extends RoomViewPanel{
                         if(empty) { //만약 클릭한 곳이 점유된 곳이라면
                             roomEditPanel.getSe().getRoomAdd().getRoomlcXtf().setText(String.valueOf(x));
                             roomEditPanel.getSe().getRoomAdd().getRoomlcYtf().setText(String.valueOf(y));
-                        } else {
+                        }else{
                             JOptionPane.showMessageDialog(roomEditPanel,"이미 지정된 위치입니다.","방 위치 오류",JOptionPane.INFORMATION_MESSAGE);
                         }
 
@@ -246,13 +243,13 @@ class RoomEditViewPanel extends RoomViewPanel{
 
 
 class ScreenEditPanelMini extends JPanel implements ActionListener{ //화면 편집 패널
-    private static final int IMAGE_X = 140;
-    private static final int IMAGE_Y = 140;
     JButton roomAddBtn, roomDeleteBtn;
     RoomAdd roomAdd; RoomDelete roomDel;
     JPanel sep;
     DefaultFrame parent;
     RoomEditViewPanel roomEditViewPanel;
+    private static final int IMAGE_X = 140;
+    private static final int IMAGE_Y = 140;
     public ScreenEditPanelMini(DefaultFrame prt, RoomEditViewPanel roomEditViewPanel) {
         this.roomEditViewPanel = roomEditViewPanel;
         this.parent = prt;
@@ -267,14 +264,14 @@ class ScreenEditPanelMini extends JPanel implements ActionListener{ //화면 편
         ImageIcon img1 = new FreeImageIcon(DefaultFrame.PATH+"/images/roomAddBefore.png",IMAGE_X,IMAGE_Y);
         roomAddBtn = new JButton("방 추가",img1);
         roomAddBtn.setBackground(Color.white);
-            //클릭 후
+        //클릭 후
         ImageIcon img2 = new FreeImageIcon(DefaultFrame.PATH+"/images/roomAddAfter.png",IMAGE_X,IMAGE_Y);
         roomAddBtn.setPressedIcon(img2);
         //삭제 버튼 클릭 전
         ImageIcon img3 = new FreeImageIcon(DefaultFrame.PATH+"/images/roomDeleteBefore.png",IMAGE_X,IMAGE_Y);
         roomDeleteBtn = new JButton("방 삭제",img3);
         roomDeleteBtn.setBackground(Color.white);
-            //클릭 후
+        //클릭 후
         ImageIcon img4 = new FreeImageIcon(DefaultFrame.PATH+"/images/roomDeleteAfter.png",IMAGE_X,IMAGE_Y);
         roomDeleteBtn.setPressedIcon(img4);
 
@@ -306,7 +303,6 @@ class ScreenEditPanelMini extends JPanel implements ActionListener{ //화면 편
             roomDel.getEventSwitch().setSw(true);
             this.remove(sep);
             this.add(roomDel);
-
             this.repaint();
             this.revalidate();
         }
@@ -426,6 +422,7 @@ class RoomAdd extends  JPanel implements ActionListener { //방추가 버튼
         String num = roomNumtf.getText().trim();
 
         if (s.equals("추가")){
+            //문자열을 입력했을 경우
             try { //문자열을 입력했을 경우 예외처리
                 Integer.parseInt(num);
             } catch (NumberFormatException e1) {
@@ -434,7 +431,7 @@ class RoomAdd extends  JPanel implements ActionListener { //방추가 버튼
             }
 
             RoomManageDTO room = parent.getController().getRoomManageDAO().findById(num);
-            if(room != null){ //todo 입력된 값이 존재할 경우 예외처리 <-이거 안됨
+            if(room != null){
                 JOptionPane.showMessageDialog(this,"이미 존재하는 방 번호입니다.","방 번호 오류",JOptionPane.INFORMATION_MESSAGE);
                 return;
             }
@@ -447,12 +444,17 @@ class RoomAdd extends  JPanel implements ActionListener { //방추가 버튼
                 JOptionPane.showMessageDialog(this, "방 추가가 완료되었습니다.","방 추가 확인",JOptionPane.INFORMATION_MESSAGE);
             }
 
-        } else if (s.equals("취소")) {
+        } else if (s.equals("취소")) { //초기화
             roomNumtf.setText("");
             roomSizeXY.setSelectedIndex(0);
             roomlcXtf.setText("");
             roomlcYtf.setText("");
-        } else if(s.equals("이전")){
+        } else if(s.equals("이전")){ //초기화 및 페이지 이동
+            roomNumtf.setText("");
+            roomSizeXY.setSelectedIndex(0);
+            roomlcXtf.setText("");
+            roomlcYtf.setText("");
+
             mini.remove(this);
             mini.getRoomEditViewPanel().eventUnActivate();
             mini.add(mini.sep);
@@ -474,11 +476,12 @@ class RoomAdd extends  JPanel implements ActionListener { //방추가 버튼
 }
 
 class RoomDelete extends JPanel implements ActionListener { //방삭제 버튼
-    private JButton beforeBtn, deleteBtn;
+    private JButton beforeBtn, deleteBtn, cancleBtn;
     private JLabel roomNum, roomSize,roomlcX,roomlcY;
-    private JComboBox roomNumtf;
+    private JLabel roomNumtf;
     private ScreenEditPanelMini mini;
     private DefaultFrame parent;
+    private ArrayList<RoomOptionDTO> options;
 
     EventSwitch eventSwitch;
     public RoomDelete(DefaultFrame prt,ScreenEditPanelMini mini) {
@@ -488,6 +491,8 @@ class RoomDelete extends JPanel implements ActionListener { //방삭제 버튼
         JPanel rdp = new JPanel(new BorderLayout());
         eventSwitch = new EventSwitch();
         eventSwitch.setSw(false);
+
+        options = parent.getController().getRoomOptionDAO().findAll();
 
         //Bordeer Layout의 North
         JPanel p1 = new JPanel();
@@ -518,17 +523,17 @@ class RoomDelete extends JPanel implements ActionListener { //방삭제 버튼
                 nums.add(rooms.get(i).getNum());
         }
 
-
         String[] strs = new String[nums.size()];
         for(int i = 0; i < strs.length; i++)
             strs[i] = nums.get(i);
         Arrays.sort(strs);
 
-        roomNumtf = new JComboBox(strs);
+        roomNumtf = new JLabel("");
 
-        roomNumtf.setFont(new DefaultFont(RoomSettingView.BETWEEN_FONT - 10));
+        roomNumtf.setFont(new DefaultFont(RoomSettingView.BETWEEN_FONT));
         mini1.add(roomNum);
         mini1.add(roomNumtf);
+
 
         //2행
         JPanel mini2 = new JPanel();
@@ -562,7 +567,11 @@ class RoomDelete extends JPanel implements ActionListener { //방삭제 버튼
         deleteBtn = new JButton("삭제");
         deleteBtn.setFont(new DefaultFont(RoomSettingView.MIDDLE_FONT_SIZE));
         deleteBtn.addActionListener(this);
+        cancleBtn = new JButton("취소");
+        cancleBtn.setFont(new DefaultFont(RoomSettingView.MIDDLE_FONT_SIZE));
+        cancleBtn.addActionListener(this);
         p3.add(deleteBtn);
+        p3.add(cancleBtn);
         p3.setLayout(new FlowLayout());
         add(p3,BorderLayout.SOUTH);
     }
@@ -573,13 +582,23 @@ class RoomDelete extends JPanel implements ActionListener { //방삭제 버튼
         if (s.equals("삭제")){
             JOptionPane.showConfirmDialog(this, "삭제하시겠습니까?","방 삭제",JOptionPane.YES_NO_OPTION);
             JOptionPane.showMessageDialog(this, "방 삭제가 완료되었습니다.","방 삭제 확인",JOptionPane.INFORMATION_MESSAGE);
-        } else if(s.equals("이전")){
+        } else if(s.equals("이전")){ //초기화 및 이전 페이지 이동
+            roomNumtf.setText("");
+            roomSize.setText("방 크기 XY :");
+            roomlcX.setText("방 위치 X :");
+            roomlcY.setText("방 위치 Y :");
+
             this.eventSwitch.setSw(false);
             mini.remove(this);
             mini.add(mini.sep);
 
             mini.repaint();
             mini.revalidate();
+        } else if(s.equals("취소")){ //초기화
+            roomNumtf.setText("");
+            roomSize.setText("방 크기 XY :");
+            roomlcX.setText("방 위치 X :");
+            roomlcY.setText("방 위치 Y :");
         }
     }
 
@@ -587,22 +606,23 @@ class RoomDelete extends JPanel implements ActionListener { //방삭제 버튼
         return eventSwitch;
     }
 
-    public JComboBox getRoomNumtf() {
-        return roomNumtf;
-    }
 
     public void setRoomInfo(RoomManageDTO room){
-        roomSize.setText(roomSize.getText().split(":")[0] + " : " + room.getNum());
-        roomlcX.setText(roomlcX.getText().split(":")[0] + " :" + room.getX());
-        roomlcY.setText(roomlcY.getText().split(":")[0] + ":" + room.getY());
+        RoomOptionDTO option = options.get(room.getOption() - 1);
+
+        roomNumtf.setText(room.getNum());
+        roomSize.setText(roomSize.getText().split(":")[0] + ": " + option.getWidth() +  "x" + option.getHeight());
+        roomlcX.setText(roomlcX.getText().split(":")[0] + ": " + room.getX());
+        roomlcY.setText(roomlcY.getText().split(":")[0] + ": " + room.getY());
     }
 }
 class RoomSettingPanelMini extends JPanel implements ActionListener { //방설정 패널
     JLabel roomNum;
     JTextField roomNumtf;
-    JButton roomActivate, roomUnActivate, applyBtn;
+    JButton roomActivate, roomUnActivate, applyBtn, cancleBtn;
 
     private EventSwitch eventSwitch;
+
 
     public RoomSettingPanelMini() {
         this.setLayout(new BorderLayout());
@@ -645,7 +665,11 @@ class RoomSettingPanelMini extends JPanel implements ActionListener { //방설�
         applyBtn = new JButton("적용");
         applyBtn.setFont(new DefaultFont(RoomSettingView.MIDDLE_FONT_SIZE));
         applyBtn.addActionListener(this);
+        cancleBtn = new JButton("취소");
+        cancleBtn.setFont(new DefaultFont(RoomSettingView.MIDDLE_FONT_SIZE));
+        cancleBtn.addActionListener(this);
         p5.add(applyBtn);
+        p5.add(cancleBtn);
         rsg.add(p5);
 
         add(rsg);
@@ -655,17 +679,23 @@ class RoomSettingPanelMini extends JPanel implements ActionListener { //방설�
     public void actionPerformed(ActionEvent e) {
         String s = e.getActionCommand();
         if(s.equals("방 활성화")){
-            //로직 구현
+            //todo 로직 구현
         } else if (s.equals("방 비활성화")) {
             //로직 구현
         } else if (s.equals("적용")) {
             JOptionPane.showConfirmDialog(this, "적용하시겠습니까?","방 설정",JOptionPane.YES_NO_OPTION);
             JOptionPane.showMessageDialog(this, "방 설정이 완료되었습니다.","방 설정 확인",JOptionPane.INFORMATION_MESSAGE);
+        } else if (s.equals("취소")) {
+            roomNumtf.setText("");
         }
     }
 
     public EventSwitch getEventSwitch() {
         return eventSwitch;
+    }
+
+    public void setRoomInfo(RoomManageDTO room){
+        roomNumtf.setText(room.getNum());
     }
 }
 
@@ -694,10 +724,10 @@ class RoomManagePanel extends JPanel implements ActionListener { //방관리 패
         //Grid Bag Layout의 right
         JPanel gbr = new JPanel(new GridBagLayout());
         rmview.add(gbr,DefaultFrame.easyGridBagConstraint(1,0,1,1));
-            //Jpanel의 top
+        //Jpanel의 top
         RoomManageInfoPanel gbt = new RoomManageInfoPanel();
         gbr.add(gbt,DefaultFrame.easyGridBagConstraint(0,0,1,4));
-            //JPannel의 bottom
+        //JPannel의 bottom
         JPanel gbb = new JPanel();
         gbr.add(gbb,DefaultFrame.easyGridBagConstraint(0,1,1,1));
         musicAdd = new JButton("곡 추가");

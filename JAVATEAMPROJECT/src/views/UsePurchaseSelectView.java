@@ -75,8 +75,8 @@ public class UsePurchaseSelectView extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String s = e.getActionCommand();
         if(s.equals("곡 사용")){
-            //보유곡이 0이면 곡 사용 불가하다는 창을 띄운다.
             if(parent.getController().getMemberLogDAO().findById(member.getHp()).getHoldSong() == 0){
+                JOptionPane.showMessageDialog(this,"보유곡이 없습니다.","사용 불가",JOptionPane.INFORMATION_MESSAGE);
                 return;
             }
             parent.move(new MusicUseView(parent, room, member));

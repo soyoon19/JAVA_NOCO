@@ -18,8 +18,7 @@ public class Controller {
     private WorkerDAO workerDAO;
     private GoodsImageDAO goodsImageDAO;
     private StockDAO stockDAO;
-
-
+    private StockDateDAO stockDateDAO;
 
     public Controller(Connection conn){
         goodsDAO = new GoodsDAO(conn);
@@ -33,6 +32,7 @@ public class Controller {
         workerDAO = new WorkerDAO(conn);
         goodsImageDAO = new GoodsImageDAO(conn);
         stockDAO = new StockDAO(conn);
+        stockDateDAO = new StockDateDAO(conn);
     }
 
     public GoodsDAO getGoodsDAO() {
@@ -71,4 +71,6 @@ public class Controller {
     public GoodsImageDAO getGoodsImageDAO() {return goodsImageDAO; }
 
     public StockDAO getStockDAO(){ return stockDAO; }
+
+    public StockDateDAO getStockDateDAO() {return stockDateDAO;}
 }

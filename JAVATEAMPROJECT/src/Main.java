@@ -2,9 +2,22 @@
 import controller_db.Controller;
 import controller_db.DBConnect;
 import dao.DAO;
+import dao.GoodsDAO;
+import dao.GoodsImageDAO;
+import dto.GoodsDTO;
+import dto.GoodsImageDTO;
+import dto.StockDTO;
+import dto.StockDateDTO;
+import process.ImageProcess;
 import views.*;
 
 import javax.swing.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.sql.Date;
+import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
@@ -14,42 +27,6 @@ public class Main {
         DefaultFrame win = new DefaultFrame(controller);
         win.setSize(1920,1080);
 
-        //(new MemberControlView(win)).setVisible(true);//!
-        //(new MemberDeletePopup(win)).setVisible(true);
-        //(new MemberDetailCorrectPopup(win)).setVisible(true);
-        //(new MemberDetailPopup(win)).setVisible(true);
-
-        //(new NoMemberControlView(win)).setVisible(true); //!
-
-        //(new OrderControlView(win)).setVisible(true); //!
-        //(new OrderDeleteCheckPopup(win)).setVisible(true);
-        //(new OrderDeletePopup(win)).setVisible(true);
-        //(new OrderDeleteRCPopup(win)).setVisible(true);
-        //(new OrderDetailPopup(win)).setVisible(true);
-        //(new OrderListPopup(win)).setVisible(true);
-
-        //(new SalesAnalysisDetailPopup(win)).setVisible(true);
-        //(new SalesAnalysisView(win)).setVisible(true);
-        //(new SalesCheckPopup(win)).setVisible(true);
-        //(new SalesDetailPopup(win)).setVisible(true);
-
-        //(new Worker_regPopup(win)).setVisible(true);
-        //(new WorkerControlView(win)).setVisible(true);
-        //(new WorkerDeleteCheckPopup(win)).setVisible(true);
-        //(new WorkerDeleteRCPopup(win)).setVisible(true);
-        //(new WorkerCorrectPopup(win)).setVisible(true);
-
-
-        //add는 setVisible보다 위에 있어야 됨!
-        //win.add(new ProductListCartView(win));
-        //win.add(new UserLoginView());
-
-        //new NoticeStockPopup(win);
-        //win.add(new MusicUseView(win));
-        //win.add(new ProductListCartView(win));
-        //win.add(new ProductListCartView(win));
-
-        //win.add(new StockManagementView());
         /*
         SDE 창 test
             win.add(new DrinksManagementView(win));
@@ -71,11 +48,12 @@ public class Main {
 
 
         // DB 연결 확인
-        /*
+
          DAO[] ds = {
                 controller.getGoodsDAO(), controller.getMemberDAO(), controller.getOrderDAO(),
                 controller.getRoomImfDAO(), controller.getMemberLogDAO(), controller.getRoomManageDAO(),
-                controller.getRoomOptionDAO(), controller.getOrderHDAO(), controller.getWorkerDAO(), controller.getStockDAO()
+                controller.getRoomOptionDAO(), controller.getOrderHDAO(), controller.getWorkerDAO(),
+                 controller.getStockDAO(), controller.getStockDateDAO()
         };
 
          for(DAO d : ds){
@@ -83,29 +61,37 @@ public class Main {
             System.out.println(d.findAll());
         }
 
-         */
 
 
 
-        /* 이미지 데이터 삽입 -- 주석해제 금지 --
+        ///* 이미지 데이터 삽입 -- 주석해제 금지 --
+        /*
         ArrayList<GoodsDTO> goodsArr = controller.getGoodsDAO().findAll();
+        int i = 0;
 
         for(GoodsDTO g : goodsArr){
             try {
-                controller.getGoodsImageDAO().insert( new GoodsImageDTO(g.getCode(),
+                if(goodsArr.size() -4 <= i) controller.getGoodsImageDAO().insert( new GoodsImageDTO(g.getCode(),
                         ImageProcess.ImageToBytes(DefaultFrame.PATH + "/images/goods/" + g.getCode() + ".png")));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+            i++;
         }
          */
 
+
         //(new CardInfoPopup(win)).setVisible(true);
         //win.add(new ManagerMainView(win));
-        win.add(new UserHomeView(win));
+        //win.add(new UserHomeView(win));
+
+        //상품 전체 삭제
+
+
+
         //win.add(new PswdFindView(win));
         //win.add(new StockManagementView());
-        //win.add(new CallCheckView());
+        win.add(new UserHomeView(win));
         win.setVisible(true);
         win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

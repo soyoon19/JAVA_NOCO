@@ -119,4 +119,32 @@ public class GoodsImageDAO implements DAO<GoodsImageDTO, String>{
         }
         return goodsImages;
     }
+
+
+    public boolean update(GoodsImageDTO goodsImage) {
+        PreparedStatement pstmt = null;
+
+        try {
+            String sql = "UPDATE GoodsImage_T SET g_image=? WHERE g_code=?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setBytes(1, goodsImage.getImage());
+            pstmt.setString(2, goodsImage.getCode());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            try {
+                if (pstmt != null)
+                    pstmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+
 }

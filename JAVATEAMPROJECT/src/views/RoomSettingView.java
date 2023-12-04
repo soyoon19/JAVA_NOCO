@@ -69,7 +69,6 @@ class RoomEditPanel extends JPanel { //방편집 패널
 
         gbr.add("화면 편집",se);
         gbr.add("방 설정",rs);
-
         gbr.setFont(new DefaultFont(RoomSettingView.FONT_SIZE));
         review.add(gbr,DefaultFrame.easyGridBagConstraint(1,0,1,1));
         add(review);
@@ -303,6 +302,7 @@ class ScreenEditPanelMini extends JPanel implements ActionListener{ //화면 편
             roomDel.getEventSwitch().setSw(true);
             this.remove(sep);
             this.add(roomDel);
+
             this.repaint();
             this.revalidate();
         }

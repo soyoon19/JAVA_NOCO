@@ -73,7 +73,7 @@ class ProductCart extends JPanel{
     //DB 구축이 완료되면 사용할 변수이다.
     private HashMap<String, ProductCarDetailPanel> cartListMap;
     //임시로 사용한다.
-    private ArrayList<ProductCarDetailPanel> cartList;  //상품 목록을 저장
+    private MemberDTO member;
 
     //나중에 JDialog을 사용하기 위해서 JFrame(DefaultFrame)을 매개변수로 받아둔다.
 
@@ -84,13 +84,14 @@ class ProductCart extends JPanel{
     public ProductCart(DefaultFrame parent, RoomManageDTO room, MemberDTO member){
         this.parent = parent;
         this.setLayout(new BorderLayout());
-        cartList = new ArrayList<>();
+        cartListMap = new HashMap<>();
         //top
         top = new JPanel();
         JLabel listLb = new JLabel("장바구니 리스트");
         listLb.setFont(new DefaultFont(20));
         top.add(listLb);
         this.add(top, BorderLayout.NORTH);
+        this.member = member;
 
         //center
         center = new JPanel();
@@ -140,28 +141,32 @@ class ProductCart extends JPanel{
     }
 
     public void add(GoodsDTO g){  //add 함수 실행시 선택한 상품이 추가된다.
-        cartList.add(new ProductCarDetailPanel(g));
-        center.add(cartList.get(cartList.size() - 1));
-    }
+        if(cartListMap.get(g.getCode()) != null) return;
 
-    public ArrayList<ProductCarDetailPanel> getCartList(){
-        return cartList;
+        ProductCarDetailPanel p = new ProductCarDetailPanel(g);
+        cartListMap.put(g.getCode(), p);
+
+        center.add(p);
     }
 
     class BuyButtonAction implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
             int i = 0;
-            GoodsDTO[] gs = new GoodsDTO[cartList.size()];
-            int[] nums = new int[cartList.size()];
 
-            for(ProductCarDetailPanel p : cartList){
-                gs[i] = p.getGoods();
-                nums[i] = p.getNum();
+            ProductCarDetailPanel[] goodsArr = cartListMap.values().toArray(new ProductCarDetailPanel[0]);
+
+            GoodsDTO[] goods = new GoodsDTO[goodsArr.length];
+            int[] nums = new int[goodsArr.length];
+
+            for(ProductCarDetailPanel p : goodsArr){
+                goods[i] = goodsArr[i].getGoods();
+                nums[i] = goodsArr[i].getNum();
                 i++;
             }
 
-            ProductCartResultPopup popup = new ProductCartResultPopup(gs, nums, parent);
+
+            ProductCartResultPopup popup = new ProductCartResultPopup(goods, nums, parent, member);
         }
     }
 }

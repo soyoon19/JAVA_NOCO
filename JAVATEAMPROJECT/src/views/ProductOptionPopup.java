@@ -40,7 +40,7 @@ public class ProductOptionPopup extends JDialog {
             //center-1
         JPanel center1 = new JPanel();
         JLabel imageLb = new JLabel(FreeImageIcon.resizeImageIcon(
-                DefaultFrame.PATH + "/images/" + "americano" + ".png",
+                DefaultFrame.PATH + "/images/goods/" + g.getCode() + ".png",
                 300, 300
         ));
         center1.add(imageLb);

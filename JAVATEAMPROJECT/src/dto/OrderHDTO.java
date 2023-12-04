@@ -3,16 +3,17 @@ package dto;
 import java.sql.Date;
 
 public class OrderHDTO {
-    private String orderCode, goodsCode;
+    private String orderCode, goodsCode, H_temp;
     private int count, price, discount, cost;
     private Date date;
 
     public OrderHDTO(){}
 
-    public OrderHDTO(String orderCode, String goodsCode, int count,
+    public OrderHDTO(String orderCode, String goodsCode, String H_temp, int count,
                      int price, int discount, int cost, Date date) {
         this.orderCode = orderCode;
         this.goodsCode = goodsCode;
+        this.H_temp = H_temp;
         this.count = count;
         this.price = price;
         this.discount = discount;
@@ -74,5 +75,13 @@ public class OrderHDTO {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public String getH_temp() {
+        return H_temp;
+    }
+
+    public void setH_temp(String h_temp) {
+        H_temp = h_temp;
     }
 }

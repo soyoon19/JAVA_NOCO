@@ -1,5 +1,6 @@
 package custom_component;
 
+import controller_db.Controller;
 import dao.RoomManageDAO;
 import dao.RoomOptionDAO;
 import dto.RoomManageDTO;
@@ -29,11 +30,11 @@ public class RoomViewPanel extends JPanel {
 
     //이벤트 발생여부
     protected EventSwitch sw;
+    protected Controller controller;
 
-
-    public RoomViewPanel(ArrayList<RoomManageDTO> rooms, ArrayList<RoomOptionDTO> options){
-        this.rooms = rooms;
-        this.options = options;
+    public void mapSet(){
+        this.rooms = controller.getRoomManageDAO().findAll();
+        this.options = controller.getRoomOptionDAO().findAll();
 
         this.setLayout(new GridBagLayout());
         jps = new AreaJPanel[MAX_HEIGHT][MAX_WIDTH];
@@ -49,13 +50,19 @@ public class RoomViewPanel extends JPanel {
                 this.add(jps[i][j], DefaultFrame.easyGridBagConstraint(j,i,1,1));
             }
         }
+    }
 
+    public void roomSet(){
         //그리드된 화면에서 방을 표시한다.
         roomPs = new RoomPanel[rooms.size()];
         RoomOptionDTO option;
-        int x, y, width, height, k = 0;
+        int x, y, width, height, k = 0, mode;
         for(RoomManageDTO room : rooms){
-            roomPs[k] = new RoomPanel(room);
+            mode = RoomPanel.NORMAL;
+            if(room.isCheck()) mode = RoomPanel.LOCK;
+            else if(controller.getRoomImfDAO().findById(room.getNum()) != null) mode = RoomPanel.USE;
+
+            roomPs[k] = new RoomPanel(room, mode);
             x = room.getX(); y = room.getY();
             option = options.get(room.getOption() - 1);
             width = option.getWidth();
@@ -74,6 +81,22 @@ public class RoomViewPanel extends JPanel {
         }
     }
 
+
+    public RoomViewPanel(Controller controller){
+        this.controller = controller;
+
+        this.mapSet();
+        this.roomSet();
+    }
+
+    public void update(){
+        this.removeAll();
+        this.mapSet();
+        this.roomSet();
+
+        this.repaint();
+        this.revalidate();
+    }
 
 
     public void eventActivate(){

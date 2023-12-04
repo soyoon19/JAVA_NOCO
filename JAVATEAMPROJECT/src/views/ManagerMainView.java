@@ -1,12 +1,15 @@
 package views;
 
 import custom_component.DefaultFont;
+import custom_component.JPanelOneLabel;
+import dto.StockDTO;
 import dto.WorkerDTO;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class ManagerMainView extends JPanel {
     DefaultFrame parent;
@@ -19,15 +22,13 @@ public class ManagerMainView extends JPanel {
         //Grid Bag Layout의 right
         JPanel right = new JPanel(new GridBagLayout());
         add(right,DefaultFrame.easyGridBagConstraint(1,0,8,1));
-        right.add(new MonthSaleStatus(),DefaultFrame.easyGridBagConstraint(0,0,1,3));
-        right.add(new SaleStatus(),DefaultFrame.easyGridBagConstraint(0,1,1,2));
+        right.add(new MonthSaleStatus(),DefaultFrame.easyGridBagConstraint(0,0,1,4));
+        right.add(new SaleStatus(parent),DefaultFrame.easyGridBagConstraint(0,1,1,3));
     }
 }
 
 class ManagerButtonListPanel extends JPanel implements ActionListener {
     private static final int FONT_SIZE = 40;
-    private static final int ORDER_lIST = 0, STOCK_MANAGE = 1, ROOM_SETTING = 2, MEMBER_LIST = 3,
-            DRINK_EDIT = 4, SALE_STATUS = 5, REQUEST_MANAGE = 6;
     JLabel loginName;
     JButton staffManage, logout;
     DefaultFrame parent;
@@ -40,7 +41,7 @@ class ManagerButtonListPanel extends JPanel implements ActionListener {
 
         //Border Layout의 North
         JPanel bln = new JPanel();
-        loginName = new JLabel("접속자 " + worker.getName() +": 직책 " +worker.getPosition() +"님");
+        loginName = new JLabel("접속자:"+worker.getPosition()+" "+worker.getName() +"님");
         loginName.setFont(new DefaultFont(FONT_SIZE));
         bln.add(loginName);
         add(bln, BorderLayout.NORTH);
@@ -86,7 +87,7 @@ class ManagerButtonListPanel extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String s = e.getActionCommand();
         JPanel movePage = null;
-        switch (s){
+        switch (s) {
             case "주문 내역":
                 movePage = new OrderControlView(parent);
                 break;
@@ -94,13 +95,17 @@ class ManagerButtonListPanel extends JPanel implements ActionListener {
                 movePage = new StockManagementView();
                 break;
             case "방 설정":
-                movePage = new RoomSettingView(parent);
+                movePage = new RoomSettingView(parent, worker);
                 break;
             case "회원 목록":
                 movePage = new MemberControlView(parent);
                 break;
             case "음료 편집":
-                movePage = new DrinksManagementView(parent);
+                if(worker.getPosition().equals("점장")) {
+                    movePage = new DrinksManagementView(parent);
+                } else {
+                    JOptionPane.showMessageDialog(this,"접근이 불가합니다.","접근 권한 알림",JOptionPane.INFORMATION_MESSAGE);
+                }
                 break;
             case "매출 현황":
                 movePage = new SalesAnalysisView(parent);
@@ -125,12 +130,50 @@ class ManagerButtonListPanel extends JPanel implements ActionListener {
 
 class MonthSaleStatus extends JPanel { //scrollpane으로 해야댐
     public MonthSaleStatus() {
-        this.setBackground(Color.blue);
+        setLayout(new BorderLayout());
+        //top
+        JPanelOneLabel mss = new JPanelOneLabel("이달의 매출 현황");
+        mss.getLabel().setFont(new DefaultFont(45));
+        add(mss,BorderLayout.NORTH);
+
+        //center
+        String [] colcumnType = new String [] {"날짜","일 매출"};
+        Object [] [] salesData = {
+                {"2023.11.01","222,000원"},
+                {"2023.11.02","543,000원"},
+                {"2023.11.03","137,000원"},
+                {"2023.11.04","454,000원"},
+        };
+        JTable monthSalesStatusTable = new JTable(salesData,colcumnType);
+        JScrollPane scrollPane = new JScrollPane(monthSalesStatusTable);
+        add(scrollPane,BorderLayout.CENTER);
     }
 }
 
 class SaleStatus extends JPanel {
-    public SaleStatus() {
-        this.setBackground(Color.pink);
+    public SaleStatus(DefaultFrame parent) {
+        setLayout(new BorderLayout());
+        //top
+        JPanelOneLabel mss = new JPanelOneLabel("판매 현황");
+        mss.getLabel().setFont(new DefaultFont(45));
+        add(mss, BorderLayout.NORTH);
+
+        //center
+        ArrayList<StockDTO> stocks = parent.getController().getStockDAO().findAll();
+        String[] colcumnType = new String[]{"제품명", "가격", "어제", "금일", "총합"};
+        Object[][] stockList = new Object[stocks.size()][];
+
+        int i = 0;
+        for(StockDTO stock : stocks){
+            stockList[i] = new Object[]{
+                    stock.getName(), stock.getCost(), 0, stock.getAmount(), stock.getAmount()
+            };
+            i++;
+        }
+
+        JTable monthSalesStatusTable = new JTable(stockList, colcumnType);
+        JScrollPane scrollPane = new JScrollPane(monthSalesStatusTable);
+        add(scrollPane, BorderLayout.CENTER);
+
     }
 }

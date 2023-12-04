@@ -28,6 +28,8 @@ public class RoomSelectView extends JPanel {
                 public void mouseClicked(MouseEvent e) {
                     if(member == null) {
                         parent.move(new ProductListCartView(parent, r.getRoom()));
+                    }else{
+                        parent.move(new UsePurchaseSelectView(parent, r.getRoom(), member));
                     }
                 }
 

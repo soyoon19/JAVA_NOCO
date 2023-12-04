@@ -185,7 +185,7 @@ public class SalesAnalysisView extends JPanel {
         FL2.setLayout(new FlowLayout());
 
         String[] year = {"2023", "2022", "2021", "2020", "2019"};
-        String[] month = {"1    ", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
+        String[] month = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
 
         JComboBox strYear1 = new JComboBox(year);
         JComboBox strMonth1 = new JComboBox(month);

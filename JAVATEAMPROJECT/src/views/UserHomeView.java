@@ -72,12 +72,13 @@ public class UserHomeView extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getActionCommand().contains("직원")){
             //(new ManagerLoginView())
+            parent.move(new StaffCallView(parent));
         }else if(e.getActionCommand().contains("비회원")){
             //비회원이 경우 상품 리스트로 이동한다.
             parent.move(this, new RoomSelectView(parent, null));
         }else if(e.getActionCommand().contains("회원")){
             //회원이 경우 로그인 화면으로 이동한다.
-            parent.move(this, new UserLoginView());
+            parent.move(this, new UserLoginView(parent));
         }
     }
 }

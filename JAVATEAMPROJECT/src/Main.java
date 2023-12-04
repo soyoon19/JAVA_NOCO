@@ -49,14 +49,16 @@ public class Main {
         //win.add(new ProductListCartView(win));
         //win.add(new ProductListCartView(win));
 
-        //SDE
         //win.add(new StockManagementView());
-        //win.add(new DrinksManagementView(win));
-        //(new NoticeStockPopup(win)).popup();
-        //new DrinksStatusPopup(win);
-        //new DrinkMgPopup(win);
-        //new NoticeStockPopup(win);
+        /*
+        SDE 창 test
+            win.add(new DrinksManagementView(win));
 
+            new DrinksStatusPopup(win);
+
+
+            (new NoticeStockPopup(win)).popup();
+         */
 
         /* Image to Byte[], Byte[] to Image 테스트
         try {
@@ -100,8 +102,8 @@ public class Main {
 
         //(new CardInfoPopup(win)).setVisible(true);
         //win.add(new ManagerMainView(win));
-        win.add(new UserHomeView(win));
-        //win.add(new StockManagementView());
+        //win.add(new UserHomeView(win));
+        win.add(new StockManagementView());
         win.setVisible(true);
         win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

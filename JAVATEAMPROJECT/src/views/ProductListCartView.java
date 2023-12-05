@@ -75,6 +75,7 @@ class ProductCart extends JPanel{
     //임시로 사용한다.
     private MemberDTO member;
     private JLabel totalLb;
+    private RoomManageDTO room;
 
     //나중에 JDialog을 사용하기 위해서 JFrame(DefaultFrame)을 매개변수로 받아둔다.
 
@@ -85,6 +86,7 @@ class ProductCart extends JPanel{
     public ProductCart(DefaultFrame parent, RoomManageDTO room, MemberDTO member){
         this.parent = parent;
         this.setLayout(new BorderLayout());
+        this.room = room;
         cartListMap = new HashMap<>();
         //top
         top = new JPanel();
@@ -186,7 +188,7 @@ class ProductCart extends JPanel{
 
 
 
-            ProductCartResultPopup popup = new ProductCartResultPopup(goods, nums, parent, member);
+            ProductCartResultPopup popup = new ProductCartResultPopup(goods, nums, parent, member, room);
         }
     }
 }

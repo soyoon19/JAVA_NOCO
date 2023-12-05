@@ -2,6 +2,7 @@
 package dto;
 
 public class RoomManageDTO {
+    public static final char PREFIX ='r';
     private String code, num;
     private int x, y, option;
     private boolean check;

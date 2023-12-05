@@ -192,4 +192,46 @@ public class OrderDAO implements DAO<OrderDTO, String>{
 
         return true;
     }
+
+    public OrderDTO findLastRow() {
+        OrderDTO order = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            String sql = "SELECT * FROM Order_T ORDER BY o_code DESC LIMIT 1";
+            pstmt = conn.prepareStatement(sql);
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                String o_code = rs.getString("o_code");
+                String hp = rs.getString("m_hp");
+                String id = rs.getString("w_id");
+                String code = rs.getString("r_code");
+                int pay = rs.getInt("o_pay");
+                int discount = rs.getInt("o_discount");
+                java.sql.Date date = rs.getDate("o_date");
+                java.sql.Time time = rs.getTime("o_time");
+                java.sql.Time comptime = rs.getTime("o_comptime");
+                int status = rs.getInt("o_status");
+
+                order = new OrderDTO(o_code, hp, id, code, date, time, comptime, pay, discount, status);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null)
+                    rs.close();
+                if (pstmt != null)
+                    pstmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return order;
+    }
+
 }

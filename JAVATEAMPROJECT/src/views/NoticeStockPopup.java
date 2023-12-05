@@ -36,7 +36,7 @@ public class NoticeStockPopup extends JDialog{
                 //숫자는 문자열로 변환하고 String.valueOf(int x)
                 //Date는 toString() 메서드를 사용한다.
                 notice.add(new Object[]{stock.getCode(), stock.getName(), String.valueOf(stock.getAmount()),
-                        String.valueOf(stock.getMinAmount()), String.valueOf(stock.getCost()), stock.getDate(),
+                        String.valueOf(stock.getMinAmount()), String.valueOf(stock.getCost()),
                         StockDTO.CATEGORY_TO_KOREANNAME(stock.getCategory())}); //Category는 숫자로 관리하기 때문에 정해지 약속에 따라서 변환한다.
             }
         }

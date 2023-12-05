@@ -137,4 +137,34 @@ public class WorkerDAO implements DAO<WorkerDTO, String>{
 
         return new WorkerDTO(id, passwd, name, hp, position, admin, regDate);
     }
+
+    public boolean update(WorkerDTO worker) {
+        PreparedStatement pstmt = null;
+
+        try {
+            String sql = "UPDATE Worker_T SET w_passwd=?, w_name=?, w_hp=?, w_position=?, w_admin=?, w_regDate=? WHERE w_id=?";
+            pstmt = conn.prepareStatement(sql);
+
+            pstmt.setString(1, worker.getPasswd());
+            pstmt.setString(2, worker.getName());
+            pstmt.setString(3, worker.getHp());
+            pstmt.setString(4, worker.getPosition());
+            pstmt.setInt(5, worker.isAdmin() ? 1 : 0);
+            pstmt.setDate(6, worker.getRegDate());
+            pstmt.setString(7, worker.getId());
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            try {
+                if (pstmt != null)
+                    pstmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return true;
+    }
 }

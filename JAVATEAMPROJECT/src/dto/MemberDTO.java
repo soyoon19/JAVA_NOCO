@@ -2,7 +2,10 @@ package dto;
 
 import java.sql.Date;
 
+
+
 public class MemberDTO {
+
     private String hp, passwd;
     private Date birthDate, joinDate;
     public MemberDTO() {}
@@ -44,5 +47,27 @@ public class MemberDTO {
 
     public void setJoinDate(Date joinDate) {
         this.joinDate = joinDate;
+    }
+
+    public static int gradeToDiscount(char grade){
+        switch (grade){
+            case 'C':
+                return 0;
+            case 'B':
+                return 1;
+            case 'S':
+                return 3;
+            case 'G':
+                return 5;
+            default:
+                return 0;
+        }
+    }
+
+    public static char gradeCodtion(int pay){
+        if(pay < 100000) return 'C';
+        else if(pay < 300000) return 'B';
+        else if(pay < 800000) return 'S';
+        else return 'G';
     }
 }

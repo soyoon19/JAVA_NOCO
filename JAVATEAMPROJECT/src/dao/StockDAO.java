@@ -20,16 +20,15 @@ public class StockDAO implements DAO<StockDTO, String>{
     public boolean insert(StockDTO stock) {
         PreparedStatement pstmt = null;
         try {
-            String sql = "INSERT INTO Stock_T (s_code, s_name, s_amount, s_minAmount, s_cost, s_date, s_category) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO Stock_T (s_code, s_name, s_amount, s_minAmount, s_cost, s_category) " +
+                    "VALUES (?, ?, ?, ?, ?, ?)";
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, stock.getCode());
             pstmt.setString(2, stock.getName());
             pstmt.setInt(3, stock.getAmount());
             pstmt.setInt(4, stock.getMinAmount());
             pstmt.setInt(5, stock.getCost());
-            pstmt.setDate(6, stock.getDate());
-            pstmt.setInt(7, stock.getCategory());
+            pstmt.setInt(6, stock.getCategory());
 
             pstmt.executeUpdate();
         } catch (SQLException e) {
@@ -138,9 +137,37 @@ public class StockDAO implements DAO<StockDTO, String>{
         int amount = rs.getInt("s_amount");
         int minAmount = rs.getInt("s_minAmount");
         int cost = rs.getInt("s_cost");
-        java.sql.Date date = rs.getDate("s_date");
         int category = rs.getInt("s_category");
 
-        return new StockDTO(code, name, amount, minAmount, cost, date, category);
+        return new StockDTO(code, name, amount, minAmount, cost, category);
+    }
+
+    public boolean update(StockDTO stock) {
+        PreparedStatement pstmt = null;
+
+        try {
+            String sql = "UPDATE Stock_T SET s_name=?, s_amount=?, s_minAmount=?, s_cost=?, s_category=? WHERE s_code=?";
+            pstmt = conn.prepareStatement(sql);
+
+            pstmt.setString(1, stock.getName());
+            pstmt.setInt(2, stock.getAmount());
+            pstmt.setInt(3, stock.getMinAmount());
+            pstmt.setInt(4, stock.getCost());
+            pstmt.setInt(5, stock.getCategory());
+            pstmt.setString(6, stock.getCode());
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            try {
+                if (pstmt != null)
+                    pstmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return true;
     }
 }

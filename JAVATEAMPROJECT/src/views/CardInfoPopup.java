@@ -1,6 +1,8 @@
 package views;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Date;
@@ -8,9 +10,10 @@ import javax.swing.*;
 import custom_component.DefaultFont;
 import custom_component.NumberPadListener;
 import custom_component.NumberPadPanel;
+import dto.MemberDTO;
 
 
-class CardInfoInputPanel extends JPanel {
+class CardInfoInputPanel extends JPanel implements ActionListener {
     public static final int FONT_SIZE = 40;
     JLabel cardNumLb, dateLb, cvcLb, pwLb; //입력받을 라벨들
     JTextField[] cardNumsTf; //카드 넘버를 받을 필드 4개
@@ -34,8 +37,8 @@ class CardInfoInputPanel extends JPanel {
 
         //라벨의 맞는 텍스트 넣어주기
         cardNumLb = new JLabel("카드번호");
-        dateLb = 	new JLabel("유효기간");
-        cvcLb = 	new JLabel("CVC");
+        dateLb = 	new JLabel("CVC");
+        cvcLb = 	new JLabel("유효기간");
         pwLb = 		new JLabel("카드 비빌번호");
 
         //배열에 담는다.
@@ -157,13 +160,23 @@ class CardInfoInputPanel extends JPanel {
         resetBtn.setPreferredSize(new Dimension(150, 80));
         payBtn.setPreferredSize(new Dimension(150, 80));
 
+        resetBtn.addActionListener(this);
+        payBtn.addActionListener(this);
+
         btm.add(resetBtn); btm.add(payBtn);
 
         add(btm, BorderLayout.SOUTH);
 
     }
-
-
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String s = e.getActionCommand();
+        if(s.equals("초기화")){
+            //예외 처리!
+        }else if(s.equals("결제")){
+            //예외 처리!
+        }
+    }
 }
 
 /*
@@ -181,11 +194,12 @@ public class CardInfoPopup extends JDialog{
     CardInfoInputPanel cardinputPanel;
     JButton backBtn;
     Container cp;
+    MemberDTO member;
 
-
-    public CardInfoPopup(JFrame parent) {
+    public CardInfoPopup(JFrame parent, MemberDTO member) {
         super(parent, TITLE, true);
         setSize(WIDTH, HEIGHT);
+        this.member = member;
 
         cp = getContentPane();
 
@@ -209,7 +223,5 @@ public class CardInfoPopup extends JDialog{
         center.add(numberPanel, DefaultFrame.easyGridBagConstraint(1, 0, 2, 1));
         cp.add(center, BorderLayout.CENTER);
     }
-
-
 
 }

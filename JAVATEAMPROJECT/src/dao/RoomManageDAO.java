@@ -131,4 +131,70 @@ public class RoomManageDAO implements DAO<RoomManageDTO, String> {
         }
         return true;
     }
+
+
+    public boolean update(RoomManageDTO manage) {
+        PreparedStatement pstmt = null;
+        try {
+            String sql = "UPDATE RoomManage_T SET r_num=?, r_X=?, r_Y=?, r_option=?, r_check=? WHERE r_code=?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, manage.getNum());
+            pstmt.setInt(2, manage.getX());
+            pstmt.setInt(3, manage.getY());
+            pstmt.setInt(4, manage.getOption());
+            pstmt.setBoolean(5, manage.isCheck());
+            pstmt.setString(6, manage.getCode());
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            try {
+                if (pstmt != null)
+                    pstmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    public RoomManageDTO findLatest() {
+        PreparedStatement pstmt = null;
+        ResultSet rst = null;
+        RoomManageDTO manage = null;
+
+        try {
+            String sql = "SELECT * FROM RoomManage_T ORDER BY r_code DESC LIMIT 1";
+            pstmt = conn.prepareStatement(sql);
+            rst = pstmt.executeQuery();
+
+            if (rst.next()) {
+                manage = new RoomManageDTO();
+                manage.setCode(rst.getString("r_code"));
+                manage.setNum(rst.getString("r_num"));
+                manage.setX(rst.getInt("r_X"));
+                manage.setY(rst.getInt("r_Y"));
+                manage.setOption(rst.getInt("r_option"));
+                manage.setCheck(rst.getBoolean("r_check"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pstmt != null)
+                    pstmt.close();
+                if (rst != null)
+                    rst.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return manage;
+    }
+
 }

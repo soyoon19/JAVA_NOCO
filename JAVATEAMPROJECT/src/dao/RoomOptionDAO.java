@@ -122,4 +122,31 @@ public class RoomOptionDAO implements DAO<RoomOptionDTO, Integer>{
         }
         return true;
     }
+
+
+    public boolean update(RoomOptionDTO option) {
+        PreparedStatement pstmt = null;
+        try {
+            String sql = "UPDATE RoomOption_T SET r_width=?, r_height=? WHERE r_option=?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, option.getWidth());
+            pstmt.setInt(2, option.getHeight());
+            pstmt.setInt(3, option.getOption());
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            try {
+                if (pstmt != null)
+                    pstmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
+        return true;
+    }
+
 }

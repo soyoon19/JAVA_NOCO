@@ -2,14 +2,33 @@ package views;
 
 import custom_component.DefaultFont;
 import custom_component.JPanelOneLabel;
+import dto.GoodsDTO;
 import dto.StockDTO;
 import dto.WorkerDTO;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+
+class CustomTableCellRenderer extends DefaultTableCellRenderer { //테이블 글씨 크기 조정
+    private final int fontSize;
+
+    public CustomTableCellRenderer(int fontSize) {
+        this.fontSize = fontSize; //폰트 사이즈 지정
+        setHorizontalAlignment(SwingConstants.CENTER); // 셀 텍스트 가운데 정렬
+    }
+
+    @Override
+    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+        Component cellComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+        cellComponent.setFont(new Font("맑은 고딕", Font.PLAIN, fontSize));
+        return cellComponent;
+    }
+}
 
 public class ManagerMainView extends JPanel {
     DefaultFrame parent;
@@ -51,7 +70,7 @@ class ManagerButtonListPanel extends JPanel implements ActionListener {
         blc.setLayout(new GridLayout(7,1));
 
         JButton [] btns = new JButton[7];
-        String [] label = {"주문 내역","재고 관리","방 설정","회원 목록","음료 편집","매출 현황","요청 관리"};
+        String [] label = {"요청 관리","주문 관리","회원 관리","매출 관리","음료 관리","재고 관리","방 설정"};
 
         for (int i = 0 ; i < label.length ; i++) {
             btns[i] = new JButton(label[i]);
@@ -88,7 +107,7 @@ class ManagerButtonListPanel extends JPanel implements ActionListener {
         String s = e.getActionCommand();
         JPanel movePage = null;
         switch (s) {
-            case "주문 내역":
+            case "주문 관리":
                 movePage = new OrderControlView(parent);
                 break;
             case "재고 관리":
@@ -97,17 +116,17 @@ class ManagerButtonListPanel extends JPanel implements ActionListener {
             case "방 설정":
                 movePage = new RoomSettingView(parent, worker);
                 break;
-            case "회원 목록":
+            case "회원 관리":
                 movePage = new MemberControlView(parent);
                 break;
-            case "음료 편집":
+            case "음료 관리":
                 if(worker.getPosition().equals("점장")) {
                     movePage = new DrinksManagementView(parent);
                 } else {
                     JOptionPane.showMessageDialog(this,"접근이 불가합니다.","접근 권한 알림",JOptionPane.INFORMATION_MESSAGE);
                 }
                 break;
-            case "매출 현황":
+            case "매출 관리":
                 movePage = new SalesAnalysisView(parent);
                 break;
             case "요청 관리":
@@ -132,7 +151,7 @@ class MonthSaleStatus extends JPanel { //scrollpane으로 해야댐
     public MonthSaleStatus() {
         setLayout(new BorderLayout());
         //top
-        JPanelOneLabel mss = new JPanelOneLabel("이달의 매출 현황"); //todo 글자 크기 바꾸기
+        JPanelOneLabel mss = new JPanelOneLabel("이달의 매출 현황");
         mss.getLabel().setFont(new DefaultFont(45));
         add(mss,BorderLayout.NORTH);
 
@@ -145,8 +164,14 @@ class MonthSaleStatus extends JPanel { //scrollpane으로 해야댐
                 {"2023.11.04","454,000원"},
         };
 
-        JTable monthSalesStatusTable = new JTable(salesData,colcumnType);
-        JScrollPane scrollPane = new JScrollPane(monthSalesStatusTable);
+        JTable monthSalesStatusTable = new JTable(salesData,colcumnType); //JTbale 생성
+        monthSalesStatusTable.getTableHeader().setDefaultRenderer(new CustomTableCellRenderer(25)); // 원하는 글씨 크기로 설정
+        monthSalesStatusTable.setDefaultRenderer(Object.class, new CustomTableCellRenderer(16)); // 셀의 글꼴 설정
+
+        JScrollPane scrollPane = new JScrollPane(monthSalesStatusTable); //Jscrollpane에 Jtable 추가
+        monthSalesStatusTable.getTableHeader().setReorderingAllowed(false); //header 움직이기 방지
+
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED); //스크롤팬 필요 시 자동 생성
         add(scrollPane,BorderLayout.CENTER);
     }
 }
@@ -155,25 +180,33 @@ class SaleStatus extends JPanel {
     public SaleStatus(DefaultFrame parent) {
         setLayout(new BorderLayout());
         //top
-        JPanelOneLabel mss = new JPanelOneLabel("판매 현황");
+        JPanelOneLabel mss = new JPanelOneLabel("금일 판매 가능 수량");
         mss.getLabel().setFont(new DefaultFont(45));
         add(mss,BorderLayout.NORTH);
 
         //center
-        ArrayList<StockDTO> stocks = parent.getController().getStockDAO().findAll();
-        String [] colcumnType = new String [] {"제품명","가격","어제","금일","총합"};
-        Object [] [] stockList = new Object[stocks.size()][];
+        ArrayList<GoodsDTO> goods = parent.getController().getGoodsDAO().findAll();
+        String [] colcumnType = new String[]{"제품명","가격","판매 가능 수량"};
+        Object[][] goodsList = new Object[goods.size()][];
 
         int i = 0;
-        for (StockDTO stock : stocks) {
-            stockList[i] = new Object[]{
-                    stock.getName(), stock.getCost(), 0, stock.getAmount(), stock.getAmount()
-            };
-            i++;
+        for(GoodsDTO good : goods){
+            if(good.getMainCategory() == 2) {
+                goodsList[i] = new Object[]{
+                        good.getName(),good.getPrice(), good.getSaleCount()
+                };
+                i++;
+            }
         }
 
-        JTable monthSalesStatusTable = new JTable(stockList,colcumnType);
-        JScrollPane scrollPane = new JScrollPane(monthSalesStatusTable);
+        JTable monthSalesStatusTable = new JTable(goodsList,colcumnType); //Jtable 생성
+        monthSalesStatusTable.getTableHeader().setDefaultRenderer(new CustomTableCellRenderer(25)); // 원하는 글씨 크기로 설정
+        monthSalesStatusTable.setDefaultRenderer(Object.class, new CustomTableCellRenderer(16)); // 셀의 글꼴 설정
+
+        JScrollPane scrollPane = new JScrollPane(monthSalesStatusTable); //Jscrollpane에 jtable 추가
+        monthSalesStatusTable.getTableHeader().setReorderingAllowed(false); //header 움직이기 방지
+
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED); //스크롤팬 필요 시 자동 생성
         add(scrollPane,BorderLayout.CENTER);
     }
 }

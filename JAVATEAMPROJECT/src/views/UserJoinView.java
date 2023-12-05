@@ -64,7 +64,7 @@ public class UserJoinView extends JPanel{
         centerL5_2.setLayout(new FlowLayout(FlowLayout.LEFT));
         JLabel agreeLb = new JLabel("\">>개인정보 처리 방침 동의");
         JCheckBox agreeCB = new JCheckBox();
-        agreeCB.setEnabled(false); //사용자가 임임로 선택하지 못하게
+        agreeCB.setEnabled(false); //사용자가 임의로 선택하지 못하게
         agreeLb.setFont(new DefaultFont(30));
         centerL5_2.add(agreeLb);
         centerL5_2.add(agreeCB);
@@ -77,8 +77,6 @@ public class UserJoinView extends JPanel{
         //centerR
         NumberPadPanel np = new NumberPadPanel();
         center.add(np, DefaultFrame.easyGridBagConstraint(1,0,3,1));
-
-
         this.add(center, BorderLayout.CENTER);
 
         //centerBtom
@@ -138,6 +136,3 @@ public class UserJoinView extends JPanel{
     }
 
 }
-
-//체크박스가 뒤에 가야하는데 앞에 있음
-//어캄?

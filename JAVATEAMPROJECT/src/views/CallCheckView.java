@@ -12,7 +12,6 @@ import java.awt.event.ActionListener;
 
 // 요청 관리 페이지(관리자)
 // 2021011017 김수빈
-//
 
 
 class CheckCellRender extends DefaultTableCellRenderer{

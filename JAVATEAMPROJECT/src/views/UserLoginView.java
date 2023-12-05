@@ -41,7 +41,7 @@ public class UserLoginView extends JPanel implements ActionListener{
 
 
         hpTf = new JTextField(11);
-        pwTf = new JTextField(11);
+        pwTf = new JPasswordField(11);
         hpTf.setFont(new DefaultFont(60));
         pwTf.setFont(new DefaultFont(60));
 
@@ -85,7 +85,7 @@ public class UserLoginView extends JPanel implements ActionListener{
         bottom.add(joinBtn);
         bottom.add(findPwBtn);
 
-        this.add(bottom, BorderLayout.SOUTH); //박스레이아웃 어렵지만 다양성을 위해 사용하고 싶음
+        this.add(bottom, BorderLayout.SOUTH);
 
         celBtn.addActionListener(this);
         joinBtn.addActionListener(this);

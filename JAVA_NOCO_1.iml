@@ -11,6 +11,7 @@
       <library>
         <CLASSES>
           <root url="jar://$USER_HOME$/Downloads/mysql-connector-j-8.2.0/mysql-connector-j-8.2.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/out/production/JAVA_NOCO1/jar/mysql-connector-j-8.2.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

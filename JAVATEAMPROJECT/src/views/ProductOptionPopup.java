@@ -17,7 +17,7 @@ public class ProductOptionPopup extends JDialog implements ActionListener {
     private  ProductListCartView productListCartView;
     private GoodsDTO goods;
     private DefaultFrame parent;
-    public String rst = "", tmp;
+    public String rst = "", tmp = null;
 
     //public ProductOptionPopup(ProductListCartView productListCartView, ProductDAO p){
     public ProductOptionPopup(DefaultFrame prt, GoodsDTO g){
@@ -113,6 +113,7 @@ public class ProductOptionPopup extends JDialog implements ActionListener {
         }else if(s.equals("HOT")){
             tmp = "HOT";
         }else if(s.equals("확 인")){
+            if(tmp == null) return;
             if(tmp.equals("")){
                 //TODO : 옵션 팬
             }else{

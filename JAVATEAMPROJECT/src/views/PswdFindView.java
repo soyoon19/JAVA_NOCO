@@ -45,7 +45,7 @@ public class PswdFindView extends JPanel implements ActionListener {
         phonelb = new JLabel("연락처    : ");
         phonelb.setFont(new DefaultFont(FONT_SIZE));
         bcgr.add(phonelb);
-        phonetf = new JTextField(10);
+        phonetf = new JTextField(11);
         phonetf.setFont(new DefaultFont(FONT_SIZE));
         phonetf.addMouseListener(new NumberPadListener(phonetf,np));
         phonetf.setEditable(false);
@@ -64,7 +64,7 @@ public class PswdFindView extends JPanel implements ActionListener {
         birthlb = new JLabel("생년월일 : ");
         birthlb.setFont(new DefaultFont(FONT_SIZE));
         bcbgr.add(birthlb);
-        birthtf = new JTextField(10);
+        birthtf = new JTextField(11);
         birthtf.setFont(new DefaultFont(FONT_SIZE));
         birthtf.addMouseListener(new NumberPadListener(birthtf,np));
         birthtf.setEditable(false);

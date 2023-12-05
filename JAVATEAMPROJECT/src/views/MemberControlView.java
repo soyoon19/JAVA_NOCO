@@ -1,17 +1,36 @@
 package views;
 
+import dao.MemberDAO;
+import dao.MemberLogDAO;
+import dto.MemberDTO;
+import dto.MemberLogDTO;
+
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
-public class MemberControlView extends JPanel {
-DefaultFrame parent;
+public class MemberControlView extends JPanel implements ActionListener {
+    private JTable table;
+    //모든 회원의 정보를 저장할 ArrayList을 생성
+    private ArrayList<MemberDTO> members;
+    private ArrayList<MemberLogDTO> memberLogs;
+    private DefaultFrame parent;
+
     public MemberControlView(DefaultFrame prt) {
+        parent = prt;
+        this.setLayout(new BorderLayout());
+        //회원의 모든 정적인 정보를 가져온다.
+        members = parent.getController().getMemberDAO().findAll();
+        //회원의 모든 동적인 정보를 가져온다.
+        memberLogs = parent.getController().getMemberLogDAO().findAll();
 
-        parent==prt;
+
         this.setSize(WIDTH,HEIGHT);
 
         JPanel ct = new JPanel();
@@ -97,6 +116,8 @@ DefaultFrame parent;
         //오른쪽 아랫 부분 버튼 레이아웃
         JButton cor = new JButton("수정");
         JButton del = new JButton("삭제");
+        del.addActionListener(this);
+        cor.addActionListener(this);
 
         topRightB.add(cor);
         topRightB.add(del);
@@ -116,13 +137,22 @@ DefaultFrame parent;
         JPanel main = new JPanel();
         main.setLayout(new BorderLayout());
 
+        Object[] colum = new Object[]{"선택", "회원 전화번호", "비밀번호", "생년월일", "총 결제 금액", "등급", "가입 일자", "마지막로그인일자"};
+        Object[][] memberList = new Object[members.size()][];
+        for(int i = 0; i < members.size(); i++){
+            MemberDTO member = members.get(i);
+            MemberLogDTO memberLog = parent.getController().getMemberLogDAO().findById(member.getHp());
+
+            memberList[i] = new Object[]{
+                    false, member.getHp(), member.getPasswd(), member.getBirthDate(),
+                    memberLog.getTotalPay() ,String.valueOf(memberLog.getM_rate()), member.getJoinDate().toString(),
+                    memberLog.getLastLogin().toString()
+            };
+        }
+
         // JTable 모델
         DefaultTableModel tableModel = new DefaultTableModel(
-                new Object[][]{
-                        {false, "", "", "", "", "", ""},
-                        {false, "", "", "", "", "", ""},
-                },
-                new Object[]{"선택", "순서", "주문코드", "지불금액", "주문내역", "사용일자"}
+                memberList ,colum
         ) {
             @Override
             public Class<?> getColumnClass(int columnIndex) {
@@ -140,7 +170,7 @@ DefaultFrame parent;
         };
 
         // JTable 생성 및 모델 설정
-        JTable table = new JTable(tableModel);
+        table = new JTable(tableModel);
         table.getColumnModel().getColumn(0).setCellRenderer(new NoMemberControlView.CheckBoxRenderer());
         table.getColumnModel().getColumn(0).setCellEditor(new DefaultCellEditor(new JCheckBox()));
 
@@ -152,10 +182,28 @@ DefaultFrame parent;
     }
 
     //Jcombox 액션
-    public void actionPeformed(ActionEvent e) {
-        JComboBox cb = (JComboBox) e.getSource();
-        int index = cb.getSelectedIndex();
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String s = e.getActionCommand();
+        MemberDTO member = members.get(table.getSelectedRow());
+        switch (s){
+            case "삭제":
+                System.out.println(table.getSelectedRow());
+                if(table.getSelectedRow() < 0){
+                    //JOptionPane
+                    return;
+                }
+                (new MemberDeletePopup(parent, member.getHp())).setVisible(true);
+                break;
+            case "수정":
+                (new MemberDetailCorrectPopup(parent, member.getHp())).setVisible(true);
+                break;
+        }
+
+        //JComboBox cb = (JComboBox) e.getSource();
+        //int index = cb.getSelectedIndex();
     }
+
     private static class CheckBoxRenderer extends DefaultTableCellRenderer {
         private final JCheckBox checkBox = new JCheckBox();
 

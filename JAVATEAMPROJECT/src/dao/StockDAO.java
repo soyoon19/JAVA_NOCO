@@ -109,7 +109,7 @@ public class StockDAO implements DAO<StockDTO, String>{
             rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                StockDTO stock = createStockDTO(rs);
+                  StockDTO stock = createStockDTO(rs);
                 stockList.add(stock);
             }
 

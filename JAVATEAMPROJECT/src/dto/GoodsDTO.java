@@ -6,6 +6,10 @@ public class GoodsDTO {
     public static final int MAIN_CATEGORY_MUSIC = 1;
     public static final int MAIN_CATEGORY_DRINK = 2;
 
+    public static String[] CATEGORY = {
+            "노래", "커피", "논커피", "티", "스무디", "캔음료"
+    };
+
     //category -- class //분류
     //mainCategory -- category //대분류
     private String code, name, category, status;

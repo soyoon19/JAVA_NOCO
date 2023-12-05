@@ -5,52 +5,109 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="73277347-8d03-48f7-a7c0-89844aebc90d" name="Changes" comment="Feat :">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-24__1_10__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-24__1_10__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-25__5_10__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-25__5_10__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__1_30__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__1_30__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__1_32__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__1_32__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__1_59__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__1_59__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__1_59__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__1_59__Changes_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__2_15__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__2_15__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__2_19__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__2_19__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__2_20__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__2_20__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__5_16__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__5_16__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__5_16__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__5_16__Changes_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-28__12_43__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-28__12_43__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-29__10_09__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-29__10_09__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30__10_04__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30__10_04__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30__10_04__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30__10_04__Changes_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30__12_02__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30__12_02__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30__12_48__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30__12_48__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30__12_57__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30__12_57__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30__1_02__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30__1_02__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-12-01__10_56__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-12-01__10_56__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-12-01__10_56__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-12-01__10_56__Changes_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-12-01__11_01__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-12-01__11_01__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_2023-11-27__8_44__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_2023-11-27__8_44__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/custom_component/AreaJPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/custom_component/AreaSelectMouseListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/custom_component/EventSwitch.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/custom_component/RoomPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/custom_component/RoomViewPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/RoomImfDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dto/RoomImfDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/coinAfter.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/coinBefore.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/musicAfter.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/musicBefore.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ChoiceRoomView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/DrinksStatusPopup.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ManagerLoginView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ManagerMainView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/PswdFindView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/RoomSelectView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/RoomSettingView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/StaffCallView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/UsePurchaseSelectView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/UserHomePopup.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/UserHomeView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/UserJoinView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/UserLoginView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVA_NOCO.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVA_NOCO_1.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/JAVATEAMPROJECT/JAVATEAMPROJECT.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/JAVATEAMPROJECT1/images/americano(ice).png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/JAVATEAMPROJECT1/images/home.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/JAVATEAMPROJECT1/images/title.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO/images/americano(ice).png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO/images/home.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO/images/title.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO_1/images/americano(ice).png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO_1/images/back.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO_1/images/birth.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO_1/images/coinAfter.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO_1/images/coinBefore.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO_1/images/home.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO_1/images/musicAfter.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO_1/images/musicBefore.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO_1/images/title.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__1_30__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__1_32__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__1_59__Changes_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__2_19__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__2_20__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27__5_16__Changes_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27_오전_1_30_[Changes]/coinAfter.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27_오전_1_30_[Changes]/coinBefore.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27_오전_1_30_[Changes]/musicAfter.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27_오전_1_30_[Changes]/musicBefore.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27_오전_1_30_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27_오전_1_32_[Changes]/coinAfter.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27_오전_1_32_[Changes]/coinBefore.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27_오전_1_32_[Changes]/musicAfter.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27_오전_1_32_[Changes]/musicBefore.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27_오전_1_32_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27_오전_2_19_[Changes]/coinAfter.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27_오전_2_19_[Changes]/coinBefore.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27_오전_2_19_[Changes]/musicAfter.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27_오전_2_19_[Changes]/musicBefore.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27_오전_2_19_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27_오전_2_20_[Changes]/coinAfter.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27_오전_2_20_[Changes]/coinBefore.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27_오전_2_20_[Changes]/musicAfter.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27_오전_2_20_[Changes]/musicBefore.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27_오전_2_20_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27_오전_5_16_[Changes]1/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-27_오후_1_59_[Changes]1/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-28__12_43__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-28_오전_12_43_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_2023-11-27__8_44__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_2023-11-27_오후_8_44_[Changes]/shelved.patch" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/s0101.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/s0102.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/s0103.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v0201.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v0202.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v0203.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v0204.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v0205.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v0211.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v0212.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v0221.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v0222.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v0231.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v0232.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v0241.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v0242.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/controller_db/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/controller_db/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/custom_component/NumberPadListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/custom_component/NumberPadListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/custom_component/NumberPadPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/custom_component/NumberPadPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/GoodsDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/GoodsDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/StockDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/StockDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dto/GoodsDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dto/GoodsDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/CardInfoPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/CardInfoPopup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/DefaultFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/DefaultFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/DrinkStatusPopup.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/DrinksManagementView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/DrinksManagementView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/MemberControlView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/MemberControlView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/MemberDeletePopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/MemberDeletePopup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/MemberDetailCorrectPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/MemberDetailCorrectPopup.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/MemberDetailPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/MemberDetailPopup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/OrderDeletePopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/OrderDeletePopup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVA_NOCO1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/JAVA_NOCO1.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/NoticeStockPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/NoticeStockPopup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/OrderControlView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/OrderControlView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ProductListCartView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ProductListCartView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/SalesAnalysisView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/SalesAnalysisView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/StockManagementView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/StockManagementView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/WorkerControlView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/WorkerControlView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/WorkerCorrectPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/WorkerCorrectPopup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/WorkerDeleteCheckPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/WorkerDeleteCheckPopup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/WorkerDeleteRCPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/WorkerDeleteRCPopup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/Worker_regPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/Worker_regPopup.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,7 +183,7 @@
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
-      <module name="JAVA_NOCO1" />
+      <module name="JAVA_NOCO_1" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -206,7 +263,14 @@
       <option name="project" value="LOCAL" />
       <updated>1701416359568</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Feat : 페이지 이동, 이벤트 처리&#10;&#10;관리자 페이지 이동 구현 완료(로고 3회 연속 클릭하고 id:admin, pw:1q2w3e4r!입력)&#10;사용자 페이지 이동 일부분 구현 홈 --&gt; 비회원 --&gt; 방 선택 --&gt; 상품리스트 --&gt; 상품 상세 --&gt; 결제 화면까지 이동 가능&#10;RoomSelectView 생성&#10;RoomSettingView 이벤트 수정">
+      <created>1701551348017</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1701551348017</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -267,6 +331,7 @@
     <MESSAGE value="Fix : popup 문제 해결&#10;&#10;MusicAddPopup&#10;ForcedExitPopup" />
     <MESSAGE value="Fix : RoomSettingView&#10;RoomSettingView 이벤트 연결" />
     <MESSAGE value="Feat : DAO, DTO, ImageProcess 구현&#10;모든 Stock DAO, DTO을 제외한 DTO을 구현 ImageProcess 구현" />
-    <option name="LAST_COMMIT_MESSAGE" value="Feat : DAO, DTO, ImageProcess 구현&#10;모든 Stock DAO, DTO을 제외한 DTO을 구현 ImageProcess 구현" />
+    <MESSAGE value="Feat : 페이지 이동, 이벤트 처리&#10;&#10;관리자 페이지 이동 구현 완료(로고 3회 연속 클릭하고 id:admin, pw:1q2w3e4r!입력)&#10;사용자 페이지 이동 일부분 구현 홈 --&gt; 비회원 --&gt; 방 선택 --&gt; 상품리스트 --&gt; 상품 상세 --&gt; 결제 화면까지 이동 가능&#10;RoomSelectView 생성&#10;RoomSettingView 이벤트 수정" />
+    <option name="LAST_COMMIT_MESSAGE" value="Feat : 페이지 이동, 이벤트 처리&#10;&#10;관리자 페이지 이동 구현 완료(로고 3회 연속 클릭하고 id:admin, pw:1q2w3e4r!입력)&#10;사용자 페이지 이동 일부분 구현 홈 --&gt; 비회원 --&gt; 방 선택 --&gt; 상품리스트 --&gt; 상품 상세 --&gt; 결제 화면까지 이동 가능&#10;RoomSelectView 생성&#10;RoomSettingView 이벤트 수정" />
   </component>
 </project>

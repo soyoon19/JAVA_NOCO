@@ -1,12 +1,32 @@
 package views;
 
+import dto.*;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class OrderControlView extends JPanel {
+    private JTable jTable;
+    private ArrayList<MemberDTO>members;
+    private ArrayList<WorkerDTO>workers;
+    private ArrayList<RoomManageDTO> rooms;
+    private ArrayList<OrderDTO> orders;
+    private ArrayList<OrderHDTO> orderH;
+    private ArrayList<GoodsDTO> goods;
+    DefaultFrame parent;
     public OrderControlView(DefaultFrame prt) {
+
+        parent=prt;
+        members=parent.getController().getMemberDAO().findAll();
+
+        workers=parent.getController().getWorkerDAO().findAll();
+        rooms=parent.getController().getRoomManageDAO().findAll();
+        orders=parent.getController().getOrderDAO().findAll();
+        orderH=parent.getController().getOrderHDAO().findAll();
+        goods=parent.getController().getGoodsDAO().findAll();
 
         JPanel ct = new JPanel();
 
@@ -25,7 +45,8 @@ public class OrderControlView extends JPanel {
 
         JButton back = new JButton("icon");
         JLabel title = new JLabel("주문 내역 관리");
-        JLabel post = new JLabel("직책 OOO");
+        JLabel post = new JLabel();
+       // post.setText(workers.getId());
 
         top1.add(back);
         top2.add(title);
@@ -40,13 +61,14 @@ public class OrderControlView extends JPanel {
         center.setLayout(new BorderLayout());
 
         // 테이블 모델
-        DefaultTableModel tableModel = new DefaultTableModel(
-                new Object[][]{
-                        {false, 1, "2023-01-01 12:00:00", "101호", "커피, 케이크", 12000, "2023-01-01 13:30:00", "완료"},
-                        {false, 2, "2023-01-02 14:30:00", "102호", "음료수, 샌드위치", 15000, "2023-01-02 15:45:00", "완료"},
 
-                },
-                new Object[]{"", "순서", "접수시간", "방번호", "주문내역", "결제액", "완료시간", "완료버튼"}
+        Object[] colum= new Object[]{"선택", "순서", "접수시간", "방번호", "주문내역", "결제액", "완료시간", "완료버튼"};
+        //new Object[][]{}
+
+        DefaultTableModel tableModel = new DefaultTableModel(
+
+
+
         );
 
         // 첫 번째 열에 체크박스
@@ -80,7 +102,7 @@ public class OrderControlView extends JPanel {
         bottom.add(cancel);
         main.add(bottom, BorderLayout.SOUTH);
         ct.add(main);
-
+        this.add(ct);
     }
 
     static class ButtonRenderer extends JButton implements TableCellRenderer {

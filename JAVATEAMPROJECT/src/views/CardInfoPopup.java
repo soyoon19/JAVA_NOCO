@@ -44,7 +44,7 @@ class CardInfoInputPanel extends JPanel {
 
         //한 행에 라벨이 하나씩 들어가고 같은 레이아웃을 가지고 있다.
         //그래서 반복문으로 처리 했다.
-            //centerL
+        //centerL
         JPanel centerL = new JPanel();
         centerL.setLayout(new GridLayout(4,1));
 
@@ -54,11 +54,11 @@ class CardInfoInputPanel extends JPanel {
         }
 
 
-            //centerR
+        //centerR
         JPanel centerR = new JPanel();
         centerR.setLayout(new GridLayout(4,1));
 
-                //centerR-1
+        //centerR-1
         //0 index 카드번호 패널이다.
         JPanel centerR_1 = new JPanel();
         centerR_1.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -79,7 +79,7 @@ class CardInfoInputPanel extends JPanel {
         }
         centerR.add(centerR_1);
 
-                //centerR-2
+        //centerR-2
         //2 index CVC 패널이다.
         JPanel centerR_2 = new JPanel();
         centerR_2.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -93,7 +93,7 @@ class CardInfoInputPanel extends JPanel {
         centerR.add(centerR_2);
 
 
-                //centerR-3
+        //centerR-3
         //2 index 유효기간
         JPanel centerR_3 = new JPanel();
         centerR_3.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -120,7 +120,7 @@ class CardInfoInputPanel extends JPanel {
 
 
 
-                //centerR-4
+        //centerR-4
         //3 index 비밀번호 패널이다.
         JPanel centerR_4 = new JPanel();
         centerR_4.setLayout(new FlowLayout(FlowLayout.LEFT));

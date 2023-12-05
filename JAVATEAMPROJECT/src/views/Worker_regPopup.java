@@ -6,9 +6,13 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class Worker_regPopup extends JDialog {
+
+
     public static final int WIDTH = 500, HEIGHT = 700;
     public static final int WIDTH1=300, HEIGHT1=300;
     DefaultFrame parent;
+
+
     public Worker_regPopup(DefaultFrame prt) {
         super(prt, "직원 정보 입력", true);
         this.setSize(WIDTH, HEIGHT);
@@ -106,6 +110,7 @@ public class Worker_regPopup extends JDialog {
         btmBtm.add(reg);
         btm.add(btmBtm, BorderLayout.SOUTH);
         ct.add(btm, DefaultFrame.easyGridBagConstraint(0,1,1,3));
+
 
     }
 }

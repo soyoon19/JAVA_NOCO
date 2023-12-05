@@ -156,4 +156,40 @@ public class OrderDAO implements DAO<OrderDTO, String>{
 
         return orders;
     }
+
+
+    public boolean update(OrderDTO order) {
+        PreparedStatement pstmt = null;
+
+        try {
+            String sql = "UPDATE Order_T SET m_hp=?, w_id=?, r_code=?, o_pay=?, o_discount=?, o_date=?, o_time=?, o_comptime=?, o_status=? WHERE o_code=?";
+            pstmt = conn.prepareStatement(sql);
+
+            pstmt.setString(1, order.getHp());
+            pstmt.setString(2, order.getId());
+            pstmt.setString(3, order.getCode());
+            pstmt.setInt(4, order.getPay());
+            pstmt.setInt(5, order.getDiscount());
+            pstmt.setDate(6, order.getDate());
+            pstmt.setTime(7, order.getTime());
+            pstmt.setTime(8, order.getComptime());
+            pstmt.setInt(9, order.getStatus());
+            pstmt.setString(10, order.getO_code());
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            try {
+                if (pstmt != null)
+                    pstmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
+
+        return true;
+    }
 }

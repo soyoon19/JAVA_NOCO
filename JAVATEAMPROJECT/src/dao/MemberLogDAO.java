@@ -139,4 +139,34 @@ public class MemberLogDAO implements DAO<MemberLogDTO, String> {
         return memberLogs;
     }
 
+
+    public boolean update(MemberLogDTO memberLog) {
+        PreparedStatement pstmt = null;
+
+        try {
+            String sql = "UPDATE MemberLog_T SET m_holdSong=?, m_totalPay=?, m_rate=?, m_lastLogin=? WHERE m_hp=?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, memberLog.getHoldSong());
+            pstmt.setFloat(2, memberLog.getTotalPay());
+            pstmt.setString(3, String.valueOf(memberLog.getM_rate()));
+            pstmt.setDate(4, memberLog.getLastLogin());
+            pstmt.setString(5, memberLog.getPhone());
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            try {
+                if (pstmt != null)
+                    pstmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
+
+        return true;
+    }
+
 }

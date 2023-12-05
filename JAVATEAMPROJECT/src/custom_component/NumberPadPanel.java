@@ -1,5 +1,7 @@
 package custom_component;
 
+import views.DefaultFrame;
+
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
@@ -17,6 +19,7 @@ import java.awt.event.ActionListener;
 public class NumberPadPanel extends  JPanel implements ActionListener {
     protected JButton[] numberBtns;  //숫자 버튼
     protected JButton deleteBtn;  //삭제 버튼
+    protected JButton allDelBtn;
     private JTextField target = null;
 
     public NumberPadPanel() {
@@ -29,19 +32,32 @@ public class NumberPadPanel extends  JPanel implements ActionListener {
             numberBtns[i].addActionListener(this);
         }
 
+
+        allDelBtn = new JButton("입력취소");
+        allDelBtn.setFont(new DefaultFont(30));
+        allDelBtn.addActionListener(this);
+
         numberBtns[i] = new JButton("0"); //0 버튼 생성
-        deleteBtn = new JButton("Del"); //<-(지우기 버튼 생성)
+        numberBtns[i].addActionListener(this);
+
+
+        deleteBtn = new JButton(""); //<-(지우기 버튼 생성)
         deleteBtn.setFont(new DefaultFont()); //폰트 설정
         deleteBtn.addActionListener(this);
+        deleteBtn.setIcon(FreeImageIcon.resizeImageIcon(DefaultFrame.PATH +
+                "/images/deleteBtn.png", 100, 100));
+
 
         //버튼 붙이기
-        for(i = 0; i < numberBtns.length; i++) {
+        for(i = 0; i < 9; i++) {
             numberBtns[i].setFont(new DefaultFont());
             add(numberBtns[i]);
         }
+        numberBtns[i].setFont(new DefaultFont());
 
         //빈 부분은 패널로 메꿔줌
-        add(new JPanel());
+        add(allDelBtn);
+        add(numberBtns[i]);
         add(deleteBtn);
     }
 
@@ -66,13 +82,15 @@ public class NumberPadPanel extends  JPanel implements ActionListener {
         String str = target.getText();
 
         String s = e.getActionCommand();
-        if(s.equals("Del")){
+        if(s.equals("")){
             if(str.length() > 0) {  //문자 길이가 0보다 크다면 == 삭제할 문자가 있을 면
                 target.setBorder(new LineBorder(Color.YELLOW, 5));
                 str = str.substring(0, str.length() - 1);
             }else
                 target.setBorder(new LineBorder(Color.RED, 5)); //문제가 있다걸 알려줌
 
+        }else if(s.equals("입력취소")){
+            str ="";
         }else{
             if(str.length() != target.getColumns()){    //설정한 문자 길이 이상으로는 못 들어가게 한다.
                 target.setBorder(new LineBorder(Color.YELLOW, 5));

@@ -19,7 +19,7 @@ public class RoomSettingView extends JPanel { //메인뷰
 
     public static final int FONT_SIZE = 30;
     public static final int MIDDLE_FONT_SIZE = 40;
-    public static final int BETWEEN_FONT = 60;
+    public static final int BETWEEN_FONT = 50;
     public static final int BUTTON_FONT_SIZE = 80;
 
     private DefaultFrame parent;
@@ -70,7 +70,6 @@ class RoomEditPanel extends JPanel { //방편집 패널
 
         gbr.add("화면 편집",se);
         gbr.add("방 설정",rs);
-
         gbr.setFont(new DefaultFont(RoomSettingView.FONT_SIZE));
         review.add(gbr,DefaultFrame.easyGridBagConstraint(1,0,1,1));
         add(review);
@@ -470,7 +469,7 @@ class RoomAdd extends  JPanel implements ActionListener { //방추가 버튼
             }
 
             RoomManageDTO room = parent.getController().getRoomManageDAO().findById(num);
-            if(room != null){ //todo 입력된 값이 존재할 경우 예외처리 <-이거 안됨
+            if(room != null){
                 JOptionPane.showMessageDialog(this,"이미 존재하는 방 번호입니다.","방 번호 오류",JOptionPane.INFORMATION_MESSAGE);
                 return;
             }
@@ -484,12 +483,17 @@ class RoomAdd extends  JPanel implements ActionListener { //방추가 버튼
                 mini.getRoomEditViewPanel().update();
             }
 
-        } else if (s.equals("취소")) {
+        } else if (s.equals("취소")) { //초기화
             roomNumtf.setText("");
             roomSizeXY.setSelectedIndex(0);
             roomlcXtf.setText("");
             roomlcYtf.setText("");
-        } else if(s.equals("이전")){
+        } else if(s.equals("이전")){ //초기화 및 페이지 이동
+            roomNumtf.setText("");
+            roomSizeXY.setSelectedIndex(0);
+            roomlcXtf.setText("");
+            roomlcYtf.setText("");
+
             mini.remove(this);
             mini.getRoomEditViewPanel().eventUnActivate();
             mini.add(mini.sep);
@@ -511,7 +515,7 @@ class RoomAdd extends  JPanel implements ActionListener { //방추가 버튼
 }
 
 class RoomDelete extends JPanel implements ActionListener { //방삭제 버튼
-    private JButton beforeBtn, deleteBtn;
+    private JButton beforeBtn, deleteBtn, cancleBtn;
     private JLabel roomNum, roomSize,roomlcX,roomlcY;
     private JLabel roomNumtf;
     private ScreenEditPanelMini mini;
@@ -558,7 +562,6 @@ class RoomDelete extends JPanel implements ActionListener { //방삭제 버튼
                 nums.add(rooms.get(i).getNum());
         }
 
-
         String[] strs = new String[nums.size()];
         for(int i = 0; i < strs.length; i++)
             strs[i] = nums.get(i);
@@ -566,7 +569,7 @@ class RoomDelete extends JPanel implements ActionListener { //방삭제 버튼
 
         roomNumtf = new JLabel("");
 
-        roomNumtf.setFont(new DefaultFont(RoomSettingView.BETWEEN_FONT - 10));
+        roomNumtf.setFont(new DefaultFont(RoomSettingView.BETWEEN_FONT));
         mini1.add(roomNum);
         mini1.add(roomNumtf);
 
@@ -603,11 +606,13 @@ class RoomDelete extends JPanel implements ActionListener { //방삭제 버튼
         deleteBtn = new JButton("삭제");
         deleteBtn.setFont(new DefaultFont(RoomSettingView.MIDDLE_FONT_SIZE));
         deleteBtn.addActionListener(this);
+        cancleBtn = new JButton("취소");
+        cancleBtn.setFont(new DefaultFont(RoomSettingView.MIDDLE_FONT_SIZE));
+        cancleBtn.addActionListener(this);
         p3.add(deleteBtn);
+        p3.add(cancleBtn);
         p3.setLayout(new FlowLayout());
         add(p3,BorderLayout.SOUTH);
-
-
     }
 
     @Override
@@ -616,13 +621,23 @@ class RoomDelete extends JPanel implements ActionListener { //방삭제 버튼
         if (s.equals("삭제")){
             JOptionPane.showConfirmDialog(this, "삭제하시겠습니까?","방 삭제",JOptionPane.YES_NO_OPTION);
             JOptionPane.showMessageDialog(this, "방 삭제가 완료되었습니다.","방 삭제 확인",JOptionPane.INFORMATION_MESSAGE);
-        } else if(s.equals("이전")){
+        } else if(s.equals("이전")){ //초기화 및 이전 페이지 이동
+            roomNumtf.setText("");
+            roomSize.setText("방 크기 XY :");
+            roomlcX.setText("방 위치 X :");
+            roomlcY.setText("방 위치 Y :");
+
             this.eventSwitch.setSw(false);
             mini.remove(this);
             mini.add(mini.sep);
 
             mini.repaint();
             mini.revalidate();
+        } else if(s.equals("취소")){ //초기화
+            roomNumtf.setText("");
+            roomSize.setText("방 크기 XY :");
+            roomlcX.setText("방 위치 X :");
+            roomlcY.setText("방 위치 Y :");
         }
     }
 
@@ -643,7 +658,7 @@ class RoomDelete extends JPanel implements ActionListener { //방삭제 버튼
 class RoomSettingPanelMini extends JPanel implements ActionListener { //방설정 패널
     JLabel roomNum;
     JTextField roomNumtf;
-    JButton roomActivate, roomUnActivate, applyBtn;
+    JButton roomActivate, roomUnActivate, applyBtn, cancleBtn;
 
     private EventSwitch eventSwitch;
 
@@ -689,7 +704,11 @@ class RoomSettingPanelMini extends JPanel implements ActionListener { //방설�
         applyBtn = new JButton("적용");
         applyBtn.setFont(new DefaultFont(RoomSettingView.MIDDLE_FONT_SIZE));
         applyBtn.addActionListener(this);
+        cancleBtn = new JButton("취소");
+        cancleBtn.setFont(new DefaultFont(RoomSettingView.MIDDLE_FONT_SIZE));
+        cancleBtn.addActionListener(this);
         p5.add(applyBtn);
+        p5.add(cancleBtn);
         rsg.add(p5);
 
         add(rsg);
@@ -706,6 +725,8 @@ class RoomSettingPanelMini extends JPanel implements ActionListener { //방설�
         } else if (s.equals("적용")) {
             JOptionPane.showConfirmDialog(this, "적용하시겠습니까?","방 설정",JOptionPane.YES_NO_OPTION);
             JOptionPane.showMessageDialog(this, "방 설정이 완료되었습니다.","방 설정 확인",JOptionPane.INFORMATION_MESSAGE);
+        } else if (s.equals("취소")) {
+            roomNumtf.setText("");
         }
     }
 

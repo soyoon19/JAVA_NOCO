@@ -22,38 +22,22 @@ class StocksShowPanel extends JPanel{
 
         this.setLayout(new BorderLayout());
 
-        JPanel main = new JPanel();
-        JPanel left = new JPanel(new BorderLayout());
-
-
-        //탭 생성 : 실온(0), 냉장, 냉동, 기타(3) JTabbed 반복문으로는 못 하는지? DB불러오기
-        //실온식품 패널
-        class RoomTempFoodPane extends JPanel {
-
-            JLabel jsp = new JLabel("ha");
-        }
-        class RefrigeratedItemsPane extends JPanel {
-            JLabel jsp = new JLabel("aaa");
-        }
-        class FrozenItems  extends JPanel {
-            JLabel jsp = new JLabel("bbb");
-
-        }
-        class OtherItems extends JPanel {
-            JLabel jsp = new JLabel("ccc");
-        }
-
-
+        //탭 생성
         JTabbedPane stockJTabb = new JTabbedPane();
         RoomTempFoodPane rtf = new RoomTempFoodPane();
         RefrigeratedItemsPane rfi = new RefrigeratedItemsPane();
         FrozenItems frozeni = new FrozenItems();
         OtherItems otheri = new OtherItems();
 
-        stockJTabb.addTab("실온(제품)", rtf);
-        stockJTabb.addTab("냉장(식품)", rfi);
-        stockJTabb.addTab("냉동(식품)", frozeni);
-        stockJTabb.addTab("기타", otheri);
+        stockJTabb.addTab(" 실온 ", rtf);
+        stockJTabb.addTab(" 냉장 ", rfi);
+        stockJTabb.addTab(" 냉동 ", frozeni);
+        stockJTabb.addTab(" 기타 ", otheri);
+
+        //탭 글자 크기 보기
+        stockJTabb.setFont(new DefaultFont(50));
+
+        this.add(stockJTabb);
 
 
 
@@ -130,6 +114,25 @@ class StocksShowPanel extends JPanel{
     }
 }
 
+//탭 생성 : 실온(0), 냉장, 냉동, 기타(3) JTabbed 반복문으로는 못 하는지? DB불러오기
+//실온식품 패널
+class RoomTempFoodPane extends JPanel {
+
+}
+class RefrigeratedItemsPane extends JPanel {
+
+}
+class FrozenItems  extends JPanel {
+
+
+
+}
+class OtherItems extends JPanel {
+
+}
+
+
+
 //right - 1
  class StockMenuPanel extends JPanel{
 
@@ -197,13 +200,6 @@ class StocksShowPanel extends JPanel{
 
         cCenter.add(moveMonth, BorderLayout.NORTH);
 
-        //center - 2(달력) <도움!!>
-
-
-
-
-
-
 
         //bottom : 버튼 설정
         //1. 선택(클릭 후 버튼 클릭시 해당 날짜 재고 show, 초기화 선택시 오늘 재고 상태를 show)
@@ -261,7 +257,7 @@ public class StockManagementView extends JPanel {
     }
 }
 
-
+//center - 2(달력) <도움!!>
 class CalendarPanel extends JPanel{
     private Calendar date;
     public static final String WEEK[] = {"일", "월", "화", "수", "목", "금", "토"};
@@ -324,6 +320,7 @@ class CalendarPanel extends JPanel{
         month.set(date.get(Calendar.YEAR), date.get(Calendar.MONTH), 1);
 
         int start =  month.get(Calendar.DAY_OF_WEEK) - 1 + WEEK.length;
+
         int end = month.getActualMaximum(Calendar.DAY_OF_MONTH) + start;
 
         for(int i = start; i < end; i++){
@@ -331,7 +328,5 @@ class CalendarPanel extends JPanel{
                     String.valueOf(i - start + 1));
         }
     }
-
-
 
 }

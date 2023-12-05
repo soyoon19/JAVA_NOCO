@@ -49,7 +49,7 @@ public class Main {
         //win.add(new ProductListCartView(win));
         //win.add(new ProductListCartView(win));
 
-        //win.add(new StockManagementView());
+        win.add(new StockManagementView());
         /*
         SDE 창 test
             win.add(new DrinksManagementView(win));
@@ -103,7 +103,7 @@ public class Main {
         //(new CardInfoPopup(win)).setVisible(true);
         //win.add(new ManagerMainView(win));
         //win.add(new UserHomeView(win));
-        win.add(new StockManagementView());
+       // win.add(new StockManagementView());
         win.setVisible(true);
         win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

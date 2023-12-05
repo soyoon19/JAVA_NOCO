@@ -1,5 +1,6 @@
 package views;
 
+import com.mysql.cj.xdevapi.UpdateParams;
 import controller_db.Controller;
 import custom_component.DefaultFont;
 import custom_component.FreeImageIcon;
@@ -13,15 +14,20 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 //left
-class DrinksCategoryPanel extends JPanel  {
+class DrinksCategoryPanel extends JPanel implements ActionListener{
     public static Dimension BUTTON_SIZE = new Dimension(80,80);
     public static final String[] drinksCategorys = {
             "전체 메뉴 보기", "커피", "논-커피", "티", "스무디", "상품"
     };
     private JPanel cCenter;
-    DrinksCategoryPanel() {
+    private DefaultFrame parent;
+    private HashMap<String, GoodsDTO> goodsMap;
+    DrinksCategoryPanel(DefaultFrame prt) {
+        goodsMap = new HashMap<>();
+        parent = prt;
         this.setLayout(new BorderLayout());
 
         //top : 음료 카테고리 보기 (JComboBox)
@@ -84,6 +90,7 @@ class DrinksCategoryPanel extends JPanel  {
             dMButton[i].setBackground(btnColors[i]);
             //5. 버튼 생성
             cBottom.add(dMButton[i]);
+            dMButton[i].addActionListener(this);
 
         }
 
@@ -93,9 +100,29 @@ class DrinksCategoryPanel extends JPanel  {
     }
 
     public void addDrink(GoodsDTO goods){
+        //만약 리스트에 있다면 받지 않는다.
+        if(goodsMap.get(goods.getCode()) != null ) return;
+        //만약 리스트에 없는 정보라면 해쉬맵에 추가한다.
+        goodsMap.put(goods.getCode(), goods);
+
         cCenter.add(new SelectDrinkPanel(goods));
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+       String s = e.getActionCommand();
+       if(s.contains("삭제")){
+
+       }else if(s.contains("추가")){
+
+       }else if(s.contains("일괄")){
+           System.out.println(goodsMap.values());
+
+           (new DrinksStatusPopup(parent, new ArrayList<GoodsDTO>(goodsMap.values()))).setVisible(true);
+       }else if(s.contains("편집")){
+
+       }
+    }
 }
 
 //table 선택시 담길 정보 패널
@@ -238,7 +265,7 @@ class DrinksDetailPanel extends  JPanel implements MouseListener {
     public void mouseClicked(MouseEvent e) {
         //테이블 클릭시 CategoryPanel에 담아줌 < >
         //2번 클릭시 이벤트 구현 : DrinkMgPopup
-        if(e.getClickCount() == 2){
+        if(e.getClickCount() == 1){
             int row = table.getSelectedRow();
             drinksManagementView.getDrinksCategoryPanel().addDrink(drinkList.get(row));
         }
@@ -282,7 +309,7 @@ public class DrinksManagementView extends JPanel{
         this.setLayout(new GridBagLayout());
         setBackground(Color.BLACK);
 
-        drinksCategoryPanel = new DrinksCategoryPanel();
+        drinksCategoryPanel = new DrinksCategoryPanel(parent);
         drinksDetailPanel = new DrinksDetailPanel(parent, this);
 
 

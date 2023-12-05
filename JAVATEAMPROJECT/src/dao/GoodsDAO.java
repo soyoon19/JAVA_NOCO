@@ -13,8 +13,6 @@ import java.util.Objects;
 public class GoodsDAO implements  DAO<GoodsDTO, String>{
     private Connection conn;
 
-
-
     public GoodsDAO(Connection coon){
         this.conn = coon;
     }
@@ -125,7 +123,7 @@ public class GoodsDAO implements  DAO<GoodsDTO, String>{
     public boolean insert(GoodsDTO goods) {
         PreparedStatement pstmt = null;
         try {
-            String sql = "INSERT INTO Goods_T (g_code, g_class, g_category, g_name, g_status, g_saleCount, g_disStatus, g_price, g_cost) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO Goods_T (g_code, g_class, g_category, g_name, g_status, g_saleCount, g_disStatus, g_price, g_cost, g_ice, g_hot) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, goods.getCode());
             pstmt.setString(2, goods.getCategory());

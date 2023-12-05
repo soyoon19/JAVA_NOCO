@@ -16,6 +16,7 @@ public class StockDAO implements DAO<StockDTO, String>{
         this.conn = conn;
     }
 
+    //삽입
     public boolean insert(StockDTO stock) {
         PreparedStatement pstmt = null;
         try {
@@ -67,6 +68,7 @@ public class StockDAO implements DAO<StockDTO, String>{
         return true;
     }
 
+    //삭제
     public StockDTO findById(String code) {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -98,6 +100,7 @@ public class StockDAO implements DAO<StockDTO, String>{
         return stock;
     }
 
+    //select *
     public ArrayList<StockDTO> findAll() {
         ArrayList<StockDTO> stockList = new ArrayList<>();
         PreparedStatement pstmt = null;

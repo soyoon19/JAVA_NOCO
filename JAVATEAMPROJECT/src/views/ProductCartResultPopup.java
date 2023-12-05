@@ -105,8 +105,6 @@ class ProductCartResultListDetailPanel extends JPanel{
     }
 }
 
-
-
 public class ProductCartResultPopup extends JDialog implements ActionListener{
     private static final String TITLE = "상품 확인";
     private static final int WIDTH = 400, HEIGHT = 900;

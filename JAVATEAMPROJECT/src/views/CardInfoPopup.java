@@ -1,6 +1,8 @@
 package views;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Date;
@@ -11,7 +13,7 @@ import custom_component.NumberPadPanel;
 import dto.MemberDTO;
 
 
-class CardInfoInputPanel extends JPanel {
+class CardInfoInputPanel extends JPanel implements ActionListener {
     public static final int FONT_SIZE = 40;
     JLabel cardNumLb, dateLb, cvcLb, pwLb; //입력받을 라벨들
     JTextField[] cardNumsTf; //카드 넘버를 받을 필드 4개
@@ -158,13 +160,23 @@ class CardInfoInputPanel extends JPanel {
         resetBtn.setPreferredSize(new Dimension(150, 80));
         payBtn.setPreferredSize(new Dimension(150, 80));
 
+        resetBtn.addActionListener(this);
+        payBtn.addActionListener(this);
+
         btm.add(resetBtn); btm.add(payBtn);
 
         add(btm, BorderLayout.SOUTH);
 
     }
-
-
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String s = e.getActionCommand();
+        if(s.equals("초기화")){
+            //예외 처리!
+        }else if(s.equals("결제")){
+            //예외 처리!
+        }
+    }
 }
 
 /*

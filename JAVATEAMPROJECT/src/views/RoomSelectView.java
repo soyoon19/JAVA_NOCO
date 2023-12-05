@@ -17,9 +17,8 @@ public class RoomSelectView extends JPanel {
         this.member = mbr;
 
         this.setLayout(new GridBagLayout());
-        RoomViewPanel room = new RoomViewPanel(parent.getController().getRoomManageDAO().findAll(),
-                parent.getController().getRoomOptionDAO().findAll());
-        this.add(room, DefaultFrame.easyGridBagConstraint(0,0,6,1));
+        RoomViewPanel room = new RoomViewPanel(parent.getController());
+            this.add(room, DefaultFrame.easyGridBagConstraint(0,0,6,1));
 
         //각 방의 리스너를 붙이는 작업
         for(RoomPanel r : room.getRoomPs()){

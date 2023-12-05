@@ -6,22 +6,25 @@ import dto.GoodsDTO;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class ProductOptionPopup extends JDialog {
+public class ProductOptionPopup extends JDialog implements ActionListener {
     public static final int WIDTH = 350, HEIGHT = 800;
 
     private JButton cancelBtn, checkBtn;
-    private JRadioButton iceRdBtn, hotRdBtn;
+    private JButton iceRdBtn, hotRdBtn;
     private  ProductListCartView productListCartView;
     private GoodsDTO goods;
     private DefaultFrame parent;
+    public String rst = "", tmp;
 
     //public ProductOptionPopup(ProductListCartView productListCartView, ProductDAO p){
     public ProductOptionPopup(DefaultFrame prt, GoodsDTO g){
         super(prt, "ICE HOT", true);
         this.setSize(WIDTH, HEIGHT);
 
-        this.setUndecorated(true);
+        //this.setUndecorated(true);
         JPanel main = new JPanel(new BorderLayout());
         //this.productListCartView = productListCartView;
         this.goods = g;
@@ -61,20 +64,23 @@ public class ProductOptionPopup extends JDialog {
         bottom.setLayout(new GridLayout(2,1));
             //bottom-1
         JPanel bottom1 = new JPanel();
-        bottom1.setLayout(new GridLayout(2, 1));
+        bottom1.setLayout(new GridLayout(1, 2));
                 //bottom-1-1
         JPanel bottom1_1 = new JPanel();
-        iceRdBtn = new JRadioButton("ICE");
+        iceRdBtn = new JButton("ICE");
+        iceRdBtn.setPreferredSize(new Dimension(200, 70));
         bottom1_1.add(iceRdBtn);
         bottom1.add(bottom1_1);
 
                 //bottom-1-2
         JPanel bottom1_2 = new JPanel();
-        hotRdBtn = new JRadioButton("HOT");
-        bottom1_2.add(hotRdBtn);
-        bottom1.add(bottom1_1);
+        hotRdBtn = new JButton("HOT");
+        hotRdBtn.setPreferredSize(new Dimension(200, 70));
 
-        bottom.add(bottom1_1);
+        bottom1_2.add(hotRdBtn);
+        bottom1.add(bottom1_2);
+
+        bottom.add(bottom1);
 
         //bottom-2
         JPanel bottom2 = new JPanel();
@@ -84,10 +90,35 @@ public class ProductOptionPopup extends JDialog {
 
         main.add(bottom, BorderLayout.SOUTH);
         //RadioGroup
+        /*
         JRadioButton temperatureBtnGrp = new JRadioButton();
         temperatureBtnGrp.add(iceRdBtn);
-        temperatureBtnGrp.add(hotRdBtn);
+        temperatureBtnGrp.add(hotRdBtn);*/
+        hotRdBtn.addActionListener(this);
+        iceRdBtn.addActionListener(this);
+        checkBtn.addActionListener(this);
 
         this.add(main);
+    }
+
+    public String getRst(){
+        return rst;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String s = e.getActionCommand(); //TODO: Radio Event 처리
+        if(s.equals("ICE")){
+            tmp = "ICE";
+        }else if(s.equals("HOT")){
+            tmp = "HOT";
+        }else if(s.equals("확 인")){
+            if(tmp.equals("")){
+                //TODO : 옵션 팬
+            }else{
+                rst = tmp;
+                dispose();
+            }
+        }
     }
 }

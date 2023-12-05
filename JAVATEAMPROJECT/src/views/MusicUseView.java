@@ -4,6 +4,7 @@ import custom_component.DefaultFont;
 import custom_component.JPanelOneLabel;
 import dto.MemberDTO;
 import dto.MemberLogDTO;
+import dto.RoomIfmDTO;
 import dto.RoomManageDTO;
 
 import javax.swing.*;
@@ -170,14 +171,16 @@ public class MusicUseView extends JPanel {
     DefaultFrame parent;
     private MemberDTO member;
     private RoomManageDTO room;
+    private RoomIfmDTO roomIfm;
 
     int use = 0, useMax;
 
-    public MusicUseView(DefaultFrame prt, RoomManageDTO rm, MemberDTO mbr){
+    public MusicUseView(DefaultFrame prt, RoomManageDTO rm, MemberDTO mbr, RoomIfmDTO roomIfm){
         this.setLayout(new GridBagLayout());
         this.parent  = prt;
         this.member = mbr;
         this.room = rm;
+        this.roomIfm = roomIfm;
 
         useMax = parent.getController().getMemberLogDAO().findById(member.getHp()).getHoldSong();
         this.view = new MusicUseViewPanel(useMax);
@@ -232,6 +235,13 @@ public class MusicUseView extends JPanel {
         view.getUseBtn().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if(use == 0){
+                    //todo 예외 처리
+                    return;
+                }
+
+                roomIfm.setPaySong(use);
+                parent.getController().getRoomImfDAO().insert(roomIfm);
                 parent.resetMove(new UserHomeView(parent));
             }
         });

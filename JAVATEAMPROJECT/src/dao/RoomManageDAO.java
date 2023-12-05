@@ -162,7 +162,7 @@ public class RoomManageDAO implements DAO<RoomManageDTO, String> {
     }
 
 
-    public RoomManageDTO findLatest() {
+    public RoomManageDTO findLastRow() {
         PreparedStatement pstmt = null;
         ResultSet rst = null;
         RoomManageDTO manage = null;
@@ -196,5 +196,79 @@ public class RoomManageDAO implements DAO<RoomManageDTO, String> {
 
         return manage;
     }
+
+    public ArrayList<RoomManageDTO> findNotNullRNum() {
+        PreparedStatement pstmt = null;
+        ResultSet rst = null;
+        ArrayList<RoomManageDTO> roomManageArr = new ArrayList();
+
+        try {
+            String sql = "SELECT * FROM RoomManage_T WHERE r_num IS NOT NULL";
+            pstmt = conn.prepareStatement(sql);
+            rst = pstmt.executeQuery();
+
+            while (rst.next()) {
+                RoomManageDTO roomMange = new RoomManageDTO();
+                roomMange.setCode(rst.getString("r_code"));
+                roomMange.setNum(rst.getString("r_num"));
+                roomMange.setX(rst.getInt("r_X"));
+                roomMange.setY(rst.getInt("r_Y"));
+                roomMange.setOption(rst.getInt("r_option"));
+                roomMange.setCheck(rst.getBoolean("r_check"));
+
+                roomManageArr.add(roomMange);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pstmt != null)
+                    pstmt.close();
+                if (rst != null)
+                    rst.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return roomManageArr;
+    }
+
+
+    public RoomManageDTO findByRNum(String rNum) {
+        PreparedStatement pstmt = null;
+        ResultSet rst = null;
+        RoomManageDTO roomManage = null;
+
+        try {
+            String sql = "SELECT * FROM RoomManage_T WHERE r_num = ?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, rNum);
+            rst = pstmt.executeQuery();
+
+            if (rst.next()) {
+                roomManage = new RoomManageDTO();
+                roomManage.setCode(rst.getString("r_code"));
+                roomManage.setNum(rst.getString("r_num"));
+                roomManage.setX(rst.getInt("r_X"));
+                roomManage.setY(rst.getInt("r_Y"));
+                roomManage.setOption(rst.getInt("r_option"));
+                roomManage.setCheck(rst.getBoolean("r_check"));
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pstmt != null)
+                    pstmt.close();
+                if (rst != null)
+                    rst.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return roomManage;
+    }
+
 
 }

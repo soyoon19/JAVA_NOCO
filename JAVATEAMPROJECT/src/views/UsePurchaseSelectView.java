@@ -6,12 +6,14 @@ import dao.MemberDAO;
 import dao.MemberLogDAO;
 import dto.MemberDTO;
 import dto.MemberLogDTO;
+import dto.RoomIfmDTO;
 import dto.RoomManageDTO;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 
 public class UsePurchaseSelectView extends JPanel implements ActionListener {
     JButton musicUse, productPurchase, roomExit;
@@ -79,7 +81,18 @@ public class UsePurchaseSelectView extends JPanel implements ActionListener {
             if(parent.getController().getMemberLogDAO().findById(member.getHp()).getHoldSong() == 0){
                 return;
             }
-            parent.move(new MusicUseView(parent, room, member));
+
+            Date date = new Date();
+
+            RoomIfmDTO roomIfm = new RoomIfmDTO();
+            roomIfm.setUserHp(member.getHp());
+            roomIfm.setLeftSong(0);
+            roomIfm.setUsing(false);
+            roomIfm.setNum(room.getNum());
+            roomIfm.setPaySong(0);
+            roomIfm.setEnterTime(new java.sql.Time(date.getHours(), date.getMinutes(), date.getSeconds()));
+
+            parent.move(new MusicUseView(parent, room, member, roomIfm));
         }else if(s.equals("상품 구매")){
             parent.move(new ProductListCartView(parent, room,  member));
         }

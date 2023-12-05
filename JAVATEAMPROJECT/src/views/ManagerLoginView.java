@@ -6,6 +6,8 @@ import dto.WorkerDTO;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.*;
 public class ManagerLoginView extends JPanel {
     private static final int FONT_SIZE = 80;
@@ -56,6 +58,15 @@ public class ManagerLoginView extends JPanel {
         loginbt.setPreferredSize(new Dimension(500, 100));
         loginbt.setFont(new DefaultFont(FONT_SIZE));
         bls.add(loginbt);
+
+        pwtf.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    loginbt.doClick();
+                }
+            }
+        });
 
         loginbt.addActionListener(new ActionListener() {
             @Override

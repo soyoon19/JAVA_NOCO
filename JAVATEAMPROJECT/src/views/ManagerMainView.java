@@ -51,7 +51,6 @@ class ManagerButtonListPanel extends JPanel implements ActionListener {
     JLabel loginName;
     JButton staffManage, logout;
     DefaultFrame parent;
-    JPanel nowPanel;
     WorkerDTO worker;
     public ManagerButtonListPanel(DefaultFrame prt, WorkerDTO worker) {
         this.setLayout(new BorderLayout());
@@ -69,15 +68,69 @@ class ManagerButtonListPanel extends JPanel implements ActionListener {
         JPanel blc = new JPanel();
         blc.setLayout(new GridLayout(7,1));
 
-        JButton [] btns = new JButton[7];
-        String [] label = {"요청 관리","주문 관리","회원 관리","매출 관리","음료 관리","재고 관리","방 설정"};
+        //button list 1
+        JPanel p1 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JButton b1 = new JButton("요청 관리");
+        b1.setFont(new DefaultFont(FONT_SIZE));
+        b1.addActionListener(this);
+        b1.setBackground(Color.white);
+        p1.add(b1);
+        blc.add(p1);
 
-        for (int i = 0 ; i < label.length ; i++) {
-            btns[i] = new JButton(label[i]);
-            blc.add(btns[i]);
-            btns[i].setFont(new DefaultFont(FONT_SIZE));
-            btns[i].addActionListener(this);
-        }
+        //button list 2
+        JPanel p2 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JButton b2 = new JButton("주문 관리");
+        b2.setFont(new DefaultFont(FONT_SIZE));
+        b2.addActionListener(this);
+        b2.setBackground(Color.white);
+        p2.add(b2);
+        blc.add(p2);
+
+        //button list 3
+        JPanel p3 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JButton b3 = new JButton("회원 관리");
+        b3.setFont(new DefaultFont(FONT_SIZE));
+        b3.addActionListener(this);
+        b3.setBackground(Color.white);
+        p3.add(b3);
+        blc.add(p3);
+
+        //button list 4
+        JPanel p4 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JButton b4 = new JButton("매출 관리");
+        b4.setFont(new DefaultFont(FONT_SIZE));
+        b4.addActionListener(this);
+        b4.setBackground(Color.white);
+        p4.add(b4);
+        blc.add(p4);
+
+        //button list 5
+        JPanel p5 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JButton b5 = new JButton("음료 관리");
+        b5.setFont(new DefaultFont(FONT_SIZE));
+        b5.addActionListener(this);
+        b5.setBackground(Color.white);
+        p5.add(b5);
+        blc.add(p5);
+
+        //button list 6
+        JPanel p6 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JButton b6 = new JButton("재고 관리");
+        b6.setFont(new DefaultFont(FONT_SIZE));
+        b6.addActionListener(this);
+        b6.setBackground(Color.white);
+        p6.add(b6);
+        blc.add(p6);
+
+        //button list 7
+        JPanel p7 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JButton b7 = new JButton("방 설정");
+        b7.setFont(new DefaultFont(FONT_SIZE));
+        b7.addActionListener(this);
+        b7.setBackground(Color.white);
+        b7.setPreferredSize(new Dimension(200, 60));
+        p7.add(b7);
+        blc.add(p7);
 
         add(blc, BorderLayout.CENTER);
 
@@ -86,12 +139,14 @@ class ManagerButtonListPanel extends JPanel implements ActionListener {
 
         staffManage = new JButton("직원 관리");
         staffManage.addActionListener(this);
+        staffManage.setBackground(Color.white);
         logout = new JButton("LOGOUT");
         logout.addActionListener(this);
+        logout.setBackground(Color.white);
         bls.add(staffManage);
         bls.add(logout);
 
-        staffManage.setFont(new DefaultFont(20));
+        staffManage.setFont(new DefaultFont(20,Font.BOLD));
         logout.setFont(new DefaultFont(20));
 
         staffManage.setPreferredSize(new Dimension(150,60));
@@ -99,7 +154,6 @@ class ManagerButtonListPanel extends JPanel implements ActionListener {
 
         bls.setLayout(new FlowLayout(FlowLayout.RIGHT));
         add(bls, BorderLayout.SOUTH);
-
     }
 
     @Override
@@ -165,13 +219,17 @@ class MonthSaleStatus extends JPanel { //scrollpane으로 해야댐
         };
 
         JTable monthSalesStatusTable = new JTable(salesData,colcumnType); //JTbale 생성
+        //폰트 및 색상 지정
         monthSalesStatusTable.getTableHeader().setDefaultRenderer(new CustomTableCellRenderer(25)); // 원하는 글씨 크기로 설정
-        monthSalesStatusTable.setDefaultRenderer(Object.class, new CustomTableCellRenderer(16)); // 셀의 글꼴 설정
+        monthSalesStatusTable.setDefaultRenderer(Object.class, new CustomTableCellRenderer(20)); // 셀의 글꼴 설정
+        monthSalesStatusTable.setBackground(Color.lightGray);
 
         JScrollPane scrollPane = new JScrollPane(monthSalesStatusTable); //Jscrollpane에 Jtable 추가
         monthSalesStatusTable.getTableHeader().setReorderingAllowed(false); //header 움직이기 방지
+        monthSalesStatusTable.setEnabled(false); //내용 수정 불가
 
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED); //스크롤팬 필요 시 자동 생성
+        monthSalesStatusTable.setRowHeight(30); //테이블 열 높이
         add(scrollPane,BorderLayout.CENTER);
     }
 }
@@ -199,14 +257,18 @@ class SaleStatus extends JPanel {
             }
         }
 
-        JTable monthSalesStatusTable = new JTable(goodsList,colcumnType); //Jtable 생성
-        monthSalesStatusTable.getTableHeader().setDefaultRenderer(new CustomTableCellRenderer(25)); // 원하는 글씨 크기로 설정
-        monthSalesStatusTable.setDefaultRenderer(Object.class, new CustomTableCellRenderer(16)); // 셀의 글꼴 설정
+        JTable salesStatusTable = new JTable(goodsList,colcumnType); //Jtable 생성
+        //폰트 및 색상 지정
+        salesStatusTable.getTableHeader().setDefaultRenderer(new CustomTableCellRenderer(25)); // 원하는 글씨 크기로 설정
+        salesStatusTable.setDefaultRenderer(Object.class, new CustomTableCellRenderer(20)); // 셀의 글꼴 설정
+        salesStatusTable.setBackground(Color.lightGray);
 
-        JScrollPane scrollPane = new JScrollPane(monthSalesStatusTable); //Jscrollpane에 jtable 추가
-        monthSalesStatusTable.getTableHeader().setReorderingAllowed(false); //header 움직이기 방지
+        JScrollPane scrollPane = new JScrollPane(salesStatusTable); //Jscrollpane에 jtable 추가
+        salesStatusTable.getTableHeader().setReorderingAllowed(false); //header 움직이기 방지
+        salesStatusTable.setEnabled(false); //내용 수정 불가
 
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED); //스크롤팬 필요 시 자동 생성
+        salesStatusTable.setRowHeight(30);  //테이블 열 높이
         add(scrollPane,BorderLayout.CENTER);
     }
 }

@@ -291,7 +291,7 @@ class ScreenEditPanelMini extends JPanel implements ActionListener{ //화면 편
         this.parent = prt;
         this.setLayout(new BorderLayout());
         roomAdd = new RoomAdd(prt, this);
-        roomDel = new RoomDelete(parent, this);
+        roomDel = new RoomDelete(prt, this);
 
         sep = new JPanel();
         sep.setLayout(new GridLayout(2,1));
@@ -300,6 +300,7 @@ class ScreenEditPanelMini extends JPanel implements ActionListener{ //화면 편
         ImageIcon img1 = new FreeImageIcon(DefaultFrame.PATH+"/images/roomAddBefore.png",IMAGE_X,IMAGE_Y);
         roomAddBtn = new JButton("방 추가",img1);
         roomAddBtn.setBackground(Color.white);
+
         //클릭 후
         ImageIcon img2 = new FreeImageIcon(DefaultFrame.PATH+"/images/roomAddAfter.png",IMAGE_X,IMAGE_Y);
         roomAddBtn.setPressedIcon(img2);
@@ -319,6 +320,10 @@ class ScreenEditPanelMini extends JPanel implements ActionListener{ //화면 편
 
         roomAddBtn.addActionListener(this);
         roomDeleteBtn.addActionListener(this);
+
+        Insets margin = new Insets(20,20,20,20);
+        roomAddBtn.setMargin(margin);
+        roomDeleteBtn.setMargin(margin);
 
         //방 삭제시 일어나는 이벤트 설정
         for(int i = 0; i < roomEditViewPanel.getRoomPs().length; i++){
@@ -445,6 +450,7 @@ class RoomAdd extends  JPanel implements ActionListener { //방추가 버튼
         JPanel p6 = new JPanel(new FlowLayout());
         addBtn = new JButton("추가");
         addBtn.setFont(new DefaultFont(RoomSettingView.MIDDLE_FONT_SIZE));
+        //todo 보더 주기
         cancleBtn = new JButton("취소");
         cancleBtn.setFont(new DefaultFont(RoomSettingView.MIDDLE_FONT_SIZE));
         p6.add(addBtn);
@@ -552,7 +558,6 @@ class RoomDelete extends JPanel implements ActionListener { //방삭제 버튼
         roomNum = new JLabel("방 번호:");
         roomNum.setFont(new DefaultFont(RoomSettingView.BETWEEN_FONT));
 
-
         //방 번호의 대한 정보를 가져온다.
         ArrayList<RoomManageDTO> rooms = parent.getController().getRoomManageDAO().findAll();
         ArrayList<String> nums = new ArrayList<>();
@@ -572,7 +577,6 @@ class RoomDelete extends JPanel implements ActionListener { //방삭제 버튼
         roomNumtf.setFont(new DefaultFont(RoomSettingView.BETWEEN_FONT));
         mini1.add(roomNum);
         mini1.add(roomNumtf);
-
 
         //2행
         JPanel mini2 = new JPanel();
@@ -806,7 +810,7 @@ class MusicAddPopup extends JDialog implements ActionListener { //곡추가 팝�
         musicAccount.setFont(new DefaultFont(RoomSettingView.FONT_SIZE));
         musicAccountTf = new JTextField(3);
         musicAccountTf.setFont(new DefaultFont(RoomSettingView.FONT_SIZE));
-        addBtn = new JButton("추가"); //TODO 버튼 이벤트 넣을 지 고민
+        addBtn = new JButton("추가");
         addBtn.setFont(new DefaultFont(RoomSettingView.FONT_SIZE));
         addBtn.addActionListener(this);
         cancleBtn = new JButton("취소");

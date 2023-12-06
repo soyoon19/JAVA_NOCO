@@ -6,12 +6,20 @@ import javax.print.DocFlavor;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class SalesAnalysisView extends JPanel {
+public class SalesAnalysisView extends JPanel implements ActionListener {
+
+
+    DefaultFrame parent;
+
     public SalesAnalysisView(DefaultFrame prt) {
 
+
+        this.parent = prt;
         this.setLayout(new BorderLayout());
 
 
@@ -79,9 +87,27 @@ public class SalesAnalysisView extends JPanel {
         JPanel payDay = new JPanel();
         payDay.setLayout(new FlowLayout());
 
-        JLabel T_payDay = new JLabel("마감일   yyyy-mm-dd  ~  yyyy-mm-dd");
+        JLabel T_payDay = new JLabel("마감일");
+        T_payDay.setFont(new DefaultFont(20));
+        JLabel T_pay1=new JLabel("yyyy-mm-dd");
+        T_pay1.setFont(new DefaultFont(20));
+        JButton dBtn1= new JButton("날짜 선택");
+
+        JLabel T1=new JLabel(" ~ ");
+        T1.setFont(new DefaultFont(20));
+        JLabel T_pay2=new JLabel("yyyy-mm-dd");
+        T_pay2.setFont(new DefaultFont(20));
+
+
+        JButton dBtn2= new JButton("날짜 선택");
 
         payDay.add(T_payDay);
+        payDay.add(T_pay1);
+        payDay.add(dBtn1);
+        payDay.add(T1);
+        payDay.add(T_pay2);
+        payDay.add(dBtn2);
+
 
 
         //즉시 조회 버튼 레이아웃
@@ -104,6 +130,8 @@ public class SalesAnalysisView extends JPanel {
 
         JButton checking = new JButton("조회");
         CheckBtm.add(checking);
+
+        checking.addActionListener(this);
 
         SaleCheck.add(title2);
         SaleCheck.add(payDay);
@@ -168,13 +196,15 @@ public class SalesAnalysisView extends JPanel {
         FL1.setLayout(new FlowLayout());
         JCheckBox FL1box = new JCheckBox();
 
+        JLabel date_name= new JLabel("년도별 분석");
         JLabel date1 = new JLabel("YYYY-MM-DD");
         JLabel date2 = new JLabel("YYYY-MM-DD");
         JLabel sym = new JLabel(" ~ ");
-        JButton btn1 = new JButton("icon1");
-        JButton btn2 = new JButton("icon2");
+        JButton btn1 = new JButton("날짜 선택");
+        JButton btn2 = new JButton("날짜 선택");
 
         FL1.add(FL1box);
+        FL1.add(date_name);
         FL1.add(date1);
         FL1.add(btn1);
         FL1.add(sym);
@@ -192,11 +222,14 @@ public class SalesAnalysisView extends JPanel {
         JComboBox strYear2 = new JComboBox(year);
         JComboBox strMonth2 = new JComboBox(month);
         JCheckBox FL2box = new JCheckBox();
+
+        JLabel month_name=new JLabel("월별 분석");
         JLabel sym1 = new JLabel("-");
         JLabel sym2 = new JLabel(" ~ ");
         JLabel sym3 = new JLabel("-");
 
         FL2.add(FL2box);
+        FL2.add(month_name);
         FL2.add(strYear1);
         FL2.add(sym1);
         FL2.add(strMonth1);
@@ -209,13 +242,13 @@ public class SalesAnalysisView extends JPanel {
         JPanel FL3 = new JPanel();
         FL3.setLayout(new FlowLayout());
 
-        String[] r_num={"1","2","3","4","5","6"};
-        JLabel room= new JLabel("방");
-        JCheckBox FL3box  = new JCheckBox();
-        JCheckBox r1Box  = new JCheckBox();
-        JCheckBox r2Box  = new JCheckBox();
-        JComboBox strRoom1= new JComboBox(r_num);
-        JComboBox strRoom2= new JComboBox(r_num);
+        String[] r_num = {"1", "2", "3", "4", "5", "6"};
+        JLabel room = new JLabel("방");
+        JCheckBox FL3box = new JCheckBox();
+        JCheckBox r1Box = new JCheckBox();
+        JCheckBox r2Box = new JCheckBox();
+        JComboBox strRoom1 = new JComboBox(r_num);
+        JComboBox strRoom2 = new JComboBox(r_num);
 
         FL3.add(FL3box);
         FL3.add(room);
@@ -226,13 +259,13 @@ public class SalesAnalysisView extends JPanel {
         JPanel FL4 = new JPanel();
         FL3.setLayout(new FlowLayout());
 
-        String[] g_name={"아메리카노","딸기스무디","바닐라라뗴","과채주스","코카콜라","칠성사이다"};
-        JLabel goods= new JLabel("상품");
-        JCheckBox FL4box  = new JCheckBox();
-        JCheckBox g1Box  = new JCheckBox();
-        JCheckBox g2Box  = new JCheckBox();
-        JComboBox strGoods1= new JComboBox(g_name);
-        JComboBox strGoods2= new JComboBox(g_name);
+        String[] g_name = {"아메리카노", "딸기스무디", "바닐라라뗴", "과채주스", "코카콜라", "칠성사이다"};
+        JLabel goods = new JLabel("상품");
+        JCheckBox FL4box = new JCheckBox();
+        JCheckBox g1Box = new JCheckBox();
+        JCheckBox g2Box = new JCheckBox();
+        JComboBox strGoods1 = new JComboBox(g_name);
+        JComboBox strGoods2 = new JComboBox(g_name);
 
         FL4.add(FL4box);
         FL4.add(goods);
@@ -246,13 +279,37 @@ public class SalesAnalysisView extends JPanel {
         analysisCtr.add(FL2);
         analysisCtr.add(FL3);
         analysisCtr.add(FL4);
+        analysis.add(analysisCtr, BorderLayout.CENTER);
 
 
-        analysis.add(analysisCtr,BorderLayout.CENTER);
+        JPanel check = new JPanel();
+        check.setLayout(new FlowLayout(FlowLayout.CENTER));
+        JButton checkBtn = new JButton("분석");
+        checkBtn.addActionListener(this);
+        check.add(checkBtn);
+
+        analysis.add(check, BorderLayout.SOUTH);
+
+
         main.add(today);
         main.add(SaleCheck);
         main.add(current);
         main.add(analysis);
         this.add(main, BorderLayout.CENTER);
+
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        String s = e.getActionCommand();
+
+        switch (s) {
+            case "조회":
+                (new SalesCheckPopup(parent)).setVisible(true);
+                break;
+            case "분석":
+                (new SalesAnalysisDetailPopup(parent)).setVisible(true);
+                break;
+        }
+
     }
 }

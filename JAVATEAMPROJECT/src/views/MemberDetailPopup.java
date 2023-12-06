@@ -3,6 +3,7 @@ package views;
 
 import custom_component.DefaultFont;
 import dao.MemberDAO;
+import dao.MemberLogDAO;
 import dto.MemberDTO;
 import dto.MemberLogDTO;
 
@@ -10,26 +11,25 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MemberDetailPopup extends JDialog {
-    MemberDTO member;
-    MemberLogDTO memberLog;
+
     DefaultFrame parent;
+    private MemberDTO member;
+    private MemberLogDTO memberLog;
 
     public MemberDetailPopup(DefaultFrame prt, String M_hp) {
-        super(prt, "직원 상세 정보", true);
-        parent = prt;
-        member = parent.getController().getMemberDAO().findById(M_hp);
-        memberLog = parent.getController().getMemberLogDAO().findById(M_hp);
-
-
+        super(prt, "", true);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setSize(500, 700);
+        this.parent = prt;
+
+        member=parent.getController().getMemberDAO().findById(M_hp);
+        memberLog=parent.getController().getMemberLogDAO().findById(M_hp);
 
 
         Container ct = getContentPane();
         ct.setLayout(new GridBagLayout());
 
         //위부분
-
         JPanel top = new JPanel();
         top.setLayout(new BorderLayout());
 
@@ -45,26 +45,33 @@ public class MemberDetailPopup extends JDialog {
         JPanel topBtm = new JPanel();
         JLabel hp = new JLabel("전화번호");
         JTextField T_hp = new JTextField(15);
-        hp.setText(member.getHp());
+        T_hp.setText(member.getHp());
+        T_hp.setEditable(false);
 
-        T_hp.setEditable(false);// 변경불가 값
-        T_hp.setBackground(Color.WHITE);
+
+
 
         JLabel passwd = new JLabel("비밀번호");
         JTextField T_passwd = new JTextField(20);
-        hp.setText(member.getPasswd());
+        T_passwd.setText(member.getPasswd());
+        T_passwd.setEditable(false);
 
         JLabel birth = new JLabel("생년월일");
         JTextField T_birth = new JTextField(15);
+        T_birth.setText(member.getBirthDate().toString());
+        T_birth.setEditable(false);
 
         JLabel pay = new JLabel("총 결제 금액");
-        JTextField T_pay = new JTextField("1000000");
+        JTextField T_pay = new JTextField();
+        T_pay.setText(String.valueOf(memberLog.getTotalPay()));
+        T_pay.setEditable(false);
 
         JLabel rate = new JLabel("등급");
-        JLabel T_rate = new JLabel("G");
+        JLabel T_rate = new JLabel();
+        T_rate.setText(String.valueOf(memberLog.getM_rate()));
+
         // 배열로 입력준비
         JLabel[] jlb1 = new JLabel[]{hp, passwd, birth, pay, rate, T_rate};
-        JTextField[] jtf = new JTextField[]{T_hp, T_passwd, T_birth, T_pay};
         JComponent[] match1 = new JComponent[]{T_hp, T_passwd, T_birth, T_pay, T_rate};
 
         topBtm.setLayout(new GridLayout(5, 1));
@@ -85,21 +92,29 @@ public class MemberDetailPopup extends JDialog {
         top.add(topBtm, BorderLayout.CENTER);
         ct.add(top, DefaultFrame.easyGridBagConstraint(0, 0, 1, 5));
         //하단 부분
-        JPanel btm= new JPanel();
+        JPanel btm = new JPanel();
         btm.setLayout(new BorderLayout());
         JPanel btmTop = new JPanel();
 
         JLabel totSong = new JLabel("총 보유곡");
         JLabel T_totSong = new JLabel("n 곡");
+        T_totSong.setText(String.valueOf(memberLog.getHoldSong()));
+
 
         JLabel joinDate = new JLabel("가입일자");
         JTextField T_joinDate = new JTextField();
+        T_joinDate.setText(member.getJoinDate().toString());
+        T_joinDate.setEditable(false);
 
         JLabel lastDate = new JLabel("마지막 사용 일자");
         JTextField T_lastDate = new JTextField();
+        T_lastDate.setText(memberLog.getLastLogin().toString());
 
-        JLabel[] jlb2 = new JLabel[]{totSong,joinDate,lastDate};
-        JComponent[] match2 = new JComponent[]{T_totSong,T_joinDate,T_lastDate};
+
+        T_lastDate.setText(memberLog.getLastLogin().toString());
+        T_lastDate.setEditable(false);
+        JLabel[] jlb2 = new JLabel[]{totSong, joinDate, lastDate};
+        JComponent[] match2 = new JComponent[]{T_totSong, T_joinDate, T_lastDate};
 
         btmTop.setLayout(new GridLayout(3, 1));
 
@@ -117,7 +132,7 @@ public class MemberDetailPopup extends JDialog {
         }
         btm.add(btmTop, BorderLayout.CENTER);
         ct.add(btm, DefaultFrame.easyGridBagConstraint(0, 1, 1, 3));
-
+        setLocationRelativeTo(null);
 
     }
 }

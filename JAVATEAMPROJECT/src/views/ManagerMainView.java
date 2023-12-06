@@ -162,7 +162,7 @@ class ManagerButtonListPanel extends JPanel implements ActionListener {
         JPanel movePage = null;
         switch (s) {
             case "주문 관리":
-                movePage = new OrderControlView(parent);
+                movePage = new OrderControlView(parent, worker);
                 break;
             case "재고 관리":
                 movePage = new StockManagementView();
@@ -193,7 +193,7 @@ class ManagerButtonListPanel extends JPanel implements ActionListener {
                 }
                 break;
             case "직원 관리":
-                movePage = new WorkerControlView(parent);
+                movePage = new WorkerControlView(parent, worker);
                 break;
         }
 

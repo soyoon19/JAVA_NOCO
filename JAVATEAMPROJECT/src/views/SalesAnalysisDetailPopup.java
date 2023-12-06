@@ -8,7 +8,7 @@ import java.awt.geom.*;
 public class SalesAnalysisDetailPopup extends JDialog {
     public SalesAnalysisDetailPopup(DefaultFrame prt) {
         super(prt, "", true);
-        this.setSize(1900, 1000);
+        this.setSize(1200, 800);
         this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 
         JPanel ct= new JPanel();
@@ -27,6 +27,7 @@ public class SalesAnalysisDetailPopup extends JDialog {
 
         ct.add(scrollPane,DefaultFrame.easyGridBagConstraint(0,0,3,1));
         this.add(ct);
+        setLocationRelativeTo(null);
 
 
         //

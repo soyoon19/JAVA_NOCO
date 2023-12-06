@@ -7,10 +7,14 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class NoMemberControlView extends JPanel {
+public class NoMemberControlView extends JDialog {
 
+    DefaultFrame parent;
     public NoMemberControlView(DefaultFrame prt) {
-        this.setSize(WIDTH, HEIGHT);
+
+        super(prt,"",true);
+
+        this.setSize(1200, 900);
         JPanel ct = new JPanel();
         ct.setLayout(new GridBagLayout());
 
@@ -52,7 +56,8 @@ public class NoMemberControlView extends JPanel {
 
         JLabel o_code = new JLabel("주문코드");
         JTextField T_o_code = new JTextField();
-        JButton B_icon = new JButton("icon");
+        T_o_code.setPreferredSize(new Dimension(120,20));
+        JButton B_icon = new JButton("search");
         topLeftB.add(o_code);
         topLeftB.add(T_o_code);
         topLeftB.add(B_icon);
@@ -61,19 +66,19 @@ public class NoMemberControlView extends JPanel {
 
 
         JCheckBox c = new JCheckBox();
-        String[] date = new String[]{"사용일자", " 마지막사용일자"};
-        JComboBox strCombo2 = new JComboBox(date);
+
+       JLabel date_name= new JLabel("사용 일자");
 
 
         JLabel firDate = new JLabel("YYYY-MM-DD");
-        JButton fir = new JButton("icon");
+        JButton fir = new JButton("날짜 선택");
         JLabel sym = new JLabel("  ~  ");
         JLabel secDate = new JLabel("YYYY-MM-DD");
-        JButton sec = new JButton("icon");
+        JButton sec = new JButton("날짜 선택");
 
 
         topRightT.add(c);
-        topRightT.add(strCombo2);
+        topRightT.add(date_name);
         topRightT.add(firDate);
         topRightT.add(fir);
         topRightT.add(sym);
@@ -136,6 +141,7 @@ public class NoMemberControlView extends JPanel {
 
         ct.add(main, DefaultFrame.easyGridBagConstraint(0, 1, 1, 7));
         this.add(ct);
+        setLocationRelativeTo(null);
 
     }
 

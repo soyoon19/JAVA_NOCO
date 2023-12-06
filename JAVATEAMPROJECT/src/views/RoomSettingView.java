@@ -1,5 +1,6 @@
 package views;
 
+import com.oracle.tools.packager.Log;
 import controller_db.Controller;
 import custom_component.*;
 import dto.*;
@@ -413,6 +414,7 @@ class RoomAdd extends  JPanel implements ActionListener { //방추가 버튼
         JPanel p1 = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         beforeBtn = new JButton("이전");
         beforeBtn.setFont(new DefaultFont(RoomSettingView.FONT_SIZE, Font.BOLD));
+        beforeBtn.setBackground(Color.white);
         beforeBtn.addActionListener(this);
         p1.add(beforeBtn);
         add(p1);
@@ -482,8 +484,10 @@ class RoomAdd extends  JPanel implements ActionListener { //방추가 버튼
         //6행
         JPanel p6 = new JPanel(new FlowLayout());
         addBtn = new JButton("추가");
+        addBtn.setBackground(Color.white);
         addBtn.setFont(new DefaultFont(RoomSettingView.MIDDLE_FONT_SIZE));
         cancleBtn = new JButton("취소");
+        cancleBtn.setBackground(Color.white);
         cancleBtn.setFont(new DefaultFont(RoomSettingView.MIDDLE_FONT_SIZE));
         p6.add(addBtn);
         p6.add(cancleBtn);
@@ -559,7 +563,6 @@ class RoomDelete extends JPanel implements ActionListener { //방삭제 버튼
     private ScreenEditPanelMini mini;
     private DefaultFrame parent;
     private ArrayList<RoomOptionDTO> options;
-
     EventSwitch eventSwitch;
     public RoomDelete(DefaultFrame prt,ScreenEditPanelMini mini) {
         parent = prt;
@@ -575,6 +578,7 @@ class RoomDelete extends JPanel implements ActionListener { //방삭제 버튼
         JPanel p1 = new JPanel();
         beforeBtn = new JButton("이전");
         beforeBtn.setFont(new DefaultFont(RoomSettingView.FONT_SIZE, Font.BOLD));
+        beforeBtn.setBackground(Color.white);
         beforeBtn.addActionListener(this);
         p1.add(beforeBtn);
         p1.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -643,9 +647,11 @@ class RoomDelete extends JPanel implements ActionListener { //방삭제 버튼
         JPanel p3 = new JPanel();
         deleteBtn = new JButton("삭제");
         deleteBtn.setFont(new DefaultFont(RoomSettingView.MIDDLE_FONT_SIZE));
+        deleteBtn.setBackground(Color.white);
         deleteBtn.addActionListener(this);
         cancleBtn = new JButton("취소");
         cancleBtn.setFont(new DefaultFont(RoomSettingView.MIDDLE_FONT_SIZE));
+        cancleBtn.setBackground(Color.white);
         cancleBtn.addActionListener(this);
         p3.add(deleteBtn);
         p3.add(cancleBtn);
@@ -656,17 +662,23 @@ class RoomDelete extends JPanel implements ActionListener { //방삭제 버튼
     @Override
     public void actionPerformed(ActionEvent e) {
         String s = e.getActionCommand();
+        RoomIfmDTO roomIfm= new RoomIfmDTO();
         if (s.equals("삭제")){ //todo 방 삭제
-            int x = JOptionPane.showConfirmDialog(this, "삭제하시겠습니까?","방 삭제",JOptionPane.YES_NO_OPTION);
-            if(x == JOptionPane.NO_OPTION) return;
-
-            //방 번호로 원하는 행을 찾는다.
-            RoomManageDTO room = parent.getController().getRoomManageDAO().findByRNum(roomNumtf.getText());
-            room.setNum(null); //DB 삭제 X --> r_code만 null로 변경한다.
-            parent.getController().getRoomManageDAO().update(room);
-
-            JOptionPane.showMessageDialog(this, "방 삭제가 완료되었습니다.","방 삭제 확인",JOptionPane.INFORMATION_MESSAGE);
-            mini.update();
+            if(true) {
+                System.out.println(roomIfm.isUsing());
+                JOptionPane.showMessageDialog(this, "사용 중인 방은 삭제할 수 없습니다.","방 삭제 오류",JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                System.out.println(roomIfm.isUsing());
+                int x = JOptionPane.showConfirmDialog(this, "삭제하시겠습니까?","방 삭제",JOptionPane.YES_NO_OPTION);
+                if(x == JOptionPane.OK_OPTION) {
+                    //방 번호로 원하는 행을 찾는다.
+                    RoomManageDTO room = parent.getController().getRoomManageDAO().findByRNum(roomNumtf.getText());
+                    room.setNum(null); //DB 삭제 X --> r_code만 null로 변경한다.
+                    parent.getController().getRoomManageDAO().update(room);
+                    mini.update();
+                    JOptionPane.showMessageDialog(this, "방 삭제가 완료되었습니다.","방 삭제 확인",JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
         } else if(s.equals("이전")){ //초기화 및 이전 페이지 이동
             roomNumtf.setText("");
             roomSize.setText("방 크기 XY :");
@@ -706,9 +718,10 @@ class RoomSettingPanelMini extends JPanel implements ActionListener { //방설�
     private JTextField roomNumtf;
     private JButton roomActivate, roomUnActivate, applyBtn, cancleBtn;
     private boolean state = false;
-
     private EventSwitch eventSwitch;
     private DefaultFrame parent;
+    private static final int IMAGE_X = 140;
+    private static final int IMAGE_Y = 140;
     public RoomSettingPanelMini(DefaultFrame prt) {
         this.parent = prt;
         this.setLayout(new BorderLayout());
@@ -730,33 +743,36 @@ class RoomSettingPanelMini extends JPanel implements ActionListener { //방설�
 
         //3행
         JPanel p3 = new JPanel();
-        roomActivate = new JButton("방 활성화");
+        //활성화 버튼 클릭 전
+        ImageIcon img1 = new FreeImageIcon(DefaultFrame.PATH+"/images/roomActivateBefore.png",IMAGE_X,IMAGE_Y);
+        roomActivate = new JButton("    방 활성화",img1);
         roomActivate.setFont(new DefaultFont(RoomSettingView.BETWEEN_FONT));
+
+        //활성화 버튼 클릭 후
+        ImageIcon img2 = new FreeImageIcon(DefaultFrame.PATH+"/images/roomUnActivateAfter.png",IMAGE_X,IMAGE_Y);
+        roomActivate.setPressedIcon(img2);
+
+        roomActivate.setBackground(Color.white);
         roomActivate.addActionListener(this);
         p3.add(roomActivate);
-        roomActivate.setPreferredSize(new Dimension(400,80));
+        roomActivate.setPreferredSize(new Dimension(450,150));
         rsg.add(p3);
 
         //4행
         JPanel p4 = new JPanel();
-        roomUnActivate = new JButton("방 비활성화");
+        //비활성화 버튼 클릭 전
+        ImageIcon img3 = new FreeImageIcon(DefaultFrame.PATH+"/images/roomUnActivateBefore.png",IMAGE_X,IMAGE_Y);
+        roomUnActivate = new JButton("방 비활성화",img3);
         roomUnActivate.setFont(new DefaultFont(RoomSettingView.BETWEEN_FONT));
+        //비활성화 버튼 클릭 후
+        ImageIcon img4 = new FreeImageIcon(DefaultFrame.PATH+"/images/roomUnActivateAfter.png",IMAGE_X,IMAGE_Y);
+        roomUnActivate.setPressedIcon(img4);
+
+        roomUnActivate.setBackground(Color.white);
         roomUnActivate.addActionListener(this);
         p4.add(roomUnActivate);
-        roomUnActivate.setPreferredSize(new Dimension(400,80));
+        roomUnActivate.setPreferredSize(new Dimension(450,150));
         rsg.add(p4);
-
-        //5행
-        JPanel p5 = new JPanel();
-        applyBtn = new JButton("적용");
-        applyBtn.setFont(new DefaultFont(RoomSettingView.MIDDLE_FONT_SIZE));
-        applyBtn.addActionListener(this);
-        cancleBtn = new JButton("취소");
-        cancleBtn.setFont(new DefaultFont(RoomSettingView.MIDDLE_FONT_SIZE));
-        cancleBtn.addActionListener(this);
-        p5.add(applyBtn);
-        p5.add(cancleBtn);
-        rsg.add(p5);
 
         add(rsg);
     }
@@ -765,23 +781,28 @@ class RoomSettingPanelMini extends JPanel implements ActionListener { //방설�
     public void actionPerformed(ActionEvent e) {
         String s = e.getActionCommand();
         //todo 예외 처리 방이 선택 안된 경우
-
         if(s.equals("방 활성화")){
-            state = false;
-        } else if (s.equals("방 비활성화")) {
-            state = true;
-        } else if (s.equals("적용")) {
-            int x = JOptionPane.showConfirmDialog(this, "적용하시겠습니까?","방 설정",JOptionPane.YES_NO_OPTION);
+            //if()
+            int x = JOptionPane.showConfirmDialog(this, "방 활성화를 적용하시겠습니까?","방 설정",JOptionPane.YES_NO_OPTION);
             if(x == JOptionPane.NO_OPTION) return;
 
             RoomManageDTO room = parent.getController().getRoomManageDAO().findByRNum(roomNumtf.getText());
             room.setCheck(state);
             parent.getController().getRoomManageDAO().update(room);
+
             state = false;
 
-            JOptionPane.showMessageDialog(this, "방 설정이 완료되었습니다.","방 설정 확인",JOptionPane.INFORMATION_MESSAGE);
-        } else if (s.equals("취소")) {
-            roomNumtf.setText("");
+            JOptionPane.showMessageDialog(this, "방이 활성화 되었습니다.","방 활성화 완료",JOptionPane.INFORMATION_MESSAGE);
+        } else if (s.equals("방 비활성화")) {
+            int x = JOptionPane.showConfirmDialog(this, "방 비활성화를 적용하시겠습니까?","방 설정",JOptionPane.YES_NO_OPTION);
+            if(x == JOptionPane.NO_OPTION) return;
+
+            RoomManageDTO room = parent.getController().getRoomManageDAO().findByRNum(roomNumtf.getText());
+            room.setCheck(state);
+            parent.getController().getRoomManageDAO().update(room);
+
+            state = true;
+            JOptionPane.showMessageDialog(this, "방이 비활성화 되었습니다.","방 비활성화 완료",JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
@@ -798,11 +819,9 @@ class RoomManagePanel extends JPanel implements ActionListener { //방관리 패
     JButton musicAdd, forcedExit;
     DefaultFrame parent;
     private RoomViewPanel roomViewPanel;
-    private RoomSettingView roomSettingView;
     public RoomManagePanel(DefaultFrame parent, RoomSettingView roomSettingView) {
         this.parent = parent;
         this.setLayout(new BorderLayout());
-        this.roomSettingView = roomSettingView;
         JPanel rmview = new JPanel(new GridBagLayout());
         RoomManageInfoPanel gbt = new RoomManageInfoPanel();
 
@@ -855,9 +874,11 @@ class RoomManagePanel extends JPanel implements ActionListener { //방관리 패
         JPanel gbb = new JPanel();
         gbr.add(gbb,DefaultFrame.easyGridBagConstraint(0,1,1,1));
         musicAdd = new JButton("곡 추가");
+        musicAdd.setBackground(Color.white);
         musicAdd.setFont(new DefaultFont(RoomSettingView.MIDDLE_FONT_SIZE));
         musicAdd.addActionListener(this);
         forcedExit = new JButton("강제 퇴장");
+        forcedExit.setBackground(Color.white);
         forcedExit.setFont(new DefaultFont(RoomSettingView.MIDDLE_FONT_SIZE));
         forcedExit.addActionListener(this);
         gbb.add(musicAdd);
@@ -896,10 +917,12 @@ class MusicAddPopup extends JDialog implements ActionListener { //곡추가 팝�
         musicAccount.setFont(new DefaultFont(RoomSettingView.FONT_SIZE));
         musicAccountTf = new JTextField(3);
         musicAccountTf.setFont(new DefaultFont(RoomSettingView.FONT_SIZE));
-        addBtn = new JButton("추가"); //TODO 버튼 이벤트 넣을 지 고민
+        addBtn = new JButton("추가");
+        addBtn.setBackground(Color.white);
         addBtn.setFont(new DefaultFont(RoomSettingView.FONT_SIZE));
         addBtn.addActionListener(this);
         cancleBtn = new JButton("취소");
+        cancleBtn.setBackground(Color.white);
         cancleBtn.addActionListener(this);
         cancleBtn.setFont(new DefaultFont(RoomSettingView.FONT_SIZE));
 
@@ -923,7 +946,8 @@ class MusicAddPopup extends JDialog implements ActionListener { //곡추가 팝�
     public void actionPerformed(ActionEvent e) {
         String s = e.getActionCommand();
         if(s.equals("추가")){
-            JOptionPane.showMessageDialog(this, "곡이 추가되었습니다.","방 추가",JOptionPane.INFORMATION_MESSAGE);
+            //todo musicAccountTf.setText()
+            JOptionPane.showMessageDialog(this, musicAccountTf.getText()+"곡이 추가되었습니다.","방 추가",JOptionPane.INFORMATION_MESSAGE);
         } else if (s.equals("취소")){
             this.dispose();
         }
@@ -940,12 +964,15 @@ class ForcedExitPopup extends JDialog implements ActionListener { //강제퇴장
     ForcedExitPopup(JFrame parent){
         super(parent, TITLE, true);
         this.parent = parent;
-        musicAccount = new JLabel("번 방을 강제 퇴장하시겠습니까?");
+        RoomIfmDTO roomIfmDTO = new RoomIfmDTO();
+        musicAccount = new JLabel(roomIfmDTO.getNum()+"번 방을 강제 퇴장하시겠습니까?");
         musicAccount.setFont(new DefaultFont(RoomSettingView.FONT_SIZE-10));
         addBtn = new JButton("확인");
+        addBtn.setBackground(Color.white);
         addBtn.addActionListener(this);
         addBtn.setFont(new DefaultFont(RoomSettingView.FONT_SIZE));
         cancleBtn = new JButton("취소");
+        cancleBtn.setBackground(Color.white);
         cancleBtn.addActionListener(this);
         cancleBtn.setFont(new DefaultFont(RoomSettingView.FONT_SIZE));
 

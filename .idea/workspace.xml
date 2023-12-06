@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="73277347-8d03-48f7-a7c0-89844aebc90d" name="Changes" comment="Feat : CardInfoPopup 기능 추가">
+    <list default="true" id="73277347-8d03-48f7-a7c0-89844aebc90d" name="Changes" comment="Feat : 방 편집 기능 추가">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/custom_component/AreaSelectMouseListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/custom_component/AreaSelectMouseListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/custom_component/RoomViewPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/custom_component/RoomViewPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/RoomSettingView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/RoomSettingView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

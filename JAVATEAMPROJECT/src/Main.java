@@ -79,7 +79,8 @@ public class Main {
         }
          */
 
-        new DrinkMgPopup(win);
+
+        new StockMgPopup(win);
         //win.add(new UserHomeView(win));
         //win.add(new PswdFindView(win));
         //win.add(new StockManagementView());

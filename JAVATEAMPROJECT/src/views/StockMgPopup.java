@@ -8,16 +8,16 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-//부족한 재고를 보여주는 팝업창
+//재고 추가, 편집
 // (관리자 로그인 시, 재고관리 페이지에서 확인 가능)
-public class DrinkMgPopup extends JDialog implements ActionListener {
+public class StockMgPopup extends JDialog implements ActionListener {
 
-    public static final int WIDTH = 1200, HEIGHT = 800;
+    public static final int WIDTH = 800, HEIGHT = 100;
 
     DefaultFrame parent;
 
-    public DrinkMgPopup (DefaultFrame parent) {
-        super(parent, "음료 상세 관리 팝업", true);
+    public StockMgPopup(DefaultFrame parent) {
+        super(parent, "재고 상세 관리 팝업", true);
         this.parent = parent;
         this.setSize(WIDTH, HEIGHT);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -59,21 +59,16 @@ public class DrinkMgPopup extends JDialog implements ActionListener {
         JPanel right = new JPanel();
         //right.setLayout(new );
 
-        //이미지 변경 버튼
-        JButton changeImg = new JButton("이미지 변경");
-        changeImg.setFont(new DefaultFont(20));
-        right.add(changeImg);
-
+        //right - 3 : 저장 버튼
+        JButton okBtn = new JButton("저장");
+        okBtn.setFont(new DefaultFont(20));
+        right.add(okBtn);
 
         //right - 3 : 취소 버튼
         JButton canBtn = new JButton("취소");
         canBtn.setFont(new DefaultFont(20));
         right.add(canBtn);
 
-        //right - 3 : 저장 버튼
-        JButton okBtn = new JButton("저장");
-        okBtn.setFont(new DefaultFont(20));
-        right.add(okBtn);
 
         main.add(right, BorderLayout.EAST);
 

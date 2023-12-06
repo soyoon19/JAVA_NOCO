@@ -118,6 +118,7 @@ class DrinksCategoryPanel extends JPanel implements ActionListener{
 
        }else if(s.contains("추가")){
            //(new DrinkMgPopup(parent, newArr))
+           //(new DrinkMgPopup(parent, )).setVisible(true);
 
        }else if(s.contains("편집")){
 

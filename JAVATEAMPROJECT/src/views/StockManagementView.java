@@ -112,24 +112,6 @@ class StockViewPanel extends JPanel {
 
 }
 
-class StcokEditPanel extends JPanel{
-
-}
-/*
-class RefrigeratedItemsPane extends JPanel {
-
-}
-class FrozenItems  extends JPanel {
-
-
-}
-class OtherItems extends JPanel {
-
-}
-*/
-
-
-
 //right - 1
  class StockMenuPanel extends JPanel{
 

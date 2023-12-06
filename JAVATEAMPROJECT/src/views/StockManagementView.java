@@ -3,6 +3,7 @@ package views;
 import custom_component.DefaultFont;
 import custom_component.EventSwitch;
 import custom_component.JPanelOneLabel;
+import dto.GoodsDTO;
 import dto.StockDTO;
 
 import javax.swing.*;
@@ -40,7 +41,7 @@ class StocksShowPanel extends JPanel {
 
         //탭 생성
         JTabbedPane stockJTabb = new JTabbedPane();
-        stocsk = parent.getController().getStockDAO().findAll();
+        stocsk = parent.getController().getStockDAO().findAll(); //todo 변수명 이상해서 한번만 확인부탁드립나다.
 
         //category 만큼 반복
         categoryStockList = new ArrayList[StockDTO.ITEMS_KOREA_NAME.length]; //StockDTO에 있는 카테고리 정보를 길이만큼 받기
@@ -117,7 +118,7 @@ class StockViewPanel extends JPanel {
 }
 
 //right - 1
-class StockMenuPanel extends JPanel {
+class StockMenuPanel extends JPanel implements ActionListener {
 
     private CalendarPanel calendarPanel;
     private DefaultFrame parent;
@@ -131,7 +132,7 @@ class StockMenuPanel extends JPanel {
         //탭에 들어갈 내용 (날짜 grid로)
         //right: 날짜, 캘린더, 재고 검색, 버튼
         //top(cTop) : 재고 검색하기 (JTextFIeld, JLable)
-        JPanel cTop = new JPanel();
+        /*JPanel cTop = new JPanel();
         cTop.setBackground(Color.WHITE);
         cTop.setLayout(new BorderLayout());
 
@@ -145,7 +146,7 @@ class StockMenuPanel extends JPanel {
         JButton searchBtn = new JButton("검색");
         cTop.add(searchBtn, BorderLayout.EAST);
 
-        this.add(cTop);
+        this.add(cTop);*/
 
 
         //center : 달력
@@ -199,7 +200,7 @@ class StockMenuPanel extends JPanel {
 
         //stock
         JPanel cBottom = new JPanel();
-        String[] drinkMangement = {"추가", "편집", "삭제", "<HTML><body style='text-align:center;'>선택<br>해제</body></HTML>"};
+        String[] drinkMangement = {"추가", "편집", "삭제", "<HTML><body style='text-align:center;'>부족한<br>재고</body></HTML>"};
         String[] dMButtonColor = {"green", "yellow", "RED", "orange"};
         Color[] btnColors = {Color.green, Color.YELLOW, new Color(255, 0, 0), Color.white};
 
@@ -219,12 +220,46 @@ class StockMenuPanel extends JPanel {
         }
 
 
-        add(cTop, BorderLayout.NORTH);
+        //add(cTop, BorderLayout.NORTH);
         add(cCenter, BorderLayout.CENTER);
         add(cBottom, BorderLayout.SOUTH);
 
     }
-}
+
+    //todo : 위쪽 table의 정보를 가져오는 getTable을 만들어 사용하고 싶은데 안돼서 전체 주석처리 했습니다.
+/*    @Override
+    public void actionPerformed(ActionEvent e) {
+        String s = e.getActionCommand();
+        int row = StocksShowPanel.getTable().getSelectedRow();
+        //추가
+        if(s.contains("추가")){
+
+
+            if(s.contains("삭제")){
+                if(!(row >= 0 && row <800)){//미선택 예외처리
+                    JOptionPane.showMessageDialog(null, "선택된 음료가 없어 삭제할 수 없습니다.");
+
+                }else {
+                    int r = JOptionPane.showConfirmDialog(null, "해당 음료를 정말 삭제하겠습니까?",
+                            "음료 종류 삭제 확인창", JOptionPane.YES_NO_OPTION);
+
+                    }
+                }
+
+                //todo : goodEditPopup에 DB에 저장된 정보 불러오고, 수정 후 DB에 반영되는 이벤트 처리
+            }else if(s.contains("편집")){
+                if(row < 0) {//미선택시 에외처리
+                    JOptionPane.showMessageDialog(null, "선택된 음료가 없어 편집할 수 없습니다.");
+                }else {
+
+                }
+
+            } else if(s.contains("부족한")) {
+            (new NoticeStockPopup(parent)).popup();
+
+            }
+    }
+}*/
 
 public class StockManagementView extends JPanel {
     public static Dimension BUTTON_SIZE = new Dimension(80, 80);
@@ -382,4 +417,5 @@ abstract  class CalMouseListener implements MouseListener {
     public void setSw(boolean sw) {
         this.sw = sw;
     }
+
 }

@@ -32,7 +32,6 @@ public class GoodsAddPopup extends JDialog implements ActionListener {
 
         for(int i = 0; i < lbs.length; i++){
             lbs[i] = new JPanelOneLabel(lbsNames[i]);
-            //todo 폰트, 글자 설정
             lbs[i].getLabel().setFont(new DefaultFont(40));
             lbs[i].setLayout(new FlowLayout(FlowLayout.LEFT));
             lbs[i].setBorder(BorderFactory.createEmptyBorder(0,20, 0,0));
@@ -49,7 +48,6 @@ public class GoodsAddPopup extends JDialog implements ActionListener {
         JTextField[] tfs = new JTextField[7];
         for(int i  = 0; i < tfs.length; i++){
             tfs[i] = new JTextField(11);
-            //todo textfield 기타 설정
         }
 
         JTextField codeTf = tfs[0], nameTf = tfs[1], kindTf = tfs[2],

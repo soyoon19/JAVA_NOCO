@@ -93,7 +93,7 @@ class DrinksCategoryPanel extends JPanel implements ActionListener{
 
         //버튼 넣기
         String [] drinkMangement = {"추가", "편집", "삭제", "<HTML><body style='text-align:center;'>일괄<br>설정</body></HTML>", "비우기"};
-        String [] dMButtonColor = {"green", "yellow", "RED", "orange", ""};
+        String [] dMButtonColor = {"green", "yellow", "RED", "orange", "white"};
         Color[] btnColors = {Color.green, Color.YELLOW, new Color(255, 0, 0) , Color.orange, Color.WHITE};
 
         //1. 반복문으로 drinkMangement 개수만큼 버튼 생성
@@ -151,23 +151,25 @@ class DrinksCategoryPanel extends JPanel implements ActionListener{
             //(new DrinkMgPopup(parent, )).setVisible(true);
 
        if(s.contains("삭제")){
-           if(!(row >= 0 && row <800)){//미선택 예외처리
+           if(!(row < 0)){//미선택 예외처리
                JOptionPane.showMessageDialog(null, "선택된 음료가 없어 삭제할 수 없습니다.");
+               return;
+           }else {
+               int r = JOptionPane.showConfirmDialog(null, "해당 음료를 정말 삭제하겠습니까?",
+                       "음료 종류 삭제 확인창", JOptionPane.YES_NO_OPTION);
 
-           }
-           int r = JOptionPane.showConfirmDialog(null, "해당 음료를 정말 삭제하겠습니까?",
-                   "음료 종류 삭제 확인창", JOptionPane.YES_NO_OPTION);
-           if(r == JOptionPane.YES_NO_OPTION) {
-               //DB 삭제 방식
-               parent.getController().getGoodsDAO().delete(drinksDetailPanel.getProductData().get(row).get(0).toString());
-               drinksDetailPanel.tableUpdate(nowSelect);
+               if(r == JOptionPane.YES_NO_OPTION) {
+                   //DB 삭제 방식
+                   parent.getController().getGoodsDAO().delete(drinksDetailPanel.getProductData().get(row).get(0).toString());
+                   drinksDetailPanel.tableUpdate(nowSelect);
            }
        }
 
-       //!!!
+       //todo : goodEditPopup에 DB에 저장된 정보 불러오고, 수정 후 DB에 반영되는 이벤트 처리
        }else if(s.contains("편집")){
            if(row < 0) {//미선택시 에외처리
                JOptionPane.showMessageDialog(null, "선택된 음료가 없어 편집할 수 없습니다.");
+               return;
            }else {
                //parent.getController().getGoodsDAO().update(drinksDetailPanel.getProductData().get(row).get(0).toString());
                drinksDetailPanel.tableUpdate(nowSelect);
@@ -175,14 +177,18 @@ class DrinksCategoryPanel extends JPanel implements ActionListener{
            }
 
        } else if(s.contains("일괄")) {
-           //todo 담겨있는게 없을 때 예외 처리하기
+           if(row < 0) {//미선택시 에외처리
+               JOptionPane.showMessageDialog(null, "선택된 음료가 없어 일괄설정할 수 없습니다.");
+               return;
+           }
            System.out.println(goodsMap.values());
            DrinksStatusPopup drinksStatusPopup = new DrinksStatusPopup(parent, new ArrayList<GoodsDTO>(goodsMap.values()));
            drinksStatusPopup.setVisible(true);
 
-           //todo drinksStatusPopup 에서 확인 클릭 여부를 알려주는 메서드를 만들어 호출한다.
            //확인이 눌렸다면
-          // clearBoxLayout(); 메서드 실행
+           if (drinksStatusPopup.isChecked() == true) {
+               clearBoxLayout(); //메서드 실행
+           }
            drinksDetailPanel.tableUpdate(nowSelect);
 
        }else if(s.contains("비우기")) {
@@ -217,7 +223,7 @@ class SelectDrinkPanel extends JPanel{
         name.setFont(new DefaultFont(30));
         drinkSelect.add(name);
 
-        //판매가능 개수
+        //판매 가능 개수
         JLabel saleCount = new JLabel("판매 가능 개수: "+ String.valueOf(goods.getSaleCount()));
         saleCount.setFont(new DefaultFont(15));
         drinkSelect.add(saleCount);
@@ -413,4 +419,5 @@ public class DrinksManagementView extends JPanel{
         return drinksCategoryPanel;
     }
 
+}
 }

@@ -25,6 +25,12 @@ public class DrinksStatusPopup extends JDialog implements ActionListener {
     DefaultFrame parent;
     JButton pastBtn = null, saleBtn, soldOutBtn, hideBtn;
 
+    public boolean isChecked = false;
+
+    public boolean isChecked() {
+        return isChecked;
+    }
+
     public DrinksStatusPopup(DefaultFrame parent, ArrayList<GoodsDTO> goodsAddr) {
         super(parent, "음료 상태를 보여주는 팝업창", true);
         this.parent = parent;
@@ -93,9 +99,10 @@ public class DrinksStatusPopup extends JDialog implements ActionListener {
 
                 for(GoodsDTO g : goodsAddr){
                     g.setStatus(pastBtn.getText()); //상태 변경!
-
                     goodsDAO.update(g);
                 }
+                isChecked = true; //변경 사항 저장 확인 메서드
+
                 dispose();
             }
         });

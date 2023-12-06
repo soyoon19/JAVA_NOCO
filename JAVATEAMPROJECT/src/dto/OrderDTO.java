@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.sql.Time;
 
 public class OrderDTO {
+    public static final char PREFIX = 'o';
+
     public static final int STATUS_ORDER = 1
             ,STATUS_COMPLETE = 2, STATUS_CANCEL = 3;
 

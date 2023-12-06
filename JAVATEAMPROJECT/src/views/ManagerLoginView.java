@@ -1,12 +1,13 @@
 package views;
 import controller_db.Controller;
 import custom_component.DefaultFont;
-import dao.WorkerDAO;
 import dto.WorkerDTO;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.*;
 public class ManagerLoginView extends JPanel {
     private static final int FONT_SIZE = 80;
@@ -58,22 +59,35 @@ public class ManagerLoginView extends JPanel {
         loginbt.setFont(new DefaultFont(FONT_SIZE));
         bls.add(loginbt);
 
+        pwtf.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    loginbt.doClick();
+                }
+            }
+        });
+
         loginbt.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(idtf.getText().equals("") || pwtf.getText().equals("")){
-                    JOptionPane.showConfirmDialog(parent, "Empty!");
+                //Text Filed에 입력된 값이 없을 경우 예외처리
+                if(idtf.getText().equals("")||pwtf.getText().equals("")){
+                    JOptionPane.showMessageDialog(parent,"값을 입력해주세요.","입력 오류",JOptionPane.INFORMATION_MESSAGE);
                     return;
                 }
-                //parent에 있는 controller을 가져옴
-                //controller에 있는 Worker_T에서 데이터를 가져와주는(DTO로 변환하여) WorkerDAO을 가져온다
-                //WorkerDAO에 메서드를 실행시킨다.
+                //Text Filed에 입력된 값이 있다면 아이디를 조회
                 WorkerDTO worker = parent.getController().getWorkerDAO().findById(idtf.getText());
+                //입력받은 아이디가 DB에 없을 경우 예외처리
                 if(worker == null){
-                    //JOptionPane 아이디 일치하지 않음
-                }else if(!worker.getPasswd().equals(pwtf.getText())){
-                    //
-                }else{
+                    JOptionPane.showMessageDialog(parent,"일치하는 아이디가 없습니다.","아이디 조회 불가",
+                            JOptionPane.INFORMATION_MESSAGE);
+                } else if(!worker.getPasswd().equals(pwtf.getText())) { //입력받은 아이디가 DB에 있으나 비밀번호가 일치하지 않을 경우 예외처리
+                    JOptionPane.showMessageDialog(parent,"비밀번호가 일치하지 않습니다.","비밀번호 오류",
+                            JOptionPane.INFORMATION_MESSAGE);
+                } else { //로그인 성공 알림 및 ManageMainView 이동
+                    JOptionPane.showMessageDialog(parent,worker.getName()+"님 환영합니다.","관리자 로그인 성공",
+                            JOptionPane.INFORMATION_MESSAGE);
                     parent.switchTop(DefaultFrame.TOP_ADMIN);
                     parent.resetMove(new ManagerMainView(parent, worker));
                 }

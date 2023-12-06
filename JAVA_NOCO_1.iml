@@ -10,7 +10,8 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Desktop/2023-2/객체지향언어실습(안유정)/기말 프로젝트/sql/mysql-connector-j-8.2.0/mysql-connector-j-8.2.0/mysql-connector-j-8.2.0.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/mysql-connector-j-8.2.0/mysql-connector-j-8.2.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/out/production/JAVA_NOCO1/jar/mysql-connector-j-8.2.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

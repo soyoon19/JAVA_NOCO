@@ -20,7 +20,8 @@ public class OrderDAO implements DAO<OrderDTO, String>{
     public boolean insert(OrderDTO order) {
         PreparedStatement pstmt = null;
         try {
-            String sql = "INSERT INTO Order_T (o_code, m_hp, w_id, r_code, o_pay, o_discount, o_date, o_time, o_comptime, o_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO Order_T (o_code, m_hp, w_id, r_code, o_pay, o_discount, o_date, o" +
+                    "_time, o_comptime, o_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, order.getO_code());
             pstmt.setString(2, order.getHp());

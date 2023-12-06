@@ -31,7 +31,6 @@ class DrinksCategoryPanel extends JPanel {
         cTop.add(CategoryComboBox);
 
 
-
         //center : 변경할 상품 담는
         cCenter = new JPanel();
         

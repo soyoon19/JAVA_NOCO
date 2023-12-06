@@ -817,6 +817,7 @@ class RoomManagePanel extends JPanel implements ActionListener { //방관리 패
 
                     @Override
                     public void mouseClicked(MouseEvent e) {
+
                         gbt.infoSet(parent.getController().getRoomImfDAO().findById(p.getRoom().getNum()));
                     }
 
@@ -833,6 +834,35 @@ class RoomManagePanel extends JPanel implements ActionListener { //방관리 패
                         System.out.println("in!");
                         background = new Color(p.getBackground().getRGB());
                         p.setBackground(new Color(10, 120, 80));
+                    }
+
+                    @Override
+                    public void mouseExited(MouseEvent e) {
+                        p.setBackground(background);
+                    }
+                });
+            }else{
+                p.addMouseListener(new MouseListener() {
+                    Color background;
+
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        JOptionPane.showMessageDialog(parent, "설정할 수 없는 방입니다.");
+                    }
+
+                    @Override
+                    public void mousePressed(MouseEvent e) {
+                    }
+
+                    @Override
+                    public void mouseReleased(MouseEvent e) {
+                    }
+
+                    @Override
+                    public void mouseEntered(MouseEvent e) {
+                        System.out.println("in!");
+                        background = new Color(p.getBackground().getRGB());
+                        p.setBackground(new Color(130, 10, 30));
                     }
 
                     @Override

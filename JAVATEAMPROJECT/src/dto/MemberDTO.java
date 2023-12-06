@@ -51,13 +51,13 @@ public class MemberDTO {
 
     public static int gradeToDiscount(char grade){
         switch (grade){
-            case 'C':
+            case 'c':
                 return 0;
-            case 'B':
+            case 'b':
                 return 1;
-            case 'S':
+            case 's':
                 return 3;
-            case 'G':
+            case 'g':
                 return 5;
             default:
                 return 0;
@@ -65,9 +65,9 @@ public class MemberDTO {
     }
 
     public static char gradeCodtion(int pay){
-        if(pay < 100000) return 'C';
-        else if(pay < 300000) return 'B';
-        else if(pay < 800000) return 'S';
-        else return 'G';
+        if(pay < 100000) return 'c';
+        else if(pay < 300000) return 'b';
+        else if(pay < 800000) return 's';
+        else return 'g';
     }
 }

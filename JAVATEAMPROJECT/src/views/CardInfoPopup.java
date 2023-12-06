@@ -262,7 +262,11 @@ class CardInfoInputPanel extends JPanel implements ActionListener{
             ));
 
             //todo 회원 할인 정보
+
+            memberLog.setTotalPay(memberLog.getTotalPay() + total - totalDiscount);
+
             //회원 등급 설정
+
 
 
 

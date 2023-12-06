@@ -170,6 +170,11 @@ class ProductCart extends JPanel{
         center.add(p);
     }
 
+    public void clearPanel()
+    {
+        cartListMap.clear();
+    }
+
     class BuyButtonAction implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {

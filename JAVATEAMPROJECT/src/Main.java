@@ -80,8 +80,12 @@ public class Main {
          */
 
 
-        new StockMgPopup(win);
-        //win.add(new UserHomeView(win));
+
+        //new StockMgPopup(win);
+
+
+        win.add(new UserHomeView(win));
+        //win.add(new DrinksManagementView(win));
         //win.add(new PswdFindView(win));
         //win.add(new StockManagementView());
         //win.add(new StockManagementView(win));

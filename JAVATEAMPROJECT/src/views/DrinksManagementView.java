@@ -20,7 +20,7 @@ import java.util.Vector;
 class DrinksCategoryPanel extends JPanel implements ActionListener{
     public static Dimension BUTTON_SIZE = new Dimension(80,80);
     public static final String[] drinksCategorys = {
-            "전체 메뉴 보기", "커피", "논-커피", "티", "스무디", "상품"
+            "전체 메뉴 보기", "커피", "논커피", "티", "스무디", "상품"
     };
     private JPanel cCenter;
     private DefaultFrame parent;
@@ -28,9 +28,22 @@ class DrinksCategoryPanel extends JPanel implements ActionListener{
     //
     private HashMap<String, GoodsDTO> goodsMap;
     DrinksDetailPanel drinksDetailPanel;
+    private ArrayList<GoodsDTO> goodsArr;
+
+    private int nowSelect = 0;
+
+    //BoxLayout 초기화 : 담아준 음료를 초기화 시키기
+    private void clearBoxLayout() {
+        cCenter.removeAll(); //all 컴포넌트 제거
+        cCenter.revalidate(); //다시 유효하게
+        cCenter.repaint(); //패널을 다시 그림
+        goodsMap.clear();
+    }
 
     DrinksCategoryPanel(DefaultFrame prt, DrinksDetailPanel drinksDetailPanel) {
         goodsMap = new HashMap<>();
+        parent = prt;
+        goodsArr = parent.getController().getGoodsDAO().findAll();
         parent = prt;
         this.drinksDetailPanel = drinksDetailPanel;
         this.setLayout(new BorderLayout());
@@ -39,10 +52,12 @@ class DrinksCategoryPanel extends JPanel implements ActionListener{
         JPanel cTop = new JPanel();
         //setBackground(Color.WHITE);
 
-        JComboBox CategoryComboBox = new JComboBox(drinksCategorys);
-        CategoryComboBox.setFont(new DefaultFont(50));
+        JComboBox categoryComboBox = new JComboBox(drinksCategorys);
+        categoryComboBox.setFont(new DefaultFont(50));
+        //콤보 이벤트 처리
+        categoryComboBox.addActionListener(this);
         cTop.setLayout(new BorderLayout());
-        cTop.add(CategoryComboBox);
+        cTop.add(categoryComboBox);
 
         //center : 변경할 상품 담는
         cCenter = new JPanel();
@@ -57,11 +72,13 @@ class DrinksCategoryPanel extends JPanel implements ActionListener{
         add을 수행하면 정한 방향(수평 혹은 수직)으로 계속 추가 가능
          */
 
+
+
         //box 시작
         JPanel tmp = new JPanel();
         tmp.setLayout(new FlowLayout(FlowLayout.LEFT));
 
-        //-실제 내용
+        //실제 내용
         cCenter.setLayout(new BoxLayout(cCenter, BoxLayout.Y_AXIS)); //수직 방향으로 설정하였다.
         tmp.add(cCenter);
 
@@ -99,7 +116,19 @@ class DrinksCategoryPanel extends JPanel implements ActionListener{
         add(cTop, BorderLayout.NORTH);
         add(jsp, BorderLayout.CENTER);
         add(cBottom, BorderLayout.SOUTH);
+
+        categoryComboBox.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int s = categoryComboBox.getSelectedIndex();
+                if(s == nowSelect) return;;
+                drinksDetailPanel.tableUpdate(s);
+                nowSelect = s;
+            }
+        });
     }
+
 
 
     public void addDrink(GoodsDTO goods){
@@ -114,23 +143,54 @@ class DrinksCategoryPanel extends JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
        String s = e.getActionCommand();
+       int row = drinksDetailPanel.getTable().getSelectedRow();
+       //추가
+        if(s.contains("추가")){
+            (new GoodsAddPopup(parent)).setVisible(true);
+            //(new DrinkMgPopup(parent, newArr))
+            //(new DrinkMgPopup(parent, )).setVisible(true);
+
        if(s.contains("삭제")){
+           if(!(row >= 0 && row <800)){//미선택 예외처리
+               JOptionPane.showMessageDialog(null, "선택된 음료가 없어 삭제할 수 없습니다.");
 
-       }else if(s.contains("추가")){
-           //(new DrinkMgPopup(parent, newArr))
-           //(new DrinkMgPopup(parent, )).setVisible(true);
+           }
+           int r = JOptionPane.showConfirmDialog(null, "해당 음료를 정말 삭제하겠습니까?",
+                   "음료 종류 삭제 확인창", JOptionPane.YES_NO_OPTION);
+           if(r == JOptionPane.YES_NO_OPTION) {
+               //DB 삭제 방식
+               parent.getController().getGoodsDAO().delete(drinksDetailPanel.getProductData().get(row).get(0).toString());
+               drinksDetailPanel.tableUpdate(nowSelect);
+           }
+       }
 
+       //!!!
        }else if(s.contains("편집")){
-
+           if(row < 0) {//미선택시 에외처리
+               JOptionPane.showMessageDialog(null, "선택된 음료가 없어 편집할 수 없습니다.");
+           }else {
+               //parent.getController().getGoodsDAO().update(drinksDetailPanel.getProductData().get(row).get(0).toString());
+               drinksDetailPanel.tableUpdate(nowSelect);
+               (new GoodEditPopup(parent)).setVisible(true);
+           }
 
        } else if(s.contains("일괄")) {
+           //todo 담겨있는게 없을 때 예외 처리하기
            System.out.println(goodsMap.values());
-           (new DrinksStatusPopup(parent, new ArrayList<GoodsDTO>(goodsMap.values()))).setVisible(true);
-           drinksDetailPanel.tableUpdate();
+           DrinksStatusPopup drinksStatusPopup = new DrinksStatusPopup(parent, new ArrayList<GoodsDTO>(goodsMap.values()));
+           drinksStatusPopup.setVisible(true);
+
+           //todo drinksStatusPopup 에서 확인 클릭 여부를 알려주는 메서드를 만들어 호출한다.
+           //확인이 눌렸다면
+          // clearBoxLayout(); 메서드 실행
+           drinksDetailPanel.tableUpdate(nowSelect);
 
        }else if(s.contains("비우기")) {
-
+           clearBoxLayout();
+           drinksDetailPanel.tableUpdate(nowSelect);// 선택 되어있던 카테고리로 보여줌
        }
+
+
     }
 
 }
@@ -167,25 +227,6 @@ class SelectDrinkPanel extends JPanel{
         status.setFont(new DefaultFont(15));
         drinkSelect.add(status);
 
-        //삭제 버튼 (개별)
-        JButton cancelDrinkMg = new JButton("X");
-        cancelDrinkMg.setForeground(Color.red);
-
-        cancelDrinkMg.setBorderPainted(false);        //주변 테투리 이미지를 없게 한다.
-        cancelDrinkMg.setContentAreaFilled(false);    //버튼 안에 기본이미지를 없게 한다.
-        cancelDrinkMg.setFocusPainted(false);         //포커스 했을 때 이미지를 없게 한다.
-        cancelDrinkMg.setFont(new DefaultFont(10));
-        //cancelDrinkMg.setRolloverIcon();          //버튼 마우스 오버 되었을 경우 변경되는 이미지
-
-        drinkSelect.add(cancelDrinkMg);
-
-        //전체 삭제 클릭 이벤트 처리 1 - 삭제 : X 버튼 클릭시 담겼던 음료 삭제
-        cancelDrinkMg.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
 
     }
 
@@ -200,19 +241,18 @@ class DrinksDetailPanel extends  JPanel implements MouseListener {
     private  ArrayList<GoodsDTO> drinkList;
     private Vector<Vector<Object>> productData = new Vector<>(new Vector<>());
     private DrinksManagementView drinksManagementView;
+    private int nowCategoryIndex = 0;
 
     DrinksDetailPanel(DefaultFrame parent, DrinksManagementView drinksManagementView) {
         this.setLayout(new BorderLayout());
         this.parent = parent;
         controller = parent.getController(); //getController 하기 귀찮아서 변수에 저장
 
-        //!!!!!!
         ArrayList<GoodsDTO> goodsList = controller.getGoodsDAO().findAll();
         drinkList = new ArrayList<>();
         for(int i = 0; i < goodsList.size(); i++)
             if(goodsList.get(i).getMainCategory() == GoodsDTO.MAIN_CATEGORY_DRINK)
                 drinkList.add(goodsList.get(i));
-
 
         this.drinksManagementView = drinksManagementView;
 
@@ -224,7 +264,7 @@ class DrinksDetailPanel extends  JPanel implements MouseListener {
         //columnType.setFont(new DefaultFont(50));
 
         /* table 기본 설정 */
-        //2. JTable 수정 방지 하는 메서드
+        //2. JTable 사용자 수정 방지 하는 메서드
         DefaultTableModel tableModel = new DefaultTableModel(productData, columVector){
             public boolean isCellEditable(int row, int col){
                 return false;
@@ -232,9 +272,8 @@ class DrinksDetailPanel extends  JPanel implements MouseListener {
         };
         table = new JTable(tableModel);
 
-
         //새로운 정보를 받아서 UPDATE
-        tableUpdate();
+        tableUpdate(nowCategoryIndex);
 
         table.addMouseListener(this);
         JScrollPane scrollPane = new JScrollPane(table);
@@ -260,7 +299,9 @@ class DrinksDetailPanel extends  JPanel implements MouseListener {
         if(e.getClickCount() == 2) {
             //더블 클릭 -
             int row = table.getSelectedRow();
-            drinksManagementView.getDrinksCategoryPanel().addDrink(drinkList.get(row));
+            drinksManagementView.getDrinksCategoryPanel().addDrink(
+                    parent.getController().getGoodsDAO().findById(
+                            productData.get(row).get(0).toString()));
         }
     }
 
@@ -280,23 +321,56 @@ class DrinksDetailPanel extends  JPanel implements MouseListener {
     //ArrayList --> Object[][] 형으로 변환
     public void tableUpdate() {
         //테이블 정보 모두 삭제
-        productData.removeAllElements();
+        tableUpdate(0);
+    }
 
-        //테이블 정보 가져오기
-        for (GoodsDTO g : drinkList) {
-            productData.add(new Vector<Object>());
-            productData.get(productData.size() - 1).add(g.getCode());
-            productData.get(productData.size() - 1).add(g.getName());
-            productData.get(productData.size() - 1).add(g.getCategory());
-            productData.get(productData.size() - 1).add(g.getStatus());
-            productData.get(productData.size() - 1).add(g.getSaleCount());
-            productData.get(productData.size() - 1).add(g.getDisStatus());
-            productData.get(productData.size() - 1).add(g.getPrice());
-            productData.get(productData.size() - 1).add(g.getCost());
+    public void tableUpdate(int s){
+        nowCategoryIndex = s;
+        drinkList = parent.getController().getGoodsDAO().findAll();
+        String category = DrinksCategoryPanel.drinksCategorys[nowCategoryIndex];
+        productData.removeAllElements();
+        System.out.println(s);
+
+        if(s == 0){
+            for(GoodsDTO goods : drinkList) {
+                productData.add(GoodsDTOToVector(goods));
+            }
+        }else{
+            for(GoodsDTO goods : drinkList){
+                if(DrinksCategoryPanel.drinksCategorys[s].equals(goods.getCategory()))
+                    productData.add(GoodsDTOToVector(goods));
+
+            }
         }
-        //새롭게 되도록 업데이트
         table.updateUI();
     }
+
+    public JTable getTable() {
+        return table;
+    }
+
+    public Vector<Vector<Object>> getProductData() {
+        return productData;
+    }
+
+    public Vector<Object> GoodsDTOToVector(GoodsDTO g){
+        Vector<Object> productData = new Vector<>();
+        productData.add(g.getCode());
+        productData.add(g.getName());
+        productData.add(g.getCategory());
+        productData.add(g.getStatus());
+        productData.add(g.getSaleCount());
+        productData.add(g.getDisStatus());
+        productData.add(g.getPrice());
+        productData.add(g.getCost());
+
+        return productData;
+    }
+
+    public void setNowCategoryIndex(int nowCategoryIndex){
+        this.nowCategoryIndex = nowCategoryIndex;
+    }
+
 }
 
 //mainView

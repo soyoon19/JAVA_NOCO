@@ -1,6 +1,7 @@
 package views;
 
 import custom_component.DefaultFont;
+import custom_component.EventSwitch;
 import custom_component.JPanelOneLabel;
 import dto.StockDTO;
 
@@ -11,6 +12,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.lang.invoke.VolatileCallSite;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -19,7 +22,7 @@ import java.util.Date;
 import java.util.Vector;
 
 
-class StocksShowPanel extends JPanel{
+class StocksShowPanel extends JPanel {
 
     /**/
 
@@ -29,7 +32,7 @@ class StocksShowPanel extends JPanel{
     DefaultFrame parent; //부모 정보 받기
 
     //LEFT (1) : 모든 JTable을 보여줄 패널
-    public StocksShowPanel(DefaultFrame prt){
+    public StocksShowPanel(DefaultFrame prt) {
         this.parent = prt;
 
         //left - JTable
@@ -42,11 +45,11 @@ class StocksShowPanel extends JPanel{
         //category 만큼 반복
         categoryStockList = new ArrayList[StockDTO.ITEMS_KOREA_NAME.length]; //StockDTO에 있는 카테고리 정보를 길이만큼 받기
         stockViews = new StockViewPanel[categoryStockList.length]; //categoryStockList 개수만큼 stockView를 만듦
-        for(int i = 0; i < StockDTO.ITEMS_KOREA_NAME.length; i++){
+        for (int i = 0; i < StockDTO.ITEMS_KOREA_NAME.length; i++) {
             categoryStockList[i] = new ArrayList<>(); //categoryStockList ??
             //stocks에서 원하는 카테고리 아이템을 가져온다.
-            for(int j = 0; j < stocsk.size(); j++){
-                if(i == stocsk.get(j).getCategory()){ //Category 번호가 서로 같다면
+            for (int j = 0; j < stocsk.size(); j++) {
+                if (i == stocsk.get(j).getCategory()) { //Category 번호가 서로 같다면
                     categoryStockList[i].add(stocsk.get(j)); //해당하는 카테고리 패널에 추가
                 }
             }
@@ -68,7 +71,8 @@ class StocksShowPanel extends JPanel{
 class StockViewPanel extends JPanel {
     //1. DB로 불러와서 비교하기 / 2. 해당 카테고리에 맞는 JTable 붙이기
     ArrayList<StockDTO> stokcs;
-    public StockViewPanel(ArrayList<StockDTO> stocks){
+
+    public StockViewPanel(ArrayList<StockDTO> stocks) {
         this.setLayout(new BorderLayout());
         this.add(new JLabel("test"), BorderLayout.NORTH);
 
@@ -76,11 +80,11 @@ class StockViewPanel extends JPanel {
 
         String[] columnType = new String[]{"재고코드", "재고명", "현재 수량", "최소수량", "공급가", "날짜"};
         Vector<Object> colVec = new Vector<>();
-        for(int i = 0; i < columnType.length; i++)
+        for (int i = 0; i < columnType.length; i++)
             colVec.add(columnType[i]);
 
         Vector<Vector<Object>> stockList = new Vector<>(new Vector<>());
-        for(StockDTO stock : stocks){
+        for (StockDTO stock : stocks) {
             stockList.add(new Vector<>());
             int x = stockList.size() - 1;
             stockList.get(x).add(stock.getCode());
@@ -91,12 +95,12 @@ class StockViewPanel extends JPanel {
             stockList.get(x).add((new Date()).toString());
         }
 
-        DefaultTableModel tableModel = new DefaultTableModel(stockList, colVec){
-            public boolean isCellEditable(int row, int col){
+        DefaultTableModel tableModel = new DefaultTableModel(stockList, colVec) {
+            public boolean isCellEditable(int row, int col) {
                 return false;
             }
         };
-        
+
         JTable table = new JTable(tableModel);
         JScrollPane sp = new JScrollPane(table);
 
@@ -113,11 +117,12 @@ class StockViewPanel extends JPanel {
 }
 
 //right - 1
- class StockMenuPanel extends JPanel{
+class StockMenuPanel extends JPanel {
 
     private CalendarPanel calendarPanel;
     private DefaultFrame parent;
-    public StockMenuPanel(DefaultFrame prt){
+
+    public StockMenuPanel(DefaultFrame prt) {
         parent = prt;
         this.setLayout(new BorderLayout());
         JTabbedPane jtp = new JTabbedPane();
@@ -188,14 +193,15 @@ class StockViewPanel extends JPanel {
         //2. 추가/편집/삭제/일괄설정 버튼 넣기 (색깔 지정)
         JPanel cCenterBtm = new JPanel();
         JButton selBtn = new JButton("선택"), reBtn = new JButton("초기화");
-        cCenterBtm.add(selBtn); cCenterBtm.add(reBtn);
+        cCenterBtm.add(selBtn);
+        cCenterBtm.add(reBtn);
         cCenter.add(cCenterBtm, BorderLayout.SOUTH);
 
         //stock
         JPanel cBottom = new JPanel();
         String[] drinkMangement = {"추가", "편집", "삭제", "<HTML><body style='text-align:center;'>선택<br>해제</body></HTML>"};
         String[] dMButtonColor = {"green", "yellow", "RED", "orange"};
-        Color[] btnColors = {Color.green, Color.YELLOW, new Color(255, 0, 0),Color.white};
+        Color[] btnColors = {Color.green, Color.YELLOW, new Color(255, 0, 0), Color.white};
 
         //1. 반복문으로 drinkMangement 개수만큼 버튼 생성
         JButton[] dMButton = new JButton[drinkMangement.length];
@@ -212,12 +218,14 @@ class StockViewPanel extends JPanel {
             cBottom.add(dMButton[i]);
         }
 
+
         add(cTop, BorderLayout.NORTH);
         add(cCenter, BorderLayout.CENTER);
         add(cBottom, BorderLayout.SOUTH);
 
     }
 }
+
 public class StockManagementView extends JPanel {
     public static Dimension BUTTON_SIZE = new Dimension(80, 80);
     public static final String[] stocksCategory = {
@@ -225,30 +233,33 @@ public class StockManagementView extends JPanel {
     };
     private JPanel cCenter;
     private DefaultFrame parent;
+
     public StockManagementView(DefaultFrame prt) {
         this.parent = prt;
         this.setLayout(new GridBagLayout());
 
         //left
-        this.add(new StocksShowPanel(parent), DefaultFrame.easyGridBagConstraint(0,0,3,1));
+        this.add(new StocksShowPanel(parent), DefaultFrame.easyGridBagConstraint(0, 0, 3, 1));
 
 
         //rightMain - JTabbed (날짜, 캘린더)
-        this.add(new StockMenuPanel(parent), DefaultFrame.easyGridBagConstraint(1,0,1,1));
+        this.add(new StockMenuPanel(parent), DefaultFrame.easyGridBagConstraint(1, 0, 1, 1));
 
     }
 }
 
 //center - 2(달력)
-class CalendarPanel extends JPanel{
+class CalendarPanel extends JPanel {
     private Calendar date;
     public static final String WEEK[] = {"일", "월", "화", "수", "목", "금", "토"};
     private JPanelOneLabel[][] space;
     private JPanelOneLabel yearMonth;
     private SimpleDateFormat format;
     private DefaultFrame parent;
+    private int pastX = -1, pastY = -1;
+    private int nowDate = -1;
 
-    public CalendarPanel(DefaultFrame prt){
+    public CalendarPanel(DefaultFrame prt) {
         this.parent = prt;
         date = Calendar.getInstance();
         this.setLayout(new BorderLayout());
@@ -262,15 +273,30 @@ class CalendarPanel extends JPanel{
         cal.setLayout(new GridLayout(WEEK.length, WEEK.length));
         space = new JPanelOneLabel[WEEK.length][WEEK.length];
 
-        for(int i = 0; i < WEEK.length; i++) {
+        for (int i = 0; i < WEEK.length; i++) {
             for (int j = 0; j < WEEK.length; j++) {
                 space[i][j] = new JPanelOneLabel("");
                 space[i][j].setBorder(new LineBorder(Color.BLACK, 1));
+                int x = i, y = j;
+                space[i][j].addMouseListener(new CalMouseListener() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        if (!sw) return;
+                        if (pastX < 0) {
+                            space[pastX][pastY].setBackground(Color.white);
+                        }
+                        space[x][y].setBackground(Color.lightGray);
+                        nowDate = Integer.parseInt(space[x][y].getLabel().getText());
+                        pastX = x;
+                        pastY = y;
+                    }
+
+                });
                 cal.add(space[i][j]);
             }
         }
 
-        for(int i = 0; i < WEEK.length; i++){
+        for (int i = 0; i < WEEK.length; i++) {
             space[0][i].setBackground(Color.ORANGE);
             space[0][i].getLabel().setText(WEEK[i]);
         }
@@ -279,38 +305,81 @@ class CalendarPanel extends JPanel{
         this.add(cal);
     }
 
-    public void nextMonth(){
-        if(date.compareTo(Calendar.getInstance()) < 0) //date가 더 작을 경우에만
+    public void nextMonth() {
+        if (date.compareTo(Calendar.getInstance()) < 0) //date가 더 작을 경우에만
             date.add(Calendar.MONTH, 1);
         update();
     }
 
-    public void preMonth(){
+    public void preMonth() {
         date.add(Calendar.MONTH, -1);
         update();
     }
 
-    public void resetDate(){
+    public void resetDate() {
         date = Calendar.getInstance();
     }
 
-    public void update(){
+    public void update() {
         yearMonth.getLabel().setText(format.format(date.getTime()));
-        for(int y = 1; y < WEEK.length; y++)
-            for(int x = 0; x < WEEK.length; x++)
+        for (int y = 1; y < WEEK.length; y++)
+            for (int x = 0; x < WEEK.length; x++) {
                 space[y][x].getLabel().setText("");
+                //(CalMouseListener)(space[y][x].getMouseListeners())
+            }
 
         Calendar month = Calendar.getInstance();
         month.set(date.get(Calendar.YEAR), date.get(Calendar.MONTH), 1);
 
-        int start =  month.get(Calendar.DAY_OF_WEEK) - 1 + WEEK.length;
+        int start = month.get(Calendar.DAY_OF_WEEK) - 1 + WEEK.length;
 
         int end = month.getActualMaximum(Calendar.DAY_OF_MONTH) + start;
 
-        for(int i = start; i < end; i++){
+        for (int i = start; i < end; i++) {
             space[i / WEEK.length][i % WEEK.length].getLabel().setText(
                     String.valueOf(i - start + 1));
+
         }
     }
 
+    public int getNowDate() {
+        return nowDate;
+    }
+
+
+}
+
+abstract  class CalMouseListener implements MouseListener {
+    boolean sw = false;
+    @Override
+    public void mousePressed(MouseEvent e) {
+        if (!sw) return;
+
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        if (!sw) return;
+
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        if (!sw) return;
+
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        if (!sw) return;
+
+
+    }
+
+    public void setSw(boolean sw) {
+        this.sw = sw;
+    }
 }

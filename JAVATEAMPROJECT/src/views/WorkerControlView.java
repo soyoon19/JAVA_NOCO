@@ -9,17 +9,21 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Vector;
 
 public class WorkerControlView extends JPanel implements ActionListener {
 
     private JTable table;
     private ArrayList<WorkerDTO> workers;
+    WorkerDTO worker;
     private DefaultFrame parent;
+    private Vector<Vector<Object>> workerList;
 
-    public WorkerControlView(DefaultFrame prt) {
+    public WorkerControlView(DefaultFrame prt, WorkerDTO worker) {
 
         parent = prt;
-        workers = parent.getController().getWorkerDAO().findAll();
+        String name1=worker.getPosition();
+        String name2=worker.getName();
 
 
         this.setLayout(new BorderLayout());
@@ -30,7 +34,8 @@ public class WorkerControlView extends JPanel implements ActionListener {
         JPanel top = new JPanel();
         top.setLayout(new FlowLayout(FlowLayout.RIGHT));
 
-        JLabel workName = new JLabel("직책 OOO");
+
+        JLabel workName = new JLabel("직책 "+name1+" "+name2+"님");
         JButton reg = new JButton("등록");
         JButton chg = new JButton("수정");
         JButton del = new JButton("삭제");
@@ -49,16 +54,19 @@ public class WorkerControlView extends JPanel implements ActionListener {
 
         ArrayList<WorkerDTO> workers = prt.getController().getWorkerDAO().findAll();
         Object[] colum = new Object[]{"선택", "순서", "직책", "이름", "전화번호", "ID", "Password", "관리자 권한", "등록일자"};
-        Object[][] workerData = new Object[workers.size()][];
+        Vector<Object>  colVec = new Vector<>();
+        for(int i = 0; i < colum.length; i++)
+            colVec.add(colum[i]);
 
-        int i = 0;
-        for (WorkerDTO worker : workers) {
-            workerData[i] = new Object[]{false, (i + 1), worker.getPosition(), worker.getName(), worker.getHp(), worker.getId(),
-                    worker.getPasswd(), worker.getPosition().equals("점장"), worker.getRegDate()};
-            i++;
-        }
+        workerList = new Vector<>(new Vector<>());
 
-        DefaultTableModel tableModel = new DefaultTableModel(workerData, colum);
+
+
+        DefaultTableModel tableModel = new DefaultTableModel(workerList, colVec){
+            public boolean isCellEditable(int row, int col){
+                return false;
+            }
+        };
 
         // JTable 생성 및 모델 설정
         table = new JTable(tableModel) {
@@ -77,6 +85,8 @@ public class WorkerControlView extends JPanel implements ActionListener {
             }
         };
 
+        tableUpdate();
+
         // 첫 번째 열에 RadioCheckBox 추가
         table.getColumnModel().getColumn(0).setCellEditor(new DefaultCellEditor(new JCheckBox()));
 
@@ -90,7 +100,12 @@ public class WorkerControlView extends JPanel implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         String s = e.getActionCommand();
+        if(table.getSelectedRow() == -1) {
+            //todo 안내
+            return;
+        }
         WorkerDTO worker = workers.get(table.getSelectedRow());
+
         switch (s) {
             case "등록":
                 (new Worker_regPopup(parent)).setVisible(true);
@@ -102,7 +117,27 @@ public class WorkerControlView extends JPanel implements ActionListener {
                     (new WorkerDeleteCheckPopup(parent, worker)).setVisible(true);
                 break;
         }
+        workerList.removeAllElements();
+        tableUpdate();
 
+    }
+
+    public void tableUpdate(){
+        int i = 0;
+
+        workers = parent.getController().getWorkerDAO().findAll();
+        workerList.removeAllElements();
+
+        for (WorkerDTO worker : workers) {
+            Object[] t = new Object[]{false, (i + 1), worker.getPosition(), worker.getName(), worker.getHp(), worker.getId(),
+                    worker.getPasswd(), worker.getPosition().equals("점장"), worker.getRegDate()};
+            workerList.add(new Vector<>());
+            for(int j = 0; j < t.length; j++)
+                workerList.get(workerList.size() - 1).add(t[j]);
+            i++;
+        }
+
+        table.updateUI();
     }
 
 

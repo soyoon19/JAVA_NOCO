@@ -1,5 +1,6 @@
 package views;
 
+import custom_component.DefaultFont;
 import dao.MemberDAO;
 import dao.MemberLogDAO;
 import dto.MemberDTO;
@@ -14,6 +15,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Vector;
 
 public class MemberControlView extends JPanel implements ActionListener {
     private JTable table;
@@ -21,9 +23,11 @@ public class MemberControlView extends JPanel implements ActionListener {
     private ArrayList<MemberDTO> members;
     private ArrayList<MemberLogDTO> memberLogs;
     private DefaultFrame parent;
+    private Vector<Vector<Object>> memberList;
+    JComboBox strCombo1;
 
     public MemberControlView(DefaultFrame prt) {
-        parent = prt;
+        this.parent=prt;
         this.setLayout(new BorderLayout());
         //회원의 모든 정적인 정보를 가져온다.
         members = parent.getController().getMemberDAO().findAll();
@@ -31,7 +35,7 @@ public class MemberControlView extends JPanel implements ActionListener {
         memberLogs = parent.getController().getMemberLogDAO().findAll();
 
 
-        this.setSize(WIDTH,HEIGHT);
+        this.setSize(WIDTH, HEIGHT);
 
         JPanel ct = new JPanel();
         ct.setLayout(new GridBagLayout());
@@ -43,11 +47,6 @@ public class MemberControlView extends JPanel implements ActionListener {
 
         //맨 위쪽 뒤로 가기 버튼 레이아웃
 
-        JPanel topTop = new JPanel();
-        topTop.setLayout(new FlowLayout(FlowLayout.LEFT));
-        JButton back = new JButton("icon");
-
-        topTop.add(back);
 
         JPanel topBtm = new JPanel();
         topBtm.setLayout(new GridLayout(1, 2));
@@ -75,8 +74,8 @@ public class MemberControlView extends JPanel implements ActionListener {
 
         // 회원 JComboBox
         String[] memCategory = new String[]{"회원", "비회원"};
-        JComboBox strCombo1 = new JComboBox(memCategory);
-        //strCombo1.addActionListener(this);
+        strCombo1 = new JComboBox(memCategory);
+        strCombo1.addActionListener(this);
 
         topLeftT.add(mem);
         topLeftT.add(strCombo1);
@@ -85,7 +84,8 @@ public class MemberControlView extends JPanel implements ActionListener {
 
         JLabel hp = new JLabel("전화번호");
         JTextField T_hp = new JTextField();
-        JButton B_hp = new JButton("icon");
+        T_hp.setPreferredSize(new Dimension(120,20));
+        JButton B_hp = new JButton("search");
         topLeftB.add(hp);
         topLeftB.add(T_hp);
         topLeftB.add(B_hp);
@@ -99,10 +99,10 @@ public class MemberControlView extends JPanel implements ActionListener {
 
 
         JLabel firDate = new JLabel("YYYY-MM-DD");
-        JButton fir = new JButton("icon");
+        JButton fir = new JButton("날짜 선택");
         JLabel sym = new JLabel("  ~  ");
         JLabel secDate = new JLabel("YYYY-MM-DD");
-        JButton sec = new JButton("icon");
+        JButton sec = new JButton("날짜 선택");
 
 
         topRightT.add(c);
@@ -114,11 +114,13 @@ public class MemberControlView extends JPanel implements ActionListener {
         topRightT.add(sec);
 
         //오른쪽 아랫 부분 버튼 레이아웃
+        JButton detail = new JButton("조회");
         JButton cor = new JButton("수정");
         JButton del = new JButton("삭제");
+        detail.addActionListener(this);
         del.addActionListener(this);
         cor.addActionListener(this);
-
+        topRightB.add(detail);
         topRightB.add(cor);
         topRightB.add(del);
 
@@ -129,7 +131,7 @@ public class MemberControlView extends JPanel implements ActionListener {
         topBtm.add(topLeft);
         topBtm.add(topRight);
 
-        top.add(topTop, BorderLayout.NORTH);
+
         top.add(topBtm, BorderLayout.CENTER);
         ct.add(top, DefaultFrame.easyGridBagConstraint(0, 0, 1, 3));
 
@@ -138,21 +140,33 @@ public class MemberControlView extends JPanel implements ActionListener {
         main.setLayout(new BorderLayout());
 
         Object[] colum = new Object[]{"선택", "회원 전화번호", "비밀번호", "생년월일", "총 결제 금액", "등급", "가입 일자", "마지막로그인일자"};
-        Object[][] memberList = new Object[members.size()][];
-        for(int i = 0; i < members.size(); i++){
+        Vector<Object> colvec = new Vector<>();
+        for (int i = 0; i < colum.length; i++) {
+            colvec.add(colum[i]);
+        }
+
+
+        memberList = new Vector<>(new Vector<>());
+
+
+
+        /*Object[][] memberList = new Object[members.size()][];
+
+
+        for (int i = 0; i < members.size(); i++) {
             MemberDTO member = members.get(i);
             MemberLogDTO memberLog = parent.getController().getMemberLogDAO().findById(member.getHp());
 
             memberList[i] = new Object[]{
                     false, member.getHp(), member.getPasswd(), member.getBirthDate(),
-                    memberLog.getTotalPay() ,String.valueOf(memberLog.getM_rate()), member.getJoinDate().toString(),
+                    memberLog.getTotalPay(), String.valueOf(memberLog.getM_rate()), member.getJoinDate().toString(),
                     memberLog.getLastLogin().toString()
             };
-        }
+        }*/
 
         // JTable 모델
         DefaultTableModel tableModel = new DefaultTableModel(
-                memberList ,colum
+                memberList, colvec
         ) {
             @Override
             public Class<?> getColumnClass(int columnIndex) {
@@ -169,14 +183,17 @@ public class MemberControlView extends JPanel implements ActionListener {
             }
         };
 
+
         // JTable 생성 및 모델 설정
         table = new JTable(tableModel);
+        MtableUpdate();
+
+
         table.getColumnModel().getColumn(0).setCellRenderer(new NoMemberControlView.CheckBoxRenderer());
         table.getColumnModel().getColumn(0).setCellEditor(new DefaultCellEditor(new JCheckBox()));
-
         // 스크롤 가능하도록 JScrollPane에 JTable 추가
         JScrollPane scrollPane = new JScrollPane(table);
-        main.add(scrollPane,BorderLayout.CENTER);
+        main.add(scrollPane, BorderLayout.CENTER);
         ct.add(main, DefaultFrame.easyGridBagConstraint(0, 1, 1, 7));
         this.add(ct);
     }
@@ -186,10 +203,11 @@ public class MemberControlView extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String s = e.getActionCommand();
         MemberDTO member = members.get(table.getSelectedRow());
-        switch (s){
+        JPanel movePage = null;
+        switch (s) {
             case "삭제":
                 System.out.println(table.getSelectedRow());
-                if(table.getSelectedRow() < 0){
+                if (table.getSelectedRow() < 0) {
                     //JOptionPane
                     return;
                 }
@@ -198,7 +216,17 @@ public class MemberControlView extends JPanel implements ActionListener {
             case "수정":
                 (new MemberDetailCorrectPopup(parent, member.getHp())).setVisible(true);
                 break;
+
+            case "조회":
+                (new MemberDetailPopup(parent, member.getHp())).setVisible(true);
+                break;
+            case"comboBoxChanged":
+                if("비회원".equals(strCombo1.getSelectedItem())){
+                    (new NoMemberControlView(parent)).setVisible(true);
         }
+        }
+
+        MtableUpdate();
 
         //JComboBox cb = (JComboBox) e.getSource();
         //int index = cb.getSelectedIndex();
@@ -212,6 +240,30 @@ public class MemberControlView extends JPanel implements ActionListener {
             checkBox.setSelected((Boolean) value);
             return checkBox;
         }
+    }
+
+
+    public void MtableUpdate() {
+        memberList.removeAllElements();
+        members = parent.getController().getMemberDAO().findAll();
+
+        for (int i = 0; i < members.size(); i++) {
+            MemberDTO member = members.get(i);
+            MemberLogDTO memberLog = parent.getController().getMemberLogDAO().findById(member.getHp());
+            Vector<Object> rowData = new Vector<>();
+
+            rowData.add(false);
+            rowData.add(member.getHp());
+            rowData.add(member.getPasswd());
+            rowData.add(member.getBirthDate());
+            rowData.add(memberLog.getTotalPay());
+            rowData.add(String.valueOf(memberLog.getM_rate()));
+            rowData.add(member.getJoinDate().toString());
+            rowData.add(memberLog.getLastLogin().toString());
+
+            memberList.add(rowData);
+        }
+        table.updateUI();
     }
 
 }

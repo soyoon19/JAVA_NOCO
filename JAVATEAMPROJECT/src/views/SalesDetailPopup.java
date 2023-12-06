@@ -3,11 +3,13 @@ package views;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
-public class SalesDetailPopup extends JDialog {
+public class SalesDetailPopup extends JDialog  {
 
     public SalesDetailPopup(DefaultFrame prt) {
         super(prt,"",true);
+        this.setSize(1200,900);
         JPanel main = new JPanel();
         main.setLayout(new BorderLayout());
 
@@ -75,6 +77,7 @@ public class SalesDetailPopup extends JDialog {
 
         main.add(center,BorderLayout.CENTER);
         this.add(main);
+        setLocationRelativeTo(null);
 
     }
 }

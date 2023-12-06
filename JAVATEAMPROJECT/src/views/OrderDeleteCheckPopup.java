@@ -1,11 +1,20 @@
 package views;
 
+import dto.OrderDTO;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class OrderDeleteCheckPopup extends JDialog {
+public class OrderDeleteCheckPopup extends JDialog implements ActionListener {
     public static final int width=300, height=300;
+
+    DefaultFrame parent;
+
+    OrderDTO order;
+
     public OrderDeleteCheckPopup(DefaultFrame prt){
         super(prt,"확인창",true);
         this.setSize(width,height);
@@ -27,10 +36,28 @@ public class OrderDeleteCheckPopup extends JDialog {
         JButton n= new JButton("NO");
 
         bLayout.add(y);
+        y.addActionListener(this);
+        n.addActionListener(this);
+
         bLayout.add(n);
 
         ct.add(message);
         ct.add(bLayout);
+        setLocationRelativeTo(null);
+    }
+
+    public void actionPerformed(ActionEvent e){
+        String s=e.getActionCommand();
+        switch (s) {
+            case "YES":
+                (new OrderDeleteRCPopup(parent)).setVisible(true);
+                this.dispose();
+                break;
+
+            case"NO":
+                dispose();
+                break;
+        }
 
     }
 }

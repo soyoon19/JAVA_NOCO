@@ -140,7 +140,10 @@ public class MemberDeletePopup extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 parent.getController().getMemberLogDAO().delete(member.getHp());
                 parent.getController().getMemberDAO().delete(member.getHp());
+                JOptionPane.showMessageDialog(parent, "삭제 성공!", "알림", JOptionPane.INFORMATION_MESSAGE);
+                dispose();
             }
         });
+        setLocationRelativeTo(null);
     }
 }

@@ -79,6 +79,7 @@ class DefaultUserTopPanel extends DefaultTopPanel{
             @Override
             public void mouseClicked(MouseEvent e) {
                 if(e.getClickCount() == 3){
+                    //로고 3번 연속 클릭시 관리자 로그인 화면으로 이동
                     parent.move(new ManagerLoginView(parent));
                 }
             }

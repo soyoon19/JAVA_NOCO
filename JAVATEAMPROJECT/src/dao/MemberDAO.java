@@ -137,4 +137,32 @@ public class MemberDAO implements DAO<MemberDTO, String>{
 
         return member; // 해당 ID의 회원을 찾지 못하면 null 반환
     }
+
+    public boolean update(MemberDTO member) {
+        PreparedStatement pstmt = null;
+
+        try {
+            String sql = "UPDATE Member_T SET m_passwd=?, m_birthDate=?, m_joinDate=? WHERE m_hp=?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, member.getPasswd());
+            pstmt.setDate(2, member.getBirthDate());
+            pstmt.setDate(3, member.getJoinDate());
+            pstmt.setString(4, member.getHp());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            try {
+                if (pstmt != null)
+                    pstmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
+
+        return true;
+    }
+
 }

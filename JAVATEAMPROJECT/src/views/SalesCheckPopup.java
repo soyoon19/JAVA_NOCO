@@ -7,11 +7,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-public class SalesCheckPopup extends JDialog {
+public class SalesCheckPopup extends JDialog implements ActionListener {
+
+    DefaultFrame parent;
 
     public SalesCheckPopup(DefaultFrame prt) {
+
         super(prt, "", true);
         this.setSize(500,700);
+
+        this.parent=prt;
         JPanel main = new JPanel();
         main.setLayout(new BorderLayout());
 
@@ -62,6 +67,7 @@ public class SalesCheckPopup extends JDialog {
         JPanel FL5 = new JPanel();
         FL5.setLayout(new FlowLayout(FlowLayout.RIGHT));
         JButton det = new JButton("상세히");
+        det.addActionListener(this);
         FL5.add(det);
 
         JPanel leftgB = new JPanel();
@@ -171,6 +177,12 @@ public class SalesCheckPopup extends JDialog {
         mainGB.add(right, DefaultFrame.easyGridBagConstraint(1, 0, 6, 1));
         main.add(mainGB, BorderLayout.CENTER);
         this.add(main);
+        setLocationRelativeTo(null);
+    }
+
+    public void actionPerformed(ActionEvent e){
+        (new SalesDetailPopup(parent)).setVisible(true);
+
     }
 
 

@@ -12,17 +12,18 @@ import java.awt.*;
 
 public class MemberDetailPopup extends JDialog {
 
-    public MemberDetailPopup(DefaultFrame prt, MemberDTO member) {
+    DefaultFrame parent;
+    private MemberDTO member;
+    private MemberLogDTO memberLog;
+
+    public MemberDetailPopup(DefaultFrame prt, String M_hp) {
         super(prt, "", true);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setSize(500, 700);
+        this.parent = prt;
 
-
-        //MemberLog 정보를 가져오는 DAO 객체
-        MemberLogDAO memberLogDAO = prt.getController().getMemberLogDAO();
-
-        //Member에 있는 전화번호로 MemberLog의 정볼르 조회
-        MemberLogDTO memberLog = memberLogDAO.findById(member.getHp());
+        member=parent.getController().getMemberDAO().findById(M_hp);
+        memberLog=parent.getController().getMemberLogDAO().findById(M_hp);
 
 
         Container ct = getContentPane();
@@ -46,17 +47,9 @@ public class MemberDetailPopup extends JDialog {
         JTextField T_hp = new JTextField(15);
         T_hp.setText(member.getHp());
         T_hp.setEditable(false);
-        //값 형태의 맞게 데이터를 가져옴
-        /*
-        String --> String
-        int --> String.valueOf()
-        Char --> String.valueOf()
-        Date --> toString()
-        ....
-         */
 
-        T_hp.setEditable(false);// 변경불가 값
-        T_hp.setBackground(Color.WHITE);
+
+
 
         JLabel passwd = new JLabel("비밀번호");
         JTextField T_passwd = new JTextField(20);
@@ -79,7 +72,6 @@ public class MemberDetailPopup extends JDialog {
 
         // 배열로 입력준비
         JLabel[] jlb1 = new JLabel[]{hp, passwd, birth, pay, rate, T_rate};
-        JTextField[] jtf = new JTextField[]{T_hp, T_passwd, T_birth, T_pay};
         JComponent[] match1 = new JComponent[]{T_hp, T_passwd, T_birth, T_pay, T_rate};
 
         topBtm.setLayout(new GridLayout(5, 1));
@@ -140,8 +132,7 @@ public class MemberDetailPopup extends JDialog {
         }
         btm.add(btmTop, BorderLayout.CENTER);
         ct.add(btm, DefaultFrame.easyGridBagConstraint(0, 1, 1, 3));
-        this.add(ct);
-
+        setLocationRelativeTo(null);
 
     }
 }

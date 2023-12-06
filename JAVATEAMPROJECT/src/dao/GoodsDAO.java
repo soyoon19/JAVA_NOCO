@@ -125,7 +125,7 @@ public class GoodsDAO implements  DAO<GoodsDTO, String>{
     public boolean insert(GoodsDTO goods) {
         PreparedStatement pstmt = null;
         try {
-            String sql = "INSERT INTO Goods_T (g_code, g_class, g_category, g_name, g_status, g_saleCount, g_disStatus, g_price, g_cost) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO Goods_T (g_code, g_class, g_category, g_name, g_status, g_saleCount, g_disStatus, g_price, g_cost, g_ice, g_hot) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, goods.getCode());
             pstmt.setString(2, goods.getCategory());
@@ -152,6 +152,44 @@ public class GoodsDAO implements  DAO<GoodsDTO, String>{
             }
         }
         return true;
+    }
+
+
+    public boolean update(GoodsDTO goods) {
+        PreparedStatement pstmt = null;
+        try {
+            String sql = "UPDATE Goods_T SET g_class=?, g_category=?, g_name=?, g_status=?, " +
+                    "g_saleCount=?, g_disStatus=?, g_price=?, g_cost=?, g_ice=?, g_hot=? WHERE g_code=?";
+            pstmt = conn.prepareStatement(sql);
+
+            pstmt.setString(1, goods.getCategory());
+            pstmt.setInt(2, goods.getMainCategory());
+            pstmt.setString(3, goods.getName());
+            pstmt.setString(4, goods.getStatus());
+            pstmt.setInt(5, goods.getSaleCount());
+            pstmt.setInt(6, goods.getDisStatus() ? 1 : 0);
+            pstmt.setInt(7, goods.getPrice());
+            pstmt.setInt(8, goods.getCost());
+            pstmt.setInt(9, goods.getIce() ? 1 : 0);
+            pstmt.setInt(10, goods.getHot() ? 1 : 0);
+            pstmt.setString(11, goods.getCode());
+
+            int rowsAffected = pstmt.executeUpdate();
+
+            // Check if the update was successful
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            try {
+                if (pstmt != null)
+                    pstmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
     }
 
 }

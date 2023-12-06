@@ -1,6 +1,5 @@
 package dao;
 
-import dto.OrderDTO;
 import dto.OrderHDTO;
 
 import java.sql.Connection;
@@ -8,7 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class OrderHDAO implements DAO<OrderHDTO, String> {
     private Connection conn;
@@ -20,16 +18,17 @@ public class OrderHDAO implements DAO<OrderHDTO, String> {
     public boolean insert(OrderHDTO orderH) {
         PreparedStatement pstmt = null;
         try {
-            String sql = "INSERT INTO OrderH_T (o_code, g_code, g_count, o_date, oH_price, oH_discount, oH_cost) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO OrderH_T (o_code, g_code, oH_temp, g_count, o_date, oH_price, oH_discount, oH_cost) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, orderH.getOrderCode());
             pstmt.setString(2, orderH.getGoodsCode());
-            pstmt.setInt(3, orderH.getCount());
-            pstmt.setDate(4, orderH.getDate());
-            pstmt.setInt(5, orderH.getPrice());
-            pstmt.setInt(6, orderH.getDiscount());
-            pstmt.setInt(7, orderH.getCost());
+            pstmt.setString(3, orderH.getH_temp());
+            pstmt.setInt(4, orderH.getCount());
+            pstmt.setDate(5, orderH.getDate());
+            pstmt.setInt(6, orderH.getPrice());
+            pstmt.setInt(7, orderH.getDiscount());
+            pstmt.setInt(8, orderH.getCost());
 
             pstmt.executeUpdate();
         } catch (SQLException e) {
@@ -68,35 +67,10 @@ public class OrderHDAO implements DAO<OrderHDTO, String> {
         return true;
     }
 
-    public OrderHDTO findById(String orderCode) {
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
-        OrderHDTO orderH = null;
 
-        try {
-            String sql = "SELECT * FROM OrderHD_T WHERE o_code = ?";
-            pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, orderCode);
-            rs = pstmt.executeQuery();
 
-            if (rs.next()) {
-                orderH = createOrderHDTO(rs);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (rs != null)
-                    rs.close();
-                if (pstmt != null)
-                    pstmt.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-
-        return orderH;
+    public OrderHDTO findById(String orderCode){
+        return null;
     }
 
     public ArrayList<OrderHDTO> findAll() {
@@ -133,6 +107,7 @@ public class OrderHDAO implements DAO<OrderHDTO, String> {
     private OrderHDTO createOrderHDTO(ResultSet rs) throws SQLException {
         String o_code = rs.getString("o_code");
         String g_code = rs.getString("g_code");
+        String H_temp = rs.getString("oH_temp");
         int g_count = rs.getInt("g_count");
         java.sql.Date o_date = rs.getDate("o_date");
         int oH_price = rs.getInt("oH_price");
@@ -140,6 +115,41 @@ public class OrderHDAO implements DAO<OrderHDTO, String> {
         int oH_cost = rs.getInt("oH_cost");
 
 
-        return new OrderHDTO(o_code, g_code, g_count, oH_price, oH_discount, oH_cost, o_date);
+        return new OrderHDTO(o_code, g_code, H_temp, g_count, oH_price, oH_discount, oH_cost, o_date);
     }
+
+
+    public boolean update(OrderHDTO orderH) {
+        PreparedStatement pstmt = null;
+
+        try {
+            String sql = "UPDATE OrderH_T SET g_code=?, g_count=?, o_date=?, oH_price=?, oH_discount=?, oH_cost=?, oH_temp = ? WHERE o_code=?";
+            pstmt = conn.prepareStatement(sql);
+
+            pstmt.setString(1, orderH.getGoodsCode());
+            pstmt.setInt(2, orderH.getCount());
+            pstmt.setDate(3, orderH.getDate());
+            pstmt.setInt(4, orderH.getPrice());
+            pstmt.setInt(5, orderH.getDiscount());
+            pstmt.setInt(6, orderH.getCost());
+            pstmt.setString(7, orderH.getH_temp());
+            pstmt.setString(8, orderH.getOrderCode());
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            try {
+                if (pstmt != null)
+                    pstmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
+
+        return true;
+    }
+
 }

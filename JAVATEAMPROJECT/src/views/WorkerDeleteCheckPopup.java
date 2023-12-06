@@ -26,7 +26,7 @@ public class WorkerDeleteCheckPopup extends JDialog implements ActionListener {
         Container ct = getContentPane();
         ct.setLayout(new BoxLayout(ct, BoxLayout.Y_AXIS));
 
-        JLabel message = new JLabel("OOO님을 삭제 하시겠습니까?");
+        JLabel message = new JLabel(worker.getName()+"님을 삭제 하시겠습니까?");
 
 
         message.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -46,7 +46,7 @@ public class WorkerDeleteCheckPopup extends JDialog implements ActionListener {
 
         ct.add(message);
         ct.add(bLayout);
-
+        setLocationRelativeTo(null);
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -55,9 +55,10 @@ public class WorkerDeleteCheckPopup extends JDialog implements ActionListener {
             case "YES":
                 parent.getController().getWorkerDAO().delete(workers.getId());
                 (new WorkerDeleteRCPopup(parent)).setVisible(true);
+                this.dispose();
                 break;
             case "NO":
-                //WorkerDeleteCheckPopup(this).setVisible(false);
+                dispose();
                 break;
         }
     }

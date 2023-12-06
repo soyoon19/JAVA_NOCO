@@ -81,12 +81,13 @@ class RoomEditPanel extends JPanel { //방편집 패널
         //Grid Bag Layout의 right
         JTabbedPane gbr = new JTabbedPane();
         se = new ScreenEditPanelMini(parent, this);
-        rs = new RoomSettingPanelMini(parent);
+        rs = new RoomSettingPanelMini(parent, this);
 
         roomEditViewPanel = new RoomEditViewPanel(parent.getController(), this);
         review.add(roomEditViewPanel,DefaultFrame.easyGridBagConstraint(0,0,3,1));
 
         gbr.add("화면 편집",se);
+
         gbr.add("방 설정",rs);
         gbr.setFont(new DefaultFont(RoomSettingView.FONT_SIZE));
         review.add(gbr,DefaultFrame.easyGridBagConstraint(1,0,1,1));
@@ -134,6 +135,7 @@ class RoomEditViewPanel extends RoomViewPanel{
 
     public void update(){
         super.update(); //RoomViewPanel의 UI Update
+        sw.setSw(false);
         for(int i = 0; i < jps.length; i++){
             for(int j = 0; j < jps[i].length; j++){
                 int x = j, y = i;
@@ -201,7 +203,7 @@ class RoomEditViewPanel extends RoomViewPanel{
                                     empty = false;
                                     break;
                                 }
-                        if(i == RoomEditViewPanel.MAX_HEIGHT || j == RoomEditViewPanel.MAX_WIDTH) empty = false;
+                        if((i == RoomEditViewPanel.MAX_HEIGHT || j == RoomEditViewPanel.MAX_WIDTH)) empty = false;
 
                         if(empty) { //빈 방이라면
                             /*
@@ -297,13 +299,6 @@ class RoomEditViewPanel extends RoomViewPanel{
         update();
         this.sw.setSw(false);
 
-    }
-
-    public void selectUnLock() { //todo 방 선택히 흔적 해결
-        /*
-        int x = Integer.parseInt(roomEditPanel.getSe().getRoomAdd().getRoomlcXtf().getText());
-        int y = Integer.parseInt(roomEditPanel.getSe().getRoomAdd().getRoomlcYtf().getText());
-        selectUnLock(x, y);*/
     }
 
     public void selectUnLock(int x, int y) {
@@ -450,7 +445,6 @@ class RoomAdd extends  JPanel implements ActionListener { //방추가 버튼
             @Override
             public void itemStateChanged(ItemEvent e) {
                 //콤보박스 변경시 입력된 좌표 초기화
-                mini.getRoomEditViewPanel().selectUnLock();
                 roomlcXtf.setText("");
                 roomlcYtf.setText("");
             }
@@ -662,13 +656,13 @@ class RoomDelete extends JPanel implements ActionListener { //방삭제 버튼
     @Override
     public void actionPerformed(ActionEvent e) {
         String s = e.getActionCommand();
-        RoomIfmDTO roomIfm= new RoomIfmDTO();
-        if (s.equals("삭제")){ //todo 방 삭제
-            if(true) {
+        RoomIfmDTO roomIfm = parent.getController().getRoomImfDAO().findById(roomNumtf.getText());
+
+        if (s.equals("삭제")){
+            if(roomIfm != null) {
                 System.out.println(roomIfm.isUsing());
                 JOptionPane.showMessageDialog(this, "사용 중인 방은 삭제할 수 없습니다.","방 삭제 오류",JOptionPane.INFORMATION_MESSAGE);
             } else {
-                System.out.println(roomIfm.isUsing());
                 int x = JOptionPane.showConfirmDialog(this, "삭제하시겠습니까?","방 삭제",JOptionPane.YES_NO_OPTION);
                 if(x == JOptionPane.OK_OPTION) {
                     //방 번호로 원하는 행을 찾는다.
@@ -717,12 +711,13 @@ class RoomSettingPanelMini extends JPanel implements ActionListener { //방설�
     private JLabel roomNum;
     private JTextField roomNumtf;
     private JButton roomActivate, roomUnActivate, applyBtn, cancleBtn;
-    private boolean state = false;
     private EventSwitch eventSwitch;
     private DefaultFrame parent;
     private static final int IMAGE_X = 140;
     private static final int IMAGE_Y = 140;
-    public RoomSettingPanelMini(DefaultFrame prt) {
+    private RoomEditPanel roomEditPanel;
+    public RoomSettingPanelMini(DefaultFrame prt, RoomEditPanel roomEditPanel) {
+        this.roomEditPanel = roomEditPanel;
         this.parent = prt;
         this.setLayout(new BorderLayout());
         JPanel rsg = new JPanel();
@@ -745,11 +740,11 @@ class RoomSettingPanelMini extends JPanel implements ActionListener { //방설�
         JPanel p3 = new JPanel();
         //활성화 버튼 클릭 전
         ImageIcon img1 = new FreeImageIcon(DefaultFrame.PATH+"/images/roomActivateBefore.png",IMAGE_X,IMAGE_Y);
-        roomActivate = new JButton("    방 활성화",img1);
+        roomActivate = new JButton("  방 활성화",img1);
         roomActivate.setFont(new DefaultFont(RoomSettingView.BETWEEN_FONT));
 
         //활성화 버튼 클릭 후
-        ImageIcon img2 = new FreeImageIcon(DefaultFrame.PATH+"/images/roomUnActivateAfter.png",IMAGE_X,IMAGE_Y);
+        ImageIcon img2 = new FreeImageIcon(DefaultFrame.PATH+"/images/roomActivateAfter.png",IMAGE_X,IMAGE_Y);
         roomActivate.setPressedIcon(img2);
 
         roomActivate.setBackground(Color.white);
@@ -781,28 +776,42 @@ class RoomSettingPanelMini extends JPanel implements ActionListener { //방설�
     public void actionPerformed(ActionEvent e) {
         String s = e.getActionCommand();
         //todo 예외 처리 방이 선택 안된 경우
-        if(s.equals("방 활성화")){
-            //if()
+        if(roomNumtf.equals("")){
+            JOptionPane.showMessageDialog(this, "방을 선택하세요.","방 선택",JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        RoomManageDTO room = parent.getController().getRoomManageDAO().findByRNum(roomNumtf.getText());
+
+        if(s.contains("방 활성화")){
+            if(room.isCheck() == false){
+                JOptionPane.showMessageDialog(this, "이미 활성화된 방입니다.","Error",JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+
             int x = JOptionPane.showConfirmDialog(this, "방 활성화를 적용하시겠습니까?","방 설정",JOptionPane.YES_NO_OPTION);
             if(x == JOptionPane.NO_OPTION) return;
 
-            RoomManageDTO room = parent.getController().getRoomManageDAO().findByRNum(roomNumtf.getText());
-            room.setCheck(state);
+            room.setCheck(false);
             parent.getController().getRoomManageDAO().update(room);
 
-            state = false;
 
             JOptionPane.showMessageDialog(this, "방이 활성화 되었습니다.","방 활성화 완료",JOptionPane.INFORMATION_MESSAGE);
+            roomEditPanel.update(); //GUI Update
         } else if (s.equals("방 비활성화")) {
+            if(room.isCheck() == true) {
+                JOptionPane.showMessageDialog(this, "이미 비활성화된 방입니다.","Error",JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+
             int x = JOptionPane.showConfirmDialog(this, "방 비활성화를 적용하시겠습니까?","방 설정",JOptionPane.YES_NO_OPTION);
             if(x == JOptionPane.NO_OPTION) return;
 
-            RoomManageDTO room = parent.getController().getRoomManageDAO().findByRNum(roomNumtf.getText());
-            room.setCheck(state);
+            room.setCheck(true);
             parent.getController().getRoomManageDAO().update(room);
 
-            state = true;
             JOptionPane.showMessageDialog(this, "방이 비활성화 되었습니다.","방 비활성화 완료",JOptionPane.INFORMATION_MESSAGE);
+            roomEditPanel.update();
         }
     }
 

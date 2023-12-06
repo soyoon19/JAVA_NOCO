@@ -4,14 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="73277347-8d03-48f7-a7c0-89844aebc90d" name="Changes" comment="Feat : 방 벤트 연결&#10;&#10;방의 업데이트 실시간 적요, 방 관리 이벤트 연결">
-      <change afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/jar/mysql-connector-j-8.2.0.jar" afterDir="false" />
+    <list default="true" id="73277347-8d03-48f7-a7c0-89844aebc90d" name="Changes" comment="Feat : CardInfoPopup 기능 추가">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/OrderDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/OrderDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dto/MemberDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dto/MemberDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/CardInfoPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/CardInfoPopup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/DrinksManagementView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/DrinksManagementView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ProductListCartView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ProductListCartView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/custom_component/AreaSelectMouseListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/custom_component/AreaSelectMouseListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/custom_component/RoomViewPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/custom_component/RoomViewPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/RoomSettingView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/RoomSettingView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -229,7 +225,14 @@
       <option name="project" value="LOCAL" />
       <updated>1701802886382</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Feat : CardInfoPopup 기능 추가">
+      <created>1701881427819</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1701881427819</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -299,6 +302,7 @@
     <MESSAGE value="Feat : RoomView, HOT/ICE 기능 추가" />
     <MESSAGE value="Feat : DAO, Order 주문&#10;&#10;주문시에 DB에 최신화 기능" />
     <MESSAGE value="Feat : 방 벤트 연결&#10;&#10;방의 업데이트 실시간 적요, 방 관리 이벤트 연결" />
-    <option name="LAST_COMMIT_MESSAGE" value="Feat : 방 벤트 연결&#10;&#10;방의 업데이트 실시간 적요, 방 관리 이벤트 연결" />
+    <MESSAGE value="Feat : CardInfoPopup 기능 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="Feat : CardInfoPopup 기능 추가" />
   </component>
 </project>

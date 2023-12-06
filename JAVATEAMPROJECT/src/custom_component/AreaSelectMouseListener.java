@@ -33,16 +33,16 @@ public abstract class AreaSelectMouseListener implements MouseListener {
         if(!sw.getSw()) return;
         boolean empty = true;
 
-        for(int i = y; i < option.getWidth() + y && i < RoomViewPanel.MAX_HEIGHT; i++)
-            for(int j = x; j < option.getHeight() + x && j < RoomViewPanel.MAX_WIDTH; j++)
+        for(int i = y; i < option.getHeight() + y && i < RoomViewPanel.MAX_HEIGHT; i++)
+            for(int j = x; j < option.getWidth() + x && j < RoomViewPanel.MAX_WIDTH; j++)
                 if(!jps[i][j].getUse()) { //JPanel이 사용되고 있지 않으면 == 방이 이미 점유되어 있면
                     empty = false;
                     break;
                 }
 
 
-        for(int i = y; i < option.getWidth() + y && i < RoomViewPanel.MAX_HEIGHT; i++)
-            for(int j = x; j < option.getHeight() + x && j < RoomViewPanel.MAX_WIDTH; j++) {
+        for(int i = y; i < option.getHeight() + y && i < RoomViewPanel.MAX_HEIGHT; i++)
+            for(int j = x; j < option.getWidth() + x && j < RoomViewPanel.MAX_WIDTH; j++) {
                 if(empty) jps[i][j].setBackground(new Color(122,138,250));
                 else jps[i][j].setBackground(new Color(242,101,101));    //방이 이미 점유되어 있으면 빨간색으로 변경한다.
             }

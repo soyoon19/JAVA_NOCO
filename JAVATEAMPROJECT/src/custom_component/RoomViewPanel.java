@@ -33,7 +33,15 @@ public class RoomViewPanel extends JPanel {
     protected Controller controller;
 
     public void mapSet(){
-        this.rooms = controller.getRoomManageDAO().findAll();
+        ArrayList<RoomManageDTO> tempRooms = controller.getRoomManageDAO().findAll();
+        rooms = new ArrayList<RoomManageDTO>();
+
+        //RoomNum이 null이 아닌 값을 가져온다.
+        for(int i = 0; i < tempRooms.size(); i++)
+            if(tempRooms.get(i).getNum() != null)
+                rooms.add(tempRooms.get(i));
+
+
         this.options = controller.getRoomOptionDAO().findAll();
 
         this.setLayout(new GridBagLayout());

@@ -261,6 +261,9 @@ class CardInfoInputPanel extends JPanel implements ActionListener{
                     null,total, totalDiscount, OrderDTO.STATUS_ORDER
             ));
 
+            //todo 회원 할인 정보
+            //회원 등급 설정
+
 
 
             int i = 0;
@@ -281,6 +284,7 @@ class CardInfoInputPanel extends JPanel implements ActionListener{
             //room 정보 insert
             if(member != null) {
                 roomImf.setUserHp(member.getHp());
+                //memberLog.setTotalPay();
                 cardInfoPopup.getParent().move(new MusicUseView(cardInfoPopup.getParent(), room, member, roomImf));
             }else{
                 controller.getRoomImfDAO().insert(roomImf);

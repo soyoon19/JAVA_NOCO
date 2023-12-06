@@ -1,5 +1,6 @@
 package dao;
 
+import dto.MemberDTO;
 import dto.RoomManageDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,6 +12,36 @@ public class RoomManageDAO implements DAO<RoomManageDTO, String> {
     private Connection conn;
     public RoomManageDAO(Connection coon){this.conn=coon;}
 
+    public String getNextCode(){
+        //일련번호 갱신
+        RoomManageDTO lastOrder = findLastRow(); //마지막 행을 가져온다.
+
+        String code;
+        if(lastOrder == null){
+            code = RoomManageDTO.PREFIX + "0001";
+        }else{
+            String lastCode = lastOrder.getCode();
+            System.out.println("x : " + lastCode);
+
+            lastCode = lastCode.substring(1); //r0002 --> 0002
+            System.out.println("y : " + lastCode);
+
+
+            int intCode = Integer.parseInt(lastCode); //0002 --> 2
+            intCode++; //3
+
+            String needZero = ""; //빈 공간을 0으로 채울 변수
+
+            lastCode = String.valueOf(intCode); //(int)3 --> (String)3 --> 03 --> 003 --> 0003
+                                                //(int)10 --> (String)10 --> 010 --> 0010
+            while(lastCode.length() + needZero.length() < 4)
+                needZero += "0";
+
+            code = RoomManageDTO.PREFIX + needZero + lastCode;
+        }
+
+        return code;
+    }
 
     @Override
     public boolean insert(RoomManageDTO manage) {

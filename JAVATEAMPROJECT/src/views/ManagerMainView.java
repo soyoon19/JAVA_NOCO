@@ -2,14 +2,33 @@ package views;
 
 import custom_component.DefaultFont;
 import custom_component.JPanelOneLabel;
+import dto.GoodsDTO;
 import dto.StockDTO;
 import dto.WorkerDTO;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+
+class CustomTableCellRenderer extends DefaultTableCellRenderer { //테이블 글씨 크기 조정
+    private final int fontSize;
+
+    public CustomTableCellRenderer(int fontSize) {
+        this.fontSize = fontSize; //폰트 사이즈 지정
+        setHorizontalAlignment(SwingConstants.CENTER); // 셀 텍스트 가운데 정렬
+    }
+
+    @Override
+    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+        Component cellComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+        cellComponent.setFont(new Font("맑은 고딕", Font.PLAIN, fontSize));
+        return cellComponent;
+    }
+}
 
 public class ManagerMainView extends JPanel {
     DefaultFrame parent;
@@ -32,7 +51,6 @@ class ManagerButtonListPanel extends JPanel implements ActionListener {
     JLabel loginName;
     JButton staffManage, logout;
     DefaultFrame parent;
-    JPanel nowPanel;
     WorkerDTO worker;
     public ManagerButtonListPanel(DefaultFrame prt, WorkerDTO worker) {
         this.setLayout(new BorderLayout());
@@ -50,15 +68,69 @@ class ManagerButtonListPanel extends JPanel implements ActionListener {
         JPanel blc = new JPanel();
         blc.setLayout(new GridLayout(7,1));
 
-        JButton [] btns = new JButton[7];
-        String [] label = {"주문 내역","재고 관리","방 설정","회원 목록","음료 편집","매출 현황","요청 관리"};
+        //button list 1
+        JPanel p1 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JButton b1 = new JButton("요청 관리");
+        b1.setFont(new DefaultFont(FONT_SIZE));
+        b1.addActionListener(this);
+        b1.setBackground(Color.white);
+        p1.add(b1);
+        blc.add(p1);
 
-        for (int i = 0 ; i < label.length ; i++) {
-            btns[i] = new JButton(label[i]);
-            blc.add(btns[i]);
-            btns[i].setFont(new DefaultFont(FONT_SIZE));
-            btns[i].addActionListener(this);
-        }
+        //button list 2
+        JPanel p2 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JButton b2 = new JButton("주문 관리");
+        b2.setFont(new DefaultFont(FONT_SIZE));
+        b2.addActionListener(this);
+        b2.setBackground(Color.white);
+        p2.add(b2);
+        blc.add(p2);
+
+        //button list 3
+        JPanel p3 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JButton b3 = new JButton("회원 관리");
+        b3.setFont(new DefaultFont(FONT_SIZE));
+        b3.addActionListener(this);
+        b3.setBackground(Color.white);
+        p3.add(b3);
+        blc.add(p3);
+
+        //button list 4
+        JPanel p4 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JButton b4 = new JButton("매출 관리");
+        b4.setFont(new DefaultFont(FONT_SIZE));
+        b4.addActionListener(this);
+        b4.setBackground(Color.white);
+        p4.add(b4);
+        blc.add(p4);
+
+        //button list 5
+        JPanel p5 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JButton b5 = new JButton("음료 관리");
+        b5.setFont(new DefaultFont(FONT_SIZE));
+        b5.addActionListener(this);
+        b5.setBackground(Color.white);
+        p5.add(b5);
+        blc.add(p5);
+
+        //button list 6
+        JPanel p6 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JButton b6 = new JButton("재고 관리");
+        b6.setFont(new DefaultFont(FONT_SIZE));
+        b6.addActionListener(this);
+        b6.setBackground(Color.white);
+        p6.add(b6);
+        blc.add(p6);
+
+        //button list 7
+        JPanel p7 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JButton b7 = new JButton("방 설정");
+        b7.setFont(new DefaultFont(FONT_SIZE));
+        b7.addActionListener(this);
+        b7.setBackground(Color.white);
+        b7.setPreferredSize(new Dimension(200, 60));
+        p7.add(b7);
+        blc.add(p7);
 
         add(blc, BorderLayout.CENTER);
 
@@ -67,12 +139,14 @@ class ManagerButtonListPanel extends JPanel implements ActionListener {
 
         staffManage = new JButton("직원 관리");
         staffManage.addActionListener(this);
+        staffManage.setBackground(Color.white);
         logout = new JButton("LOGOUT");
         logout.addActionListener(this);
+        logout.setBackground(Color.white);
         bls.add(staffManage);
         bls.add(logout);
 
-        staffManage.setFont(new DefaultFont(20));
+        staffManage.setFont(new DefaultFont(20,Font.BOLD));
         logout.setFont(new DefaultFont(20));
 
         staffManage.setPreferredSize(new Dimension(150,60));
@@ -80,7 +154,6 @@ class ManagerButtonListPanel extends JPanel implements ActionListener {
 
         bls.setLayout(new FlowLayout(FlowLayout.RIGHT));
         add(bls, BorderLayout.SOUTH);
-
     }
 
     @Override
@@ -88,7 +161,7 @@ class ManagerButtonListPanel extends JPanel implements ActionListener {
         String s = e.getActionCommand();
         JPanel movePage = null;
         switch (s) {
-            case "주문 내역":
+            case "주문 관리":
                 movePage = new OrderControlView(parent);
                 break;
             case "재고 관리":
@@ -97,17 +170,17 @@ class ManagerButtonListPanel extends JPanel implements ActionListener {
             case "방 설정":
                 movePage = new RoomSettingView(parent, worker);
                 break;
-            case "회원 목록":
+            case "회원 관리":
                 movePage = new MemberControlView(parent);
                 break;
-            case "음료 편집":
+            case "음료 관리":
                 if(worker.getPosition().equals("점장")) {
                     movePage = new DrinksManagementView(parent);
                 } else {
                     JOptionPane.showMessageDialog(this,"접근이 불가합니다.","접근 권한 알림",JOptionPane.INFORMATION_MESSAGE);
                 }
                 break;
-            case "매출 현황":
+            case "매출 관리":
                 movePage = new SalesAnalysisView(parent);
                 break;
             case "요청 관리":
@@ -132,7 +205,7 @@ class MonthSaleStatus extends JPanel { //scrollpane으로 해야댐
     public MonthSaleStatus() {
         setLayout(new BorderLayout());
         //top
-        JPanelOneLabel mss = new JPanelOneLabel("이달의 매출 현황"); //todo 글자 크기 바꾸기
+        JPanelOneLabel mss = new JPanelOneLabel("이달의 매출 현황");
         mss.getLabel().setFont(new DefaultFont(45));
         add(mss,BorderLayout.NORTH);
 
@@ -145,8 +218,18 @@ class MonthSaleStatus extends JPanel { //scrollpane으로 해야댐
                 {"2023.11.04","454,000원"},
         };
 
-        JTable monthSalesStatusTable = new JTable(salesData,colcumnType);
-        JScrollPane scrollPane = new JScrollPane(monthSalesStatusTable);
+        JTable monthSalesStatusTable = new JTable(salesData,colcumnType); //JTbale 생성
+        //폰트 및 색상 지정
+        monthSalesStatusTable.getTableHeader().setDefaultRenderer(new CustomTableCellRenderer(25)); // 원하는 글씨 크기로 설정
+        monthSalesStatusTable.setDefaultRenderer(Object.class, new CustomTableCellRenderer(20)); // 셀의 글꼴 설정
+        monthSalesStatusTable.setBackground(Color.lightGray);
+
+        JScrollPane scrollPane = new JScrollPane(monthSalesStatusTable); //Jscrollpane에 Jtable 추가
+        monthSalesStatusTable.getTableHeader().setReorderingAllowed(false); //header 움직이기 방지
+        monthSalesStatusTable.setEnabled(false); //내용 수정 불가
+
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED); //스크롤팬 필요 시 자동 생성
+        monthSalesStatusTable.setRowHeight(30); //테이블 열 높이
         add(scrollPane,BorderLayout.CENTER);
     }
 }
@@ -155,25 +238,37 @@ class SaleStatus extends JPanel {
     public SaleStatus(DefaultFrame parent) {
         setLayout(new BorderLayout());
         //top
-        JPanelOneLabel mss = new JPanelOneLabel("판매 현황");
+        JPanelOneLabel mss = new JPanelOneLabel("금일 판매 가능 수량");
         mss.getLabel().setFont(new DefaultFont(45));
         add(mss,BorderLayout.NORTH);
 
         //center
-        ArrayList<StockDTO> stocks = parent.getController().getStockDAO().findAll();
-        String [] colcumnType = new String [] {"제품명","가격","어제","금일","총합"};
-        Object [] [] stockList = new Object[stocks.size()][];
+        ArrayList<GoodsDTO> goods = parent.getController().getGoodsDAO().findAll();
+        String [] colcumnType = new String[]{"제품명","가격","판매 가능 수량"};
+        Object[][] goodsList = new Object[goods.size()][];
 
         int i = 0;
-        for (StockDTO stock : stocks) {
-            stockList[i] = new Object[]{
-                    stock.getName(), stock.getCost(), 0, stock.getAmount(), stock.getAmount()
-            };
-            i++;
+        for(GoodsDTO good : goods){
+            if(good.getMainCategory() == 2) {
+                goodsList[i] = new Object[]{
+                        good.getName(),good.getPrice(), good.getSaleCount()
+                };
+                i++;
+            }
         }
 
-        JTable monthSalesStatusTable = new JTable(stockList,colcumnType);
-        JScrollPane scrollPane = new JScrollPane(monthSalesStatusTable);
+        JTable salesStatusTable = new JTable(goodsList,colcumnType); //Jtable 생성
+        //폰트 및 색상 지정
+        salesStatusTable.getTableHeader().setDefaultRenderer(new CustomTableCellRenderer(25)); // 원하는 글씨 크기로 설정
+        salesStatusTable.setDefaultRenderer(Object.class, new CustomTableCellRenderer(20)); // 셀의 글꼴 설정
+        salesStatusTable.setBackground(Color.lightGray);
+
+        JScrollPane scrollPane = new JScrollPane(salesStatusTable); //Jscrollpane에 jtable 추가
+        salesStatusTable.getTableHeader().setReorderingAllowed(false); //header 움직이기 방지
+        salesStatusTable.setEnabled(false); //내용 수정 불가
+
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED); //스크롤팬 필요 시 자동 생성
+        salesStatusTable.setRowHeight(30);  //테이블 열 높이
         add(scrollPane,BorderLayout.CENTER);
     }
 }

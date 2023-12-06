@@ -57,6 +57,7 @@ public class ManagerLoginView extends JPanel {
         loginbt = new JButton("LOGIN");
         loginbt.setPreferredSize(new Dimension(500, 100));
         loginbt.setFont(new DefaultFont(FONT_SIZE));
+        loginbt.setBackground(Color.white);
         bls.add(loginbt);
 
         pwtf.addKeyListener(new KeyAdapter() {

@@ -91,12 +91,21 @@ public class PswdFindView extends JPanel implements ActionListener {
         inquirybt = new JButton("조회");
         inquirybt.setPreferredSize(new Dimension(200, 100));
         inquirybt.setFont(new DefaultFont(FONT_SIZE));
+        inquirybt.setBackground(Color.white);
         inquirybt.addActionListener(this);
         stp.add(inquirybt);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (phonetf.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "값을 입력해주세요.", "비밀번호 찾기 실패", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        } else if(birthtf.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "값을 입력해주세요.", "비밀번호 찾기 실패", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
         MemberDAO memberDAO = parent.getController().getMemberDAO();
         MemberDTO member = memberDAO.findById(phonetf.getText());
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");

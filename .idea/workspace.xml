@@ -4,18 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="73277347-8d03-48f7-a7c0-89844aebc90d" name="Changes" comment="Feat : NumberPad&#10;&#10;NumberPad 업데이트">
+    <list default="true" id="73277347-8d03-48f7-a7c0-89844aebc90d" name="Changes" comment="FIX : DrinksManagementView 이벤트 처리(같은 항목 추가 방지)">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-28__12_43__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-28_오전_12_43_[Changes]/shelved.patch" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/custom_component/RoomPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/custom_component/RoomPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/custom_component/RoomViewPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/custom_component/RoomViewPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/OrderHDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/OrderHDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dto/OrderHDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dto/OrderHDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/CardInfoPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/CardInfoPopup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ProductCartResultPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ProductCartResultPopup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ProductListCartView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ProductListCartView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ProductOptionPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ProductOptionPopup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/RoomSelectView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/RoomSelectView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/RoomSettingView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/RoomSettingView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/StockDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/StockDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dto/StockDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dto/StockDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/DrinkMgPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/DrinkMgPopup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/DrinksManagementView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/DrinksManagementView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/DrinksStatusPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/DrinksStatusPopup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ManagerMainView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ManagerMainView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/StockManagementView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/StockManagementView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,6 +57,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
   <component name="ProjectId" id="2YZVaGrJIrbJOzSSu9dYpg5RStn" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -215,6 +219,21 @@
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="kjw" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="TAB_STATES">
       <map>
         <entry key="0bd3f8fb-8d19-4f2c-b739-dc4430bdb809">
@@ -242,21 +261,6 @@
                 </map>
               </option>
             </State>
-          </value>
-        </entry>
-      </map>
-    </option>
-    <option name="RECENT_FILTERS">
-      <map>
-        <entry key="Branch">
-          <value>
-            <list>
-              <RecentGroup>
-                <option name="FILTER_VALUES">
-                  <option value="kjw" />
-                </option>
-              </RecentGroup>
-            </list>
           </value>
         </entry>
       </map>

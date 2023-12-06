@@ -12,7 +12,7 @@ public class StockDTO {
             , REFRIGERATED_ITEMS = 1, FROZEN_ITEMS = 2, ORTHER_ITEMS = 3;
 
     public static final String[] ITEMS_KOREA_NAME = {
-            "실온(상품)", "냉장", "냉동", "일회용품"
+            "실온", "냉장", "냉동", "기타"
     };
 
     public static String CATEGORY_TO_KOREANNAME(int category){

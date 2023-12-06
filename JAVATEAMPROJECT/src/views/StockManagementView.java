@@ -2,134 +2,131 @@ package views;
 
 import custom_component.DefaultFont;
 import custom_component.JPanelOneLabel;
+import dto.StockDTO;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.invoke.VolatileCallSite;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Vector;
 
 
 class StocksShowPanel extends JPanel{
 
+    /**/
 
-    public StocksShowPanel(){
-    //left - JTable
+    ArrayList<StockDTO>[] categoryStockList; //재고 카테고리 받기
+    StockViewPanel[] stockViews;
+    ArrayList<StockDTO> stocsk; //DTO의 모든 정보를 받기
+    DefaultFrame parent; //부모 정보 받기
 
+    //LEFT (1) : 모든 JTable을 보여줄 패널
+    public StocksShowPanel(DefaultFrame prt){
+        this.parent = prt;
+
+        //left - JTable
         this.setLayout(new BorderLayout());
 
         //탭 생성
         JTabbedPane stockJTabb = new JTabbedPane();
-        RoomTempFoodPane rtf = new RoomTempFoodPane();
-        RefrigeratedItemsPane rfi = new RefrigeratedItemsPane();
-        FrozenItems frozeni = new FrozenItems();
-        OtherItems otheri = new OtherItems();
+        stocsk = parent.getController().getStockDAO().findAll();
 
-        stockJTabb.addTab(" 실온 ", rtf);
-        stockJTabb.addTab(" 냉장 ", rfi);
-        stockJTabb.addTab(" 냉동 ", frozeni);
-        stockJTabb.addTab(" 기타 ", otheri);
+        //category 만큼 반복
+        categoryStockList = new ArrayList[StockDTO.ITEMS_KOREA_NAME.length]; //StockDTO에 있는 카테고리 정보를 길이만큼 받기
+        stockViews = new StockViewPanel[categoryStockList.length]; //categoryStockList 개수만큼 stockView를 만듦
+        for(int i = 0; i < StockDTO.ITEMS_KOREA_NAME.length; i++){
+            categoryStockList[i] = new ArrayList<>(); //categoryStockList ??
+            //stocks에서 원하는 카테고리 아이템을 가져온다.
+            for(int j = 0; j < stocsk.size(); j++){
+                if(i == stocsk.get(j).getCategory()){ //Category 번호가 서로 같다면
+                    categoryStockList[i].add(stocsk.get(j)); //해당하는 카테고리 패널에 추가
+                }
+            }
+            stockViews[i] = new StockViewPanel(categoryStockList[i]);
+            stockJTabb.addTab(StockDTO.CATEGORY_TO_KOREANNAME(i), stockViews[i]);
+
+        }
 
         //탭 글자 크기 보기
         stockJTabb.setFont(new DefaultFont(50));
 
         this.add(stockJTabb);
 
-
-
-        //(카테고리 기준)DB로 table 불러오기
-
-
-
-/*
-
-        String[] columnType = new String[]{"재고코드", "재고명", "현재 수량", "최소수량", "공급가", "날짜"};
-
-        //columnType.setFont(new DefaultFont(50));
-
-
-        Object [][] stockstData = {
-                {"A12", "사이다", "3", "5", "30000", "2023.11.29" } ,
-                {"A12", "사이다", "3", "5", "30000", "2023.11.29" },
-                {"A12", "사이다", "3", "5", "30000", "2023.11.29" },
-                {"A12", "사이다", "3", "5", "30000", "2023.11.29" },
-                {"A12", "사이다", "3", "5", "30000", "2023.11.29" },
-                {"A12", "사이다", "3", "5", "30000", "2023.11.29" },
-                {"A12", "사이다", "3", "5", "30000", "2023.11.29" },
-                {"A12", "사이다", "3", "5", "30000", "2023.11.29" },
-                {"A12", "사이다", "3", "5", "30000", "2023.11.29" },
-                {"A12", "사이다", "3", "5", "30000", "2023.11.29" },
-                {"A12", "사이다", "3", "5", "30000", "2023.11.29" },
-                {"A12", "사이다", "3", "5", "30000", "2023.11.29" },
-                {"A12", "사이다", "3", "5", "30000", "2023.11.29" } ,
-                {"A12", "사이다", "3", "5", "30000", "2023.11.29" },
-                {"A12", "사이다", "3", "5", "30000", "2023.11.29" },
-                {"A12", "사이다", "3", "5", "30000", "2023.11.29" },
-                {"A12", "사이다", "3", "5", "30000", "2023.11.29" },
-                {"A12", "사이다", "3", "5", "30000", "2023.11.29" },
-                {"A12", "사이다", "3", "5", "30000", "2023.11.29" },
-                {"A12", "사이다", "3", "5", "30000", "2023.11.29" },
-                {"A12", "사이다", "3", "5", "30000", "2023.11.29" },
-                {"A12", "사이다", "3", "5", "30000", "2023.11.29" },
-                {"A12", "사이다", "3", "5", "30000", "2023.11.29" },
-                {"A12", "사이다", "3", "5", "30000", "2023.11.29" },
-                {"A12", "사이다", "3", "5", "30000", "2023.11.29" },
-                {"A12", "사이다", "3", "5", "30000", "2023.11.29" },
-                {"A12", "사이다", "3", "5", "30000", "2023.11.29" },
-                {"A12", "사이다", "3", "5", "30000", "2023.11.29" },
-                {"A12", "사이다", "3", "5", "30000", "2023.11.29" },
-                {"A12", "사이다", "3", "5", "30000", "2023.11.29" },
-                {"A12", "사이다", "3", "5", "30000", "2023.11.29" },
-
-        };
-
-        JTable table = new JTable(stockstData, columnType);
-        add(table);
-
-        */
-/*
-        Object[][] productData = new Object[drinkList.size()][];
-
-        for(int i = 0; i <productData.length; i++){
-            GoodsDTO goods = drinkList.get(i);
-
-            productData[i] = new Object[]{
-                    goods.getCode(), goods.getName(), goods.getCategory(), goods.getStatus(), goods.getSaleCount(),
-                    goods.getDisStatus(), goods.getPrice(), goods.getCost()
-            };
-        }*//*
-
-
-        //Table에 scrollPane 붙이기
-        //table.addMouseListener(this);
-        JScrollPane scrollPane = new JScrollPane(table);
-        //scrollPane 올리기
-        this.add(scrollPane);
-*/
-
     }
 }
 
-//탭 생성 : 실온(0), 냉장, 냉동, 기타(3) JTabbed 반복문으로는 못 하는지? DB불러오기
+//탭 생성 : 실온(0), 냉장, 냉동, 기타(3) 
 //실온식품 패널
-class RoomTempFoodPane extends JPanel {
+class StockViewPanel extends JPanel {
+    //1. DB로 불러와서 비교하기 / 2. 해당 카테고리에 맞는 JTable 붙이기
+    ArrayList<StockDTO> stokcs;
+    public StockViewPanel(ArrayList<StockDTO> stocks){
+        this.setLayout(new BorderLayout());
+        this.add(new JLabel("test"), BorderLayout.NORTH);
+
+        this.stokcs = stocks;
+
+        String[] columnType = new String[]{"재고코드", "재고명", "현재 수량", "최소수량", "공급가", "날짜"};
+        Vector<Object> colVec = new Vector<>();
+        for(int i = 0; i < columnType.length; i++)
+            colVec.add(columnType[i]);
+
+        Vector<Vector<Object>> stockList = new Vector<>(new Vector<>());
+        for(StockDTO stock : stocks){
+            stockList.add(new Vector<>());
+            int x = stockList.size() - 1;
+            stockList.get(x).add(stock.getCode());
+            stockList.get(x).add(stock.getName());
+            stockList.get(x).add(stock.getAmount());
+            stockList.get(x).add(stock.getMinAmount());
+            stockList.get(x).add(stock.getCost());
+            stockList.get(x).add((new Date()).toString());
+        }
+
+        DefaultTableModel tableModel = new DefaultTableModel(stockList, colVec){
+            public boolean isCellEditable(int row, int col){
+                return false;
+            }
+        };
+        
+        JTable table = new JTable(tableModel);
+        JScrollPane sp = new JScrollPane(table);
+
+        // header 움직이기 방지
+        table.getTableHeader().setReorderingAllowed(false);
+
+        //터치 막기
+        table = new JTable(tableModel);
+
+        this.add(sp);
+        this.setBackground(Color.orange);
+    }
 
 }
+
+class StcokEditPanel extends JPanel{
+
+}
+/*
 class RefrigeratedItemsPane extends JPanel {
 
 }
 class FrozenItems  extends JPanel {
 
 
-
 }
 class OtherItems extends JPanel {
 
 }
+*/
 
 
 
@@ -137,10 +134,13 @@ class OtherItems extends JPanel {
  class StockMenuPanel extends JPanel{
 
     private CalendarPanel calendarPanel;
-    public StockMenuPanel(){
+    private DefaultFrame parent;
+    public StockMenuPanel(DefaultFrame prt){
+        parent = prt;
         this.setLayout(new BorderLayout());
         JTabbedPane jtp = new JTabbedPane();
 
+        //right
         //탭에 들어갈 내용 (날짜 grid로)
         //right: 날짜, 캘린더, 재고 검색, 버튼
         //top(cTop) : 재고 검색하기 (JTextFIeld, JLable)
@@ -168,7 +168,7 @@ class OtherItems extends JPanel {
         JPanel divCenter = new JPanel();
         divCenter.setBackground(Color.BLACK);
         divCenter.setLayout(new BorderLayout());
-        calendarPanel = new CalendarPanel();
+        calendarPanel = new CalendarPanel(parent);
         divCenter.add(calendarPanel);
         cCenter.add(divCenter, BorderLayout.CENTER);
 
@@ -242,30 +242,32 @@ public class StockManagementView extends JPanel {
             "재고코드", "재고명", "현재 수향", "최소 수량", "공급가", "날짜"
     };
     private JPanel cCenter;
-
-    public StockManagementView() {
-
+    private DefaultFrame parent;
+    public StockManagementView(DefaultFrame prt) {
+        this.parent = prt;
         this.setLayout(new GridBagLayout());
 
         //left
-        this.add(new StocksShowPanel(), DefaultFrame.easyGridBagConstraint(0,0,3,1));
+        this.add(new StocksShowPanel(parent), DefaultFrame.easyGridBagConstraint(0,0,3,1));
 
 
         //rightMain - JTabbed (날짜, 캘린더)
-        this.add(new StockMenuPanel(), DefaultFrame.easyGridBagConstraint(1,0,1,1));
+        this.add(new StockMenuPanel(parent), DefaultFrame.easyGridBagConstraint(1,0,1,1));
 
     }
 }
 
-//center - 2(달력) <도움!!>
+//center - 2(달력)
 class CalendarPanel extends JPanel{
     private Calendar date;
     public static final String WEEK[] = {"일", "월", "화", "수", "목", "금", "토"};
     private JPanelOneLabel[][] space;
     private JPanelOneLabel yearMonth;
     private SimpleDateFormat format;
+    private DefaultFrame parent;
 
-    public CalendarPanel(){
+    public CalendarPanel(DefaultFrame prt){
+        this.parent = prt;
         date = Calendar.getInstance();
         this.setLayout(new BorderLayout());
         format = new SimpleDateFormat("yyyy-MM");

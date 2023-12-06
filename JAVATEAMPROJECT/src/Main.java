@@ -33,7 +33,6 @@ public class Main {
 
             new DrinksStatusPopup(win);
 
-
             (new NoticeStockPopup(win)).popup();
          */
 
@@ -80,18 +79,11 @@ public class Main {
         }
          */
 
-
-        //(new CardInfoPopup(win)).setVisible(true);
-        //win.add(new ManagerMainView(win));
+        new DrinkMgPopup(win);
         //win.add(new UserHomeView(win));
-
-        //상품 전체 삭제
-
-
-
         //win.add(new PswdFindView(win));
         //win.add(new StockManagementView());
-        win.add(new UserHomeView(win));
+        //win.add(new StockManagementView(win));
         win.setVisible(true);
         win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

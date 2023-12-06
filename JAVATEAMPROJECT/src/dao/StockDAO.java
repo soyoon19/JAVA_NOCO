@@ -16,7 +16,7 @@ public class StockDAO implements DAO<StockDTO, String>{
         this.conn = conn;
     }
 
-    //삽입
+    //삽입 : INSERT
     public boolean insert(StockDTO stock) {
         PreparedStatement pstmt = null;
         try {
@@ -45,6 +45,7 @@ public class StockDAO implements DAO<StockDTO, String>{
         return true;
     }
 
+    //삭제
     public boolean delete(String code) {
         PreparedStatement pstmt = null;
         try {
@@ -67,7 +68,7 @@ public class StockDAO implements DAO<StockDTO, String>{
         return true;
     }
 
-    //삭제
+    //특정 하나 조회 : 재고코드가 ~ 일때 하나의 재고를 조회
     public StockDTO findById(String code) {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -99,12 +100,13 @@ public class StockDAO implements DAO<StockDTO, String>{
         return stock;
     }
 
-    //select *
+    //조회 : SELECT *;
     public ArrayList<StockDTO> findAll() {
         ArrayList<StockDTO> stockList = new ArrayList<>();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
+        //조회시
         try {
             String sql = "SELECT * FROM Stock_T";
             pstmt = conn.prepareStatement(sql);
@@ -131,6 +133,7 @@ public class StockDAO implements DAO<StockDTO, String>{
         return stockList;
     }
 
+    //생성 : CREATE
     private StockDTO createStockDTO(ResultSet rs) throws SQLException {
         String code = rs.getString("s_code");
         String name = rs.getString("s_name");
@@ -142,6 +145,7 @@ public class StockDAO implements DAO<StockDTO, String>{
         return new StockDTO(code, name, amount, minAmount, cost, category);
     }
 
+    //편집(수정) : UPDATE
     public boolean update(StockDTO stock) {
         PreparedStatement pstmt = null;
 

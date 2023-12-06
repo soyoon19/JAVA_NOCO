@@ -5,9 +5,11 @@ import custom_component.DefaultFont;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 //부족한 재고를 보여주는 팝업창 (관리자 로그인 시, 재고관리 페이지에서 확인 가능)
-public class DrinkMgPopup  extends JDialog{
+public class DrinkMgPopup extends JDialog implements ActionListener {
 
     public static final int WIDTH = 1200, HEIGHT = 800;
 
@@ -19,10 +21,8 @@ public class DrinkMgPopup  extends JDialog{
         this.setSize(WIDTH, HEIGHT);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-
         JPanel main = new JPanel();
         main.setLayout(new BorderLayout());
-
 
         //left -1 (JLable)
         JPanel left = new JPanel();
@@ -45,18 +45,6 @@ public class DrinkMgPopup  extends JDialog{
         table = new JTable(drinksData, columnType);
         left.add(table, BorderLayout.CENTER);
 
-       /* Object[][] productData = new Object[drinkList.size()][];
-
-        for(int i = 0; i <productData.length; i++){
-            GoodsDTO goods = drinkList.get(i);
-
-            productData[i] = new Object[]{
-                    goods.getCode(), goods.getName(), goods.getCategory(), goods.getStatus(), goods.getSaleCount(),
-                    goods.getDisStatus(), goods.getPrice(), goods.getCost()
-            };
-        }
-
-        */
 
         //Table에 scrollPane 붙이기
         //table.addMouseListener(this);
@@ -86,13 +74,15 @@ public class DrinkMgPopup  extends JDialog{
         okBtn.setFont(new DefaultFont(20));
         right.add(okBtn);
 
-
-
         main.add(right, BorderLayout.EAST);
 
         //호출시 보이기 설정
         this.add(main);
         this.setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
 
     }
 }

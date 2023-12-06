@@ -4,6 +4,7 @@ import custom_component.DefaultFont;
 import custom_component.JPanelOneLabel;
 import dto.GoodsDTO;
 import dto.MemberDTO;
+import dto.RoomManageDTO;
 
 import javax.swing.*;
 import java.awt.*;
@@ -111,21 +112,23 @@ public class ProductCartResultPopup extends JDialog implements ActionListener{
     private GoodsDTO[] goodsArr;
     private int[] nums;
     private int tot, pay;
-    JFrame parent;
+    DefaultFrame parent;
     ProductCartResultListPanel productCartResultListPanel;
     ProductCartResultPricePanel productCartResultPricePanel;
     JButton backBtn, payBtn;
-    MemberDTO mmeber;
+    MemberDTO member;
+    RoomManageDTO room;
 
 
-    public ProductCartResultPopup(GoodsDTO[] gs, int[] ns, JFrame parent, MemberDTO member) {
+    public ProductCartResultPopup(GoodsDTO[] gs, int[] ns, DefaultFrame parent, MemberDTO member, RoomManageDTO room) {
         super(parent, TITLE, true);
         this.setLayout(new BorderLayout());
 
-        this.mmeber = member;
+        this.member = member;
         this.goodsArr = gs;
         this.nums = ns;
         this.parent = parent;
+        this.room = room;
 
 
         tot = 0;
@@ -172,7 +175,7 @@ public class ProductCartResultPopup extends JDialog implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         dispose();
         if(e.getActionCommand().equals("결제")){
-            CardInfoPopup popup = new CardInfoPopup((DefaultFrame) parent, mmeber);
+            CardInfoPopup popup = new CardInfoPopup(parent, member, room, goodsArr, nums);
             popup.setVisible(true);
         }
     }

@@ -5,15 +5,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.*;
+
+import controller_db.Controller;
 import custom_component.DefaultFont;
 import custom_component.NumberPadListener;
 import custom_component.NumberPadPanel;
-import dto.MemberDTO;
+import dao.OrderDAO;
+import dto.*;
 
 
-class CardInfoInputPanel extends JPanel implements ActionListener {
+class CardInfoInputPanel extends JPanel implements ActionListener{
     public static final int FONT_SIZE = 40;
     JLabel cardNumLb, dateLb, cvcLb, pwLb; //입력받을 라벨들
     JTextField[] cardNumsTf; //카드 넘버를 받을 필드 4개
@@ -25,10 +29,13 @@ class CardInfoInputPanel extends JPanel implements ActionListener {
 
     NumberPadPanel np;
 
-    public CardInfoInputPanel(NumberPadPanel np) {
+    CardInfoPopup cardInfoPopup;
+
+    public CardInfoInputPanel(CardInfoPopup cardInfoPopup) {
         //this.setBackground(Color.RED);
         this.setLayout(new BorderLayout());
-        this.np = np;
+        this.cardInfoPopup = cardInfoPopup;
+        this.np = cardInfoPopup.getNumberPanel();
 
 
         //center
@@ -166,16 +173,127 @@ class CardInfoInputPanel extends JPanel implements ActionListener {
         btm.add(resetBtn); btm.add(payBtn);
 
         add(btm, BorderLayout.SOUTH);
-
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         String s = e.getActionCommand();
+
         if(s.equals("초기화")){
-            //예외 처리!
+
         }else if(s.equals("결제")){
-            //예외 처리!
+            //Todo 결졔 예외처리
+            GoodsDTO[] goodsArr = cardInfoPopup.getGoodsArr();
+            int[] nums = cardInfoPopup.getNums();
+            MemberDTO member = cardInfoPopup.getMember();
+            Controller controller = cardInfoPopup.getParent().getController();
+            MemberLogDTO memberLog = null;
+            if(member != null)
+                memberLog = controller.getMemberLogDAO().findById(member.getHp());
+            RoomManageDTO room = cardInfoPopup.getRoom();
+
+            Date date = new Date();
+
+            //방 정보 생성
+            RoomIfmDTO roomImf = new RoomIfmDTO(member != null ? member.getHp() : null
+                    , new java.sql.Time(date.getHours(), date.getMinutes(), date.getSeconds())
+                    , room.getNum(), 0, 0, 0, true);
+
+
+            //일련번호 갱신
+            OrderDTO lastOrder = controller.getOrderDAO().findLastRow();
+            String code;
+            if(lastOrder == null){
+                code = OrderDTO.PREFIX + "0001";
+            }else{
+                String lastCode = lastOrder.getO_code();
+                System.out.println("x : " + lastCode);
+
+                lastCode = lastCode.substring(1);
+                System.out.println("y : " + lastCode);
+
+
+                int intCode = Integer.parseInt(lastCode);
+                intCode++;
+
+                String needZero = ""; //빈 공간을 0으로 채울 변수
+
+                lastCode = String.valueOf(intCode);
+                while(lastCode.length() + needZero.length() < 4)
+                    needZero += "0";
+
+                code = OrderDTO.PREFIX + needZero + lastCode;
+            }
+
+            int total = 0, totalDiscount = 0, num, price, discount;
+            int y, m, d;
+            y = date.getYear(); m = date.getMonth(); d = date.getDate();
+
+            String state;
+            for(int i = 0; i < goodsArr.length; i++){
+                num = nums[i];
+                state = goodsArr[i].getIce() ? "ICE" : goodsArr[i].getHot() ? "HOT" :
+                        "None";
+
+                price = goodsArr[i].getPrice() * num;
+                discount = 0;
+
+                if(goodsArr[i].getDisStatus() && member != null)
+                    discount = (int)(price * (MemberDTO.gradeToDiscount(memberLog.getM_rate()) * 0.01));
+
+                totalDiscount += discount;
+                total += price;
+
+                //주문 상세 insert
+                controller.getOrderHDAO().insert(new OrderHDTO(
+                        code, goodsArr[i].getCode(),
+                        state, num, price,
+                        discount ,
+                        goodsArr[i].getCost() * num, new java.sql.Date(y, m, d)
+                ));
+            }
+
+            //주문 정보 insert
+            controller.getOrderDAO().insert(new OrderDTO(
+                    code, member == null ? null : member.getHp()
+                    , "",room.getCode(),  new java.sql.Date(y, m, d),
+                    new java.sql.Time(date.getHours(), date.getMinutes(), date.getSeconds()),
+                    null,total, totalDiscount, OrderDTO.STATUS_ORDER
+            ));
+
+            //todo 회원 할인 정보
+            //회원 등급 설정
+
+
+
+            int i = 0;
+            //멤버 음악 개수와 굿즈  update & Goods 수량 update
+            for(GoodsDTO goods : goodsArr){
+                if(goods.getMainCategory() == GoodsDTO.MAIN_CATEGORY_MUSIC){
+                    int music = Integer.parseInt(goods.getName().substring(0, goods.getName().length() - 1));
+                    if(member != null) memberLog.setHoldSong(memberLog.getHoldSong() + music);  //맴베인 경우 방에 사용할 곡을 추가한다.
+                    else roomImf.setLeftSong(roomImf.getLeftSong() + music);        //맴버가 아닌 경우 룸에 구한 곡을 추가한다 
+                }else if(goods.getMainCategory() == GoodsDTO.MAIN_CATEGORY_DRINK){ //Goods 수량 업데이트
+                    GoodsDTO pastGoods = controller.getGoodsDAO().findById(goods.getCode());
+                    pastGoods.setSaleCount(pastGoods.getSaleCount() - nums[i]);
+                    controller.getGoodsDAO().update(pastGoods);
+                }
+                i++;
+            }
+
+            //room 정보 insert
+            if(member != null) {
+                roomImf.setUserHp(member.getHp());
+                //memberLog.setTotalPay();
+                cardInfoPopup.getParent().move(new MusicUseView(cardInfoPopup.getParent(), room, member, roomImf));
+            }else{
+                controller.getRoomImfDAO().insert(roomImf);
+                cardInfoPopup.getParent().resetMove(new UserHomeView(cardInfoPopup.getParent()));
+            }
+            System.out.println("insert Complete!");
+            cardInfoPopup.dispose();
         }
+
     }
 }
 
@@ -184,22 +302,29 @@ class CardInfoInputPanel extends JPanel implements ActionListener {
 이 페이지에는 카드 정보를 입력, NumberPad을 다른 패널로 만들어기에
 여기서는 붙여주기만 한다.
  */
-public class CardInfoPopup extends JDialog{
+public class CardInfoPopup extends JDialog implements ActionListener{
     public static final int WIDTH = 1400,
             HEIGHT = 600;
     public static final String TITLE = "결제화면";
-    JFrame parent;
-    JPanel top, center;
-    NumberPadPanel numberPanel;
-    CardInfoInputPanel cardinputPanel;
-    JButton backBtn;
-    Container cp;
-    MemberDTO member;
+    private DefaultFrame parent;
+    private JPanel top, center;
+    private NumberPadPanel numberPanel;
+    private CardInfoInputPanel cardinputPanel;
+    private JButton backBtn;
+    private Container cp;
+    private MemberDTO member;
+    private GoodsDTO[] goodsArr;
+    private RoomManageDTO room;
+    private int[] nums;
 
-    public CardInfoPopup(JFrame parent, MemberDTO member) {
+    public CardInfoPopup(DefaultFrame parent, MemberDTO member, RoomManageDTO room, GoodsDTO[] goods, int[] nums ) {
         super(parent, TITLE, true);
         setSize(WIDTH, HEIGHT);
+        this.parent = parent;
         this.member = member;
+        this.goodsArr = goods;
+        this.nums = nums;
+        this.room = room;
 
         cp = getContentPane();
 
@@ -207,10 +332,11 @@ public class CardInfoPopup extends JDialog{
         center = new JPanel();
 
         numberPanel = new NumberPadPanel();
-        cardinputPanel = new CardInfoInputPanel(numberPanel);
+        cardinputPanel = new CardInfoInputPanel(this);
 
         //top
         backBtn = new JButton("뒤로가기");
+        backBtn.addActionListener(this);
         top.setLayout(new FlowLayout(FlowLayout.LEFT));
         top.add(backBtn);
         cp.add(top, BorderLayout.NORTH);
@@ -222,6 +348,40 @@ public class CardInfoPopup extends JDialog{
         center.add(cardinputPanel, DefaultFrame.easyGridBagConstraint(0, 0, 7, 1));
         center.add(numberPanel, DefaultFrame.easyGridBagConstraint(1, 0, 2, 1));
         cp.add(center, BorderLayout.CENTER);
+
+
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String s = e.getActionCommand();
+        if(s.equals("뒤로가기")){
+            dispose();
+        }
+    }
+
+    public NumberPadPanel getNumberPanel(){
+        return numberPanel;
+    }
+
+    public MemberDTO getMember() {
+        return member;
+    }
+
+    public GoodsDTO[] getGoodsArr() {
+        return goodsArr;
+    }
+
+    @Override
+    public DefaultFrame getParent() {
+        return parent;
+    }
+
+    public int[] getNums() {
+        return nums;
+    }
+
+    public RoomManageDTO getRoom() {
+        return room;
+    }
 }

@@ -6,6 +6,7 @@ public class RoomRequestDTO {
     private String num, request;
     private Time recTime;
     private Boolean complete;
+    public static final char PREFIX = 'q';
 
     public RoomRequestDTO() {}
 

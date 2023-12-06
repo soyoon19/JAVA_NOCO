@@ -132,7 +132,7 @@ class MonthSaleStatus extends JPanel { //scrollpane으로 해야댐
     public MonthSaleStatus() {
         setLayout(new BorderLayout());
         //top
-        JPanelOneLabel mss = new JPanelOneLabel("이달의 매출 현황");
+        JPanelOneLabel mss = new JPanelOneLabel("이달의 매출 현황"); //todo 글자 크기 바꾸기
         mss.getLabel().setFont(new DefaultFont(45));
         add(mss,BorderLayout.NORTH);
 
@@ -144,6 +144,7 @@ class MonthSaleStatus extends JPanel { //scrollpane으로 해야댐
                 {"2023.11.03","137,000원"},
                 {"2023.11.04","454,000원"},
         };
+
         JTable monthSalesStatusTable = new JTable(salesData,colcumnType);
         JScrollPane scrollPane = new JScrollPane(monthSalesStatusTable);
         add(scrollPane,BorderLayout.CENTER);
@@ -156,24 +157,23 @@ class SaleStatus extends JPanel {
         //top
         JPanelOneLabel mss = new JPanelOneLabel("판매 현황");
         mss.getLabel().setFont(new DefaultFont(45));
-        add(mss, BorderLayout.NORTH);
+        add(mss,BorderLayout.NORTH);
 
         //center
         ArrayList<StockDTO> stocks = parent.getController().getStockDAO().findAll();
-        String[] colcumnType = new String[]{"제품명", "가격", "어제", "금일", "총합"};
-        Object[][] stockList = new Object[stocks.size()][];
+        String [] colcumnType = new String [] {"제품명","가격","어제","금일","총합"};
+        Object [] [] stockList = new Object[stocks.size()][];
 
         int i = 0;
-        for(StockDTO stock : stocks){
+        for (StockDTO stock : stocks) {
             stockList[i] = new Object[]{
                     stock.getName(), stock.getCost(), 0, stock.getAmount(), stock.getAmount()
             };
             i++;
         }
 
-        JTable monthSalesStatusTable = new JTable(stockList, colcumnType);
+        JTable monthSalesStatusTable = new JTable(stockList,colcumnType);
         JScrollPane scrollPane = new JScrollPane(monthSalesStatusTable);
-        add(scrollPane, BorderLayout.CENTER);
-
+        add(scrollPane,BorderLayout.CENTER);
     }
 }

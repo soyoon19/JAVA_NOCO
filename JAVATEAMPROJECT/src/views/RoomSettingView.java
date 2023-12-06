@@ -4,6 +4,7 @@ import com.oracle.tools.packager.Log;
 import controller_db.Controller;
 import custom_component.*;
 import dto.*;
+import javafx.scene.Parent;
 import javafx.scene.control.ComboBox;
 
 import javax.swing.*;
@@ -832,9 +833,7 @@ class RoomManagePanel extends JPanel implements ActionListener { //방관리 패
         this.parent = parent;
         this.setLayout(new BorderLayout());
         JPanel rmview = new JPanel(new GridBagLayout());
-        RoomManageInfoPanel gbt = new RoomManageInfoPanel();
-
-
+        RoomManageInfoPanel gbt = new RoomManageInfoPanel(parent);
 
         //Grid Bag Layout의 left
         roomViewPanel = new RoomViewPanel(parent.getController());
@@ -1041,10 +1040,11 @@ class ForcedExitPopup extends JDialog implements ActionListener { //강제퇴장
 }
 
 
-class RoomManageInfoPanel extends JPanel { //방관리정보 패널
+class RoomManageInfoPanel extends JPanel { //방관리 정보 패널
     JLabel division, phone,birth, inTime,useMusic, remainMusic, payMusic;
-    //Todo parent 상속 받을 수 있도록
-    public RoomManageInfoPanel () {
+    DefaultFrame parent;
+    public RoomManageInfoPanel (DefaultFrame parent) {
+        this.parent=parent;
         this.setLayout(new BorderLayout());
         JPanel rmi = new JPanel();
         rmi.setLayout(new GridLayout(7,1));
@@ -1094,17 +1094,23 @@ class RoomManageInfoPanel extends JPanel { //방관리정보 패널
         add(rmi);
     }
 
-    //todo 아래 코드 완성해보기
-    //roomInf.UserHp로 MemberDTO 정보 가져오기
-    //주의 : 비회원일 수 있음(== MemberDTO가 null일 수 있음)
-    //주의2 : RoomImf의 pk는 code가 아닌 num임!
     public void infoSet(RoomIfmDTO roomIfm){
-        phone.setText(phone.getText().split(":")[0] + ": " + roomIfm.getUserHp());
-        birth.setText(birth.getText().split(":")[0] + ": " + roomIfm.getUserHp());
-        inTime.setText(inTime.getText().split(":")[0] + ": " + roomIfm.getUserHp());
-        useMusic.setText(useMusic.getText().split(":")[0] + ": " + roomIfm.getUseSong());
-        remainMusic.setText(remainMusic.getText().split(":")[0] + ": " + roomIfm.getLeftSong());
-        payMusic.setText(payMusic.getText().split(":")[0] + ": " + roomIfm.getPaySong());
+        if(roomIfm.getUserHp() == null) { //비회원일 때
+            division.setText("구분 : 비회원");
+            inTime.setText(inTime.getText().split(":")[0] + ": " + roomIfm.getEnterTime().toString());
+            useMusic.setText(useMusic.getText().split(":")[0] + ": " + roomIfm.getUseSong());
+            remainMusic.setText(remainMusic.getText().split(":")[0] + ": " + roomIfm.getLeftSong());
+            payMusic.setText(payMusic.getText().split(":")[0] + ": " + roomIfm.getPaySong());
+        } else { //회원일 때
+            MemberDTO member = parent.getController().getMemberDAO().findById(roomIfm.getUserHp());
+            division.setText("구분 : 회원");
+            phone.setText(phone.getText().split(":")[0] + ": " + roomIfm.getUserHp());
+            birth.setText(birth.getText().split(":")[0] + ": " + member.getBirthDate());
+            inTime.setText(inTime.getText().split(":")[0] + ": " + roomIfm.getEnterTime().toString());
+            useMusic.setText(useMusic.getText().split(":")[0] + ": " + roomIfm.getUseSong());
+            remainMusic.setText(remainMusic.getText().split(":")[0] + ": " + roomIfm.getLeftSong());
+            payMusic.setText(payMusic.getText().split(":")[0] + ": " + roomIfm.getPaySong());
+        }
     }
 
     public void infoReSet(){

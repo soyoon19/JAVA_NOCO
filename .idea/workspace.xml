@@ -4,97 +4,63 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="73277347-8d03-48f7-a7c0-89844aebc90d" name="Changes" comment="Feat : 방 편집 기능 완료">
-      <change afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/americano(ice).png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/s0101.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/s0102.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/s0103.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/home.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/title.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO_1/images/deleteBtn.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-29__10_09__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-29_오전_10_09_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30__12_02__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30_오전_12_02_[Changes]/shelved.patch" beforeDir="false" />
+    <list default="true" id="73277347-8d03-48f7-a7c0-89844aebc90d" name="Changes" comment="merge chooyj_temp">
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/s0105.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/s0106.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/s0107.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/s0108.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2001.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2002.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2003.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2004.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2005.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2006.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2007.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2008.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2009.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2010.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2101.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2102.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2103.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2104.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2105.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2106.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2107.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2201.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2202.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2203.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2204.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2205.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2206.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2301.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2302.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2303.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2304.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2305.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2306.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2307.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2401.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2402.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2403.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2404.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/test/Tester.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO_1/images/goods/s0101.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO_1/images/goods/s0102.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO_1/images/goods/s0103.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30__10_04__Changes_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30__12_48__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30__12_57__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30__1_02__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30_오전_10_04_[Changes]1/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30_오전_12_48_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30_오전_12_57_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30_오전_1_02_[Changes]/shelved.patch" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/s0104.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/s0104.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/s0105.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/s0105.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/s0106.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/s0106.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v0201.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/v0201.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v0202.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/v0202.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v0203.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/v0203.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v0204.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/v0204.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v0205.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/v0205.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v0211.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/v0211.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v0212.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/v0212.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v0221.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/v0221.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v0222.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/v0222.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v0231.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/v0231.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v0232.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/v0232.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v0241.png" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v0241.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v0242.png" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v0242.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2001.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/v2001.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2002.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/v2002.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2003.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/v2003.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2004.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/v2004.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2005.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/v2005.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2006.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/v2006.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2007.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/v2007.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2008.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/v2008.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2009.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/v2009.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2010.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/v2010.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2011.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/v2011.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2012.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/v2012.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2021.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/v2021.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2022.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/v2022.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2031.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/v2031.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2032.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/v2032.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2041.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/v2041.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2042.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/v2042.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2101.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/v2101.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2102.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/v2102.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2103.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/v2103.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2104.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/v2104.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2105.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/v2105.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2106.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/v2106.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2107.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/v2107.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2201.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/v2201.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2202.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/v2202.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2203.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/v2203.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2204.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/v2204.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2205.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/v2205.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2206.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/v2206.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2301.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/v2301.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2302.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/v2302.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2303.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/v2303.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2304.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/v2304.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2305.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/v2305.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2306.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/v2306.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2307.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/v2307.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2401.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/v2401.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2402.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/v2402.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2403.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/v2403.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2404.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO1/images/goods/v2404.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/MemberControlView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/MemberControlView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/MemberDeletePopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/MemberDeletePopup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/MemberDetailCorrectPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/MemberDetailCorrectPopup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/MemberDetailPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/MemberDetailPopup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/NoMemberControlView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/NoMemberControlView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/OrderControlView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/OrderControlView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/OrderDeleteCheckPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/OrderDeleteCheckPopup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/OrderDeletePopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/OrderDeletePopup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/OrderDeleteRCPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/OrderDeleteRCPopup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/OrderDetailPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/OrderDetailPopup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/SalesAnalysisDetailPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/SalesAnalysisDetailPopup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/SalesAnalysisView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/SalesAnalysisView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/SalesCheckPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/SalesCheckPopup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/SalesDetailPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/SalesDetailPopup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/WorkerControlView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/WorkerControlView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/WorkerCorrectPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/WorkerCorrectPopup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/WorkerDeleteCheckPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/WorkerDeleteCheckPopup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/WorkerDeleteRCPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/WorkerDeleteRCPopup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/Worker_regPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/Worker_regPopup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVA_NOCO1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/JAVA_NOCO1.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dto/GoodsDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dto/GoodsDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/s0103.png" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/s0103.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/CardInfoPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/CardInfoPopup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ProductListCartView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ProductListCartView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ProductOptionPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ProductOptionPopup.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -140,18 +106,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/KJW/Code/kotlinProgramming/JAVA_NOCO_1/out/production/JAVA_NOCO1/jar/mysql-connector-j-8.2.0.jar&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_opened_file_path": "C:/Users/KJW/Code/kotlinProgramming/JAVA_NOCO_1/JAVATEAMPROJECT/src/images/goods",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\KJW\Code\kotlinProgramming\JAVA_NOCO_1\JAVATEAMPROJECT\src\images\goods" />
@@ -325,7 +291,14 @@
       <option name="project" value="LOCAL" />
       <updated>1701890978888</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="merge chooyj_temp">
+      <created>1701891839393</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1701891839393</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -397,6 +370,7 @@
     <MESSAGE value="Feat : 방 벤트 연결&#10;&#10;방의 업데이트 실시간 적요, 방 관리 이벤트 연결" />
     <MESSAGE value="Feat : CardInfoPopup 기능 추가" />
     <MESSAGE value="Feat : 방 편집 기능 완료" />
-    <option name="LAST_COMMIT_MESSAGE" value="Feat : 방 편집 기능 완료" />
+    <MESSAGE value="merge chooyj_temp" />
+    <option name="LAST_COMMIT_MESSAGE" value="merge chooyj_temp" />
   </component>
 </project>

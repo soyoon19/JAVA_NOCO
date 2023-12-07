@@ -7,7 +7,7 @@ public class GoodsDTO {
     public static final int MAIN_CATEGORY_DRINK = 2;
 
     public static String[] CATEGORY = {
-            "노래", "커피", "논커피", "티", "스무디", "캔음료"
+            "노래", "커피", "논커피", "티", "스무디", "상품"
     };
 
     //category -- class //분류

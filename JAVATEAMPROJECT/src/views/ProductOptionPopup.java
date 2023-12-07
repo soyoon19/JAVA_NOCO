@@ -12,12 +12,12 @@ import java.awt.event.ActionListener;
 public class ProductOptionPopup extends JDialog implements ActionListener {
     public static final int WIDTH = 350, HEIGHT = 800;
 
-    private JButton cancelBtn, checkBtn;
+    private JButton cancelBtn;
     private JButton iceRdBtn, hotRdBtn;
     private  ProductListCartView productListCartView;
     private GoodsDTO goods;
     private DefaultFrame parent;
-    public String rst = "", tmp = null;
+    public String rst = "";
 
     //public ProductOptionPopup(ProductListCartView productListCartView, ProductDAO p){
     public ProductOptionPopup(DefaultFrame prt, GoodsDTO g){
@@ -81,14 +81,9 @@ public class ProductOptionPopup extends JDialog implements ActionListener {
         bottom1.add(bottom1_2);
 
         bottom.add(bottom1);
+        this.add(bottom, BorderLayout.SOUTH);
 
-        //bottom-2
-        JPanel bottom2 = new JPanel();
-        checkBtn = new JButton("확 인");
-        bottom2.add(checkBtn);
-        bottom.add(bottom2);
 
-        main.add(bottom, BorderLayout.SOUTH);
         //RadioGroup
         /*
         JRadioButton temperatureBtnGrp = new JRadioButton();
@@ -96,7 +91,6 @@ public class ProductOptionPopup extends JDialog implements ActionListener {
         temperatureBtnGrp.add(hotRdBtn);*/
         hotRdBtn.addActionListener(this);
         iceRdBtn.addActionListener(this);
-        checkBtn.addActionListener(this);
 
         this.add(main);
     }
@@ -109,17 +103,11 @@ public class ProductOptionPopup extends JDialog implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String s = e.getActionCommand(); //TODO: Radio Event 처리
         if(s.equals("ICE")){
-            tmp = "ICE";
+            rst = "ICE";
+            this.dispose();
         }else if(s.equals("HOT")){
-            tmp = "HOT";
-        }else if(s.equals("확 인")){
-            if(tmp == null) return;
-            if(tmp.equals("")){
-                //TODO : 옵션 팬
-            }else{
-                rst = tmp;
-                dispose();
-            }
+            rst = "HOT";
+            this.dispose();
         }
     }
 }

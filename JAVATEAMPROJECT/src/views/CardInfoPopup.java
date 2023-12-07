@@ -13,6 +13,7 @@ import controller_db.Controller;
 import custom_component.DefaultFont;
 import custom_component.NumberPadListener;
 import custom_component.NumberPadPanel;
+import dao.MemberLogDAO;
 import dao.OrderDAO;
 import dto.*;
 
@@ -180,9 +181,31 @@ class CardInfoInputPanel extends JPanel implements ActionListener{
         String s = e.getActionCommand();
 
         if(s.equals("초기화")){
+            for(int i=0;i<cardNumsTf.length;i++){
+                cardNumsTf[i].setText("");
+            }
+            cvc.setText("");
+            yearCB.setSelectedIndex(0);
+            monthCB.setSelectedIndex(0);
+            pwPf.setText("");
+        } else if(s.equals("결제")){ //todo 실제로 사용시에는 return 발생
+            for(int i=0;i<cardNumsTf.length;i++){ //카드번호 입력 예외처리
+                if(!(cardNumsTf[i].getText().length() == 4)){
+                    JOptionPane.showMessageDialog(this,"카드 번호를 다시 입력해주세요.","카드 번호 입력 오류",JOptionPane.INFORMATION_MESSAGE);
+                    //return;
+                }
+            }
 
-        }else if(s.equals("결제")){
-            //Todo 결졔 예외처리
+            if(!(cvc.getText().length() == 3)){
+                JOptionPane.showMessageDialog(this,"cvc 번호를 다시 입력해주세요.","CVC 입력 오류",JOptionPane.INFORMATION_MESSAGE);
+                //return;
+            }
+
+            if(!(pwPf.getText().length() == 4)) {
+                JOptionPane.showMessageDialog(this,"카드 비밀번호를 다시 입력해주세요.","카드 비밀번호 입력 오류",JOptionPane.INFORMATION_MESSAGE);
+                //return;
+            }
+
             GoodsDTO[] goodsArr = cardInfoPopup.getGoodsArr();
             int[] nums = cardInfoPopup.getNums();
             MemberDTO member = cardInfoPopup.getMember();
@@ -232,12 +255,14 @@ class CardInfoInputPanel extends JPanel implements ActionListener{
             String state;
             for(int i = 0; i < goodsArr.length; i++){
                 num = nums[i];
+                //ICE/HOT/NONE 분리
                 state = goodsArr[i].getIce() ? "ICE" : goodsArr[i].getHot() ? "HOT" :
                         "None";
-
+                //총액
                 price = goodsArr[i].getPrice() * num;
                 discount = 0;
 
+                //할인액 구하기
                 if(goodsArr[i].getDisStatus() && member != null)
                     discount = (int)(price * (MemberDTO.gradeToDiscount(memberLog.getM_rate()) * 0.01));
 
@@ -264,6 +289,7 @@ class CardInfoInputPanel extends JPanel implements ActionListener{
             //todo 회원 할인 정보
 
             memberLog.setTotalPay(memberLog.getTotalPay() + total - totalDiscount);
+            memberLog.setM_rate(MemberDTO.gradeCodtion((int)memberLog.getTotalPay()));
 
             //회원 등급 설정
 
@@ -280,7 +306,10 @@ class CardInfoInputPanel extends JPanel implements ActionListener{
                 }else if(goods.getMainCategory() == GoodsDTO.MAIN_CATEGORY_DRINK){ //Goods 수량 업데이트
                     GoodsDTO pastGoods = controller.getGoodsDAO().findById(goods.getCode());
                     pastGoods.setSaleCount(pastGoods.getSaleCount() - nums[i]);
+                    if(pastGoods.getSaleCount() == 0)   //재고가 0개라면 품절로 변경해 준다.
+                        pastGoods.setStatus("품절");
                     controller.getGoodsDAO().update(pastGoods);
+
                 }
                 i++;
             }

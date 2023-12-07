@@ -49,13 +49,16 @@ class ProductList extends JPanel{
         for(int i = 0; i < goodsArr.size(); i++){
             System.out.println(map.get(goodsArr.get(i).getCategory()));
 
-            goodsCategoryArr[map.get(goodsArr.get(i).getCategory())].add(goodsArr.get(i));
+            if(("판매").equals(goodsArr.get(i).getStatus())) {
+                System.out.println(goodsArr.get(i));
+                goodsCategoryArr[map.get(goodsArr.get(i).getCategory())].add(goodsArr.get(i)); //맞는 카테고리에 추가한다.
+            }
         }
 
         for(int i = 0; i < CATEGORY_NUM; i++) {
             JLabel tmp = new JLabel(GoodsDTO.CATEGORY[i]);
             tmp.setPreferredSize(new Dimension(100, 30));
-            productTab[i] = new ProductCategoryTap(GoodsDTO.CATEGORY[i], cart, goodsCategoryArr[i]);
+            productTab[i] = new ProductCategoryTap(cart, goodsCategoryArr[i]);
             jtp.add(productTab[i], "");
             jtp.setTabComponentAt(i, tmp);
         }
@@ -72,10 +75,12 @@ class ProductCart extends JPanel{
     private JScrollPane jsp;
     //DB 구축이 완료되면 사용할 변수이다.
     private HashMap<String, ProductCarDetailPanel> cartListMap;
+    private HashMap<String, Integer> goodsCountInfoMap; //숫자를 저장하는 변수
     //임시로 사용한다.
     private MemberDTO member;
     private JLabel totalLb;
     private RoomManageDTO room;
+    private int total;
 
     //나중에 JDialog을 사용하기 위해서 JFrame(DefaultFrame)을 매개변수로 받아둔다.
 
@@ -84,10 +89,12 @@ class ProductCart extends JPanel{
     }
 
     public ProductCart(DefaultFrame parent, RoomManageDTO room, MemberDTO member){
+        total = 0;
         this.parent = parent;
         this.setLayout(new BorderLayout());
         this.room = room;
         cartListMap = new HashMap<>();
+        goodsCountInfoMap = new HashMap<>();
         //top
         top = new JPanel();
         JLabel listLb = new JLabel("장바구니 리스트");
@@ -136,6 +143,12 @@ class ProductCart extends JPanel{
         rmBtn = new JButton("비우기");
         btmDown.add(buyBtn);
         btmDown.add(rmBtn);
+        rmBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                clearPanel();
+            }
+        });
 
         btm.add(btmUp);
         btm.add(btmDown);
@@ -143,6 +156,7 @@ class ProductCart extends JPanel{
     }
 
     public void add(GoodsDTO g){  //add 함수 실행시 선택한 상품이 추가된다.
+
         GoodsDTO gCopy = new GoodsDTO(g.getCode(), g.getName(), g.getCategory(), g.getStatus(),
                 g.getMainCategory(), g.getSaleCount(), g.getPrice(), g.getCost(), g.getDisStatus(),
                 g.getIce(), g.getHot());
@@ -161,10 +175,20 @@ class ProductCart extends JPanel{
                 gCopy.setHot(false);
             }
         }
-        if(cartListMap.get(gCopy.getCode() + ":" + tp) != null) return;
+        if(cartListMap.get(gCopy.getCode() + ":" + tp) != null) return; //이미 장바구니에 있는 요소라면 접근을 막는다.
 
+        if(goodsCountInfoMap.get(g.getCode()) != null &&
+                goodsCountInfoMap.get(g.getCode()) <= 0){
+            JOptionPane.showMessageDialog(parent, "재고가 부족하여 더 이상 구매할 수 없습니다.");
+            return;
 
-        ProductCarDetailPanel p = new ProductCarDetailPanel(gCopy);
+        }
+
+        if(goodsCountInfoMap.get(g.getCode()) == null)  //숫자 정보를 받는다.
+            goodsCountInfoMap.put(g.getCode(), g.getSaleCount());
+
+        updateTot(g.getPrice());
+        ProductCarDetailPanel p = new ProductCarDetailPanel(gCopy, this);
         cartListMap.put(g.getCode() + ":" + tp , p);
 
         center.add(p);
@@ -172,7 +196,22 @@ class ProductCart extends JPanel{
 
     public void clearPanel()
     {
+        center.removeAll();
+        center.repaint();
+        center.revalidate();
         cartListMap.clear();
+        goodsCountInfoMap.clear();
+        totalLb.setText("Total : 0원");
+    }
+
+    public void removeCartList(ProductCarDetailPanel p){
+        center.remove(p);
+        center.repaint();
+        center.revalidate();
+        updateTot(-(p.getNum() * p.getGoods().getPrice()));
+        String tp = p.getGoods().getIce() ? "ICE" : p.getGoods().getHot() ? "HOT" : "";
+        cartListMap.remove(p.getGoods().getCode() + ":" + tp);
+        goodsCountInfoMap.remove(p.getGoods().getCode().split(":")[0]);
     }
 
     class BuyButtonAction implements ActionListener{
@@ -196,23 +235,24 @@ class ProductCart extends JPanel{
             ProductCartResultPopup popup = new ProductCartResultPopup(goods, nums, parent, member, room);
         }
     }
+
+    public void updateTot(int addOrDel) {
+        total += addOrDel;
+        totalLb.setText("Total : " + total + "원");
+    }
+
+    public HashMap<String, Integer> getGoodsCountInfoMap() { //카운트를 살펴볼 이벤트
+        return goodsCountInfoMap;
+    }
 }
 
 //카테고리에 맞는 상품의 리스트 정보를 저장하고 보여주는 패널이다.(탭)
  class ProductCategoryTap extends JScrollPane{
     JPanel main; //JscrollPane에 넣을 패널
-    private String category;
-    private GoodsDTO[] goodsArr;
-    private ProductCart cart;
 
 
-    public ProductCategoryTap(String category, ProductCart cart, ArrayList<GoodsDTO> goodsArr){
-        this.cart = cart;
-        this.category = category;
+    public ProductCategoryTap(ProductCart cart, ArrayList<GoodsDTO> goodsArr){
         main = new JPanel();
-
-        //대분류와 소분류를 구분한 데이터를 가져왔다고 가정
-
 
 
         main.setLayout(new GridLayout(goodsArr.size() / 2 + 1, 2));
@@ -220,6 +260,7 @@ class ProductCart extends JPanel{
         for(int i = 0; i < goodsArr.size(); i++){
             main.add(new ProductDetailPanel(goodsArr.get(i), cart));
         }
+
         //만약 JScrollPanel 생성후에 Panel의 스크롤 기능을 만들고 싶다면
         //꼭  setViewportView(JPanel)을 사용해야 한다는 점을 잊지 말자.
         this.setViewportView(main);
@@ -310,7 +351,7 @@ class ProductDetailPanel extends JPanel{
 }
 
 //cart 안에 들어있는 하나의 항목(반복적인 패널)
-class ProductCarDetailPanel extends JPanel{
+class ProductCarDetailPanel extends JPanel implements ActionListener{
     private static final int IMAGE_SIZE = 100;
     private static final int FONT_SZIE = 25;
     private static final int BTN_SIZE = 25;
@@ -319,11 +360,13 @@ class ProductCarDetailPanel extends JPanel{
     private JButton upBtn, downBtn;
     private JLabel numLb, priceLb;
     private int num = 1;
+    private ProductCart cart;
 
 
-    public ProductCarDetailPanel(GoodsDTO g) {
+    public ProductCarDetailPanel(GoodsDTO g, ProductCart cart) {
         this.goods = g;
         //this.setLayout(new FlowLayout(FlowLayout.LEFT));
+        this.cart = cart;
         this.setLayout(new GridBagLayout());
         //image
         ImageIcon ii = new ImageIcon(DefaultFrame.PATH + "/images/goods/" + g.getCode() + ".png");
@@ -375,8 +418,12 @@ class ProductCarDetailPanel extends JPanel{
             public void actionPerformed(ActionEvent e) {
                 if(num > 1) {
                     num--;
+
                     numLb.setText(String.valueOf(num));
                     priceLb.setText(num * goods.getPrice() + "원");
+                    cart.updateTot(-goods.getPrice());
+                    int saleCount = cart.getGoodsCountInfoMap().get(g.getCode());
+                    cart.getGoodsCountInfoMap().replace(g.getCode(), saleCount + 1); //hasp 맵 변경
                 }
             }
         });
@@ -384,11 +431,24 @@ class ProductCarDetailPanel extends JPanel{
         upBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                //만약 상품의 개수가 팔수 있는 재고보다 적다면
+                int saleCount = cart.getGoodsCountInfoMap().get(g.getCode());
+                System.out.println("count : " + saleCount);
+                if(g.getMainCategory() != GoodsDTO.MAIN_CATEGORY_MUSIC)    //재고 보다 많이 담을려고 하는 경우
+                    if(saleCount - 1 == 0) {
+                        JOptionPane.showMessageDialog(cart.getParent(), "재고가 부족하여 더 이상 구매할 수 없습니다.");
+                        return;
+                    }
+                cart.getGoodsCountInfoMap().replace(g.getCode(), saleCount - 1); //hasp 맵 변경
                 num++;
                 numLb.setText(String.valueOf(num));
                 priceLb.setText(num * goods.getPrice() + "원");
+                cart.updateTot(goods.getPrice());
             }
         });
+
+        delBtn.addActionListener(this);
 
         left3.add(downBtn);
         left3.add(numLb);
@@ -406,6 +466,7 @@ class ProductCarDetailPanel extends JPanel{
         return goods;
     }
 
+
     public int getNum() {
         return num;
     }
@@ -416,6 +477,11 @@ class ProductCarDetailPanel extends JPanel{
 
     public JButton getDownBtn(){
         return downBtn;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        cart.removeCartList(this);
     }
 }
 

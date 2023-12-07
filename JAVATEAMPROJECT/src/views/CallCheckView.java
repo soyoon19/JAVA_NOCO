@@ -13,22 +13,6 @@ import java.awt.event.ActionListener;
 // 요청 관리 페이지(관리자)
 // 2021011017 김수빈
 
-class CustomTableCellRenderer extends DefaultTableCellRenderer { //테이블 글씨 크기 조정
-    private final int fontSize;
-
-    public CustomTableCellRenderer(int fontSize) {
-        this.fontSize = fontSize; //폰트 사이즈 지정
-        setHorizontalAlignment(SwingConstants.CENTER); // 셀 텍스트 가운데 정렬
-    }
-
-    @Override
-    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-        Component cellComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-        cellComponent.setFont(new Font("맑은 고딕", Font.PLAIN, fontSize));
-        return cellComponent;
-    }
-}
-
 class CheckCellRender extends DefaultTableCellRenderer{
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,

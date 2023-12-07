@@ -7,19 +7,27 @@ import dto.StockDTO;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 //부족한 재고를 보여주는 팝업창 (관리자 로그인 시, 재고관리 페이지에서 확인 가능)
-public class NoticeStockPopup extends JDialog{
+public class NoticeStockPopup extends JDialog implements ActionListener{
 
     public static final int WIDTH = 1200, HEIGHT = 800;
 
     DefaultFrame parent;
     StockDAO stockDAO;
 
+    public NoticeStockPopup(DefaultFrame parent) {
+        super(parent, "부족한 재고를 보여주는 팝업창", true);
 
-    public void popup(){
-        /*
+        this.parent = parent;
+        this.setSize(WIDTH, HEIGHT);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        stockDAO = parent.getController().getStockDAO();
+
+                /*
         getStockDAO()가 DB에 재고 테이블에 있는 테이블에 모든 정보를
         ArrayList<StockDTO> 형태로 가져온다.
          */
@@ -40,7 +48,6 @@ public class NoticeStockPopup extends JDialog{
                         StockDTO.CATEGORY_TO_KOREANNAME(stock.getCategory())}); //Category는 숫자로 관리하기 때문에 정해지 약속에 따라서 변환한다.
             }
         }
-        //너무해.....
 
         //만약 재고가 적은게 없다면 종료한다.
         if(notice.size() == 0) return;
@@ -68,51 +75,27 @@ public class NoticeStockPopup extends JDialog{
         //left -2 (JTable)
         JTable table;
 
-        String[] columnType = new String[]{"재고코드", "재고명", "현재 수량", "최소수량", "공급가", "날짜", "카테고리"};
+        String[] columnType = new String[]{"재고코드", "재고명", "현재 수량", "최소수량", "공급가", "카테고리"};
 
         //columnType.setFont(new DefaultFont(50));
 
 
         table = new JTable(rst, columnType);
-        left.add(table, BorderLayout.CENTER);
+        //left.add(table, BorderLayout.CENTER);
 
-
-       /* Object[][] productData = new Object[drinkList.size()][];
-
-        for(int i = 0; i <productData.length; i++){
-            GoodsDTO goods = drinkList.get(i);
-
-            productData[i] = new Object[]{
-                    goods.getCode(), goods.getName(), goods.getCategory(), goods.getStatus(), goods.getSaleCount(),
-                    goods.getDisStatus(), goods.getPrice(), goods.getCost()
-            };
-        }
-
-        */
 
         //Table에 scrollPane 붙이기
         //table.addMouseListener(this);
         JScrollPane scrollPane = new JScrollPane(table);
         //scrollPane 올리기
-        main.add(scrollPane);
+        main.add(scrollPane, BorderLayout.CENTER);
 
 
-
-/*
-        JPanel t = new JPanel();
-        t.setLayout(new GridLayout(1,1));
-        JPanel right = new JPanel();
-        right.setLayout(null);
-        right.setBounds(0, 0, 40, 50);
-
-        JButton okBtn = new JButton("확인");
-        okBtn.setFont(new DefaultFont(20));
-        okBtn.setBounds(0, 0, 40, 50);
-*/
         JPanel right = new JPanel();
         right.setLayout(new FlowLayout());
 
         JButton okBtn = new JButton("확인");
+        okBtn.addActionListener(this);
         okBtn.setFont(new DefaultFont(20));
 
         right.add(okBtn);
@@ -120,16 +103,11 @@ public class NoticeStockPopup extends JDialog{
 
         //호출시 보이기 설정
         this.add(main);
-        this.setVisible(true);
     }
 
-    public NoticeStockPopup(DefaultFrame parent) {
-        super(parent, "부족한 재고를 보여주는 팝업창", true);
 
-        this.parent = parent;
-        this.setSize(WIDTH, HEIGHT);
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        stockDAO = parent.getController().getStockDAO();
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        this.dispose();
     }
-
 }

@@ -43,6 +43,16 @@ public class ManagerMainView extends JPanel {
         add(right,DefaultFrame.easyGridBagConstraint(1,0,8,1));
         right.add(new MonthSaleStatus(),DefaultFrame.easyGridBagConstraint(0,0,1,4));
         right.add(new SaleStatus(parent),DefaultFrame.easyGridBagConstraint(0,1,1,3));
+
+        boolean find = false;
+        ArrayList<StockDTO> stocks = parent.getController().getStockDAO().findAll();
+        for(StockDTO stock : stocks){
+            if(stock.getAmount() < stock.getMinAmount()){
+                find = true; break;
+            }
+        }
+        if(find)
+            (new NoticeStockPopup(parent)).setVisible(true);
     }
 }
 
@@ -184,6 +194,7 @@ class ManagerButtonListPanel extends JPanel implements ActionListener {
                 movePage = new SalesAnalysisView(parent);
                 break;
             case "요청 관리":
+                movePage = new CallCheckView();
                 break;
             case "LOGOUT":
                 int x = JOptionPane.showConfirmDialog(this, "로그아웃하시겠습니까?","LOGUT",JOptionPane.YES_NO_OPTION);

@@ -16,6 +16,7 @@ import custom_component.NumberPadPanel;
 import dao.MemberLogDAO;
 import dao.OrderDAO;
 import dto.*;
+import test.Tester;
 
 
 class CardInfoInputPanel extends JPanel implements ActionListener{
@@ -192,18 +193,18 @@ class CardInfoInputPanel extends JPanel implements ActionListener{
             for(int i=0;i<cardNumsTf.length;i++){ //카드번호 입력 예외처리
                 if(!(cardNumsTf[i].getText().length() == 4)){
                     JOptionPane.showMessageDialog(this,"카드 번호를 다시 입력해주세요.","카드 번호 입력 오류",JOptionPane.INFORMATION_MESSAGE);
-                    //return;
+                    return;
                 }
             }
 
             if(!(cvc.getText().length() == 3)){
                 JOptionPane.showMessageDialog(this,"cvc 번호를 다시 입력해주세요.","CVC 입력 오류",JOptionPane.INFORMATION_MESSAGE);
-                //return;
+                return;
             }
 
             if(!(pwPf.getText().length() == 4)) {
                 JOptionPane.showMessageDialog(this,"카드 비밀번호를 다시 입력해주세요.","카드 비밀번호 입력 오류",JOptionPane.INFORMATION_MESSAGE);
-                //return;
+                return;
             }
 
             GoodsDTO[] goodsArr = cardInfoPopup.getGoodsArr();
@@ -321,9 +322,11 @@ class CardInfoInputPanel extends JPanel implements ActionListener{
                 //memberLog.setTotalPay();
                 cardInfoPopup.getParent().move(new MusicUseView(cardInfoPopup.getParent(), room, member, roomImf));
             }else{
-                controller.getRoomImfDAO().insert(roomImf);
                 cardInfoPopup.getParent().resetMove(new UserHomeView(cardInfoPopup.getParent()));
             }
+            controller.getRoomImfDAO().insert(roomImf);
+            (new Tester(roomImf)).start();
+
             System.out.println("insert Complete!");
             cardInfoPopup.dispose();
         }
@@ -337,7 +340,7 @@ class CardInfoInputPanel extends JPanel implements ActionListener{
 여기서는 붙여주기만 한다.
  */
 public class CardInfoPopup extends JDialog implements ActionListener{
-    public static final int WIDTH = 1400,
+    public static final int WIDTH = 1600,
             HEIGHT = 600;
     public static final String TITLE = "결제화면";
     private DefaultFrame parent;
@@ -347,6 +350,7 @@ public class CardInfoPopup extends JDialog implements ActionListener{
     private JButton backBtn;
     private Container cp;
     private MemberDTO member;
+
     private GoodsDTO[] goodsArr;
     private RoomManageDTO room;
     private int[] nums;

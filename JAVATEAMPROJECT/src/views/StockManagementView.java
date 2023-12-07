@@ -246,6 +246,7 @@ class StockMenuPanel extends JPanel implements ActionListener {
 
             //4. 버튼에 색깔 지정
             dMButton[i].setBackground(btnColors[i]);
+            dMButton[i].addActionListener(this);
             //5. 버튼 생성
             cBottom.add(dMButton[i]);
         }
@@ -261,21 +262,21 @@ class StockMenuPanel extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String s = e.getActionCommand();
-        int row = (stocksShowPanel.getStockViews()
-                [stocksShowPanel.getStockJTabb().getSelectedIndex()])
-                .getTable().getSelectedRow();
-        //추가
-        if(s.contains("추가")){
-            if(s.contains("삭제")){
-                if(!(row >= 0 && row <800)){//미선택 예외처리
-                    JOptionPane.showMessageDialog(null, "선택된 재고가 없어 삭제할 수 없습니다.");
+//        int row = (stocksShowPanel.getStockViews()
+//                [stocksShowPanel.getStockJTabb().getSelectedIndex()])
+//                .getTable().getSelectedRow();
+        int row = 0;
+        if(s.contains("삭제")){
+            if(!(row >= 0 && row <800)){//미선택 예외처리
+                JOptionPane.showMessageDialog(null, "선택된 재고가 없어 삭제할 수 없습니다.");
 
-                }else {
-                    int r = JOptionPane.showConfirmDialog(null, "해당 재고를 정말 삭제하겠습니까?",
-                            "음료 재고 삭제 확인창", JOptionPane.YES_NO_OPTION);
+            }else {
+                int r = JOptionPane.showConfirmDialog(null, "해당 재고를 정말 삭제하겠습니까?",
+                        "음료 재고 삭제 확인창", JOptionPane.YES_NO_OPTION);
 
-                    }
-                }
+            }
+        }else if(s.contains("추가")){
+
 
                 //todo : goodEditPopup에 DB에 저장된 정보 불러오고, 수정 후 DB에 반영되는 이벤트 처리
         }else if(s.contains("편집")){
@@ -286,7 +287,8 @@ class StockMenuPanel extends JPanel implements ActionListener {
             }
 
         } else if(s.contains("부족한")) {
-           (new NoticeStockPopup(parent)).popup();
+            System.out.println("부족한!");
+           (new NoticeStockPopup(parent)).setVisible(true);
         }
     }
 }

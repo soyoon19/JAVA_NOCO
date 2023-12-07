@@ -25,6 +25,7 @@ public class StaffCallView extends JPanel implements ActionListener {
     public StaffCallView(DefaultFrame prt) {
         this.parent = prt;
         this.setLayout(new GridBagLayout());
+        np = new NumberPadPanel();
         //left
         JPanel left = new JPanel();
         left.setLayout(new GridLayout(2,2));
@@ -33,7 +34,6 @@ public class StaffCallView extends JPanel implements ActionListener {
         //left-1
         JPanel left1 = new JPanel();
         JButton cleanBtn = new JButton("정리요청");
-        cleanBtn.setForeground(new Color(242,101,101));
         cleanBtn.setPreferredSize(new Dimension(BUTTON_SIZE));
         cleanBtn.setFont(new DefaultFont(50));
         cleanBtn.addActionListener(this);
@@ -80,6 +80,7 @@ public class StaffCallView extends JPanel implements ActionListener {
         whatyouwant.setFont(new DefaultFont(50));
         right1.add(whatyouwant);
         right.add(right1, DefaultFrame.easyGridBagConstraint(0,0,1,1));
+
         //right-2
         JPanel right2 = new JPanel();
         roomNum = new JTextField(11);
@@ -89,15 +90,12 @@ public class StaffCallView extends JPanel implements ActionListener {
         bunBang.setFont(new DefaultFont(30));
         right2.add(roomNum);
         right2.add(bunBang);
-        JButton okBtn = new JButton("확인");
-        okBtn.setPreferredSize(new Dimension(100,50));
-        okBtn.setFont(new DefaultFont(30));
-        right2.add(okBtn);
+
         right.add(right2, DefaultFrame.easyGridBagConstraint(0,1,1,1));
 
 
         //right-3
-        np = new NumberPadPanel();
+
         right.add(np, DefaultFrame.easyGridBagConstraint(0,2,1,2));
 
         this.add(right, DefaultFrame.easyGridBagConstraint(1,0,3,1));
@@ -107,11 +105,12 @@ public class StaffCallView extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e){
         String roomNumber = roomNum.getText();
         RoomManageDTO requestRoom = null;
+
         if(roomNumber.equals("")){
-            //JOptionpanel 값을 입력하세요
-            //JOptionPane.show
+            JOptionPane.showMessageDialog(this, "방 번호를 입력하세요.", "알림", JOptionPane.WARNING_MESSAGE);
             return;
         }
+
         Controller controller = parent.getController();
         ArrayList<RoomManageDTO> rooms = controller.getRoomManageDAO().findAll();
         boolean find = false;
@@ -124,11 +123,13 @@ public class StaffCallView extends JPanel implements ActionListener {
             }
         }
         if(!find){
-            //JOptionPane
+            JOptionPane.showMessageDialog(this, "해당 방 번호를 찾을 수 없습니다.", "알림", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
         String request = e.getActionCommand();
-        System.out.println(roomNum + "번 방에 대해서 " + request + "요청이 들어왔습니다.");
+        String message = roomNum.getText() + "번 방에 대해서 " + request + " 전송 완료";
+
+        JOptionPane.showMessageDialog(this, message, "알림", JOptionPane.INFORMATION_MESSAGE);
     }
 }

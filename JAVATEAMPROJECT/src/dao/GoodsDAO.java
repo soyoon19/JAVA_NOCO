@@ -13,8 +13,6 @@ import java.util.Objects;
 public class GoodsDAO implements  DAO<GoodsDTO, String>{
     private Connection conn;
 
-
-
     public GoodsDAO(Connection coon){
         this.conn = coon;
     }

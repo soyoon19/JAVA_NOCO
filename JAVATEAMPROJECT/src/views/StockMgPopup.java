@@ -5,24 +5,25 @@ import custom_component.DefaultFont;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-//부족한 재고를 보여주는 팝업창 (관리자 로그인 시, 재고관리 페이지에서 확인 가능)
-public class DrinkMgPopup  extends JDialog{
+//재고 추가, 편집
+// (관리자 로그인 시, 재고관리 페이지에서 확인 가능)
+public class StockMgPopup extends JDialog implements ActionListener {
 
-    public static final int WIDTH = 1200, HEIGHT = 800;
+    public static final int WIDTH = 800, HEIGHT = 100;
 
     DefaultFrame parent;
 
-    public DrinkMgPopup (DefaultFrame parent) {
-        super(parent, "음료 상세 관리 팝업", true);
+    public StockMgPopup(DefaultFrame parent) {
+        super(parent, "재고 상세 관리 팝업", true);
         this.parent = parent;
         this.setSize(WIDTH, HEIGHT);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-
         JPanel main = new JPanel();
         main.setLayout(new BorderLayout());
-
 
         //left -1 (JLable)
         JPanel left = new JPanel();
@@ -45,18 +46,6 @@ public class DrinkMgPopup  extends JDialog{
         table = new JTable(drinksData, columnType);
         left.add(table, BorderLayout.CENTER);
 
-       /* Object[][] productData = new Object[drinkList.size()][];
-
-        for(int i = 0; i <productData.length; i++){
-            GoodsDTO goods = drinkList.get(i);
-
-            productData[i] = new Object[]{
-                    goods.getCode(), goods.getName(), goods.getCategory(), goods.getStatus(), goods.getSaleCount(),
-                    goods.getDisStatus(), goods.getPrice(), goods.getCost()
-            };
-        }
-
-        */
 
         //Table에 scrollPane 붙이기
         //table.addMouseListener(this);
@@ -70,22 +59,15 @@ public class DrinkMgPopup  extends JDialog{
         JPanel right = new JPanel();
         //right.setLayout(new );
 
-        //이미지 변경 버튼
-        JButton changeImg = new JButton("이미지 변경");
-        changeImg.setFont(new DefaultFont(20));
-        right.add(changeImg);
-
-
-        //right - 3 : 취소 버튼
-        JButton canBtn = new JButton("취소");
-        canBtn.setFont(new DefaultFont(20));
-        right.add(canBtn);
-
         //right - 3 : 저장 버튼
         JButton okBtn = new JButton("저장");
         okBtn.setFont(new DefaultFont(20));
         right.add(okBtn);
 
+        //right - 3 : 취소 버튼
+        JButton canBtn = new JButton("취소");
+        canBtn.setFont(new DefaultFont(20));
+        right.add(canBtn);
 
 
         main.add(right, BorderLayout.EAST);
@@ -93,6 +75,10 @@ public class DrinkMgPopup  extends JDialog{
         //호출시 보이기 설정
         this.add(main);
         this.setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
 
     }
 }

@@ -4,63 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="73277347-8d03-48f7-a7c0-89844aebc90d" name="Changes" comment="merge chooyj_temp">
-      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/s0105.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/s0106.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/s0107.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/s0108.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2001.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2002.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2003.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2004.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2005.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2006.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2007.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2008.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2009.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2010.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2101.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2102.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2103.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2104.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2105.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2106.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2107.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2201.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2202.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2203.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2204.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2205.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2206.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2301.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2302.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2303.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2304.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2305.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2306.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2307.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2401.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2402.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2403.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/v2404.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/test/Tester.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO_1/images/goods/s0101.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO_1/images/goods/s0102.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/JAVA_NOCO_1/images/goods/s0103.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30__10_04__Changes_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30__12_48__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30__12_57__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30__1_02__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30_오전_10_04_[Changes]1/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30_오전_12_48_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30_오전_12_57_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-30_오전_1_02_[Changes]/shelved.patch" beforeDir="false" />
+    <list default="true" id="73277347-8d03-48f7-a7c0-89844aebc90d" name="Changes" comment="feat 결제 기능 완료">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dto/GoodsDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dto/GoodsDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/s0103.png" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/goods/s0103.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/CardInfoPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/CardInfoPopup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/DrinksManagementView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/DrinksManagementView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ProductListCartView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ProductListCartView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ProductOptionPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ProductOptionPopup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/RoomSettingView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/RoomSettingView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/StockManagementView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/StockManagementView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVA_NOCO_1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/JAVA_NOCO_1.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,7 +62,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "C:/Users/KJW/Code/kotlinProgramming/JAVA_NOCO_1/JAVATEAMPROJECT/src/images/goods",
+    "last_opened_file_path": "C:/Users/KJW/Code/kotlinProgramming/JAVA_NOCO_1/out/production/JAVA_NOCO1/jar/mysql-connector-j-8.2.0.jar",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
@@ -298,7 +249,14 @@
       <option name="project" value="LOCAL" />
       <updated>1701891839393</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="feat 결제 기능 완료">
+      <created>1701924830034</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1701924830034</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -371,6 +329,7 @@
     <MESSAGE value="Feat : CardInfoPopup 기능 추가" />
     <MESSAGE value="Feat : 방 편집 기능 완료" />
     <MESSAGE value="merge chooyj_temp" />
-    <option name="LAST_COMMIT_MESSAGE" value="merge chooyj_temp" />
+    <MESSAGE value="feat 결제 기능 완료" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat 결제 기능 완료" />
   </component>
 </project>

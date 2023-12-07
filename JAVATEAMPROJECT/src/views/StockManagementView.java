@@ -9,6 +9,8 @@ import dto.StockDTO;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -31,6 +33,8 @@ class StocksShowPanel extends JPanel {
     StockViewPanel[] stockViews;
     ArrayList<StockDTO> stocsk; //DTO의 모든 정보를 받기
     DefaultFrame parent; //부모 정보 받기
+    private int nowCategory = 0;
+    JTabbedPane stockJTabb;
 
     //LEFT (1) : 모든 JTable을 보여줄 패널
     public StocksShowPanel(DefaultFrame prt) {
@@ -40,7 +44,7 @@ class StocksShowPanel extends JPanel {
         this.setLayout(new BorderLayout());
 
         //탭 생성
-        JTabbedPane stockJTabb = new JTabbedPane();
+        stockJTabb = new JTabbedPane();
         stocsk = parent.getController().getStockDAO().findAll(); //todo 변수명 이상해서 한번만 확인부탁드립나다.
 
         //category 만큼 반복
@@ -63,7 +67,25 @@ class StocksShowPanel extends JPanel {
         stockJTabb.setFont(new DefaultFont(50));
 
         this.add(stockJTabb);
+        stockJTabb.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+            }
+        });
+    }
 
+    public JTabbedPane getStockJTabb() {
+        return stockJTabb;
+    }
+
+    public void tableUpdate(){
+        for(int i = 0; i < stockViews.length; i++){
+            //stockViews[i].tableUpdate();
+        }
+    }
+
+    public StockViewPanel[] getStockViews(){
+        return stockViews;
     }
 }
 
@@ -72,6 +94,7 @@ class StocksShowPanel extends JPanel {
 class StockViewPanel extends JPanel {
     //1. DB로 불러와서 비교하기 / 2. 해당 카테고리에 맞는 JTable 붙이기
     ArrayList<StockDTO> stokcs;
+    private JTable table;
 
     public StockViewPanel(ArrayList<StockDTO> stocks) {
         this.setLayout(new BorderLayout());
@@ -84,6 +107,8 @@ class StockViewPanel extends JPanel {
         for (int i = 0; i < columnType.length; i++)
             colVec.add(columnType[i]);
 
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
         Vector<Vector<Object>> stockList = new Vector<>(new Vector<>());
         for (StockDTO stock : stocks) {
             stockList.add(new Vector<>());
@@ -93,7 +118,7 @@ class StockViewPanel extends JPanel {
             stockList.get(x).add(stock.getAmount());
             stockList.get(x).add(stock.getMinAmount());
             stockList.get(x).add(stock.getCost());
-            stockList.get(x).add((new Date()).toString());
+            stockList.get(x).add((format.format(new Date())).toString());
         }
 
         DefaultTableModel tableModel = new DefaultTableModel(stockList, colVec) {
@@ -115,6 +140,10 @@ class StockViewPanel extends JPanel {
         this.setBackground(Color.orange);
     }
 
+    public JTable getTable(){
+        return table;
+    }
+
 }
 
 //right - 1
@@ -122,11 +151,13 @@ class StockMenuPanel extends JPanel implements ActionListener {
 
     private CalendarPanel calendarPanel;
     private DefaultFrame parent;
+    private StocksShowPanel stocksShowPanel;
 
-    public StockMenuPanel(DefaultFrame prt) {
+    public StockMenuPanel(DefaultFrame prt, StocksShowPanel stocksShowPanel) {
         parent = prt;
         this.setLayout(new BorderLayout());
         JTabbedPane jtp = new JTabbedPane();
+        this.stocksShowPanel = stocksShowPanel;
 
         //right
         //탭에 들어갈 내용 (날짜 grid로)
@@ -227,21 +258,21 @@ class StockMenuPanel extends JPanel implements ActionListener {
     }
 
     //todo : 위쪽 table의 정보를 가져오는 getTable을 만들어 사용하고 싶은데 안돼서 전체 주석처리 했습니다.
-/*    @Override
+    @Override
     public void actionPerformed(ActionEvent e) {
         String s = e.getActionCommand();
-        int row = StocksShowPanel.getTable().getSelectedRow();
+        int row = (stocksShowPanel.getStockViews()
+                [stocksShowPanel.getStockJTabb().getSelectedIndex()])
+                .getTable().getSelectedRow();
         //추가
         if(s.contains("추가")){
-
-
             if(s.contains("삭제")){
                 if(!(row >= 0 && row <800)){//미선택 예외처리
-                    JOptionPane.showMessageDialog(null, "선택된 음료가 없어 삭제할 수 없습니다.");
+                    JOptionPane.showMessageDialog(null, "선택된 재고가 없어 삭제할 수 없습니다.");
 
                 }else {
-                    int r = JOptionPane.showConfirmDialog(null, "해당 음료를 정말 삭제하겠습니까?",
-                            "음료 종류 삭제 확인창", JOptionPane.YES_NO_OPTION);
+                    int r = JOptionPane.showConfirmDialog(null, "해당 재고를 정말 삭제하겠습니까?",
+                            "음료 재고 삭제 확인창", JOptionPane.YES_NO_OPTION);
 
                     }
                 }
@@ -249,7 +280,7 @@ class StockMenuPanel extends JPanel implements ActionListener {
                 //todo : goodEditPopup에 DB에 저장된 정보 불러오고, 수정 후 DB에 반영되는 이벤트 처리
             }else if(s.contains("편집")){
                 if(row < 0) {//미선택시 에외처리
-                    JOptionPane.showMessageDialog(null, "선택된 음료가 없어 편집할 수 없습니다.");
+                    JOptionPane.showMessageDialog(null, "선택된 재고가 없어 편집할 수 없습니다.");
                 }else {
 
                 }
@@ -259,7 +290,7 @@ class StockMenuPanel extends JPanel implements ActionListener {
 
             }
     }
-}*/
+}
 
 public class StockManagementView extends JPanel {
     public static Dimension BUTTON_SIZE = new Dimension(80, 80);
@@ -268,17 +299,19 @@ public class StockManagementView extends JPanel {
     };
     private JPanel cCenter;
     private DefaultFrame parent;
+    private StocksShowPanel stocksShowPanel;
 
     public StockManagementView(DefaultFrame prt) {
         this.parent = prt;
         this.setLayout(new GridBagLayout());
+        this.stocksShowPanel = new StocksShowPanel(parent);
 
         //left
-        this.add(new StocksShowPanel(parent), DefaultFrame.easyGridBagConstraint(0, 0, 3, 1));
+        this.add(stocksShowPanel, DefaultFrame.easyGridBagConstraint(0, 0, 3, 1));
 
 
         //rightMain - JTabbed (날짜, 캘린더)
-        this.add(new StockMenuPanel(parent), DefaultFrame.easyGridBagConstraint(1, 0, 1, 1));
+        this.add(new StockMenuPanel(parent,stocksShowPanel), DefaultFrame.easyGridBagConstraint(1, 0, 1, 1));
 
     }
 }
@@ -381,11 +414,11 @@ class CalendarPanel extends JPanel {
         return nowDate;
     }
 
-
 }
 
 abstract  class CalMouseListener implements MouseListener {
     boolean sw = false;
+
     @Override
     public void mousePressed(MouseEvent e) {
         if (!sw) return;
@@ -404,18 +437,16 @@ abstract  class CalMouseListener implements MouseListener {
     public void mouseEntered(MouseEvent e) {
         if (!sw) return;
 
-
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
         if (!sw) return;
 
-
     }
 
     public void setSw(boolean sw) {
         this.sw = sw;
     }
-
 }
+

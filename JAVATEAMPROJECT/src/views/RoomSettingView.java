@@ -254,15 +254,17 @@ class RoomEditViewPanel extends RoomViewPanel{
         for(RoomPanel rp : getRoomPs()){
             rp.addMouseListener(new MouseListener() {
                 //비활성화
-                boolean lock = controller.getRoomImfDAO().findById(rp.getRoom().getNum()) == null ? true : false;
+                boolean lock = controller.getRoomImfDAO().findById(rp.getRoom().getNum()) == null ? false : true;
 
                 Color color;
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    if(rs.getEventSwitch().getSw() && lock){
-                        rs.setRoomInfo(rp.getRoom());
+                    if(rs.getEventSwitch().getSw()) {
+                        if(!lock)
+                            rs.setRoomInfo(rp.getRoom());
+                        else
+                            JOptionPane.showMessageDialog(getParent(), "사용중인 방입니다.");
                     }
-
                     if(se.getRoomDel().getEventSwitch().getSw()){
                         se.getRoomDel().setRoomInfo(rp.getRoom());
                     }
@@ -831,6 +833,7 @@ class RoomSettingPanelMini extends JPanel implements ActionListener { //방설�
 class RoomManagePanel extends JPanel implements ActionListener { //방관리 패널
     JButton musicAdd, forcedExit;
     DefaultFrame parent;
+    private RoomSettingView roomSettingView;
     private RoomViewPanel roomViewPanel;
     private RoomManageInfoPanel gbt;
 
@@ -840,6 +843,7 @@ class RoomManagePanel extends JPanel implements ActionListener { //방관리 패
         this.setLayout(new BorderLayout());
         JPanel rmview = new JPanel(new GridBagLayout());
         gbt = new RoomManageInfoPanel(parent);
+        this.roomSettingView = roomSettingView;
 
         //Grid Bag Layout의 left
         roomViewPanel = new RoomViewPanel(parent.getController());
@@ -943,7 +947,7 @@ class RoomManagePanel extends JPanel implements ActionListener { //방관리 패
             gbt.infoSet(gbt.getRoomIfm());
 
             //todo 강제퇴장 된 경우 최신화
-            //roomSettingView.update();
+            roomSettingView.update();
         }
     }
 

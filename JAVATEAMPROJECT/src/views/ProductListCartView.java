@@ -224,14 +224,21 @@ class ProductCart extends JPanel{
             GoodsDTO[] goods = new GoodsDTO[goodsArr.length];
             int[] nums = new int[goodsArr.length];
 
+            boolean findMusic = false;
             for(ProductCarDetailPanel p : goodsArr){
                 goods[i] = goodsArr[i].getGoods();
+                if(goods[i].getMainCategory() == GoodsDTO.MAIN_CATEGORY_MUSIC)
+                    findMusic = true;
                 nums[i] = goodsArr[i].getNum();
                 i++;
             }
 
-
-
+            if(member == null || parent.getController().getMemberLogDAO().findById(member.getHp()).getHoldSong() == 0){
+                if(!findMusic){
+                    JOptionPane.showConfirmDialog(parent, "곡을 구매해 주세요");
+                    return;
+                }
+            }
             ProductCartResultPopup popup = new ProductCartResultPopup(goods, nums, parent, member, room);
         }
     }

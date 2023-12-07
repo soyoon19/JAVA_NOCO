@@ -254,17 +254,18 @@ class RoomEditViewPanel extends RoomViewPanel{
         for(RoomPanel rp : getRoomPs()){
             rp.addMouseListener(new MouseListener() {
                 //비활성화
-                boolean lock = controller.getRoomImfDAO().findById(rp.getRoom().getNum()) == null ? false : true;
+                boolean lock = controller.getRoomImfDAO().findById(rp.getRoom().getNum()) == null ? true : false;
 
                 Color color;
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    if(rs.getEventSwitch().getSw()) {
+                    if(rs.getEventSwitch().getSw()){
                         if(!lock)
                             rs.setRoomInfo(rp.getRoom());
                         else
-                            JOptionPane.showMessageDialog(getParent(), "사용중인 방입니다.");
+                            JOptionPane.showMessageDialog(getParent(),"사용 중인 방입니다.");
                     }
+
                     if(se.getRoomDel().getEventSwitch().getSw()){
                         se.getRoomDel().setRoomInfo(rp.getRoom());
                     }
@@ -781,8 +782,7 @@ class RoomSettingPanelMini extends JPanel implements ActionListener { //방설�
     @Override
     public void actionPerformed(ActionEvent e) {
         String s = e.getActionCommand();
-        //todo 예외 처리 방이 선택 안된 경우
-        if(roomNumtf.equals("")){
+        if(roomNumtf.getText().toString().trim().equals("")){
             JOptionPane.showMessageDialog(this, "방을 선택하세요.","방 선택",JOptionPane.INFORMATION_MESSAGE);
             return;
         }
@@ -800,7 +800,6 @@ class RoomSettingPanelMini extends JPanel implements ActionListener { //방설�
 
             room.setCheck(false);
             parent.getController().getRoomManageDAO().update(room);
-
 
             JOptionPane.showMessageDialog(this, "방이 활성화 되었습니다.","방 활성화 완료",JOptionPane.INFORMATION_MESSAGE);
             roomEditPanel.update(); //GUI Update
@@ -833,7 +832,6 @@ class RoomSettingPanelMini extends JPanel implements ActionListener { //방설�
 class RoomManagePanel extends JPanel implements ActionListener { //방관리 패널
     JButton musicAdd, forcedExit;
     DefaultFrame parent;
-    private RoomSettingView roomSettingView;
     private RoomViewPanel roomViewPanel;
     private RoomManageInfoPanel gbt;
 
@@ -843,7 +841,6 @@ class RoomManagePanel extends JPanel implements ActionListener { //방관리 패
         this.setLayout(new BorderLayout());
         JPanel rmview = new JPanel(new GridBagLayout());
         gbt = new RoomManageInfoPanel(parent);
-        this.roomSettingView = roomSettingView;
 
         //Grid Bag Layout의 left
         roomViewPanel = new RoomViewPanel(parent.getController());
@@ -947,7 +944,7 @@ class RoomManagePanel extends JPanel implements ActionListener { //방관리 패
             gbt.infoSet(gbt.getRoomIfm());
 
             //todo 강제퇴장 된 경우 최신화
-            roomSettingView.update();
+            //roomSettingView.update();
         }
     }
 
@@ -1002,15 +999,16 @@ class MusicAddPopup extends JDialog implements ActionListener { //곡추가 팝�
     @Override
     public void actionPerformed(ActionEvent e) {
         String s = e.getActionCommand();
-        //todo Exception 처리
         if(s.equals("추가")){
-            int x = Integer.parseInt(musicAccountTf.getText());
-            roomIfm.setLeftSong(roomIfm.getLeftSong() + x);
+            if(musicAccountTf.getText().toString().trim().equals("")){
+                JOptionPane.showMessageDialog(this,"곡 수를 입력해 주세요.","곡 추가 오류",JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                int x = Integer.parseInt(musicAccountTf.getText());
+                roomIfm.setLeftSong(roomIfm.getLeftSong() + x);
+                JOptionPane.showMessageDialog(this, x + "곡이 추가되었습니다.","곡 추가",JOptionPane.INFORMATION_MESSAGE);
 
-            JOptionPane.showMessageDialog(this, x + "곡이 추가되었습니다.","방 추가",JOptionPane.INFORMATION_MESSAGE);
-
-            parent.getController().getRoomImfDAO().update(roomIfm);
-
+                parent.getController().getRoomImfDAO().update(roomIfm);
+            }
         } else if (s.equals("취소")){
             this.dispose();
         }
@@ -1030,10 +1028,8 @@ class ForcedExitPopup extends JDialog implements ActionListener { //강제퇴장
         this.roomIfm = roomIfm;
         this.parent = parent;
         this.roomIfm = roomIfm;
-
-        RoomIfmDTO roomIfmDTO = new RoomIfmDTO();
-        musicAccount = new JLabel(roomIfmDTO.getNum()+"번 방을 강제 퇴장하시겠습니까?");
-        musicAccount.setFont(new DefaultFont(RoomSettingView.FONT_SIZE-10));
+        musicAccount = new JLabel(roomIfm.getNum()+"번 방을 강제 퇴장하시겠습니까?");
+        musicAccount.setFont(new DefaultFont(RoomSettingView.FONT_SIZE-11));
         addBtn = new JButton("확인");
         addBtn.setBackground(Color.white);
         addBtn.addActionListener(this);
@@ -1063,7 +1059,7 @@ class ForcedExitPopup extends JDialog implements ActionListener { //강제퇴장
         if(s.equals("확인")){
             parent.getController().getRoomImfDAO().delete(roomIfm.getUserHp());
 
-            JOptionPane.showMessageDialog(this, "번방이 강제퇴장되었습니다.","방 강제퇴장",JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, roomIfm.getNum()+"번방이 강제퇴장되었습니다.","방 강제퇴장",JOptionPane.INFORMATION_MESSAGE);
         } else if (s.equals("취소")){
             this.dispose();
         }

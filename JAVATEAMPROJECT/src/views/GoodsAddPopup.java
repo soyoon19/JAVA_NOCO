@@ -9,6 +9,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Enumeration;
 
 public class GoodsAddPopup extends JDialog implements ActionListener {
@@ -73,11 +78,12 @@ public class GoodsAddPopup extends JDialog implements ActionListener {
 
         //right-4
         JRadioButton[] stateBrbs = new JRadioButton[states.length];
+        stateBtnGrp = new ButtonGroup();
         JPanel right4 = new JPanel();
 
         for(int i = 0; i < states.length; i++){
             stateBrbs[i] = new JRadioButton(states[i]);
-            stateBrbs[i].setFont(new DefaultFont(40))
+            stateBrbs[i].setFont(new DefaultFont(40));
             stateBtnGrp.add(stateBrbs[i]);
             right4.add(stateBrbs[i]);
 
@@ -129,7 +135,7 @@ public class GoodsAddPopup extends JDialog implements ActionListener {
 
         //bottom
         JPanel btm = new JPanel();
-        String[] btnName = new String[]{"취소", "저정", "이미지"};
+        String[] btnName = new String[]{"취소", "저장", "이미지"};
         JButton[] btns = new JButton[btnName.length];
 
         for(int i = 0; i < btnName.length; i++){
@@ -157,10 +163,15 @@ public class GoodsAddPopup extends JDialog implements ActionListener {
                 goods.setSaleCount(Integer.parseInt(amountTf.getText()));
                 goods.setPrice(Integer.parseInt(priceTf.getText()));
                 goods.setCost(Integer.parseInt(costTf.getText()));
-                goods.setDisStatus(true);
-                goods.setIce(true); goods.setHot(true);
+                goods.setDisStatus(false);
+                goods.setIce(true);
+                goods.setHot(false);
 
+                parent.getController().getGoodsDAO().insert(goods);
+                fileCopy();
                 //DB에 해당 정보 INSERT
+                JOptionPane.showMessageDialog(parent, "추가 완료");
+                dispose();
                 break;
             case "이미지":
                 JFileChooser chooser = new JFileChooser();
@@ -172,6 +183,21 @@ public class GoodsAddPopup extends JDialog implements ActionListener {
                 break;
         }
     }
+
+
+    public  void fileCopy() {
+        Path sourcePath = Paths.get(imagePathLb.getText()); // 복사할 파일의 경로
+        Path targetPath = Paths.get(DefaultFrame.PATH + "/images/goods/" + sourcePath.getFileName()); // 복사된 파일이 저장될 경로
+
+        try {
+            // 복사
+            Files.copy(sourcePath, targetPath, StandardCopyOption.REPLACE_EXISTING);
+            System.out.println("파일이 복상 성공.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     private static int getSelectedIndex(ButtonGroup buttonGroup) {
         Enumeration<AbstractButton> buttons = buttonGroup.getElements();

@@ -148,55 +148,58 @@ class DrinksCategoryPanel extends JPanel implements ActionListener {
             (new GoodsAddPopup(parent)).setVisible(true);
             //(new DrinkMgPopup(parent, newArr))
             //(new DrinkMgPopup(parent, )).setVisible(true);
+        }
+        System.out.println("row : " + row);
 
-            if (s.contains("삭제")) {
-                if (!(row < 0)) {//미선택 예외처리
-                    JOptionPane.showMessageDialog(null, "선택된 음료가 없어 삭제할 수 없습니다.");
-                    return;
-                } else {
-                    int r = JOptionPane.showConfirmDialog(null, "해당 음료를 정말 삭제하겠습니까?",
-                            "음료 종류 삭제 확인창", JOptionPane.YES_NO_OPTION);
+        if (s.contains("삭제")) {
+            if (row < 0) {//미선택 예외처리
+                JOptionPane.showMessageDialog(null, "선택된 음료가 없어 삭제할 수 없습니다.");
+                return;
+            } else {
+                int r = JOptionPane.showConfirmDialog(null, "해당 음료를 정말 삭제하겠습니까?",
+                        "음료 종류 삭제 확인창", JOptionPane.YES_NO_OPTION);
 
-                    if (r == JOptionPane.YES_NO_OPTION) {
-                        //DB 삭제 방식
-                        parent.getController().getGoodsDAO().delete(drinksDetailPanel.getProductData().get(row).get(0).toString());
-                        drinksDetailPanel.tableUpdate(nowSelect);
-                    }
-                }
-
-                //todo : goodEditPopup에 DB에 저장된 정보 불러오고, 수정 후 DB에 반영되는 이벤트 처리
-            } else if (s.contains("편집")) {
-                if (row < 0) {//미선택시 에외처리
-                    JOptionPane.showMessageDialog(null, "선택된 음료가 없어 편집할 수 없습니다.");
-                    return;
-                } else {
-                    //parent.getController().getGoodsDAO().update(drinksDetailPanel.getProductData().get(row).get(0).toString());
+                if (r == JOptionPane.YES_NO_OPTION) {
+                    //DB 삭제 방식
+                    parent.getController().getGoodsDAO().delete(drinksDetailPanel.getProductData().get(row).get(0).toString());
                     drinksDetailPanel.tableUpdate(nowSelect);
-                    (new GoodEditPopup(parent)).setVisible(true);
                 }
-
-            } else if (s.contains("일괄")) {
-                if (row < 0) {//미선택시 에외처리
-                    JOptionPane.showMessageDialog(null, "선택된 음료가 없어 일괄설정할 수 없습니다.");
-                    return;
-                }
-                System.out.println(goodsMap.values());
-                DrinksStatusPopup drinksStatusPopup = new DrinksStatusPopup(parent, new ArrayList<GoodsDTO>(goodsMap.values()));
-                drinksStatusPopup.setVisible(true);
-
-                //확인이 눌렸다면
-                if (drinksStatusPopup.isChecked() == true) {
-                    clearBoxLayout(); //메서드 실행
-                }
-                drinksDetailPanel.tableUpdate(nowSelect);
-
-            } else if (s.contains("비우기")) {
-                clearBoxLayout();
-                drinksDetailPanel.tableUpdate(nowSelect);// 선택 되어있던 카테고리로 보여줌
             }
 
+            //todo : goodEditPopup에 DB에 저장된 정보 불러오고, 수정 후 DB에 반영되는 이벤트 처리
+        } else if (s.contains("편집")) {
+            if (row < 0) {//미선택시 에외처리
+                JOptionPane.showMessageDialog(null, "선택된 음료가 없어 편집할 수 없습니다.");
+                return;
+            } else {
+                //parent.getController().getGoodsDAO().update(drinksDetailPanel.getProductData().get(row).get(0).toString());
+                drinksDetailPanel.tableUpdate(nowSelect);
+                (new GoodEditPopup(parent)).setVisible(true);
+                drinksDetailPanel.tableUpdate(nowSelect);
+            }
 
+        } else if (s.contains("일괄")) {
+            if (row < 0) {//미선택시 에외처리
+                JOptionPane.showMessageDialog(null, "선택된 음료가 없어 일괄설정할 수 없습니다.");
+                return;
+            }
+            System.out.println(goodsMap.values());
+            DrinksStatusPopup drinksStatusPopup = new DrinksStatusPopup(parent, new ArrayList<GoodsDTO>(goodsMap.values()));
+            drinksStatusPopup.setVisible(true);
+
+            //확인이 눌렸다면
+            if (drinksStatusPopup.isChecked() == true) {
+                clearBoxLayout(); //메서드 실행
+            }
+            drinksDetailPanel.tableUpdate(nowSelect);
+
+        } else if (s.contains("비우기")) {
+            clearBoxLayout();
+            drinksDetailPanel.tableUpdate(nowSelect);// 선택 되어있던 카테고리로 보여줌
         }
+
+
+
 
     }
 }
@@ -332,7 +335,12 @@ class DrinksDetailPanel extends  JPanel implements MouseListener {
 
     public void tableUpdate(int s){
         nowCategoryIndex = s;
-        drinkList = parent.getController().getGoodsDAO().findAll();
+        ArrayList<GoodsDTO> temp = parent.getController().getGoodsDAO().findAll();
+        drinkList =  new ArrayList<GoodsDTO>();
+        for(int i = 0; i < temp.size(); i++)
+            if(temp.get(i).getMainCategory() == GoodsDTO.MAIN_CATEGORY_DRINK)
+                drinkList.add(temp.get(i));
+
         String category = DrinksCategoryPanel.drinksCategorys[nowCategoryIndex];
         productData.removeAllElements();
         System.out.println(s);

@@ -278,17 +278,16 @@ class StockMenuPanel extends JPanel implements ActionListener {
                 }
 
                 //todo : goodEditPopup에 DB에 저장된 정보 불러오고, 수정 후 DB에 반영되는 이벤트 처리
-            }else if(s.contains("편집")){
-                if(row < 0) {//미선택시 에외처리
-                    JOptionPane.showMessageDialog(null, "선택된 재고가 없어 편집할 수 없습니다.");
-                }else {
-
-                }
-
-            } else if(s.contains("부족한")) {
-            (new NoticeStockPopup(parent)).popup();
+        }else if(s.contains("편집")){
+            if(row < 0) {//미선택시 에외처리
+                JOptionPane.showMessageDialog(null, "선택된 재고가 없어 편집할 수 없습니다.");
+            }else {
 
             }
+
+        } else if(s.contains("부족한")) {
+           (new NoticeStockPopup(parent)).popup();
+        }
     }
 }
 

@@ -101,11 +101,11 @@ public class UserLoginView extends JPanel implements ActionListener{
                 MemberDTO member = memberDAO.findById(hpTf.getText());
 
                 if(member == null){
-                    JOptionPane.showConfirmDialog(parent, "로그인 아이디 틀림 실패");
+                    JOptionPane.showMessageDialog(parent, "로그인 아이디 틀림 실패");
                 }else if(!member.getPasswd().equals(pwTf.getText())){
-                    JOptionPane.showConfirmDialog(parent, "비밀번호 틀림");
+                    JOptionPane.showMessageDialog(parent, "비밀번호 틀림");
                 }else{
-                    JOptionPane.showConfirmDialog(parent, "로그인 성공");
+                    JOptionPane.showMessageDialog(parent, "로그인 성공");
                     parent.move(new RoomSelectView(parent, member));
                 }
             }

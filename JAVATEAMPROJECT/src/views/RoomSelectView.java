@@ -17,8 +17,7 @@ public class RoomSelectView extends JPanel {
         this.member = mbr;
 
         this.setLayout(new GridBagLayout());
-        RoomViewPanel room = new RoomViewPanel(parent.getController().getRoomManageDAO().findAll(),
-                parent.getController().getRoomOptionDAO().findAll());
+        RoomViewPanel room = new RoomViewPanel(parent.getController());
 
         this.add(room, DefaultFrame.easyGridBagConstraint(0,0,3,2));
 

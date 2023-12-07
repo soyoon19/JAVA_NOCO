@@ -41,7 +41,7 @@ public class UserLoginView extends JPanel implements ActionListener{
 
 
         hpTf = new JTextField(11);
-        pwTf = new JTextField(11);
+        pwTf = new JPasswordField(11);
         hpTf.setFont(new DefaultFont(60));
         pwTf.setFont(new DefaultFont(60));
 
@@ -85,7 +85,7 @@ public class UserLoginView extends JPanel implements ActionListener{
         bottom.add(joinBtn);
         bottom.add(findPwBtn);
 
-        this.add(bottom, BorderLayout.SOUTH); //박스레이아웃 어렵지만 다양성을 위해 사용하고 싶음
+        this.add(bottom, BorderLayout.SOUTH);
 
         celBtn.addActionListener(this);
         joinBtn.addActionListener(this);
@@ -101,11 +101,11 @@ public class UserLoginView extends JPanel implements ActionListener{
                 MemberDTO member = memberDAO.findById(hpTf.getText());
 
                 if(member == null){
-                    JOptionPane.showConfirmDialog(parent, "로그인 아이디 틀림 실패");
+                    JOptionPane.showMessageDialog(parent, "로그인 아이디 틀림 실패");
                 }else if(!member.getPasswd().equals(pwTf.getText())){
-                    JOptionPane.showConfirmDialog(parent, "비밀번호 틀림");
+                    JOptionPane.showMessageDialog(parent, "비밀번호 틀림");
                 }else{
-                    JOptionPane.showConfirmDialog(parent, "로그인 성공");
+                    JOptionPane.showMessageDialog(parent, "로그인 성공");
                     parent.move(new RoomSelectView(parent, member));
                 }
             }

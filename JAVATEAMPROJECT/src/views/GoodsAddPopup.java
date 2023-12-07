@@ -2,16 +2,23 @@ package views;
 
 import custom_component.DefaultFont;
 import custom_component.JPanelOneLabel;
+import dto.GoodsDTO;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.Enumeration;
 
 public class GoodsAddPopup extends JDialog implements ActionListener {
     private DefaultFrame parent;
     private JLabel imagePathLb;
+    private  ButtonGroup stateBtnGrp;
+    private String[] states = new String[]{"판매", "품절", "숨김"};
+
+
+    private  JTextField codeTf, nameTf, kindTf, amountTf, priceTf, costTf;
     public GoodsAddPopup(DefaultFrame prt){
         super(prt, "음료 등록", true);
         this.parent = prt;
@@ -50,8 +57,8 @@ public class GoodsAddPopup extends JDialog implements ActionListener {
             tfs[i] = new JTextField(11);
         }
 
-        JTextField codeTf = tfs[0], nameTf = tfs[1], kindTf = tfs[2],
-                amountTf= tfs[3], priceTf= tfs[4], costTf= tfs[5], imagePath = tfs[6];
+        codeTf = tfs[0]; nameTf = tfs[1]; kindTf = tfs[2];
+                amountTf= tfs[3]; priceTf= tfs[4]; costTf= tfs[5];//, imagePath = tfs[6];
 
         JRadioButton sellRb, soldRb, hideRb;
         JRadioButton eventTRb, eventFRb;
@@ -65,16 +72,16 @@ public class GoodsAddPopup extends JDialog implements ActionListener {
         right.add(codeTf); right.add(nameTf); right.add(kindTf);
 
         //right-4
-        sellRb = new JRadioButton("판매");
-        soldRb = new JRadioButton("품절");
-        hideRb = new JRadioButton("숨김");
-        sellRb.setFont(new DefaultFont(40));
-        soldRb.setFont(new DefaultFont(40));
-        hideRb.setFont(new DefaultFont(40));
+        JRadioButton[] stateBrbs = new JRadioButton[states.length];
         JPanel right4 = new JPanel();
-        ButtonGroup stateBtnGrp = new ButtonGroup();
-        stateBtnGrp.add(sellRb); stateBtnGrp.add(soldRb); stateBtnGrp.add(hideRb);
-        right4.add(sellRb); right4.add(soldRb);right4.add(hideRb);
+
+        for(int i = 0; i < states.length; i++){
+            stateBrbs[i] = new JRadioButton(states[i]);
+            stateBrbs[i].setFont(new DefaultFont(40))
+            stateBtnGrp.add(stateBrbs[i]);
+            right4.add(stateBrbs[i]);
+
+        }
         right.add(right4);
 
         //right-5
@@ -141,6 +148,18 @@ public class GoodsAddPopup extends JDialog implements ActionListener {
             case "취소":
                 break;
             case "저장":
+                GoodsDTO goods = new GoodsDTO();
+                goods.setCode(codeTf.getText());
+                goods.setName(nameTf.getText());
+                goods.setCategory(kindTf.getText());
+                goods.setMainCategory(GoodsDTO.MAIN_CATEGORY_DRINK);
+                goods.setStatus(states[getSelectedIndex(stateBtnGrp)]);
+                goods.setSaleCount(Integer.parseInt(amountTf.getText()));
+                goods.setPrice(Integer.parseInt(priceTf.getText()));
+                goods.setCost(Integer.parseInt(costTf.getText()));
+                goods.setDisStatus(true);
+                goods.setIce(true); goods.setHot(true);
+
                 //DB에 해당 정보 INSERT
                 break;
             case "이미지":
@@ -152,5 +171,18 @@ public class GoodsAddPopup extends JDialog implements ActionListener {
                 }
                 break;
         }
+    }
+
+    private static int getSelectedIndex(ButtonGroup buttonGroup) {
+        Enumeration<AbstractButton> buttons = buttonGroup.getElements();
+        int index = 0;
+        while (buttons.hasMoreElements()) {
+            AbstractButton button = buttons.nextElement();
+            if (button.isSelected()) {
+                return index;
+            }
+            index++;
+        }
+        return -1; // No button is selected
     }
 }

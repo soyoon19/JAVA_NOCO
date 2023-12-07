@@ -10,6 +10,8 @@ import javafx.scene.control.ComboBox;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.*;
 import java.lang.reflect.Array;
@@ -43,6 +45,8 @@ public class RoomSettingView extends JPanel { //메인뷰
         rsv.setFont(new DefaultFont(FONT_SIZE));
 
         add(rsv);
+
+
     }
 
     public RoomEditPanel getRep(){
@@ -96,6 +100,16 @@ class RoomEditPanel extends JPanel { //방편집 패널
 
 
         //방 삭제와, 방 설정 이벤트 설정
+        gbr.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                if(gbr.getSelectedIndex() == 1){
+                    rs.getEventSwitch().setSw(true);
+                }else{
+                    rs.getEventSwitch().setSw(false);
+                }
+            }
+        });
 
 
         //Button의 getter을
@@ -254,7 +268,7 @@ class RoomEditViewPanel extends RoomViewPanel{
         for(RoomPanel rp : getRoomPs()){
             rp.addMouseListener(new MouseListener() {
                 //비활성화
-                boolean lock = controller.getRoomImfDAO().findById(rp.getRoom().getNum()) == null ? true : false;
+                boolean lock = controller.getRoomImfDAO().findById(rp.getRoom().getNum()) == null ? false : true;
 
                 Color color;
                 @Override
@@ -834,11 +848,14 @@ class RoomManagePanel extends JPanel implements ActionListener { //방관리 패
     DefaultFrame parent;
     private RoomViewPanel roomViewPanel;
     private RoomManageInfoPanel gbt;
+    private RoomSettingView roomSettingView;
 
     public RoomManagePanel(DefaultFrame parent, RoomSettingView roomSettingView) {
         boolean lock;
         this.parent = parent;
         this.setLayout(new BorderLayout());
+        this.roomSettingView = roomSettingView;
+
         JPanel rmview = new JPanel(new GridBagLayout());
         gbt = new RoomManageInfoPanel(parent);
 
@@ -940,11 +957,16 @@ class RoomManagePanel extends JPanel implements ActionListener { //방관리 패
             (new MusicAddPopup(parent, gbt.getRoomIfm())).setVisible(true);
             gbt.infoSet(gbt.getRoomIfm());
         } else if (s.equals("강제 퇴장")) {
-            (new ForcedExitPopup(parent, gbt.getRoomIfm())).setVisible(true);
+            ForcedExitPopup forcedExitPopup = new ForcedExitPopup(parent, gbt.getRoomIfm());
+            forcedExitPopup.setVisible(true);
+
             gbt.infoSet(gbt.getRoomIfm());
 
-            //todo 강제퇴장 된 경우 최신화
-            //roomSettingView.update();
+            // 강제퇴장 된 경우 최신화
+            if(forcedExitPopup.getCheck()) {
+                roomSettingView.update();
+                gbt.infoReSet();
+            }
         }
     }
 
@@ -1018,6 +1040,7 @@ class MusicAddPopup extends JDialog implements ActionListener { //곡추가 팝�
 class ForcedExitPopup extends JDialog implements ActionListener { //강제퇴장 팝업
     private static final String TITLE = "강제 퇴장";
     private static final int WIDTH = 370, HEIGHT = 350;
+    private boolean check = false;
     Container ct = getContentPane();
     JLabel musicAccount;
     JButton addBtn, cancleBtn;
@@ -1058,11 +1081,16 @@ class ForcedExitPopup extends JDialog implements ActionListener { //강제퇴장
         String s = e.getActionCommand();
         if(s.equals("확인")){
             parent.getController().getRoomImfDAO().delete(roomIfm.getUserHp());
-
+            check = true;
             JOptionPane.showMessageDialog(this, roomIfm.getNum()+"번방이 강제퇴장되었습니다.","방 강제퇴장",JOptionPane.INFORMATION_MESSAGE);
         } else if (s.equals("취소")){
+            check = false;
             this.dispose();
         }
+    }
+
+    public boolean getCheck(){
+        return check;
     }
 }
 

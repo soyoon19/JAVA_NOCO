@@ -506,7 +506,7 @@ public class ProductListCartView extends JPanel {
     public ProductListCartView(DefaultFrame parent, RoomManageDTO room, MemberDTO member) {
         this.parent = parent;
         this.setLayout(new GridBagLayout());
-        pc = new ProductCart(parent, room);
+        pc = new ProductCart(parent, room, member);
         pl = new ProductList(parent.getController().getGoodsDAO(), pc);
 
 

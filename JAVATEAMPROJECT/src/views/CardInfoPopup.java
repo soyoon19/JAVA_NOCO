@@ -231,10 +231,8 @@ class CardInfoInputPanel extends JPanel implements ActionListener{
                 code = OrderDTO.PREFIX + "0001";
             }else{
                 String lastCode = lastOrder.getO_code();
-                System.out.println("x : " + lastCode);
 
                 lastCode = lastCode.substring(1);
-                System.out.println("y : " + lastCode);
 
 
                 int intCode = Integer.parseInt(lastCode);
@@ -287,7 +285,6 @@ class CardInfoInputPanel extends JPanel implements ActionListener{
                     null,total, totalDiscount, OrderDTO.STATUS_ORDER
             ));
 
-            //todo 회원 할인 정보
             if(memberLog != null) {
                 memberLog.setTotalPay(memberLog.getTotalPay() + total - totalDiscount);
                 memberLog.setM_rate(MemberDTO.gradeCodtion((int) memberLog.getTotalPay()));
@@ -305,6 +302,7 @@ class CardInfoInputPanel extends JPanel implements ActionListener{
                     int music = Integer.parseInt(goods.getName().substring(0, goods.getName().length() - 1));
                     if(member != null) memberLog.setHoldSong(memberLog.getHoldSong() + music);  //맴베인 경우 방에 사용할 곡을 추가한다.
                     else roomImf.setLeftSong(roomImf.getLeftSong() + music);        //맴버가 아닌 경우 룸에 구한 곡을 추가한다 
+
                 }else if(goods.getMainCategory() == GoodsDTO.MAIN_CATEGORY_DRINK){ //Goods 수량 업데이트
                     GoodsDTO pastGoods = controller.getGoodsDAO().findById(goods.getCode());
                     pastGoods.setSaleCount(pastGoods.getSaleCount() - nums[i]);
@@ -316,6 +314,9 @@ class CardInfoInputPanel extends JPanel implements ActionListener{
                 i++;
             }
 
+            if(memberLog != null)
+                controller.getMemberLogDAO().update(memberLog);
+
             //room 정보 insert
             if(member != null) {
                 roomImf.setUserHp(member.getHp());
@@ -323,9 +324,9 @@ class CardInfoInputPanel extends JPanel implements ActionListener{
                 cardInfoPopup.getParent().move(new MusicUseView(cardInfoPopup.getParent(), room, member, roomImf));
             }else{
                 cardInfoPopup.getParent().resetMove(new UserHomeView(cardInfoPopup.getParent()));
+                controller.getRoomImfDAO().insert(roomImf);
+                (new Tester(roomImf)).start();
             }
-            controller.getRoomImfDAO().insert(roomImf);
-            (new Tester(roomImf)).start();
 
             System.out.println("insert Complete!");
             cardInfoPopup.dispose();

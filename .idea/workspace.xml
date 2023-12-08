@@ -4,14 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="73277347-8d03-48f7-a7c0-89844aebc90d" name="Changes" comment="feat GoodsAddPopup 추가 기능">
+    <list default="true" id="73277347-8d03-48f7-a7c0-89844aebc90d" name="Changes" comment="fix CallCheckView.java, CardInfoPopup.java, ManagerMainView.java">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/CallCheckView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/CallCheckView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dto/MemberDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dto/MemberDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/CardInfoPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/CardInfoPopup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ManagerMainView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ManagerMainView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/NoticeStockPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/NoticeStockPopup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/StaffCallView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/StaffCallView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/StockManagementView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/StockManagementView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ProductListCartView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ProductListCartView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/RoomSettingView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/RoomSettingView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/UserJoinView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/UserJoinView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -277,7 +276,14 @@
       <option name="project" value="LOCAL" />
       <updated>1701936126135</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="fix CallCheckView.java, CardInfoPopup.java, ManagerMainView.java">
+      <created>1701949889511</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1701949889511</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -329,7 +335,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Feat : 패키지, 뷰, 커스텀객체 생성&#10; &#10;패키지 : custom_component, views&#10;뷰 : CardInfoView, DefaultFrame&#10;커스텀객체 : DefaultFont" />
     <MESSAGE value="Feat : 패키지, 뷰, 커스텀객체 수정, 추가&#10; &#10;패키지 : images //이미지를 저장하는 패키지, dao&#10;뷰 : CardInfoView --&gt; CardInfoPopup 변경 &#10;메인 : ProductCartResultPopup, ProductListCartView&#10;커스텀객체 : DefaultFont 수정, JPanelOneLabel" />
     <MESSAGE value="Feat : 패키지, 뷰, 팝업, 커스텀객체, dao 수정, 추가&#10; &#10;뷰 : ProductListCartView, DefaultFrame 수정&#10;팝업 : ProductCartResultPopup &#10;커스텀객체 : FreeImageIcon, NumberPadPanel &#10;dao : MemberDAO, MemberLogDAO, RoomDAO, StaffDAO&#10;dao(DB에서 온 데이터를 저장할 객체들이 정의 되어 있는 패키지)" />
     <MESSAGE value="Fix : PwsdFindView&#10;&#10;GridBagLayout 수정&#10;efaultFrame.easyGridBagConstraint() 사용 바람." />
@@ -354,17 +359,7 @@
     <MESSAGE value="fix StockManagementView, SDE merge" />
     <MESSAGE value="feat GoodsAddPopup.java, RoomSettingView" />
     <MESSAGE value="feat GoodsAddPopup 추가 기능" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat GoodsAddPopup 추가 기능" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/JAVATEAMPROJECT/src/views/RoomSettingView.java</url>
-          <line>102</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="fix CallCheckView.java, CardInfoPopup.java, ManagerMainView.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix CallCheckView.java, CardInfoPopup.java, ManagerMainView.java" />
   </component>
 </project>

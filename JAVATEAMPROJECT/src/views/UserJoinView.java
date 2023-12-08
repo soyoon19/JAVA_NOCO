@@ -170,7 +170,6 @@ public class UserJoinView extends JPanel implements ActionListener {
             Date birthDate = null;
             try {
 
-                //1. checkBox를 안 하는 경우
                 if(!agreeCB.isSelected()){
                     JOptionPane.showMessageDialog(this, "회원 동의가 필요합니다.", "가입 오류", JOptionPane.ERROR_MESSAGE);
                     return;
@@ -188,11 +187,6 @@ public class UserJoinView extends JPanel implements ActionListener {
                     return;
                 }
 
-
-
-                // TODO: Check if the date is valid (you may use a JComboBox for date selection)
-                // 3. 날짜가 잘못 입력된 경우 --> ComboBox로 구현해도 가능
-                // 콤
 
                  try{
                      SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
@@ -222,8 +216,6 @@ public class UserJoinView extends JPanel implements ActionListener {
                 member.setHp(joinTfs[HP_INDEX].getText());
                 member.setPasswd(joinTfs[PW_INDEX].getText());
 
-                // TODO: 날짜 유효성 검사 (날짜 선택을 위해 JComboBox 사용 가능)
-
 
                 member.setJoinDate(new java.sql.Date(date.getYear(), date.getMonth(), date.getDate()));
                 member.setBirthDate(new java.sql.Date(birthDate.getYear(), birthDate.getMonth(), birthDate.getDate()));
@@ -236,11 +228,12 @@ public class UserJoinView extends JPanel implements ActionListener {
                 memberLogDTO.setTotalPay(0);
 
                 // TODO: 회원 및 회원 로그를 데이터베이스에 삽입
-                // parent.getController().getMemberDAO().insert(member);
-                // parent.getController().getMemberLogDAO().insert(memberLogDTO);
+                parent.getController().getMemberDAO().insert(member);
+                parent.getController().getMemberLogDAO().insert(memberLogDTO);
 
                 // TODO: 회원가입 성공 메시지 표시
                 JOptionPane.showMessageDialog(this, "회원가입이 완료되었습니다.", "회원가입 성공", JOptionPane.INFORMATION_MESSAGE);
+
                 // UserLoginView로 이동
                 parent.move(new UserLoginView(parent));
             } catch (Exception ex) {

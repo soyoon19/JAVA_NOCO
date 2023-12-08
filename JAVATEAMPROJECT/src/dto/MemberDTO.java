@@ -5,7 +5,6 @@ import java.sql.Date;
 
 
 public class MemberDTO {
-
     private String hp, passwd;
     private Date birthDate, joinDate;
     public MemberDTO() {}

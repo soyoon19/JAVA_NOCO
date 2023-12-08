@@ -6,6 +6,7 @@ import dto.MemberDTO;
 import dto.MemberLogDTO;
 import dto.RoomIfmDTO;
 import dto.RoomManageDTO;
+import test.Tester;
 
 import javax.swing.*;
 import java.awt.*;
@@ -236,12 +237,13 @@ public class MusicUseView extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(use == 0){
-                    //todo 예외 처리
+                    JOptionPane.showMessageDialog(parent, "1곡 이상은 구매해야 합니다.");
                     return;
                 }
 
                 roomIfm.setPaySong(use);
                 parent.getController().getRoomImfDAO().insert(roomIfm);
+                (new Tester(roomIfm)).start();
                 parent.resetMove(new UserHomeView(parent));
             }
         });

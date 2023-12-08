@@ -60,7 +60,7 @@ public class RoomSettingView extends JPanel { //메인뷰
     //방 패널 최신화
     public void update(){
         rep.getSe().getRoomEditViewPanel().update();
-        rmp.getRoomViewPanel().update();
+        rmp.setRoomViewPanelAndEventUpdate();
     }
 
 }
@@ -150,7 +150,6 @@ class RoomEditViewPanel extends RoomViewPanel{
 
     public void update(){
         super.update(); //RoomViewPanel의 UI Update
-        sw.setSw(false);
         for(int i = 0; i < jps.length; i++){
             for(int j = 0; j < jps[i].length; j++){
                 int x = j, y = i;
@@ -861,6 +860,61 @@ class RoomManagePanel extends JPanel implements ActionListener { //방관리 패
 
         //Grid Bag Layout의 left
         roomViewPanel = new RoomViewPanel(parent.getController());
+        this.setRoomViewPanelAndEventUpdate();
+
+        rmview.add(roomViewPanel ,DefaultFrame.easyGridBagConstraint(0,0,3,1));
+
+        //Grid Bag Layout의 right
+        JPanel gbr = new JPanel(new GridBagLayout());
+        rmview.add(gbr,DefaultFrame.easyGridBagConstraint(1,0,1,1));
+        //Jpanel의 top
+        gbr.add(gbt,DefaultFrame.easyGridBagConstraint(0,0,1,4));
+
+
+        //JPannel의 bottom
+        JPanel gbb = new JPanel();
+        gbr.add(gbb,DefaultFrame.easyGridBagConstraint(0,1,1,1));
+        musicAdd = new JButton("곡 추가");
+        musicAdd.setBackground(Color.white);
+        musicAdd.setFont(new DefaultFont(RoomSettingView.MIDDLE_FONT_SIZE));
+        musicAdd.addActionListener(this);
+        forcedExit = new JButton("강제 퇴장");
+        forcedExit.setBackground(Color.white);
+        forcedExit.setFont(new DefaultFont(RoomSettingView.MIDDLE_FONT_SIZE));
+        forcedExit.addActionListener(this);
+        gbb.add(musicAdd);
+        gbb.add(forcedExit);
+
+        add(rmview);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String s = e.getActionCommand();
+        if(s.equals("곡 추가")){
+            (new MusicAddPopup(parent, gbt.getRoomIfm())).setVisible(true);
+            gbt.infoSet(gbt.getRoomIfm());
+        } else if (s.equals("강제 퇴장")) {
+            ForcedExitPopup forcedExitPopup = new ForcedExitPopup(parent, gbt.getRoomIfm());
+            forcedExitPopup.setVisible(true);
+
+            gbt.infoSet(gbt.getRoomIfm());
+
+            // 강제퇴장 된 경우 최신화
+            if(forcedExitPopup.getCheck()) {
+                System.out.println("start");
+                roomSettingView.update();
+                gbt.infoReSet();
+            }
+        }
+    }
+
+//    public RoomViewPanel getRoomViewPanel() {
+//        return roomViewPanel;
+//    }
+
+    public void setRoomViewPanelAndEventUpdate(){
+        roomViewPanel.update();
         for(RoomPanel p : roomViewPanel.getRoomPs()){
 
             if(parent.getController().getRoomImfDAO().findById(p.getRoom().getNum()) != null) {
@@ -869,7 +923,6 @@ class RoomManagePanel extends JPanel implements ActionListener { //방관리 패
 
                     @Override
                     public void mouseClicked(MouseEvent e) {
-
                         gbt.infoSet(parent.getController().getRoomImfDAO().findById(p.getRoom().getNum()));
                     }
 
@@ -924,54 +977,6 @@ class RoomManagePanel extends JPanel implements ActionListener { //방관리 패
                 });
             }
         }
-        rmview.add(roomViewPanel ,DefaultFrame.easyGridBagConstraint(0,0,3,1));
-
-        //Grid Bag Layout의 right
-        JPanel gbr = new JPanel(new GridBagLayout());
-        rmview.add(gbr,DefaultFrame.easyGridBagConstraint(1,0,1,1));
-        //Jpanel의 top
-        gbr.add(gbt,DefaultFrame.easyGridBagConstraint(0,0,1,4));
-
-
-        //JPannel의 bottom
-        JPanel gbb = new JPanel();
-        gbr.add(gbb,DefaultFrame.easyGridBagConstraint(0,1,1,1));
-        musicAdd = new JButton("곡 추가");
-        musicAdd.setBackground(Color.white);
-        musicAdd.setFont(new DefaultFont(RoomSettingView.MIDDLE_FONT_SIZE));
-        musicAdd.addActionListener(this);
-        forcedExit = new JButton("강제 퇴장");
-        forcedExit.setBackground(Color.white);
-        forcedExit.setFont(new DefaultFont(RoomSettingView.MIDDLE_FONT_SIZE));
-        forcedExit.addActionListener(this);
-        gbb.add(musicAdd);
-        gbb.add(forcedExit);
-
-        add(rmview);
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        String s = e.getActionCommand();
-        if(s.equals("곡 추가")){
-            (new MusicAddPopup(parent, gbt.getRoomIfm())).setVisible(true);
-            gbt.infoSet(gbt.getRoomIfm());
-        } else if (s.equals("강제 퇴장")) {
-            ForcedExitPopup forcedExitPopup = new ForcedExitPopup(parent, gbt.getRoomIfm());
-            forcedExitPopup.setVisible(true);
-
-            gbt.infoSet(gbt.getRoomIfm());
-
-            // 강제퇴장 된 경우 최신화
-            if(forcedExitPopup.getCheck()) {
-                roomSettingView.update();
-                gbt.infoReSet();
-            }
-        }
-    }
-
-    public RoomViewPanel getRoomViewPanel() {
-        return roomViewPanel;
     }
 }
 
@@ -1080,7 +1085,7 @@ class ForcedExitPopup extends JDialog implements ActionListener { //강제퇴장
     public void actionPerformed(ActionEvent e) {
         String s = e.getActionCommand();
         if(s.equals("확인")){
-            parent.getController().getRoomImfDAO().delete(roomIfm.getUserHp());
+            parent.getController().getRoomImfDAO().delete(roomIfm.getNum());
             check = true;
             JOptionPane.showMessageDialog(this, roomIfm.getNum()+"번방이 강제퇴장되었습니다.","방 강제퇴장",JOptionPane.INFORMATION_MESSAGE);
         } else if (s.equals("취소")){

@@ -19,16 +19,24 @@ public class Tester extends Thread{
 
     public void run(){
         while((roomIfm = controller.getRoomImfDAO().findById(roomIfm.getNum())) != null){
+            System.out.println(roomIfm);
             roomIfm.setLeftSong(roomIfm.getLeftSong() - 1);
             roomIfm.setUseSong(roomIfm.getUseSong() + 1);
+
+            try {
+                sleep(USE_TIME);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            System.out.println(roomIfm.getNum() + "번 방 사용한 곡 : " +
+                    roomIfm.getUseSong() + "  남은 곡  : " + roomIfm.getLeftSong() +"곡");
+            controller.getRoomImfDAO().update(roomIfm);
+
             if(roomIfm.getLeftSong() == 0){
                 controller.getRoomImfDAO().delete(roomIfm.getNum());
+                System.out.println("퇴장");
             }
-        }
-        try {
-            sleep(USE_TIME);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+
         }
 
         try {

@@ -235,7 +235,7 @@ class ProductCart extends JPanel{
 
             if(member == null || parent.getController().getMemberLogDAO().findById(member.getHp()).getHoldSong() == 0){
                 if(!findMusic){
-                    JOptionPane.showConfirmDialog(parent, "곡을 구매해 주세요");
+                    JOptionPane.showMessageDialog(parent, "곡을 구매해 주세요");
                     return;
                 }
             }

@@ -1088,6 +1088,7 @@ class ForcedExitPopup extends JDialog implements ActionListener { //강제퇴장
             parent.getController().getRoomImfDAO().delete(roomIfm.getNum());
             check = true;
             JOptionPane.showMessageDialog(this, roomIfm.getNum()+"번방이 강제퇴장되었습니다.","방 강제퇴장",JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
         } else if (s.equals("취소")){
             check = false;
             this.dispose();

@@ -175,23 +175,31 @@ class ManagerButtonListPanel extends JPanel implements ActionListener {
                 movePage = new OrderControlView(parent, worker);
                 break;
             case "재고 관리":
-                movePage = new StockManagementView(parent);
+                if(worker.getPosition().equals("점장")) {
+                    movePage = new StockManagementView(parent);
+                } else {
+                    JOptionPane.showMessageDialog(this,"접근이 불가합니다.","접근 권한 알림",JOptionPane.INFORMATION_MESSAGE);
+                }
                 break;
             case "방 설정":
-                movePage = new RoomSettingView(parent, worker);
+                if(worker.getPosition().equals("점장")) {
+                    movePage = new RoomSettingView(parent, worker);
+                } else {
+                    JOptionPane.showMessageDialog(this,"접근이 불가합니다.","접근 권한 알림",JOptionPane.INFORMATION_MESSAGE);
+                }
                 break;
             case "회원 관리":
                 movePage = new MemberControlView(parent);
                 break;
             case "음료 관리":
+                movePage = new DrinksManagementView(parent);
+                break;
+            case "매출 관리":
                 if(worker.getPosition().equals("점장")) {
-                    movePage = new DrinksManagementView(parent);
+                    movePage = new SalesAnalysisView(parent);
                 } else {
                     JOptionPane.showMessageDialog(this,"접근이 불가합니다.","접근 권한 알림",JOptionPane.INFORMATION_MESSAGE);
                 }
-                break;
-            case "매출 관리":
-                movePage = new SalesAnalysisView(parent);
                 break;
             case "요청 관리":
                 movePage = new CallCheckView();
@@ -223,17 +231,26 @@ class MonthSaleStatus extends JPanel { //scrollpane으로 해야댐
         //center
         String [] colcumnType = new String [] {"날짜","일 매출"};
         Object [] [] salesData = {
-                {"2023.11.01","222,000원"},
-                {"2023.11.02","543,000원"},
-                {"2023.11.03","137,000원"},
-                {"2023.11.04","454,000원"},
+                {"2023.12.01","222,000원"},
+                {"2023.12.02","543,000원"},
+                {"2023.12.03","137,000원"},
+                {"2023.12.04","345,000원"},
+                {"2023.12.05","865,000원"},
+                {"2023.12.06","236,000원"},
+                {"2023.12.07","484,000원"},
+                {"2023.12.08","754,000원"},
+                {"2023.12.09","264,000원"},
+                {"2023.12.10","464,000원"},
+                {"2023.12.11","834,000원"},
+                {"2023.12.12","234,000원"},
+                {"2023.12.13","564,000원"},
         };
 
         JTable monthSalesStatusTable = new JTable(salesData,colcumnType); //JTbale 생성
         //폰트 및 색상 지정
         monthSalesStatusTable.getTableHeader().setDefaultRenderer(new CustomTableCellRenderer(25)); // 원하는 글씨 크기로 설정
         monthSalesStatusTable.setDefaultRenderer(Object.class, new CustomTableCellRenderer(20)); // 셀의 글꼴 설정
-        monthSalesStatusTable.setBackground(Color.lightGray);
+        monthSalesStatusTable.setBackground(Color.white);
 
         JScrollPane scrollPane = new JScrollPane(monthSalesStatusTable); //Jscrollpane에 Jtable 추가
         monthSalesStatusTable.getTableHeader().setReorderingAllowed(false); //header 움직이기 방지
@@ -272,7 +289,7 @@ class SaleStatus extends JPanel {
         //폰트 및 색상 지정
         salesStatusTable.getTableHeader().setDefaultRenderer(new CustomTableCellRenderer(25)); // 원하는 글씨 크기로 설정
         salesStatusTable.setDefaultRenderer(Object.class, new CustomTableCellRenderer(20)); // 셀의 글꼴 설정
-        salesStatusTable.setBackground(Color.lightGray);
+        salesStatusTable.setBackground(Color.white);
 
         JScrollPane scrollPane = new JScrollPane(salesStatusTable); //Jscrollpane에 jtable 추가
         salesStatusTable.getTableHeader().setReorderingAllowed(false); //header 움직이기 방지

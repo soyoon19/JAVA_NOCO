@@ -98,7 +98,7 @@ class StockViewPanel extends JPanel {
 
     public StockViewPanel(ArrayList<StockDTO> stocks) {
         this.setLayout(new BorderLayout());
-        this.add(new JLabel("test"), BorderLayout.NORTH);
+        this.add(new JLabel("재고 상태 표시"), BorderLayout.NORTH);
 
         this.stokcs = stocks;
 

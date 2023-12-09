@@ -13,7 +13,6 @@ public class RoomOptionDAO implements DAO<RoomOptionDTO, Integer>{
     private Connection conn;
     public RoomOptionDAO(Connection coon){ this.conn=coon;}
 
-
     @Override
     public boolean insert(RoomOptionDTO option) {
         PreparedStatement pstmt = null;

@@ -300,12 +300,13 @@ class CardInfoInputPanel extends JPanel implements ActionListener{
             for(GoodsDTO goods : goodsArr){
                 if(goods.getMainCategory() == GoodsDTO.MAIN_CATEGORY_MUSIC){
                     int music = Integer.parseInt(goods.getName().substring(0, goods.getName().length() - 1));
-                    if(member != null) memberLog.setHoldSong(memberLog.getHoldSong() + music);  //맴베인 경우 방에 사용할 곡을 추가한다.
+                    if(member != null) memberLog.setHoldSong(memberLog.getHoldSong() + music * nums[i]);  //맴베인 경우 방에 사용할 곡을 추가한다.
                     else roomImf.setLeftSong(roomImf.getLeftSong() + music);        //맴버가 아닌 경우 룸에 구한 곡을 추가한다 
 
                 }else if(goods.getMainCategory() == GoodsDTO.MAIN_CATEGORY_DRINK){ //Goods 수량 업데이트
                     GoodsDTO pastGoods = controller.getGoodsDAO().findById(goods.getCode());
                     pastGoods.setSaleCount(pastGoods.getSaleCount() - nums[i]);
+                    System.out.println("pastGoods : " + pastGoods.getName() + "   saleCount : " + pastGoods.getSaleCount());
                     if(pastGoods.getSaleCount() == 0)   //재고가 0개라면 품절로 변경해 준다.
                         pastGoods.setStatus("품절");
                     controller.getGoodsDAO().update(pastGoods);

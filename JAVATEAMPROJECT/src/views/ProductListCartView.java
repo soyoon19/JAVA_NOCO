@@ -19,7 +19,6 @@ import javax.swing.*;
 //상품 목록을 보여주는 패널이다.
 class ProductList extends JPanel{
     //임시로 카테고리 개수와 카테고리를 생성했다.
-    public static final int CATEGORY_NUM = 5;
 
     ProductCategoryTap[] productTab; //각 탭마다 상품의 정보가 표시되는 패널이다.
     ProductCart cart;
@@ -55,7 +54,7 @@ class ProductList extends JPanel{
             }
         }
 
-        for(int i = 0; i < CATEGORY_NUM; i++) {
+        for(int i = 0; i < GoodsDTO.CATEGORY.length; i++) {
             JLabel tmp = new JLabel(GoodsDTO.CATEGORY[i]);
             tmp.setPreferredSize(new Dimension(100, 30));
             productTab[i] = new ProductCategoryTap(cart, goodsCategoryArr[i]);
@@ -181,11 +180,13 @@ class ProductCart extends JPanel{
                 goodsCountInfoMap.get(g.getCode()) <= 0){
             JOptionPane.showMessageDialog(parent, "재고가 부족하여 더 이상 구매할 수 없습니다.");
             return;
-
         }
 
         if(goodsCountInfoMap.get(g.getCode()) == null)  //숫자 정보를 받는다.
             goodsCountInfoMap.put(g.getCode(), g.getSaleCount());
+
+        //재고 1마이너스
+        goodsCountInfoMap.replace(g.getCode(), goodsCountInfoMap.get(g.getCode()) - 1);
 
         updateTot(g.getPrice());
         ProductCarDetailPanel p = new ProductCarDetailPanel(gCopy, this);
@@ -204,14 +205,22 @@ class ProductCart extends JPanel{
         totalLb.setText("Total : 0원");
     }
 
-    public void removeCartList(ProductCarDetailPanel p){
+    public void removeCartList(ProductCarDetailPanel p, int n){
         center.remove(p);
         center.repaint();
         center.revalidate();
         updateTot(-(p.getNum() * p.getGoods().getPrice()));
         String tp = p.getGoods().getIce() ? "ICE" : p.getGoods().getHot() ? "HOT" : "";
+
         cartListMap.remove(p.getGoods().getCode() + ":" + tp);
-        goodsCountInfoMap.remove(p.getGoods().getCode().split(":")[0]);
+
+        //삭제를 시도하는 경우 p.getGoods().getSaleCount() != n + goodsCountInfoMap 이라면 HOT, ICE가 둘 다 존재한다는 것이고
+        //그 때는 HashMap에 추가만 해야된다. --> 생각해 보니까 꼭 삭제할 필요가 있을까..?
+        if(p.getGoods().getSaleCount() == n + goodsCountInfoMap.get(p.getGoods().getCode()))
+            goodsCountInfoMap.remove(p.getGoods().getCode());
+        else
+            goodsCountInfoMap.replace(p.getGoods().getCode(),
+                    goodsCountInfoMap.get(p.getGoods().getCode()) + n);
     }
 
     class BuyButtonAction implements ActionListener{
@@ -443,7 +452,7 @@ class ProductCarDetailPanel extends JPanel implements ActionListener{
                 int saleCount = cart.getGoodsCountInfoMap().get(g.getCode());
                 System.out.println("count : " + saleCount);
                 if(g.getMainCategory() != GoodsDTO.MAIN_CATEGORY_MUSIC)    //재고 보다 많이 담을려고 하는 경우
-                    if(saleCount - 1 == 0) {
+                    if(saleCount - 1 < 0) {
                         JOptionPane.showMessageDialog(cart.getParent(), "재고가 부족하여 더 이상 구매할 수 없습니다.");
                         return;
                     }
@@ -488,7 +497,7 @@ class ProductCarDetailPanel extends JPanel implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        cart.removeCartList(this);
+        cart.removeCartList(this, num);
     }
 }
 

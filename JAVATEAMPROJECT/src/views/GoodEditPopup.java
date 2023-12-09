@@ -2,6 +2,7 @@ package views;
 
 import custom_component.DefaultFont;
 import custom_component.JPanelOneLabel;
+import dto.GoodsDTO;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,21 +13,29 @@ import java.io.File;
 public class GoodEditPopup extends JDialog implements ActionListener {
     private DefaultFrame parent;
     private JLabel imagePathLb;
-    public GoodEditPopup(DefaultFrame prt){
-        super(prt, "음료 편집", true);
+    private  ButtonGroup stateBtnGrp, eventBtnGrp;
+    private String[] states = new String[]{"판매", "품절", "숨김"};
+    private JCheckBox iceCB, hotCB;
+    private JTextField codeTf, nameTf, kindTf, amountTf, priceTf, costTf;
+    private GoodsDTO goods;
+    private JButton[] btns;
+
+    public GoodEditPopup(DefaultFrame prt, GoodsDTO goods){
+        super(prt, "음료 등록", true);
         this.parent = prt;
         this.setSize(1200, 900);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
+        this.goods = goods;
 
         //center
         JPanel center = new JPanel();
         center.setLayout(new GridBagLayout());
 
-
         //left
         JPanel left = new JPanel();
         String[] lbsNames = new String[]{"음료 코드", "음료명", "분류", "상태", "ICE/HOT", "판매 가능 개수", "이벤트 여부", "판매가", "원가", "이미지 경로"};
+
         left.setLayout(new GridLayout(lbsNames.length, 1));
         JPanelOneLabel[] lbs = new JPanelOneLabel[lbsNames.length];
 
@@ -48,15 +57,13 @@ public class GoodEditPopup extends JDialog implements ActionListener {
         JTextField[] tfs = new JTextField[7];
         for(int i  = 0; i < tfs.length; i++){
             tfs[i] = new JTextField(11);
-            //todo textfield 기타 설정
         }
 
-        JTextField codeTf = tfs[0], nameTf = tfs[1], kindTf = tfs[2],
-                amountTf= tfs[3], priceTf= tfs[4], costTf= tfs[5], imagePath = tfs[6];
+        codeTf = tfs[0]; nameTf = tfs[1]; kindTf = tfs[2];
+        amountTf= tfs[3]; priceTf= tfs[4]; costTf= tfs[5];//, imagePath = tfs[6];
 
         JRadioButton sellRb, soldRb, hideRb;
         JRadioButton eventTRb, eventFRb;
-        JRadioButton iceRb, hotRb;
 
         for(int i=0;i<tfs.length;i++){
             tfs[i].setFont(new DefaultFont(40));
@@ -66,27 +73,27 @@ public class GoodEditPopup extends JDialog implements ActionListener {
         right.add(codeTf); right.add(nameTf); right.add(kindTf);
 
         //right-4
-        sellRb = new JRadioButton("판매");
-        soldRb = new JRadioButton("품절");
-        hideRb = new JRadioButton("숨김");
-        sellRb.setFont(new DefaultFont(40));
-        soldRb.setFont(new DefaultFont(40));
-        hideRb.setFont(new DefaultFont(40));
+        JRadioButton[] stateBrbs = new JRadioButton[states.length];
+        stateBtnGrp = new ButtonGroup();
         JPanel right4 = new JPanel();
-        ButtonGroup stateBtnGrp = new ButtonGroup();
-        stateBtnGrp.add(sellRb); stateBtnGrp.add(soldRb); stateBtnGrp.add(hideRb);
-        right4.add(sellRb); right4.add(soldRb);right4.add(hideRb);
+
+        for(int i = 0; i < states.length; i++){
+            stateBrbs[i] = new JRadioButton(states[i]);
+            stateBrbs[i].setFont(new DefaultFont(40));
+            stateBtnGrp.add(stateBrbs[i]);
+            right4.add(stateBrbs[i]);
+
+        }
         right.add(right4);
 
         //right-5
-        iceRb = new JRadioButton("ICE");
-        hotRb = new JRadioButton("HOT");
-        iceRb.setFont(new DefaultFont(40));
-        hotRb.setFont(new DefaultFont(40));
-        ButtonGroup tOptionBtnGrp = new ButtonGroup();
-        tOptionBtnGrp.add(iceRb); tOptionBtnGrp.add(hotRb);
+        iceCB = new JCheckBox("ICE");
+        hotCB = new JCheckBox("HOT");
+        iceCB.setFont(new DefaultFont(40));
+        hotCB.setFont(new DefaultFont(40));
         JPanel right5 = new JPanel();
-        right5.add(iceRb); right5.add(hotRb);
+
+        right5.add(iceCB); right5.add(hotCB);
         right.add(right5);
 
         //right-6
@@ -99,7 +106,7 @@ public class GoodEditPopup extends JDialog implements ActionListener {
         eventFRb = new JRadioButton("X");
         eventTRb.setFont(new DefaultFont(40));
         eventFRb.setFont(new DefaultFont(40));
-        ButtonGroup eventBtnGrp = new ButtonGroup();
+        eventBtnGrp = new ButtonGroup();
         eventBtnGrp.add(eventTRb); eventBtnGrp.add(eventFRb);
         right7.add(eventTRb); right7.add(eventFRb);
         right.add(right7);
@@ -123,7 +130,7 @@ public class GoodEditPopup extends JDialog implements ActionListener {
 
         //bottom
         JPanel btm = new JPanel();
-        String[] btnName = new String[]{"취소", "저정", "이미지"};
+        String[] btnName = new String[]{"취소", "저장", "이미지"};
         JButton[] btns = new JButton[btnName.length];
 
         for(int i = 0; i < btnName.length; i++){
@@ -131,6 +138,10 @@ public class GoodEditPopup extends JDialog implements ActionListener {
             btns[i].addActionListener(this);
             btm.add(btns[i]);
         }
+
+
+        codeTf.setEditable(false);
+        codeTf.setBackground(Color.white);
 
         this.add(btm, BorderLayout.SOUTH);
     }
@@ -143,7 +154,18 @@ public class GoodEditPopup extends JDialog implements ActionListener {
                 break;
             case "저장":
                 //DB에 해당 정보 INSERT
-
+                GoodsDTO goods = new GoodsDTO();
+                goods.setCode(codeTf.getText());
+                goods.setName(nameTf.getText());
+                goods.setCategory(kindTf.getText());
+                goods.setMainCategory(GoodsDTO.MAIN_CATEGORY_DRINK);
+                //goods.setStatus(states[getSelectedIndex(stateBtnGrp)]);
+                goods.setSaleCount(Integer.parseInt(amountTf.getText()));
+                goods.setPrice(Integer.parseInt(priceTf.getText()));
+                goods.setCost(Integer.parseInt(costTf.getText()));
+                //goods.setDisStatus(getSelectedIndex(eventBtnGrp) == 0);
+                goods.setIce(iceCB.isSelected());
+                goods.setHot(iceCB.isSelected());
 
                 JOptionPane.showMessageDialog(parent, "편집된 음료 정보를 저장했습니다.");
                 break;

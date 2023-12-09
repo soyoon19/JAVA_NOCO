@@ -1,11 +1,9 @@
 package views;
 
-import com.oracle.tools.packager.Log;
 import controller_db.Controller;
 import custom_component.*;
 import dto.*;
-import javafx.scene.Parent;
-import javafx.scene.control.ComboBox;
+
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -956,12 +954,10 @@ class RoomManagePanel extends JPanel implements ActionListener { //방관리 패
                     }
 
                     @Override
-                    public void mousePressed(MouseEvent e) {
-                    }
+                    public void mousePressed(MouseEvent e) {}
 
                     @Override
-                    public void mouseReleased(MouseEvent e) {
-                    }
+                    public void mouseReleased(MouseEvent e) {}
 
                     @Override
                     public void mouseEntered(MouseEvent e) {

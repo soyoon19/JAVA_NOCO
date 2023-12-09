@@ -172,9 +172,8 @@ class DrinksCategoryPanel extends JPanel implements ActionListener {
                 JOptionPane.showMessageDialog(null, "선택된 음료가 없어 편집할 수 없습니다.");
                 return;
             } else {
-                //parent.getController().getGoodsDAO().update(drinksDetailPanel.getProductData().get(row).get(0).toString());
-                drinksDetailPanel.tableUpdate(nowSelect);
-                (new GoodEditPopup(parent)).setVisible(true);
+                GoodsDTO goods = parent.getController().getGoodsDAO().findById(drinksDetailPanel.getProductData().get(row).get(0).toString());
+                (new GoodsAddPopup(parent, goods)).setVisible(true);
                 drinksDetailPanel.tableUpdate(nowSelect);
             }
 

@@ -2,6 +2,7 @@ package views;
 
 import custom_component.DefaultFont;
 import custom_component.JPanelOneLabel;
+import dao.GoodsDAO;
 import dto.GoodsDTO;
 
 import javax.swing.*;
@@ -19,11 +20,48 @@ import java.util.Enumeration;
 public class GoodsAddPopup extends JDialog implements ActionListener {
     private DefaultFrame parent;
     private JLabel imagePathLb;
-    private  ButtonGroup stateBtnGrp;
+    private  ButtonGroup stateBtnGrp, eventBtnGrp;
+    private JRadioButton eventTRb, eventFRb;
     private String[] states = new String[]{"판매", "품절", "숨김"};
-
-
+    private JCheckBox iceCB, hotCB;
     private  JTextField codeTf, nameTf, kindTf, amountTf, priceTf, costTf;
+    private JButton[] btns;
+    private JRadioButton[] stateBrbs;
+
+    public GoodsAddPopup(DefaultFrame prt, GoodsDTO goods){
+        this(prt);
+
+        //편집 버튼으로 변경
+        btns[2].setText("편집");
+
+        codeTf.setText(goods.getCode());
+        codeTf.setEditable(false);
+        codeTf.setBackground(Color.white);
+
+        nameTf.setText(goods.getName());
+        kindTf.setText(goods.getCategory());
+        amountTf.setText(String.valueOf(goods.getSaleCount()));
+        priceTf.setText(String.valueOf(goods.getPrice()));
+        costTf.setText(String.valueOf(goods.getCost()));
+        iceCB.setSelected(goods.getIce());
+        hotCB.setSelected(goods.getHot());
+
+        //상태
+        int i = 0;
+        for(String state : states) {
+            if(goods.getStatus().equals(state)) {
+                stateBrbs[i].setSelected(true);
+                break;
+            }
+            i++;
+        }
+
+        if(goods.getDisStatus()) eventTRb.setSelected(true);
+        else eventFRb.setSelected(true);
+        imagePathLb.setText(DefaultFrame.PATH + "/images/goods/" + goods.getCode() + ".png");
+    }
+
+
     public GoodsAddPopup(DefaultFrame prt){
         super(prt, "음료 등록", true);
         this.parent = prt;
@@ -39,6 +77,7 @@ public class GoodsAddPopup extends JDialog implements ActionListener {
         //left
         JPanel left = new JPanel();
         String[] lbsNames = new String[]{"음료 코드", "음료명", "분류", "상태", "ICE/HOT", "판매 가능 개수", "이벤트 여부", "판매가", "원가", "이미지 경로"};
+
         left.setLayout(new GridLayout(lbsNames.length, 1));
         JPanelOneLabel[] lbs = new JPanelOneLabel[lbsNames.length];
 
@@ -48,6 +87,7 @@ public class GoodsAddPopup extends JDialog implements ActionListener {
             lbs[i].setLayout(new FlowLayout(FlowLayout.LEFT));
             lbs[i].setBorder(BorderFactory.createEmptyBorder(0,20, 0,0));
             left.add(lbs[i]);
+
         }
 
         center.add(left, DefaultFrame.easyGridBagConstraint(0,0,1,1));
@@ -65,9 +105,6 @@ public class GoodsAddPopup extends JDialog implements ActionListener {
         codeTf = tfs[0]; nameTf = tfs[1]; kindTf = tfs[2];
                 amountTf= tfs[3]; priceTf= tfs[4]; costTf= tfs[5];//, imagePath = tfs[6];
 
-        JRadioButton sellRb, soldRb, hideRb;
-        JRadioButton eventTRb, eventFRb;
-        JRadioButton iceRb, hotRb;
 
         for(int i=0;i<tfs.length;i++){
             tfs[i].setFont(new DefaultFont(40));
@@ -77,7 +114,7 @@ public class GoodsAddPopup extends JDialog implements ActionListener {
         right.add(codeTf); right.add(nameTf); right.add(kindTf);
 
         //right-4
-        JRadioButton[] stateBrbs = new JRadioButton[states.length];
+        stateBrbs = new JRadioButton[states.length];
         stateBtnGrp = new ButtonGroup();
         JPanel right4 = new JPanel();
 
@@ -91,14 +128,12 @@ public class GoodsAddPopup extends JDialog implements ActionListener {
         right.add(right4);
 
         //right-5
-        iceRb = new JRadioButton("ICE");
-        hotRb = new JRadioButton("HOT");
-        iceRb.setFont(new DefaultFont(40));
-        hotRb.setFont(new DefaultFont(40));
-        ButtonGroup tOptionBtnGrp = new ButtonGroup();
-        tOptionBtnGrp.add(iceRb); tOptionBtnGrp.add(hotRb);
+        iceCB = new JCheckBox("ICE");
+        hotCB = new JCheckBox("HOT");
+        iceCB.setFont(new DefaultFont(40));
+        hotCB.setFont(new DefaultFont(40));
         JPanel right5 = new JPanel();
-        right5.add(iceRb); right5.add(hotRb);
+        right5.add(iceCB); right5.add(hotCB);
         right.add(right5);
 
         //right-6
@@ -111,7 +146,7 @@ public class GoodsAddPopup extends JDialog implements ActionListener {
         eventFRb = new JRadioButton("X");
         eventTRb.setFont(new DefaultFont(40));
         eventFRb.setFont(new DefaultFont(40));
-        ButtonGroup eventBtnGrp = new ButtonGroup();
+        eventBtnGrp = new ButtonGroup();
         eventBtnGrp.add(eventTRb); eventBtnGrp.add(eventFRb);
         right7.add(eventTRb); right7.add(eventFRb);
         right.add(right7);
@@ -135,8 +170,8 @@ public class GoodsAddPopup extends JDialog implements ActionListener {
 
         //bottom
         JPanel btm = new JPanel();
-        String[] btnName = new String[]{"취소", "저장", "이미지"};
-        JButton[] btns = new JButton[btnName.length];
+        String[] btnName = new String[]{"취소", "이미지", "저장"};
+        btns = new JButton[btnName.length];
 
         for(int i = 0; i < btnName.length; i++){
             btns[i] =  new JButton(btnName[i]);
@@ -153,6 +188,7 @@ public class GoodsAddPopup extends JDialog implements ActionListener {
         switch (s){
             case "취소":
                 break;
+            case "편집":
             case "저장":
                 GoodsDTO goods = new GoodsDTO();
                 goods.setCode(codeTf.getText());
@@ -163,14 +199,22 @@ public class GoodsAddPopup extends JDialog implements ActionListener {
                 goods.setSaleCount(Integer.parseInt(amountTf.getText()));
                 goods.setPrice(Integer.parseInt(priceTf.getText()));
                 goods.setCost(Integer.parseInt(costTf.getText()));
-                goods.setDisStatus(false);
-                goods.setIce(true);
-                goods.setHot(false);
+                goods.setDisStatus(getSelectedIndex(eventBtnGrp) == 0);
+                goods.setIce(iceCB.isSelected());
+                goods.setHot(iceCB.isSelected());
 
-                parent.getController().getGoodsDAO().insert(goods);
-                fileCopy();
+                GoodsDAO goodsDAO = parent.getController().getGoodsDAO();
+
+                if(s.equals("저장")) {
+                    goodsDAO.insert(goods);
+                    fileCopy();
+                    JOptionPane.showMessageDialog(parent, "추가 완료");
+                }else{
+                    goodsDAO.update(goods);
+                    JOptionPane.showMessageDialog(parent, "편집 완료");
+                }
+
                 //DB에 해당 정보 INSERT
-                JOptionPane.showMessageDialog(parent, "추가 완료");
                 dispose();
                 break;
             case "이미지":

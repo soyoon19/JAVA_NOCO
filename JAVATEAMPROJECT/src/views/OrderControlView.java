@@ -180,10 +180,13 @@ public class OrderControlView extends JPanel implements ActionListener {
 
     public void actionPerformed(ActionEvent e){
         String s= e.getActionCommand();
+        if(jTable.getSelectedRow() < 0) return;
+
         OrderDTO order = orders.get(jTable.getSelectedRow());
+
         switch (s){
             case "상세 내역 확인":
-                        (new OrderDetailPopup(parent)).setVisible(true);
+                (new OrderDetailPopup(parent, order)).setVisible(true);
                 break;
             case"결제취소":
                 (new OrderDeletePopup(parent)).setVisible(true);

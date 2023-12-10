@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="73277347-8d03-48f7-a7c0-89844aebc90d" name="Changes" comment="fix 방 퇴장 기능, 일 매출 기능 수정&#10;&#10;방 퇴장 연결, 일 매출 DB 연결">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ProductListCartView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ProductListCartView.java" afterDir="false" />
-    </list>
+    <list default="true" id="73277347-8d03-48f7-a7c0-89844aebc90d" name="Changes" comment="Feat 이미지 아이콘 추가" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -308,7 +305,14 @@
       <option name="project" value="LOCAL" />
       <updated>1702191182417</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="Feat 이미지 아이콘 추가">
+      <created>1702191833874</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1702191833874</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -360,7 +364,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Feat : DB 정보 은닉, View 수정&#10;&#10;DBLoginInfo DB 로그인 정보가 있게 했음" />
     <MESSAGE value="Fix : popup 문제 해결&#10;&#10;MusicAddPopup&#10;ForcedExitPopup" />
     <MESSAGE value="Fix : RoomSettingView&#10;RoomSettingView 이벤트 연결" />
     <MESSAGE value="Feat : DAO, DTO, ImageProcess 구현&#10;모든 Stock DAO, DTO을 제외한 DTO을 구현 ImageProcess 구현" />
@@ -385,6 +388,7 @@
     <MESSAGE value="fix Tester&#10;&#10;10초 마다 방에 곡이 차감되며 곡이 다&#10;차감되면 퇴장 안 되는 문제 해결" />
     <MESSAGE value="fix ProductListCartView, NoPKDAO와 DAO와 분리, OrderDetailPopup DB 연결, StockManagementView 편집 수정" />
     <MESSAGE value="fix 방 퇴장 기능, 일 매출 기능 수정&#10;&#10;방 퇴장 연결, 일 매출 DB 연결" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix 방 퇴장 기능, 일 매출 기능 수정&#10;&#10;방 퇴장 연결, 일 매출 DB 연결" />
+    <MESSAGE value="Feat 이미지 아이콘 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="Feat 이미지 아이콘 추가" />
   </component>
 </project>

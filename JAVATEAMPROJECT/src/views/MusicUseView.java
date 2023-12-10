@@ -247,7 +247,7 @@ public class MusicUseView extends JPanel {
                 roomIfm.setPaySong(use);
                 roomIfm.setLeftSong(use);
                 parent.getController().getRoomImfDAO().insert(roomIfm);
-                parent.getController().getMemberLogDAO().insert(memberLog);
+                parent.getController().getMemberLogDAO().update(memberLog);
                 (new Tester(roomIfm)).start();
                 parent.resetMove(new UserHomeView(parent));
             }

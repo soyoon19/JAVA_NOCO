@@ -730,7 +730,7 @@ class RoomDelete extends JPanel implements ActionListener { //방삭제 버튼
 class RoomSettingPanelMini extends JPanel implements ActionListener { //방설정 패널
     private JLabel roomNum;
     private JTextField roomNumtf;
-    private JButton roomActivate, roomUnActivate, applyBtn, cancleBtn;
+    private JButton roomActivate, roomUnActivate;
     private EventSwitch eventSwitch;
     private DefaultFrame parent;
     private static final int IMAGE_X = 140;
@@ -1033,8 +1033,8 @@ class MusicAddPopup extends JDialog implements ActionListener { //곡추가 팝�
                 int x = Integer.parseInt(musicAccountTf.getText());
                 roomIfm.setLeftSong(roomIfm.getLeftSong() + x);
                 JOptionPane.showMessageDialog(this, x + "곡이 추가되었습니다.","곡 추가",JOptionPane.INFORMATION_MESSAGE);
-
                 parent.getController().getRoomImfDAO().update(roomIfm);
+                this.dispose();
             }
         } else if (s.equals("취소")){
             this.dispose();

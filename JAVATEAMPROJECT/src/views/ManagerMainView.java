@@ -182,11 +182,7 @@ class ManagerButtonListPanel extends JPanel implements ActionListener {
                 }
                 break;
             case "방 설정":
-                if(worker.getPosition().equals("점장")) {
-                    movePage = new RoomSettingView(parent, worker);
-                } else {
-                    JOptionPane.showMessageDialog(this,"접근이 불가합니다.","접근 권한 알림",JOptionPane.INFORMATION_MESSAGE);
-                }
+                movePage = new RoomSettingView(parent, worker);
                 break;
             case "회원 관리":
                 movePage = new MemberControlView(parent);

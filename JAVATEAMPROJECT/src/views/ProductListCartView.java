@@ -229,6 +229,10 @@ class ProductCart extends JPanel{
             int i = 0;
 
             ProductCarDetailPanel[] goodsArr = cartListMap.values().toArray(new ProductCarDetailPanel[0]);
+            if(goodsArr.length == 0){
+                JOptionPane.showMessageDialog(parent, "한 개의 이상의 상품을 구매해 주세요!");
+                return;
+            }
 
             GoodsDTO[] goods = new GoodsDTO[goodsArr.length];
             int[] nums = new int[goodsArr.length];
@@ -241,6 +245,7 @@ class ProductCart extends JPanel{
                 nums[i] = goodsArr[i].getNum();
                 i++;
             }
+
 
             if(member == null || parent.getController().getMemberLogDAO().findById(member.getHp()).getHoldSong() == 0){
                 if(!findMusic){
@@ -415,14 +420,17 @@ class ProductCarDetailPanel extends JPanel implements ActionListener{
         //left3.setLayout();
 
         numLb = new JLabel(String.valueOf(num));
-        downBtn = new JButton("<");
-        upBtn = new JButton(">");
-        JButton delBtn = new JButton("X");
+        downBtn = new JButton(FreeImageIcon.resizeImageIcon(DefaultFrame.PATH + "/images/delBtn.png", 25,25));
+        upBtn = new JButton(FreeImageIcon.resizeImageIcon(DefaultFrame.PATH + "/images/addBtn.png", 25,25));
+        JButton delBtn = new JButton(FreeImageIcon.resizeImageIcon(DefaultFrame.PATH + "/images/cenBtn.png", 25,25));
 
-
-        downBtn.setPreferredSize(new Dimension(30, BTN_SIZE));
-        upBtn.setPreferredSize(new Dimension(30, BTN_SIZE));
-        delBtn.setPreferredSize(new Dimension(BTN_SIZE, BTN_SIZE));
+        JButton[] btns = new JButton[]{downBtn, upBtn, delBtn};
+        for(JButton b : btns){
+            b.setPreferredSize(new Dimension(BTN_SIZE, BTN_SIZE));
+            b.setBorderPainted(false);
+            b.setContentAreaFilled(false);
+            b.setFocusPainted(false);
+        }
 
 
         downBtn.setFont(new DefaultFont(5));

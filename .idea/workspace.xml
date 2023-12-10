@@ -4,20 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="73277347-8d03-48f7-a7c0-89844aebc90d" name="Changes" comment="fix ProductListCartView, NoPKDAO와 DAO와 분리, OrderDetailPopup DB 연결, StockManagementView 편집 수정">
-      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/addBtn.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/cenBtn.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/images/delBtn.png" afterDir="false" />
+    <list default="true" id="73277347-8d03-48f7-a7c0-89844aebc90d" name="Changes" comment="fix 방 퇴장 기능, 일 매출 기능 수정&#10;&#10;방 퇴장 연결, 일 매출 DB 연결">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/OrderDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/dao/OrderDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/CardInfoPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/CardInfoPopup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ChoiceRoomView.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/GoodEditPopup.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ManagerMainView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ManagerMainView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ProductCartResultPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ProductCartResultPopup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/RoomSelectView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/RoomSelectView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/UsePurchaseSelectView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/UsePurchaseSelectView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/UserLoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/UserLoginView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ProductListCartView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ProductListCartView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -312,7 +301,14 @@
       <option name="project" value="LOCAL" />
       <updated>1702138871526</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="fix 방 퇴장 기능, 일 매출 기능 수정&#10;&#10;방 퇴장 연결, 일 매출 DB 연결">
+      <created>1702191182417</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1702191182417</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -364,7 +360,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Feat : DAO, DTO, View, Controller, DBConnect 추가&#10;&#10;DTO을 DAO로 표기 실수와 DB와 속성과 갖게 변경&#10;GoodsDAO만 간단하게 구현 나머지 DAO 구현 필요&#10;BirthdayPopup, MusicUseView,ProductOptionPopup 추가&#10;DefaultFrame 수정" />
     <MESSAGE value="Feat : DB 정보 은닉, View 수정&#10;&#10;DBLoginInfo DB 로그인 정보가 있게 했음" />
     <MESSAGE value="Fix : popup 문제 해결&#10;&#10;MusicAddPopup&#10;ForcedExitPopup" />
     <MESSAGE value="Fix : RoomSettingView&#10;RoomSettingView 이벤트 연결" />
@@ -389,6 +384,7 @@
     <MESSAGE value="fix RoomSettingView, UserJoinView&#10;&#10;한 번 업데이트 후에 업데이트 되지 않는 문제 해결&#10;회원 가입후 DB 업데이트 안되는 문제 해결" />
     <MESSAGE value="fix Tester&#10;&#10;10초 마다 방에 곡이 차감되며 곡이 다&#10;차감되면 퇴장 안 되는 문제 해결" />
     <MESSAGE value="fix ProductListCartView, NoPKDAO와 DAO와 분리, OrderDetailPopup DB 연결, StockManagementView 편집 수정" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix ProductListCartView, NoPKDAO와 DAO와 분리, OrderDetailPopup DB 연결, StockManagementView 편집 수정" />
+    <MESSAGE value="fix 방 퇴장 기능, 일 매출 기능 수정&#10;&#10;방 퇴장 연결, 일 매출 DB 연결" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix 방 퇴장 기능, 일 매출 기능 수정&#10;&#10;방 퇴장 연결, 일 매출 DB 연결" />
   </component>
 </project>

@@ -40,8 +40,6 @@ public class RoomSelectView extends JPanel {
                     }else{  //회원이 경우
                         if(roomIfm == null){ //빈방이 경우
                             parent.move(new UsePurchaseSelectView(parent, r.getRoom(), member));
-                        } else if(roomIfm.getUserHp() == member.getHp()){ //방이 점유되어 있는데 방을 점유한 회원과 같은 경우
-                            //todo 화이팅!
                         } else{  //다른 회원이나 다른 사람이 이미 점유한 경우
                             JOptionPane.showMessageDialog(parent,"이미 사용 중인 방입니다.","방 사용 불가",JOptionPane.INFORMATION_MESSAGE);
                         }

@@ -4,6 +4,7 @@ import custom_component.DefaultFont;
 import custom_component.JPanelOneLabel;
 import dto.GoodsDTO;
 import dto.MemberDTO;
+import dto.MemberLogDTO;
 import dto.RoomManageDTO;
 
 import javax.swing.*;
@@ -111,7 +112,7 @@ public class ProductCartResultPopup extends JDialog implements ActionListener{
     private static final int WIDTH = 400, HEIGHT = 900;
     private GoodsDTO[] goodsArr;
     private int[] nums;
-    private int tot, pay;
+    private int tot, pay, discount;
     DefaultFrame parent;
     ProductCartResultListPanel productCartResultListPanel;
     ProductCartResultPricePanel productCartResultPricePanel;
@@ -130,13 +131,25 @@ public class ProductCartResultPopup extends JDialog implements ActionListener{
         this.parent = parent;
         this.room = room;
 
+        MemberLogDTO memberLog = parent.getController().getMemberLogDAO().findById(member.getHp());
 
         tot = 0;
-        for(int i = 0; i < goodsArr.length; i++)
+        for(int i = 0; i < goodsArr.length; i++) {
             tot += goodsArr[i].getPrice() * nums[i];
+        }
+
+        //할인액 구하기
+        discount = 0;
+        if(member != null){
+            for(int i = 0; i < goodsArr.length; i++){
+                if(goodsArr[i].getDisStatus())
+                    discount += goodsArr[i].getPrice() * (MemberDTO.gradeToDiscount(memberLog.getM_rate()) * 0.01);
+            }
+        }
+        pay = tot - discount;
 
         productCartResultListPanel = new ProductCartResultListPanel(goodsArr, nums);
-        productCartResultPricePanel = new ProductCartResultPricePanel(tot, 0, tot);
+        productCartResultPricePanel = new ProductCartResultPricePanel(tot, discount, pay);
 
         JPanel main = new JPanel();
         main.setLayout(new BorderLayout());

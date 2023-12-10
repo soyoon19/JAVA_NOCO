@@ -5,6 +5,7 @@ import custom_component.NumberPadListener;
 import custom_component.NumberPadPanel;
 import dao.MemberDAO;
 import dao.RoomIfmDAO;
+import dao.RoomManageDAO;
 import dto.MemberDTO;
 import dto.RoomIfmDTO;
 import dto.RoomManageDTO;
@@ -110,7 +111,7 @@ public class UserLoginView extends JPanel implements ActionListener{
                 MemberDTO member = memberDAO.findById(hpTf.getText());
 
                 RoomIfmDAO roomIfmDAO = parent.getController().getRoomImfDAO();
-                RoomIfmDTO roomIfm = roomIfmDAO.findById(hpTf.getText());
+                //RoomIfmDTO roomIfm = roomIfmDAO.findById(hpTf.getText()); RoomIfm Pk는 room Num
 
                 if(member == null){
                     JOptionPane.showMessageDialog(parent, "로그인 아이디 틀림 실패");
@@ -118,10 +119,24 @@ public class UserLoginView extends JPanel implements ActionListener{
                     JOptionPane.showMessageDialog(parent, "비밀번호 틀림");
                 } else {
                     JOptionPane.showMessageDialog(parent, "로그인 성공");
-                    if(roomIfm == null) { //이미 사용중인 회원이 아니라면 방선택 페이지로
+
+                    //회원 hp와 같은 방이 있는지 확인
+                    ArrayList<RoomIfmDTO> roomIfms = roomIfmDAO.findAll();
+                    RoomIfmDTO findRoom = null;
+
+                    for(RoomIfmDTO roomIfm : roomIfms){
+                        if(member.getHp().equals(roomIfm.getUserHp())) { //roomImf.getUserHp가 Null일 가능성이 있기 때문에 .equal 사용 주의
+                            findRoom = roomIfm;
+                            break;
+                        }
+                    }
+
+                    RoomManageDAO roomManageDAO = parent.getController().getRoomManageDAO();
+                    if(findRoom == null) { //이미 사용중인 회원이 아니라면 방선택 페이지로
                         parent.move(new RoomSelectView(parent, member));
                     } else {  //이미 사용중인 회원이라면 곡선택 및 구매 페이지로
-                        //parent.move(new UsePurchaseSelectView(parent, roomIfm.getNum(), member)); <- 이친구가 에러남
+                        //Room num으로 방 정보를 찾아온다.
+                        parent.move(new UsePurchaseSelectView(parent, roomManageDAO.findByRNum(findRoom.getNum()), member));
                     }
                 }
                 break;

@@ -219,7 +219,9 @@ class CardInfoInputPanel extends JPanel implements ActionListener{
             Date date = new Date();
 
             //방 정보 생성
-            RoomIfmDTO roomImf = new RoomIfmDTO(member != null ? member.getHp() : null
+            RoomIfmDTO roomImf = controller.getRoomImfDAO().findById(room.getNum()); //방에 정보가 있을수 도 있음
+            if(roomImf == null);
+                roomImf = new RoomIfmDTO(member != null ? member.getHp() : null
                     , new java.sql.Time(date.getHours(), date.getMinutes(), date.getSeconds())
                     , room.getNum(), 0, 0, 0, true);
 
@@ -285,14 +287,11 @@ class CardInfoInputPanel extends JPanel implements ActionListener{
                     null,total, totalDiscount, OrderDTO.STATUS_ORDER
             ));
 
+            //회원 등급 설정
             if(memberLog != null) {
                 memberLog.setTotalPay(memberLog.getTotalPay() + total - totalDiscount);
                 memberLog.setM_rate(MemberDTO.gradeCodtion((int) memberLog.getTotalPay()));
             }
-
-            //회원 등급 설정
-
-
 
 
             int i = 0;
@@ -321,7 +320,6 @@ class CardInfoInputPanel extends JPanel implements ActionListener{
             //room 정보 insert
             if(member != null) {
                 roomImf.setUserHp(member.getHp());
-                //memberLog.setTotalPay();
                 cardInfoPopup.getParent().move(new MusicUseView(cardInfoPopup.getParent(), room, member, roomImf));
             }else{
                 cardInfoPopup.getParent().resetMove(new UserHomeView(cardInfoPopup.getParent()));

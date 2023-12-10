@@ -2,7 +2,10 @@ package views;
 
 import custom_component.DefaultFont;
 import custom_component.JPanelOneLabel;
+import dao.DAO;
+import dao.OrderDAO;
 import dto.GoodsDTO;
+import dto.OrderDTO;
 import dto.StockDTO;
 import dto.WorkerDTO;
 
@@ -12,7 +15,11 @@ import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.SimpleFormatter;
 
 class CustomTableCellRenderer extends DefaultTableCellRenderer { //테이블 글씨 크기 조정
     private final int fontSize;
@@ -41,7 +48,7 @@ public class ManagerMainView extends JPanel {
         //Grid Bag Layout의 right
         JPanel right = new JPanel(new GridBagLayout());
         add(right,DefaultFrame.easyGridBagConstraint(1,0,8,1));
-        right.add(new MonthSaleStatus(),DefaultFrame.easyGridBagConstraint(0,0,1,4));
+        right.add(new MonthSaleStatus(parent.getController().getOrderDAO()),DefaultFrame.easyGridBagConstraint(0,0,1,4));
         right.add(new SaleStatus(parent),DefaultFrame.easyGridBagConstraint(0,1,1,3));
 
         boolean find = false;
@@ -217,30 +224,42 @@ class ManagerButtonListPanel extends JPanel implements ActionListener {
 }
 
 class MonthSaleStatus extends JPanel { //scrollpane으로 해야댐
-    public MonthSaleStatus() {
+    public MonthSaleStatus(OrderDAO orderDAO) {
         setLayout(new BorderLayout());
         //top
         JPanelOneLabel mss = new JPanelOneLabel("이달의 매출 현황");
         mss.getLabel().setFont(new DefaultFont(45));
         add(mss,BorderLayout.NORTH);
 
+
+        //일자별 데이터를 구한다.
+        Date date = new Date();
+        int[] daySales = new int[(new Date()).getDate()]; //데이터 길이 만큼 정수열배열 생성
+        for(int i = 0; i < daySales.length; i++){
+            daySales[i] = 0;
+            //원하는 날짜에 주문내역을 가져옴
+            ArrayList<OrderDTO> orderArr = orderDAO.findByDate(new java.sql.Date(date.getYear(), date.getMonth(), i + 1));
+            if(orderArr != null) { //주문내역이 하나도 없다면 null값음으로 반복문을 수행하지 않음
+                                    //값 자체가 null임으로 size() 메서드를 자체를 사용할 수 없다.
+                for (int j = 0; j < orderArr.size(); j++)  //주문내역의 모든 값을 더한다.
+                    daySales[i] += orderArr.get(j).getPay();
+            }
+        }
+
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd");   //날짜 포맷
+        DecimalFormat decimalFormat = new DecimalFormat("#,###");  //정수 3자리 마다 콤마 찍기
+
+
+
         //center
         String [] colcumnType = new String [] {"날짜","일 매출"};
-        Object [] [] salesData = {
-                {"2023.12.01","222,000원"},
-                {"2023.12.02","543,000원"},
-                {"2023.12.03","137,000원"},
-                {"2023.12.04","345,000원"},
-                {"2023.12.05","865,000원"},
-                {"2023.12.06","236,000원"},
-                {"2023.12.07","484,000원"},
-                {"2023.12.08","754,000원"},
-                {"2023.12.09","264,000원"},
-                {"2023.12.10","464,000원"},
-                {"2023.12.11","834,000원"},
-                {"2023.12.12","234,000원"},
-                {"2023.12.13","564,000원"},
-        };
+        Object [] [] salesData = new Object[daySales.length][];
+        for(int i = 0; i < daySales.length; i++){
+            date.setDate(i + 1);
+            salesData[i] = new Object[]{format.format(date),
+                    decimalFormat.format(daySales[i]) + "원"};
+        }
 
         JTable monthSalesStatusTable = new JTable(salesData,colcumnType); //JTbale 생성
         //폰트 및 색상 지정

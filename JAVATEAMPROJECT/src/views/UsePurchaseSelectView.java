@@ -66,6 +66,7 @@ public class UsePurchaseSelectView extends JPanel implements ActionListener {
         //bottom
         if(parent.getController().getRoomImfDAO().findById(room.getNum()) != null) {
             roomExit = new JButton("방 퇴장");
+            roomExit.addActionListener(this);
             roomExit.setFont(new DefaultFont(FONT_SIZE));
             roomExit.setBackground(Color.white);
 
@@ -76,13 +77,13 @@ public class UsePurchaseSelectView extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String s = e.getActionCommand();
-        RoomIfmDTO roomIfm= new RoomIfmDTO();
+        RoomIfmDTO roomIfm = null;
         if(s.equals("곡 사용")){
             if(parent.getController().getMemberLogDAO().findById(member.getHp()).getHoldSong() == 0){
                 JOptionPane.showMessageDialog(this,"보유곡이 없습니다.","사용 불가",JOptionPane.INFORMATION_MESSAGE);
                 return;
             }
-
+            roomIfm = new RoomIfmDTO();
             Date date = new Date();
             roomIfm.setUserHp(member.getHp());
             roomIfm.setLeftSong(0);
@@ -97,10 +98,12 @@ public class UsePurchaseSelectView extends JPanel implements ActionListener {
         } else if(s.equals("방 퇴장")){
             int x = JOptionPane.showConfirmDialog(this,"방을 퇴장하시겠습니까?","방 퇴장",JOptionPane.YES_NO_OPTION);
             if(x == JOptionPane.OK_OPTION) {
+                roomIfm = parent.getController().getRoomImfDAO().findById(room.getNum());
                 MemberLogDTO member = new MemberLogDTO();
                 member.setHoldSong(roomIfm.getLeftSong()); //roomifm에 있는 남은 곡 정보를 member의 hold song에 저장
                 parent.getController().getRoomImfDAO().delete(roomIfm.getNum()); //roomifm의 num을 받아와 방정보 삭제
                 parent.getController().getMemberLogDAO().update(member); //member에 담아 있는 정보로 memberlog를 업데이트
+                parent.resetMove(new UserHomeView(parent));
             }
         }
     }

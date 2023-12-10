@@ -4,12 +4,16 @@ import custom_component.DefaultFont;
 import custom_component.NumberPadListener;
 import custom_component.NumberPadPanel;
 import dao.MemberDAO;
+import dao.RoomIfmDAO;
 import dto.MemberDTO;
+import dto.RoomIfmDTO;
+import dto.RoomManageDTO;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class UserLoginView extends JPanel implements ActionListener{
     private DefaultFrame parent;
@@ -87,29 +91,13 @@ public class UserLoginView extends JPanel implements ActionListener{
 
         this.add(bottom, BorderLayout.SOUTH);
 
+        loginBtn.addActionListener(this);
         celBtn.addActionListener(this);
         joinBtn.addActionListener(this);
         findPwBtn.addActionListener(this);
 
         pwTf.addMouseListener(new NumberPadListener(pwTf, np));
         hpTf.addMouseListener(new NumberPadListener(hpTf, np));
-
-       loginBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                MemberDAO memberDAO = parent.getController().getMemberDAO();
-                MemberDTO member = memberDAO.findById(hpTf.getText());
-
-                if(member == null){
-                    JOptionPane.showMessageDialog(parent, "로그인 아이디 틀림 실패");
-                }else if(!member.getPasswd().equals(pwTf.getText())){
-                    JOptionPane.showMessageDialog(parent, "비밀번호 틀림");
-                }else{
-                    JOptionPane.showMessageDialog(parent, "로그인 성공");
-                    parent.move(new RoomSelectView(parent, member));
-                }
-            }
-        });
     }
 
     @Override
@@ -117,6 +105,26 @@ public class UserLoginView extends JPanel implements ActionListener{
         String s = e.getActionCommand();
 
         switch (s){
+            case "로그인":
+                MemberDAO memberDAO = parent.getController().getMemberDAO();
+                MemberDTO member = memberDAO.findById(hpTf.getText());
+
+                RoomIfmDAO roomIfmDAO = parent.getController().getRoomImfDAO();
+                RoomIfmDTO roomIfm = roomIfmDAO.findById(hpTf.getText());
+
+                if(member == null){
+                    JOptionPane.showMessageDialog(parent, "로그인 아이디 틀림 실패");
+                } else if(!member.getPasswd().equals(pwTf.getText())){
+                    JOptionPane.showMessageDialog(parent, "비밀번호 틀림");
+                } else {
+                    JOptionPane.showMessageDialog(parent, "로그인 성공");
+                    if(roomIfm == null) { //이미 사용중인 회원이 아니라면 방선택 페이지로
+                        parent.move(new RoomSelectView(parent, member));
+                    } else {  //이미 사용중인 회원이라면 곡선택 및 구매 페이지로
+                        //parent.move(new UsePurchaseSelectView(parent, roomIfm.getNum(), member)); <- 이친구가 에러남
+                    }
+                }
+                break;
             case "취소":
                 hpTf.setText("");
                 pwTf.setText("");
@@ -127,6 +135,7 @@ public class UserLoginView extends JPanel implements ActionListener{
             case "PW찾기":
                 parent.move(new PswdFindView(parent));
                 break;
+
         }
 
     }

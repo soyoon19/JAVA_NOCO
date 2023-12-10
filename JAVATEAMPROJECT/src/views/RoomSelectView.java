@@ -2,12 +2,14 @@ package views;
 
 import custom_component.*;
 import dto.MemberDTO;
+import dto.MemberLogDTO;
 import dto.RoomIfmDTO;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 public class RoomSelectView extends JPanel {
     private DefaultFrame parent;
@@ -26,24 +28,22 @@ public class RoomSelectView extends JPanel {
             r.addMouseListener(new MouseListener() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    //todo 이미 방이 점유된 경우 안내해주기!
                     RoomIfmDTO roomIfm = parent.getController().getRoomImfDAO().findById(r.getRoom().getNum());
-
                     //todo 추가 결제 로직 구현
                     if(member == null){ //비회원인 경우
                         if(roomIfm == null) //빈방인 경우
                             parent.move(new ProductListCartView(parent, r.getRoom()));
-                        else{
-
-                        } //빈방이 아닌 경우
+                        else { //빈방이 아닌 경우
+                            JOptionPane.showMessageDialog(parent,"이미 사용 중인 방입니다.","방 사용 불가",JOptionPane.INFORMATION_MESSAGE);
+                        }
                             //parent.move(new UsePurchaseSelectView(parent, r.getRoom(), member));
                     }else{  //회원이 경우
                         if(roomIfm == null){ //빈방이 경우
                             parent.move(new UsePurchaseSelectView(parent, r.getRoom(), member));
-                        }else if(roomIfm.getUserHp() == member.getHp()){ //방이 점유되어 있는데 방을 점유한 회원과 같은 경우
-
-                        }else{  //다른 회원이나 다른 사람이 이미 점유한 경우
-                            //알림!
+                        } else if(roomIfm.getUserHp() == member.getHp()){ //방이 점유되어 있는데 방을 점유한 회원과 같은 경우
+                            //todo 화이팅!
+                        } else{  //다른 회원이나 다른 사람이 이미 점유한 경우
+                            JOptionPane.showMessageDialog(parent,"이미 사용 중인 방입니다.","방 사용 불가",JOptionPane.INFORMATION_MESSAGE);
                         }
                     }
                 }

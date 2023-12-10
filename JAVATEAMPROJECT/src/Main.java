@@ -4,6 +4,7 @@ import controller_db.DBConnect;
 import dao.DAO;
 import dao.GoodsDAO;
 import dao.GoodsImageDAO;
+import dao.NoPKDAO;
 import dto.GoodsDTO;
 import dto.GoodsImageDTO;
 import dto.StockDTO;
@@ -48,14 +49,14 @@ public class Main {
 
         // DB 연결 확인
 
-         DAO[] ds = {
+         NoPKDAO[] ds = {
                 controller.getGoodsDAO(), controller.getMemberDAO(), controller.getOrderDAO(),
                 controller.getRoomImfDAO(), controller.getMemberLogDAO(), controller.getRoomManageDAO(),
                 controller.getRoomOptionDAO(), controller.getOrderHDAO(), controller.getWorkerDAO(),
                  controller.getStockDAO(), controller.getStockDateDAO()
         };
 
-         for(DAO d : ds){
+         for(NoPKDAO d : ds){
             //전체조회
             System.out.println(d.findAll());
         }

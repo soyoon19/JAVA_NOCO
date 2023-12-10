@@ -241,9 +241,13 @@ public class MusicUseView extends JPanel {
                     return;
                 }
 
+                MemberLogDTO memberLog = parent.getController().getMemberLogDAO().findById(member.getHp());
+
+                memberLog.setHoldSong(memberLog.getHoldSong() - use);
                 roomIfm.setPaySong(use);
                 roomIfm.setLeftSong(use);
                 parent.getController().getRoomImfDAO().insert(roomIfm);
+                parent.getController().getMemberLogDAO().insert(memberLog);
                 (new Tester(roomIfm)).start();
                 parent.resetMove(new UserHomeView(parent));
             }

@@ -1,12 +1,16 @@
 package views;
 
 import custom_component.DefaultFont;
+import dao.GoodsDAO;
 import dao.OrderDAO;
+import dao.OrderHDAO;
 import dto.OrderDTO;
+import dto.OrderHDTO;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class OrderDetailPopup extends JDialog {
     class Order {
@@ -27,11 +31,12 @@ public class OrderDetailPopup extends JDialog {
         }
     }
 
-    DefaultFrame parent;
+    private DefaultFrame parent;
+    private OrderDTO order;
 
     public static final int WIDTH = 300, HEIGHT = 700;
 
-    public OrderDetailPopup(DefaultFrame prt) {
+    public OrderDetailPopup(DefaultFrame prt, OrderDTO order) {
 
         super(prt, "", true);
         this.setSize(WIDTH, HEIGHT);
@@ -40,8 +45,31 @@ public class OrderDetailPopup extends JDialog {
         setTitle("주문 정보");
         setLayout(new BorderLayout());
 
-        Order order1 = new Order("2023113001", "010-1234-5678", "101호",
+        OrderHDAO orderHDAO = parent.getController().getOrderHDAO();
+        GoodsDAO goodsDAO = parent.getController().getGoodsDAO();
+
+        this.order = order;
+        System.out.println(order.getCode());
+        ArrayList<OrderHDTO> orderH = orderHDAO.findOrderCode(order.getO_code());
+
+        String[] names = new String[orderH.size()];
+        int[] nums = new int[orderH.size()];
+        int[] prices = new int[orderH.size()];
+
+        for(int i = 0; i < orderH.size(); i++){
+            names[i] = goodsDAO.findById(orderH.get(i).getGoodsCode()).getName();
+            nums[i] = orderH.get(i).getCount();
+            prices[i] = orderH.get(i).getPrice();
+        }
+
+        Order order1 = new Order(order.getO_code(), order.getHp(), order.getCode() + "번 방",
+                names, nums, prices
+                );
+
+        Order order2 = new Order("2023113001", "010-1234-5678", "101호",
                 new String[]{"커피", "케이크", "샌드위치"}, new int[]{2, 1, 3}, new int[]{3000, 5000, 4000});
+
+
 
         JPanel infoPanel = new JPanel();
         infoPanel.setLayout(new GridLayout(3, 1));
@@ -78,6 +106,7 @@ public class OrderDetailPopup extends JDialog {
         for (int price : order1.prices) {
             totalPayment += price;
         }
+
         JLabel totalPaymentLabel = new JLabel("총 결제 금액: " + totalPayment + "원");
         totalPaymentLabel.setHorizontalAlignment(JLabel.CENTER);
         totalPaymentLabel.setFont(new DefaultFont(18));

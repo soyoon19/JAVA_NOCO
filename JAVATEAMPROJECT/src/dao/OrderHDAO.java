@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class OrderHDAO implements DAO<OrderHDTO, String> {
+public class OrderHDAO implements NoPKDAO<OrderHDTO> {
     private Connection conn;
 
     public OrderHDAO(Connection conn) {
@@ -45,7 +45,7 @@ public class OrderHDAO implements DAO<OrderHDTO, String> {
         return true;
     }
 
-    public boolean delete(String orderCode) {
+    public boolean deleteOrderCode(String orderCode) {
         PreparedStatement pstmt = null;
         try {
             String sql = "DELETE FROM OrderH_T WHERE o_code = ?";
@@ -67,10 +67,38 @@ public class OrderHDAO implements DAO<OrderHDTO, String> {
         return true;
     }
 
+    public ArrayList<OrderHDTO> findOrderCode(String orderCode) {
+        ArrayList<OrderHDTO> orderHList = new ArrayList<>();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
 
-    public OrderHDTO findById(String orderCode) {
-        return null;
+        try {
+            String sql = "SELECT * FROM OrderH_T Where o_code = ?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, orderCode);
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                OrderHDTO orderH = createOrderHDTO(rs);
+                orderHList.add(orderH);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null)
+                    rs.close();
+                if (pstmt != null)
+                    pstmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return orderHList;
     }
+
 
     public ArrayList<OrderHDTO> findAll() {
         ArrayList<OrderHDTO> orderHList = new ArrayList<>();
@@ -116,40 +144,5 @@ public class OrderHDAO implements DAO<OrderHDTO, String> {
 
         return new OrderHDTO(o_code, g_code, H_temp, g_count, oH_price, oH_discount, oH_cost, o_date);
     }
-
-
-    public boolean update(OrderHDTO orderH) {
-        PreparedStatement pstmt = null;
-
-        try {
-            String sql = "UPDATE OrderH_T SET g_code=?, g_count=?, o_date=?, oH_price=?, oH_discount=?, oH_cost=?, oH_temp = ? WHERE o_code=?";
-            pstmt = conn.prepareStatement(sql);
-
-            pstmt.setString(1, orderH.getGoodsCode());
-            pstmt.setInt(2, orderH.getCount());
-            pstmt.setDate(3, orderH.getDate());
-            pstmt.setInt(4, orderH.getPrice());
-            pstmt.setInt(5, orderH.getDiscount());
-            pstmt.setInt(6, orderH.getCost());
-            pstmt.setString(7, orderH.getH_temp());
-            pstmt.setString(8, orderH.getOrderCode());
-
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        } finally {
-            try {
-                if (pstmt != null)
-                    pstmt.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-                return false;
-            }
-        }
-
-        return true;
-    }
-
 
 }

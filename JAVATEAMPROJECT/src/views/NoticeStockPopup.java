@@ -81,6 +81,9 @@ public class NoticeStockPopup extends JDialog implements ActionListener{
 
 
         table = new JTable(rst, columnType);
+        table.setEnabled(false);
+        table.getTableHeader().setReorderingAllowed(false);
+
         //left.add(table, BorderLayout.CENTER);
 
 

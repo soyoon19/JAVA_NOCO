@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class StockDateDAO implements DAO<StockDateDTO, Integer> {
+public class StockDateDAO implements NoPKDAO<StockDateDTO> {
     private Connection conn;
 
     public StockDateDAO(Connection conn) {
@@ -60,10 +60,6 @@ public class StockDateDAO implements DAO<StockDateDTO, Integer> {
             }
         }
         return true;
-    }
-
-    public StockDateDTO findById(Integer num) {
-        return null;
     }
 
     public ArrayList<StockDateDTO> findAll() {

@@ -9,7 +9,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StockDAO implements DAO<StockDTO, String>{
+public class
+StockDAO implements DAO<StockDTO, String>{
     private Connection conn;
 
     public StockDAO(Connection conn) {

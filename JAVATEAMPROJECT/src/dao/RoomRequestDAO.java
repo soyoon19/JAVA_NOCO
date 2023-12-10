@@ -130,7 +130,7 @@ public class RoomRequestDAO implements DAO<RoomRequestDTO, String> {
         return true;
     }
 
-    public void update(RoomRequestDTO roomRequest) {
+    public boolean update(RoomRequestDTO roomRequest) {
         PreparedStatement pstmt = null;
 
         try {
@@ -145,13 +145,16 @@ public class RoomRequestDAO implements DAO<RoomRequestDTO, String> {
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         } finally {
             try {
                 if (pstmt != null) pstmt.close();
             } catch (SQLException e) {
                 e.printStackTrace();
+                return false;
             }
         }
+        return true;
     }
 
 

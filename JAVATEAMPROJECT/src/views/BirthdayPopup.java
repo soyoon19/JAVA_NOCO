@@ -5,6 +5,9 @@ import custom_component.FreeImageIcon;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 
 public class BirthdayPopup extends JDialog {
     private static final int WIDTH = 600, HEIGHT = 700;
@@ -54,6 +57,31 @@ public class BirthdayPopup extends JDialog {
         main.add(center, BorderLayout.CENTER);
 
         //bottom
+        JDialog jDialog = this;
+
+        Thread t = new Thread(){
+          public void run(){
+              for(int i = 10; i > 0; i--){
+                  countLb.setText(i + "초 뒤에 자동으로 닫힙니다.");
+
+                  try {
+                      sleep(1000);
+                  } catch (InterruptedException e) {
+                      throw new RuntimeException(e);
+                  }
+              }
+
+              jDialog.dispose();
+          }
+        };
+
+        check.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jDialog.dispose();
+            }
+        });
+
         JPanel btm = new JPanel();
         countLb = new JLabel("초 뒤에 자동으로 닫힙니다.");
         countLb.setFont(new DefaultFont(10));

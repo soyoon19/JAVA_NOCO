@@ -49,6 +49,7 @@ public class ManagerLoginView extends JPanel {
 
         add(blc, BorderLayout.CENTER);
 
+
         //BorderLayout의 South
         JPanel bls = new JPanel();
         bls.setLayout(new FlowLayout());

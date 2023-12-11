@@ -4,9 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="73277347-8d03-48f7-a7c0-89844aebc90d" name="Changes" comment="Fix MemberLog table에 추가되는 문제 해결">
+    <list default="true" id="73277347-8d03-48f7-a7c0-89844aebc90d" name="Changes" comment="Fix 방 퇴장 시 곡 적용 안되는 문제 해결">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/UsePurchaseSelectView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/UsePurchaseSelectView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/BirthdayPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/BirthdayPopup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ManagerLoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ManagerLoginView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/OrderDetailPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/OrderDetailPopup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ProductCartResultPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/ProductCartResultPopup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/RoomSelectView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/RoomSelectView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/UserLoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVATEAMPROJECT/src/views/UserLoginView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -322,7 +327,14 @@
       <option name="project" value="LOCAL" />
       <updated>1702204198344</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="Fix 방 퇴장 시 곡 적용 안되는 문제 해결">
+      <created>1702206869918</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1702206869918</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -374,7 +386,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fix : RoomSettingView&#10;RoomSettingView 이벤트 연결" />
     <MESSAGE value="Feat : DAO, DTO, ImageProcess 구현&#10;모든 Stock DAO, DTO을 제외한 DTO을 구현 ImageProcess 구현" />
     <MESSAGE value="Feat : 페이지 이동, 이벤트 처리&#10;&#10;관리자 페이지 이동 구현 완료(로고 3회 연속 클릭하고 id:admin, pw:1q2w3e4r!입력)&#10;사용자 페이지 이동 일부분 구현 홈 --&gt; 비회원 --&gt; 방 선택 --&gt; 상품리스트 --&gt; 상품 상세 --&gt; 결제 화면까지 이동 가능&#10;RoomSelectView 생성&#10;RoomSettingView 이벤트 수정" />
     <MESSAGE value="Feat : 캘린더 패널 추가&#10;CalendarPanel 추가" />
@@ -399,6 +410,7 @@
     <MESSAGE value="fix 방 퇴장 기능, 일 매출 기능 수정&#10;&#10;방 퇴장 연결, 일 매출 DB 연결" />
     <MESSAGE value="Feat 이미지 아이콘 추가" />
     <MESSAGE value="Fix MemberLog table에 추가되는 문제 해결" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix MemberLog table에 추가되는 문제 해결" />
+    <MESSAGE value="Fix 방 퇴장 시 곡 적용 안되는 문제 해결" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix 방 퇴장 시 곡 적용 안되는 문제 해결" />
   </component>
 </project>

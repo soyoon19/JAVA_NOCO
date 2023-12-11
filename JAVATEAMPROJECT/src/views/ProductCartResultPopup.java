@@ -118,6 +118,7 @@ public class ProductCartResultPopup extends JDialog implements ActionListener{
     ProductCartResultPricePanel productCartResultPricePanel;
     JButton backBtn, payBtn;
     MemberDTO member;
+    MemberLogDTO memberLog = null;
     RoomManageDTO room;
 
 
@@ -131,7 +132,6 @@ public class ProductCartResultPopup extends JDialog implements ActionListener{
         this.parent = parent;
         this.room = room;
 
-        MemberLogDTO memberLog = parent.getController().getMemberLogDAO().findById(member.getHp());
 
         tot = 0;
         for(int i = 0; i < goodsArr.length; i++) {
@@ -141,6 +141,8 @@ public class ProductCartResultPopup extends JDialog implements ActionListener{
         //할인액 구하기
         discount = 0;
         if(member != null){
+            memberLog = parent.getController().getMemberLogDAO().findById(member.getHp());
+
             for(int i = 0; i < goodsArr.length; i++){
                 if(goodsArr[i].getDisStatus())
                     discount += goodsArr[i].getPrice() * (MemberDTO.gradeToDiscount(memberLog.getM_rate()) * 0.01);

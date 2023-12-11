@@ -66,10 +66,6 @@ public class OrderDetailPopup extends JDialog {
                 names, nums, prices
                 );
 
-        Order order2 = new Order("2023113001", "010-1234-5678", "101호",
-                new String[]{"커피", "케이크", "샌드위치"}, new int[]{2, 1, 3}, new int[]{3000, 5000, 4000});
-
-
 
         JPanel infoPanel = new JPanel();
         infoPanel.setLayout(new GridLayout(3, 1));

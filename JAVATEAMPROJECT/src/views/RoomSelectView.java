@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class RoomSelectView extends JPanel {
     private DefaultFrame parent;
@@ -138,6 +139,6 @@ public class RoomSelectView extends JPanel {
 
         this.add(right, DefaultFrame.easyGridBagConstraint(1,0,1,1));
 
-
+        //Date date = new Date();
     }
 }

@@ -137,6 +137,7 @@ public class UserLoginView extends JPanel implements ActionListener{
                     } else {  //이미 사용중인 회원이라면 곡선택 및 구매 페이지로
                         //Room num으로 방 정보를 찾아온다.
                         parent.move(new UsePurchaseSelectView(parent, roomManageDAO.findByRNum(findRoom.getNum()), member));
+
                     }
                 }
                 break;
